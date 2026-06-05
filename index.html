@@ -17,11 +17,11 @@
     position: relative;
   }
 
- .text-container {
-  background: rgba(255, 255, 255, 0.85); /* Matches your white background */
-  backdrop-filter: blur(4px); /* Softens the polaroid edges behind the text */
-  padding: 2rem;
-  border-radius: 4px;
+.text-container {
+  position: relative;
+  z-index: 10;
+  background-color: #ffffff; /* Forces a solid white mask over the center photos */
+  padding: 2rem 0; /* Creates vertical breathing room */
 }
 
   .bg {
