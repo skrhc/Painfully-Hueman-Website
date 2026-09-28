@@ -48,7 +48,7 @@
       border: 3px solid #000;
       border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px; /* hand-drawn box corners */
       overflow: hidden;
-      filter: grayscale(1) contrast(1.35) url(#hand);
+      filter: url(#hand);
     }
 
     .soundcloud-player iframe {
@@ -56,6 +56,7 @@
       width: 100%;
       height: 300px; /* use 166 for a compact bar */
       border: 0;
+      filter: grayscale(1) contrast(1.5) brightness(1.05);
     }
 
     /* RSVP BUTTON */
