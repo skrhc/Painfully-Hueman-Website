@@ -38,9 +38,9 @@
 
     .soundcloud-player {
       position: absolute;
-      top: 24px;
+      top: 50%;
       left: 50%;
-      transform: translateX(-50%);
+      transform: translate(-50%, -50%);
       width: 88%;
       z-index: 5;
       background: #ffffff;
@@ -50,6 +50,7 @@
     .soundcloud-player iframe {
       display: block;
       width: 100%;
+      height: 300px; /* shows the track list. Use 166 for a compact bar */
       border: 0;
     }
 
@@ -75,7 +76,8 @@
 
     @media (max-width: 600px) {
       main { padding: 16px 12px 40px; }
-      .soundcloud-player { top: 12px; width: 92%; }
+      .soundcloud-player { width: 92%; }
+      .soundcloud-player iframe { height: 200px; }
       .rsvp { min-height: 80px; font-size: 26px; }
     }
   </style>
@@ -86,7 +88,7 @@
 
     <div class="poster-wrap">
 
-      <!-- 1. REPLACE with your poster image (file name or URL) -->
+      <!-- POSTER (file must sit in the same folder as this index.html) -->
       <img
         class="poster"
         src="pH vol. 1 party flyer blank middle.jpg"
@@ -97,7 +99,7 @@
       <div class="soundcloud-player">
         <iframe
           width="100%"
-          height="166"
+          height="300"
           scrolling="no"
           frameborder="no"
           allow="autoplay; encrypted-media"
@@ -107,7 +109,7 @@
 
     </div>
 
-    <!-- 2. REPLACE with your RSVP link -->
+    <!-- RSVP -->
     <a class="rsvp" href="https://partiful.com/e/C60TCIZeHIw9OBnTJ1kL" target="_blank" rel="noopener">
       RSVP NEOW!
     </a>
