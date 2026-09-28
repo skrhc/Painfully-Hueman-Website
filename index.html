@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PARTY</title>
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -36,38 +40,69 @@
       background: #f2f2f2;
     }
 
-    /* STANDARD SOUNDCLOUD PLAYER, black + white and wobbly/hand-drawn */
-    .soundcloud-player {
+    /* CUSTOM PLAYER, in a hand-drawn box, in the poster's empty middle */
+    .player {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 88%;
+      width: 84%;
+      max-height: 300px;
+      overflow-y: auto;
       z-index: 5;
+      padding: 6px 16px;
       background: #fff;
       border: 3px solid #000;
       border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px; /* hand-drawn box corners */
-      overflow: hidden;
       filter: url(#hand);
+      font-family: "Patrick Hand", "Comic Sans MS", cursive, sans-serif;
+      color: #000;
+      scrollbar-width: none;
     }
+    .player::-webkit-scrollbar { display: none; }
 
-    .soundcloud-player iframe {
-      display: block;
-      width: 100%;
-      height: 300px; /* use 166 for a compact bar */
-      border: 0;
-      filter: grayscale(1) contrast(1.5) brightness(1.05); /* black + white, incl. album art */
+    .tracks { list-style: none; }
+
+    .track {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 2px;
+      font-size: 22px;
+      line-height: 1.1;
+      cursor: pointer;
+      border-bottom: 2px solid #000;
     }
+    .track:last-child { border-bottom: none; }
+    .track:hover .name { text-decoration: underline; }
 
-    /* forces everything under it (album art, waveform, text) to black + white */
-    .bw {
+    .icon { width: 22px; height: 22px; flex: none; display: block; }
+    .icon svg { display: block; width: 100%; height: 100%; }
+    .name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .time { flex: none; font-size: 18px; }
+
+    /* progress line that fills across the bottom of the playing row */
+    .bar {
       position: absolute;
-      inset: 0;
-      background: transparent;
-      -webkit-backdrop-filter: grayscale(1) contrast(1.4);
-      backdrop-filter: grayscale(1) contrast(1.4);
-      pointer-events: none;
-}
+      left: 0;
+      bottom: -2px;
+      height: 6px;
+      width: 0;
+      background: #000;
+    }
+
+    .track.active .name { font-weight: 700; text-decoration: underline; }
+    .loading { font-size: 20px; padding: 10px 2px; }
+
+    /* hidden SoundCloud engine */
+    .sc-hidden {
+      position: absolute;
+      left: -9999px;
+      width: 1px;
+      height: 1px;
+      border: 0;
+    }
 
     /* RSVP BUTTON */
     .rsvp {
@@ -90,8 +125,10 @@
 
     @media (max-width: 600px) {
       main { padding: 16px 12px 40px; }
-      .soundcloud-player { width: 92%; }
-      .soundcloud-player iframe { height: 166px; }
+      .player { width: 90%; max-height: 190px; padding: 4px 12px; }
+      .track { font-size: 18px; padding: 8px 2px; gap: 8px; }
+      .icon { width: 18px; height: 18px; }
+      .time { font-size: 15px; }
       .rsvp { min-height: 80px; font-size: 26px; }
     }
   </style>
@@ -103,7 +140,7 @@
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
     <filter id="hand" x="-2%" y="-2%" width="104%" height="104%">
       <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="4" result="noise"/>
-      <feDisplacementMap in="SourceGraphic" in2="noise" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" xChannelSelector="R" yChannelSelector="G"/>
     </filter>
   </svg>
 
@@ -118,18 +155,20 @@
         alt="Party poster"
       >
 
-      <!-- PLAYLIST: PAINFULLY HUEMAN VOL. 1 -->
-      <div class="soundcloud-player">
-        <iframe
-          width="100%"
-          height="300"
-          scrolling="no"
-          frameborder="no"
-          allow="autoplay; encrypted-media"
-          src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/soundcloud%253Aplaylists%253A2306233560&color=%23000000&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=false">
-        </iframe>
-        <div class="bw"></div>
+      <!-- CUSTOM PLAYLIST -->
+      <div class="player">
+        <ul class="tracks" id="tracks">
+          <li class="loading">loading...</li>
+        </ul>
       </div>
+
+      <!-- hidden SoundCloud player that does the actual playing -->
+      <iframe
+        id="sc"
+        class="sc-hidden"
+        allow="autoplay; encrypted-media"
+        src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/soundcloud%253Aplaylists%253A2306233560&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=false">
+      </iframe>
 
     </div>
 
@@ -139,5 +178,72 @@
     </a>
 
   </main>
+
+  <script src="https://w.soundcloud.com/player/api.js"></script>
+  <script>
+    const widget = SC.Widget('sc');
+    const list = document.getElementById('tracks');
+
+    // hand-drawn play + pause icons (slightly uneven on purpose)
+    const PLAY_ICON  = '<svg viewBox="0 0 24 24"><path d="M5.5 3.4 L19.4 11.4 L4.8 20.9 Z" fill="#000" stroke="#000" stroke-width="1.6" stroke-linejoin="round"/></svg>';
+    const PAUSE_ICON = '<svg viewBox="0 0 24 24"><path d="M5.6 3.6 L9.8 3.2 L9.2 20.6 L5.2 20.2 Z M14.4 3.8 L18.6 4.3 L18.2 20.4 L14.0 20.8 Z" fill="#000" stroke="#000" stroke-width="1.4" stroke-linejoin="round"/></svg>';
+
+    let sounds = [];
+    let current = -1;
+    let playing = false;
+
+    function fmt(ms) {
+      const s = Math.round(ms / 1000);
+      return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0');
+    }
+
+    function render() {
+      list.innerHTML = '';
+      sounds.forEach((s, i) => {
+        const li = document.createElement('li');
+        li.className = 'track';
+        li.innerHTML = '<span class="icon"></span><span class="name"></span><span class="time"></span><span class="bar"></span>';
+        li.querySelector('.icon').innerHTML = PLAY_ICON;
+        li.querySelector('.name').textContent = s.title;
+        li.querySelector('.time').textContent = fmt(s.duration);
+        li.addEventListener('click', () => choose(i));
+        list.appendChild(li);
+      });
+    }
+
+    function choose(i) {
+      if (i === current) {
+        widget.toggle();
+      } else {
+        widget.skip(i);
+        widget.play();
+      }
+    }
+
+    function paint() {
+      Array.from(list.children).forEach((li, i) => {
+        const active = i === current;
+        li.classList.toggle('active', active);
+        li.querySelector('.icon').innerHTML = (active && playing) ? PAUSE_ICON : PLAY_ICON;
+        if (!active) li.querySelector('.bar').style.width = '0';
+      });
+    }
+
+    function sync() {
+      widget.getCurrentSoundIndex(i => { current = i; paint(); });
+    }
+
+    widget.bind(SC.Widget.Events.READY, () => {
+      widget.getSounds(s => { sounds = s; render(); sync(); });
+    });
+    widget.bind(SC.Widget.Events.PLAY,  () => { playing = true;  sync(); });
+    widget.bind(SC.Widget.Events.PAUSE, () => { playing = false; paint(); });
+    widget.bind(SC.Widget.Events.PLAY_PROGRESS, e => {
+      const li = list.children[current];
+      if (li && li.querySelector('.bar')) {
+        li.querySelector('.bar').style.width = (e.relativePosition * 100) + '%';
+      }
+    });
+  </script>
 </body>
 </html>
