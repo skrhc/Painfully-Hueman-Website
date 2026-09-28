@@ -159,14 +159,19 @@
       .track.active .icon { animation: pulse 1s ease-in-out infinite; }
 
       @keyframes spin { to { transform: rotate(360deg); } }
-      .reel { animation: spin 25s linear infinite; animation-play-state: paused; }
+      .reel { animation: spin 10s linear infinite; animation-play-state: paused; }
       .poster-wrap.playing .reel { animation-play-state: running; }
+    }
+
+    /* phones and small tablets: no spinning logos, wider player */
+    @media (max-width: 900px) {
+      .reel { display: none; }
+      .player { width: 84%; }
     }
 
     @media (max-width: 600px) {
       main { padding: 16px 12px 40px; }
-      .player { width: 70%; max-height: 190px; padding: 4px 12px; }
-      .reel { width: 15%; margin-top: -7.5%; }
+      .player { width: 89%; max-height: 190px; padding: 4px 12px; }
       .track { font-size: 18px; padding: 8px 2px; gap: 8px; }
       .icon { width: 18px; height: 18px; }
       .time { font-size: 15px; }
