@@ -30,6 +30,7 @@
     .poster-wrap {
       position: relative;
       width: min(700px, 100%);
+      --player-top: 54%;
     }
 
     .poster {
@@ -43,10 +44,10 @@
     /* CUSTOM PLAYER, in a hand-drawn box, in the poster's empty middle */
     .player {
       position: absolute;
-      top: 53%;
+      top: var(--player-top);
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 84%;
+      width: 68%;
       max-height: 300px;
       overflow-y: auto;
       z-index: 5;
@@ -104,6 +105,21 @@
       border: 0;
     }
 
+    /* SPINNING LOGO REELS (one on each side of the player) */
+    .reel {
+      position: absolute;
+      top: var(--player-top);
+      width: 14%;
+      margin-top: -7%;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      z-index: 5;
+      mix-blend-mode: multiply; /* makes the logo's white background see-through */
+      pointer-events: none;
+    }
+    .reel-left  { left: 1%; }
+    .reel-right { right: 1%; }
+
     /* RSVP BUTTON */
     .rsvp {
       display: flex;
@@ -130,11 +146,16 @@
         50%      { transform: scale(1.25); }
       }
       .track.active .icon { animation: pulse 1s ease-in-out infinite; }
+
+      @keyframes spin { to { transform: rotate(360deg); } }
+      .reel { animation: spin 4s linear infinite; animation-play-state: paused; }
+      .poster-wrap.playing .reel { animation-play-state: running; }
     }
 
     @media (max-width: 600px) {
       main { padding: 16px 12px 40px; }
-      .player { width: 90%; max-height: 190px; padding: 4px 12px; }
+      .player { width: 70%; max-height: 190px; padding: 4px 12px; }
+      .reel { width: 15%; margin-top: -7.5%; }
       .track { font-size: 18px; padding: 8px 2px; gap: 8px; }
       .icon { width: 18px; height: 18px; }
       .time { font-size: 15px; }
@@ -171,6 +192,10 @@
         </ul>
       </div>
 
+      <!-- SPINNING LOGO REELS -->
+      <img class="reel reel-left"  src="Amalga Painfully Hueman Logo.png" alt="">
+      <img class="reel reel-right" src="Amalga Painfully Hueman Logo.png" alt="">
+
       <!-- hidden SoundCloud player that does the actual playing -->
       <iframe
         id="sc"
@@ -192,6 +217,7 @@
   <script>
     const widget = SC.Widget('sc');
     const list = document.getElementById('tracks');
+    const wrap = document.querySelector('.poster-wrap');
 
     // hand-drawn play + pause icons (slightly uneven on purpose)
     const PLAY_ICON  = '<svg viewBox="0 0 24 24"><path d="M5.5 3.4 L19.4 11.4 L4.8 20.9 Z" fill="#000" stroke="#000" stroke-width="1.6" stroke-linejoin="round"/></svg>';
@@ -245,8 +271,8 @@
     widget.bind(SC.Widget.Events.READY, () => {
       widget.getSounds(s => { sounds = s; render(); sync(); });
     });
-    widget.bind(SC.Widget.Events.PLAY,  () => { playing = true;  sync(); });
-    widget.bind(SC.Widget.Events.PAUSE, () => { playing = false; paint(); });
+    widget.bind(SC.Widget.Events.PLAY,  () => { playing = true;  wrap.classList.add('playing'); sync(); });
+    widget.bind(SC.Widget.Events.PAUSE, () => { playing = false; wrap.classList.remove('playing'); paint(); });
     widget.bind(SC.Widget.Events.PLAY_PROGRESS, e => {
       const li = list.children[current];
       if (li && li.querySelector('.bar')) {
