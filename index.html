@@ -123,13 +123,13 @@
 
     /* on wide screens: big reels that hang out past the poster edges */
     @media (min-width: 901px) {
-      .reel { width: 30%; margin-top: -15%; }
-      .reel-left  { left: -14%; }
-      .reel-right { right: -14%; }
+      .reel { width: 75%; margin-top: -42.5%; }
+      .reel-left  { left: -75%; }
+      .reel-right { right: -75%; }
     }
 
-    /* hand-drawn wobble on the poster, logos, and RSVP button too */
-    .poster, .reel, .rsvp { filter: url(#hand); }
+    /* hand-drawn wobble on the poster and RSVP button (the spinning logos skip it) */
+    .poster, .rsvp { filter: url(#hand); }
 
     /* RSVP BUTTON */
     .rsvp {
@@ -159,7 +159,7 @@
       .track.active .icon { animation: pulse 1s ease-in-out infinite; }
 
       @keyframes spin { to { transform: rotate(360deg); } }
-      .reel { animation: spin 4s linear infinite; animation-play-state: paused; }
+      .reel { animation: spin 10s linear infinite; animation-play-state: paused; }
       .poster-wrap.playing .reel { animation-play-state: running; }
     }
 
@@ -204,8 +204,8 @@
       </div>
 
       <!-- SPINNING LOGO REELS -->
-      <img class="reel reel-left"  src="logo.jpg" alt="">
-      <img class="reel reel-right" src="logo.jpg" alt="">
+      <img class="reel reel-left"  src="Amalga Painfully Hueman Logo.png" alt="">
+      <img class="reel reel-right" src="Amalga Painfully Hueman Logo.png" alt="">
 
       <!-- hidden SoundCloud player that does the actual playing -->
       <iframe
