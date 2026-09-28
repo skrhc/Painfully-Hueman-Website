@@ -13,6 +13,7 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
+      overflow-x: hidden;
       background: #ffffff;
       color: #000000;
       font-family: Arial, Helvetica, sans-serif;
@@ -120,6 +121,13 @@
     .reel-left  { left: 1%; }
     .reel-right { right: 1%; }
 
+    /* on wide screens: big reels that hang out past the poster edges */
+    @media (min-width: 901px) {
+      .reel { width: 30%; margin-top: -15%; }
+      .reel-left  { left: -14%; }
+      .reel-right { right: -14%; }
+    }
+
     /* RSVP BUTTON */
     .rsvp {
       display: flex;
@@ -193,8 +201,8 @@
       </div>
 
       <!-- SPINNING LOGO REELS -->
-      <img class="reel reel-left"  src="Amalga Painfully Hueman Logo.png" alt="">
-      <img class="reel reel-right" src="Amalga Painfully Hueman Logo.png" alt="">
+      <img class="reel reel-left"  src="logo.jpg" alt="">
+      <img class="reel reel-right" src="logo.jpg" alt="">
 
       <!-- hidden SoundCloud player that does the actual playing -->
       <iframe
