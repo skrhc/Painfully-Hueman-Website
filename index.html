@@ -63,10 +63,11 @@
     .bw {
       position: absolute;
       inset: 0;
-      background: #000;
-      mix-blend-mode: saturation;
+      background: transparent;
+      -webkit-backdrop-filter: grayscale(1) contrast(1.4);
+      backdrop-filter: grayscale(1) contrast(1.4);
       pointer-events: none;
-    }
+}
 
     /* RSVP BUTTON */
     .rsvp {
