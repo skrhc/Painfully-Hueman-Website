@@ -247,6 +247,7 @@
     let sounds = [];
     let current = -1;
     let playing = false;
+    let tries = 0;
 
     function fmt(ms) {
       const s = Math.round(ms / 1000);
@@ -260,8 +261,8 @@
         li.className = 'track';
         li.innerHTML = '<span class="icon"></span><span class="name"></span><span class="time"></span><span class="bar"></span>';
         li.querySelector('.icon').innerHTML = PLAY_ICON;
-        li.querySelector('.name').textContent = s.title;
-        li.querySelector('.time').textContent = fmt(s.duration);
+        li.querySelector('.name').textContent = s.title || '...';
+        li.querySelector('.time').textContent = s.duration ? fmt(s.duration) : '';
         li.addEventListener('click', () => choose(i));
         list.appendChild(li);
       });
@@ -289,9 +290,25 @@
       widget.getCurrentSoundIndex(i => { current = i; paint(); });
     }
 
-    widget.bind(SC.Widget.Events.READY, () => {
-      widget.getSounds(s => { sounds = s; render(); sync(); });
-    });
+    // SoundCloud only fills in title/duration for a track once the widget
+    // "visits" it. Step through any unloaded tracks, re-read the list,
+    // then jump back to track 1.
+    function hydrate() {
+      widget.getSounds(s => {
+        sounds = s;
+        render();
+        sync();
+        const missing = s.findIndex(x => !x.title);
+        if (missing === -1 || playing || tries++ > 40) {
+          if (missing === -1 && !playing) widget.skip(0);
+          return;
+        }
+        widget.skip(missing);       // forces SoundCloud to load this track's data
+        setTimeout(hydrate, 400);   // then check again
+      });
+    }
+
+    widget.bind(SC.Widget.Events.READY, hydrate);
     widget.bind(SC.Widget.Events.PLAY,  () => { playing = true;  wrap.classList.add('playing'); sync(); });
     widget.bind(SC.Widget.Events.PAUSE, () => { playing = false; wrap.classList.remove('playing'); paint(); });
     widget.bind(SC.Widget.Events.PLAY_PROGRESS, e => {
