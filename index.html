@@ -99,33 +99,6 @@
       background: #000;
     }
 
-    /* draggable playhead: knob + invisible grab zone along the playing row's bottom edge */
-    .knob {
-      display: none;
-      position: absolute;
-      left: 0;
-      bottom: -7px;
-      width: 14px;
-      height: 14px;
-      margin-left: -7px;
-      border-radius: 50%;
-      background: #000;
-      pointer-events: none;
-    }
-    .scrub {
-      display: none;
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: -10px;
-      height: 20px;
-      z-index: 2;
-      cursor: pointer;
-      touch-action: none; /* lets you drag on phones without scrolling the list */
-    }
-    .track.active .knob,
-    .track.active .scrub { display: block; }
-
     .track.active .name { font-weight: 700; text-decoration: underline; }
     .loading { font-size: 20px; padding: 10px 2px; }
 
@@ -286,62 +259,13 @@
       sounds.forEach((s, i) => {
         const li = document.createElement('li');
         li.className = 'track';
-        li.innerHTML = '<span class="icon"></span><span class="name"></span><span class="time"></span><span class="bar"></span><span class="knob"></span><span class="scrub"></span>';
+        li.innerHTML = '<span class="icon"></span><span class="name"></span><span class="time"></span><span class="bar"></span>';
         li.querySelector('.icon').innerHTML = PLAY_ICON;
         li.querySelector('.name').textContent = s.title || '...';
         li.querySelector('.time').textContent = s.duration ? fmt(s.duration) : '';
         li.addEventListener('click', () => choose(i));
-        attachScrub(li, i);
         list.appendChild(li);
       });
-    }
-
-    // SEEKING: click or drag along the bottom edge of the playing row
-    let dragging = false;
-
-    function clamp01(x) { return Math.max(0, Math.min(1, x)); }
-
-    function setProgress(li, frac) {
-      frac = clamp01(frac);
-      li.querySelector('.bar').style.width = (frac * 100) + '%';
-      li.querySelector('.knob').style.left = (frac * 100) + '%';
-    }
-
-    function attachScrub(li, i) {
-      const scrub = li.querySelector('.scrub');
-      const fracFrom = e => {
-        const r = li.getBoundingClientRect();
-        return clamp01((e.clientX - r.left) / r.width);
-      };
-
-      // don't let a scrub click trigger the row's play/pause
-      scrub.addEventListener('click', e => e.stopPropagation());
-
-      scrub.addEventListener('pointerdown', e => {
-        if (i !== current) return;
-        e.preventDefault();
-        e.stopPropagation();
-        dragging = true;
-        scrub.setPointerCapture(e.pointerId);
-        setProgress(li, fracFrom(e));
-      });
-
-      scrub.addEventListener('pointermove', e => {
-        if (dragging) setProgress(li, fracFrom(e));
-      });
-
-      scrub.addEventListener('pointerup', e => {
-        if (!dragging) return;
-        dragging = false;
-        const frac = fracFrom(e);
-        setProgress(li, frac);
-        widget.getDuration(d => {
-          const dur = d || (sounds[current] && sounds[current].duration) || 0;
-          if (dur) widget.seekTo(frac * dur);
-        });
-      });
-
-      scrub.addEventListener('pointercancel', () => { dragging = false; });
     }
 
     function choose(i) {
@@ -358,7 +282,7 @@
         const active = i === current;
         li.classList.toggle('active', active);
         li.querySelector('.icon').innerHTML = (active && playing) ? PAUSE_ICON : PLAY_ICON;
-        if (!active) setProgress(li, 0);
+        if (!active) li.querySelector('.bar').style.width = '0';
       });
     }
 
@@ -388,9 +312,10 @@
     widget.bind(SC.Widget.Events.PLAY,  () => { playing = true;  wrap.classList.add('playing'); sync(); });
     widget.bind(SC.Widget.Events.PAUSE, () => { playing = false; wrap.classList.remove('playing'); paint(); });
     widget.bind(SC.Widget.Events.PLAY_PROGRESS, e => {
-      if (dragging) return;
       const li = list.children[current];
-      if (li && li.querySelector('.bar')) setProgress(li, e.relativePosition);
+      if (li && li.querySelector('.bar')) {
+        li.querySelector('.bar').style.width = (e.relativePosition * 100) + '%';
+      }
     });
 
     // "line boil": the hand-drawn wobble redraws itself a few times a second
