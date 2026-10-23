@@ -456,7 +456,12 @@
 
         const time = document.createElement('span');
         time.className = 'time';
-        time.textContent = fmt(Number(sound.duration));
+        time.textContent =
+        Number(sound.duration) > 0
+        ? fmt(Number(sound.duration))
+        : index === 5
+          ? '—:——'
+          : '';
 
         const bar = document.createElement('span');
         bar.className = 'bar';
