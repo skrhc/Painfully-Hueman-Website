@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,10 +34,10 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 40px 20px 60px;
+      padding: clamp(20px, 3vw, 40px) 3vw 60px;
     }
 
-    /* POSTER + PLAYER */
+    /* POSTER */
     .poster-wrap {
       position: relative;
       width: min(35vw, 700px);
@@ -51,7 +52,7 @@
       background: #f2f2f2;
     }
 
-    /* FIXED-HEIGHT, SCROLLABLE PLAYLIST */
+    /* CUSTOM PLAYER */
     .player {
       position: absolute;
       top: var(--player-top);
@@ -59,6 +60,7 @@
       transform: translate(-50%, -50%);
       width: 68%;
       height: 190px;
+      max-height: 190px;
       overflow-y: auto;
       overflow-x: hidden;
       overscroll-behavior: contain;
@@ -73,19 +75,6 @@
       color: #000;
       scrollbar-width: thin;
       scrollbar-color: #000 transparent;
-    }
-
-    .player::-webkit-scrollbar {
-      width: 5px;
-    }
-
-    .player::-webkit-scrollbar-track {
-      background: transparent;
-    }
-
-    .player::-webkit-scrollbar-thumb {
-      background: #000;
-      border-radius: 5px;
     }
 
     .tracks {
@@ -139,7 +128,6 @@
       font-size: 18px;
     }
 
-    /* TRACK PROGRESS */
     .bar {
       position: absolute;
       left: 0;
@@ -147,7 +135,36 @@
       height: 6px;
       width: 0;
       background: #000;
+    }
+
+    .knob {
+      display: none;
+      position: absolute;
+      left: 0;
+      bottom: -7px;
+      width: 14px;
+      height: 14px;
+      margin-left: -7px;
+      border-radius: 50%;
+      background: #000;
       pointer-events: none;
+    }
+
+    .scrub {
+      display: none;
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -10px;
+      height: 20px;
+      z-index: 2;
+      cursor: pointer;
+      touch-action: none;
+    }
+
+    .track.active .knob,
+    .track.active .scrub {
+      display: block;
     }
 
     .track.active .name {
@@ -190,7 +207,7 @@
       right: 1%;
     }
 
-    /* LARGE DESKTOP REELS */
+    /* LARGE DESKTOP */
     @media (min-width: 901px) {
       .reel {
         width: 75%;
@@ -206,25 +223,24 @@
       }
     }
 
-    /* HAND-DRAWN EFFECT */
     .poster,
     .rsvp {
       filter: url(#hand);
     }
 
-    /* RSVP BUTTON */
+    /* RSVP */
     .rsvp {
       display: flex;
       align-items: center;
       justify-content: center;
       width: min(35vw, 700px);
-      min-height: 96px;
+      min-height: clamp(64px, 6.5vw, 96px);
       margin-top: 24px;
       background: #000;
       color: #fff;
       text-align: center;
       text-decoration: none;
-      font-size: 34px;
+      font-size: clamp(22px, 2.25vw, 34px);
       font-weight: 700;
       letter-spacing: -0.02em;
       transition: opacity 0.15s ease;
@@ -234,16 +250,10 @@
       opacity: 0.85;
     }
 
-    /* ANIMATIONS */
     @media (prefers-reduced-motion: no-preference) {
       @keyframes pulse {
-        0%, 100% {
-          transform: scale(1);
-        }
-
-        50% {
-          transform: scale(1.25);
-        }
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.25); }
       }
 
       .track.active .icon {
@@ -251,9 +261,7 @@
       }
 
       @keyframes spin {
-        to {
-          transform: rotate(360deg);
-        }
+        to { transform: rotate(360deg); }
       }
 
       .reel {
@@ -266,18 +274,19 @@
       }
     }
 
-    /* TABLETS AND SMALLER SCREENS */
+    /* TABLETS */
     @media (max-width: 900px) {
-      .reel {
-        display: none;
+      main {
+        padding: 24px 20px 48px;
       }
 
-      .poster-wrap {
-        width: min(700px, 100%);
-      }
-
+      .poster-wrap,
       .rsvp {
         width: min(700px, 100%);
+      }
+
+      .reel {
+        display: none;
       }
 
       .player {
@@ -294,9 +303,8 @@
       .player {
         width: 84%;
         height: 145px;
-        max-height: none;
+        max-height: 145px;
         padding: 4px 12px;
-        overflow-y: auto;
       }
 
       .track {
@@ -324,7 +332,6 @@
 </head>
 
 <body>
-
   <!-- HAND-DRAWN WOBBLE FILTER -->
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
     <filter id="hand" x="-2%" y="-2%" width="104%" height="104%">
@@ -347,10 +354,7 @@
   </svg>
 
   <main>
-
     <div class="poster-wrap">
-
-      <!-- POSTER -->
       <img
         class="poster"
         src="pH vol. 1 party flyer blank middle.jpg"
@@ -382,19 +386,16 @@
         id="sc"
         class="sc-hidden"
         allow="autoplay; encrypted-media"
-        src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/soundcloud%253Aplaylists%253A2306233560&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=false">
-      </iframe>
-
+        src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/soundcloud%253Aplaylists%253A2306233560&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=false"
+      ></iframe>
     </div>
 
-    <!-- RSVP -->
     <a
       class="rsvp"
       href="https://partiful.com/e/C60TCIZeHIw9OBnTJ1kL"
       target="_blank"
       rel="noopener"
     >RSVP NEOW!</a>
-
   </main>
 
   <script src="https://w.soundcloud.com/player/api.js"></script>
@@ -404,7 +405,6 @@
     const list = document.getElementById('tracks');
     const wrap = document.querySelector('.poster-wrap');
 
-    // HAND-DRAWN PLAY AND PAUSE ICONS
     const PLAY_ICON =
       '<svg viewBox="0 0 24 24"><path d="M5.5 3.4 L19.4 11.4 L4.8 20.9 Z" fill="#000" stroke="#000" stroke-width="1.6" stroke-linejoin="round"/></svg>';
 
@@ -414,91 +414,281 @@
     let sounds = [];
     let current = -1;
     let playing = false;
+    let dragging = false;
+    let loadingDetails = false;
+    let loadToken = 0;
 
     function fmt(ms) {
-      const s = Math.round(ms / 1000);
-      return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0');
+      if (!Number.isFinite(ms) || ms <= 0) return '';
+
+      const seconds = Math.round(ms / 1000);
+      const minutes = Math.floor(seconds / 60);
+      const remainder = String(seconds % 60).padStart(2, '0');
+
+      return minutes + ':' + remainder;
+    }
+
+    function clamp01(value) {
+      return Math.max(0, Math.min(1, value));
     }
 
     function render() {
       list.innerHTML = '';
 
-      sounds.forEach((s, i) => {
+      sounds.forEach((sound, index) => {
         const li = document.createElement('li');
         li.className = 'track';
 
-        li.innerHTML =
-          '<span class="icon"></span>' +
-          '<span class="name"></span>' +
-          '<span class="time"></span>' +
-          '<span class="bar"></span>';
+        const icon = document.createElement('span');
+        icon.className = 'icon';
+        icon.innerHTML = PLAY_ICON;
 
-        li.querySelector('.icon').innerHTML = PLAY_ICON;
+        const name = document.createElement('span');
+        name.className = 'name';
+        name.textContent = sound.title || '';
 
-        const trackNames = [
-        'MR. SOC',
-        'THEMBOW',
-        'HEEMONOMICS',
-        'GIRLSCOUTS',
-        'SEXINCHURCH',
-        'BOYGIRL!'
-        ];
+        const time = document.createElement('span');
+        time.className = 'time';
+        time.textContent = fmt(sound.duration);
 
-li.querySelector('.name').textContent =
-  s.title || trackNames[i] || 'Unknown track';
+        const bar = document.createElement('span');
+        bar.className = 'bar';
 
-        li.querySelector('.time').textContent =
-          Number.isFinite(s.duration) && s.duration > 0
-            ? fmt(s.duration)
-            : '';
+        const knob = document.createElement('span');
+        knob.className = 'knob';
 
-        li.addEventListener('click', () => choose(i));
+        const scrub = document.createElement('span');
+        scrub.className = 'scrub';
+
+        li.append(icon, name, time, bar, knob, scrub);
+
+        li.addEventListener('click', () => choose(index));
+        attachScrub(li, index);
 
         list.appendChild(li);
       });
+
+      paint();
     }
 
-    function choose(i) {
-      if (i === current) {
+    function setProgress(li, fraction) {
+      fraction = clamp01(fraction);
+
+      li.querySelector('.bar').style.width =
+        (fraction * 100) + '%';
+
+      li.querySelector('.knob').style.left =
+        (fraction * 100) + '%';
+    }
+
+    function attachScrub(li, index) {
+      const scrub = li.querySelector('.scrub');
+
+      function fractionFromEvent(event) {
+        const rect = li.getBoundingClientRect();
+        return clamp01((event.clientX - rect.left) / rect.width);
+      }
+
+      scrub.addEventListener('click', event => {
+        event.stopPropagation();
+      });
+
+      scrub.addEventListener('pointerdown', event => {
+        if (index !== current) return;
+
+        event.preventDefault();
+        event.stopPropagation();
+
+        dragging = true;
+        scrub.setPointerCapture(event.pointerId);
+        setProgress(li, fractionFromEvent(event));
+      });
+
+      scrub.addEventListener('pointermove', event => {
+        if (dragging) {
+          setProgress(li, fractionFromEvent(event));
+        }
+      });
+
+      scrub.addEventListener('pointerup', event => {
+        if (!dragging) return;
+
+        dragging = false;
+
+        const fraction = fractionFromEvent(event);
+        setProgress(li, fraction);
+
+        widget.getDuration(duration => {
+          const trackDuration =
+            duration ||
+            (sounds[current] && sounds[current].duration) ||
+            0;
+
+          if (trackDuration) {
+            widget.seekTo(fraction * trackDuration);
+          }
+        });
+      });
+
+      scrub.addEventListener('pointercancel', () => {
+        dragging = false;
+      });
+    }
+
+    function choose(index) {
+      if (index === current) {
         widget.toggle();
       } else {
-        widget.skip(i);
+        widget.skip(index);
         widget.play();
       }
     }
 
     function paint() {
-      Array.from(list.children).forEach((li, i) => {
-        const active = i === current;
+      Array.from(list.children).forEach((li, index) => {
+        const active = index === current;
 
         li.classList.toggle('active', active);
 
         li.querySelector('.icon').innerHTML =
-          (active && playing) ? PAUSE_ICON : PLAY_ICON;
+          active && playing ? PAUSE_ICON : PLAY_ICON;
 
         if (!active) {
-          li.querySelector('.bar').style.width = '0';
+          setProgress(li, 0);
         }
       });
     }
 
     function sync() {
-      widget.getCurrentSoundIndex(i => {
-        current = i;
+      widget.getCurrentSoundIndex(index => {
+        current = Number.isInteger(index) ? index : -1;
         paint();
       });
     }
 
-    widget.bind(SC.Widget.Events.READY, () => {
-      widget.getSounds(s => {
-        sounds = s;
+    /*
+      SoundCloud's playlist response can omit metadata for
+      some tracks. First use the playlist data, then query
+      each track individually through the widget API.
+
+      No manual title or duration list is used.
+    */
+    function loadTrackDetails() {
+      if (loadingDetails || playing || sounds.length === 0) return;
+
+      loadingDetails = true;
+      const thisLoad = ++loadToken;
+
+      widget.getCurrentSoundIndex(originalIndex => {
+        if (thisLoad !== loadToken) {
+          loadingDetails = false;
+          return;
+        }
+
+        let index = 0;
+
+        function nextTrack() {
+          if (thisLoad !== loadToken) {
+            loadingDetails = false;
+            return;
+          }
+
+          if (index >= sounds.length) {
+            const restoreIndex =
+              Number.isInteger(originalIndex) && originalIndex >= 0
+                ? originalIndex
+                : 0;
+
+            widget.skip(restoreIndex);
+
+            current = restoreIndex;
+            loadingDetails = false;
+            render();
+            return;
+          }
+
+          const trackIndex = index++;
+
+          widget.skip(trackIndex);
+
+          /*
+            Allow SoundCloud to switch tracks before asking
+            for the selected track's full metadata.
+          */
+          setTimeout(() => {
+            if (thisLoad !== loadToken) {
+              loadingDetails = false;
+              return;
+            }
+
+            widget.getCurrentSound(sound => {
+              if (thisLoad !== loadToken) {
+                loadingDetails = false;
+                return;
+              }
+
+              if (sound) {
+                const existing = sounds[trackIndex] || {};
+
+                sounds[trackIndex] = {
+                  ...existing,
+                  ...sound,
+                  title:
+                    sound.title || existing.title || '',
+                  duration:
+                    Number(sound.duration) ||
+                    Number(existing.duration) ||
+                    0
+                };
+              }
+
+              render();
+              nextTrack();
+            });
+          }, 180);
+        }
+
+        nextTrack();
+      });
+    }
+
+    function loadPlaylist() {
+      widget.getSounds(result => {
+        if (!Array.isArray(result) || result.length === 0) {
+          list.innerHTML =
+            '<li class="loading">Playlist unavailable</li>';
+          return;
+        }
+
+        sounds = result.map(sound => ({
+          ...sound,
+          title: sound.title || '',
+          duration: Number(sound.duration) || 0
+        }));
+
         render();
         sync();
+
+        /*
+          Only query individual tracks when some metadata
+          is missing. The player stays fixed in height.
+        */
+        const hasMissingMetadata = sounds.some(sound =>
+          !sound.title || !sound.duration
+        );
+
+        if (hasMissingMetadata) {
+          loadTrackDetails();
+        }
       });
-    });
+    }
+
+    widget.bind(SC.Widget.Events.READY, loadPlaylist);
 
     widget.bind(SC.Widget.Events.PLAY, () => {
       playing = true;
+      loadToken++;
+      loadingDetails = false;
       wrap.classList.add('playing');
       sync();
     });
@@ -509,26 +699,32 @@ li.querySelector('.name').textContent =
       paint();
     });
 
-    widget.bind(SC.Widget.Events.PLAY_PROGRESS, e => {
+    widget.bind(SC.Widget.Events.FINISH, () => {
+      playing = false;
+      wrap.classList.remove('playing');
+      sync();
+    });
+
+    widget.bind(SC.Widget.Events.PLAY_PROGRESS, event => {
+      if (dragging) return;
+
       const li = list.children[current];
 
-      if (li && li.querySelector('.bar')) {
-        li.querySelector('.bar').style.width =
-          (e.relativePosition * 100) + '%';
+      if (li) {
+        setProgress(li, event.relativePosition);
       }
     });
 
-    // HAND-DRAWN LINE ANIMATION
+    /* Subtle hand-drawn animation */
     if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       const noise = document.getElementById('noise');
-      let n = 0;
+      let seed = 0;
 
       setInterval(() => {
-        n = (n % 6) + 1;
-        noise.setAttribute('seed', n);
+        seed = (seed % 6) + 1;
+        noise.setAttribute('seed', seed);
       }, 150);
     }
   </script>
-
 </body>
 </html>
