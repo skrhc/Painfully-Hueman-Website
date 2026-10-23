@@ -23,8 +23,8 @@
 
     body {
       overflow-x: hidden;
-      background: #ffffff;
-      color: #000000;
+      background: #fff;
+      color: #000;
       font-family: Arial, Helvetica, sans-serif;
     }
 
@@ -51,15 +51,18 @@
       background: #f2f2f2;
     }
 
-    /* CUSTOM PLAYER */
+    /* FIXED-HEIGHT, SCROLLABLE PLAYLIST */
     .player {
       position: absolute;
       top: var(--player-top);
       left: 50%;
       transform: translate(-50%, -50%);
       width: 68%;
-      max-height: 300px;
+      height: 190px;
       overflow-y: auto;
+      overflow-x: hidden;
+      overscroll-behavior: contain;
+      -webkit-overflow-scrolling: touch;
       z-index: 5;
       padding: 6px 16px;
       background: #fff;
@@ -68,27 +71,38 @@
       filter: url(#hand);
       font-family: "Patrick Hand", "Comic Sans MS", cursive, sans-serif;
       color: #000;
-      scrollbar-width: none;
+      scrollbar-width: thin;
+      scrollbar-color: #000 transparent;
     }
 
     .player::-webkit-scrollbar {
-      display: none;
+      width: 5px;
+    }
+
+    .player::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .player::-webkit-scrollbar-thumb {
+      background: #000;
+      border-radius: 5px;
     }
 
     .tracks {
       list-style: none;
+      height: auto;
     }
 
     .track {
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 7px 2px;
-    font-size: 20px;
-    line-height: 1.1;
-    cursor: pointer;
-    border-bottom: 2px solid #000;
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 7px 2px;
+      font-size: 20px;
+      line-height: 1.1;
+      cursor: pointer;
+      border-bottom: 2px solid #000;
     }
 
     .track:last-child {
@@ -133,6 +147,7 @@
       height: 6px;
       width: 0;
       background: #000;
+      pointer-events: none;
     }
 
     .track.active .name {
@@ -205,8 +220,8 @@
       width: min(35vw, 700px);
       min-height: 96px;
       margin-top: 24px;
-      background: #000000;
-      color: #ffffff;
+      background: #000;
+      color: #fff;
       text-align: center;
       text-decoration: none;
       font-size: 34px;
@@ -253,16 +268,16 @@
 
     /* TABLETS AND SMALLER SCREENS */
     @media (max-width: 900px) {
+      .reel {
+        display: none;
+      }
+
       .poster-wrap {
         width: min(700px, 100%);
       }
 
       .rsvp {
         width: min(700px, 100%);
-      }
-
-      .reel {
-        display: none;
       }
 
       .player {
@@ -278,8 +293,10 @@
 
       .player {
         width: 84%;
-        max-height: 145px;
+        height: 145px;
+        max-height: none;
         padding: 4px 12px;
+        overflow-y: auto;
       }
 
       .track {
@@ -411,11 +428,20 @@
         li.className = 'track';
 
         li.innerHTML =
-          '<span class="icon"></span><span class="name"></span><span class="time"></span><span class="bar"></span>';
+          '<span class="icon"></span>' +
+          '<span class="name"></span>' +
+          '<span class="time"></span>' +
+          '<span class="bar"></span>';
 
         li.querySelector('.icon').innerHTML = PLAY_ICON;
-        li.querySelector('.name').textContent = s.title || '';
-        li.querySelector('.time').textContent = fmt(s.duration);
+
+        li.querySelector('.name').textContent =
+          s.title || s.user?.username || 'Untitled track';
+
+        li.querySelector('.time').textContent =
+          Number.isFinite(s.duration) && s.duration > 0
+            ? fmt(s.duration)
+            : '';
 
         li.addEventListener('click', () => choose(i));
 
