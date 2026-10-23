@@ -435,8 +435,17 @@
 
         li.querySelector('.icon').innerHTML = PLAY_ICON;
 
-        li.querySelector('.name').textContent =
-          s.title || s.user?.username || 'Untitled track';
+        const trackNames = [
+        'MR. SOC',
+        'THEMBOW',
+        'HEEMONOMICS',
+        'GIRLSCOUTS',
+        'SEXINCHURCH',
+        'BOYGIRL!'
+        ];
+
+li.querySelector('.name').textContent =
+  s.title || trackNames[i] || 'Unknown track';
 
         li.querySelector('.time').textContent =
           Number.isFinite(s.duration) && s.duration > 0
