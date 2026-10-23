@@ -445,11 +445,16 @@
 
         const name = document.createElement('span');
         name.className = 'name';
-        name.textContent = sound.title || '';
+
+        // Prevent a missing SoundCloud title from creating a blank row.
+        name.textContent =
+          sound.title && sound.title.trim()
+            ? sound.title
+            : 'Track ' + (index + 1);
 
         const time = document.createElement('span');
         time.className = 'time';
-        time.textContent = fmt(sound.duration);
+        time.textContent = fmt(Number(sound.duration));
 
         const bar = document.createElement('span');
         bar.className = 'bar';
@@ -567,11 +572,9 @@
     }
 
     /*
-      SoundCloud's playlist response can omit metadata for
-      some tracks. First use the playlist data, then query
-      each track individually through the widget API.
-
-      No manual title or duration list is used.
+      Load playlist metadata directly from SoundCloud.
+      Individual-track lookups are attempted when playlist
+      metadata is incomplete. Missing titles get a fallback.
     */
     function loadTrackDetails() {
       if (loadingDetails || playing || sounds.length === 0) return;
@@ -600,7 +603,6 @@
                 : 0;
 
             widget.skip(restoreIndex);
-
             current = restoreIndex;
             loadingDetails = false;
             render();
@@ -611,10 +613,7 @@
 
           widget.skip(trackIndex);
 
-          /*
-            Allow SoundCloud to switch tracks before asking
-            for the selected track's full metadata.
-          */
+          // Give SoundCloud time to switch to the selected track.
           setTimeout(() => {
             if (thisLoad !== loadToken) {
               loadingDetails = false;
@@ -645,7 +644,7 @@
               render();
               nextTrack();
             });
-          }, 180);
+          }, 350);
         }
 
         nextTrack();
@@ -669,10 +668,6 @@
         render();
         sync();
 
-        /*
-          Only query individual tracks when some metadata
-          is missing. The player stays fixed in height.
-        */
         const hasMissingMetadata = sounds.some(sound =>
           !sound.title || !sound.duration
         );
