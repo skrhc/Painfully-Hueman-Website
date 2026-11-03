@@ -21,26 +21,35 @@
       box-sizing: border-box;
     }
 
-    html,
     body {
       overflow-x: hidden;
-    }
-
-    body {
       background: #fff;
       color: #000;
       font-family: Arial, Helvetica, sans-serif;
     }
 
-    /* The whole page is laid out at a fixed size,
-       then scaled as one unit by the script at the bottom. */
     main {
-      width: 2000px;
+      display: block;
+      padding: 40px 0 60px;
+    }
+
+    /* The whole design lives in this fixed-size stage.
+       The script zooms it to fit the window, so proportions never change. */
+    #stage {
+      width: 1750px;
+      margin: 0 auto;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 40px 0 60px;
-      transform-origin: top left;
+    }
+
+    #stage.narrow {
+      width: 740px;
+      padding: 0 20px;
+    }
+
+    #stage.narrow .reel {
+      display: none;
     }
 
     /* POSTER */
@@ -94,56 +103,3 @@
       align-items: center;
       gap: 10px;
       padding: 7px 2px;
-      font-size: 20px;
-      line-height: 1.1;
-      cursor: pointer;
-      border-bottom: 2px solid #000;
-    }
-
-    .track:last-child {
-      border-bottom: none;
-    }
-
-    .track:hover .name {
-      text-decoration: underline;
-    }
-
-    .icon {
-      width: 22px;
-      height: 22px;
-      flex: none;
-      display: block;
-    }
-
-    .icon svg {
-      display: block;
-      width: 100%;
-      height: 100%;
-    }
-
-    .name {
-      flex: 1;
-      min-width: 0;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    .time {
-      flex: none;
-      font-size: 18px;
-    }
-
-    .bar {
-      position: absolute;
-      left: 0;
-      bottom: -2px;
-      height: 6px;
-      width: 0;
-      background: #000;
-    }
-
-    .knob {
-      display: none;
-      position: absolute;
-      left: 0;
