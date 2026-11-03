@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,13 +33,13 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: clamp(20px, 3vw, 40px) 3vw 60px;
+      padding: 40px 40px 60px;
     }
 
-    /* POSTER */
+    /* POSTER (fixed size so everything stays in proportion) */
     .poster-wrap {
       position: relative;
-      width: min(35vw, 700px);
+      width: 700px;
       --player-top: 52%;
     }
 
@@ -186,12 +185,12 @@
       border: 0;
     }
 
-    /* SPINNING LOGO REELS */
+    /* SPINNING LOGO REELS (desktop layout is now the only layout) */
     .reel {
       position: absolute;
       top: var(--player-top);
-      width: 14%;
-      margin-top: -7%;
+      width: 75%;
+      margin-top: -37.5%;
       aspect-ratio: 1;
       border-radius: 50%;
       z-index: 5;
@@ -200,27 +199,11 @@
     }
 
     .reel-left {
-      left: 1%;
+      left: -75%;
     }
 
     .reel-right {
-      right: 1%;
-    }
-
-    /* LARGE DESKTOP */
-    @media (min-width: 901px) {
-      .reel {
-        width: 75%;
-        margin-top: -37.5%;
-      }
-
-      .reel-left {
-        left: -75%;
-      }
-
-      .reel-right {
-        right: -75%;
-      }
+      right: -75%;
     }
 
     .poster,
@@ -233,14 +216,14 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      width: min(35vw, 700px);
-      min-height: clamp(64px, 6.5vw, 96px);
+      width: 700px;
+      min-height: 96px;
       margin-top: 24px;
       background: #000;
       color: #fff;
       text-align: center;
       text-decoration: none;
-      font-size: clamp(22px, 2.25vw, 34px);
+      font-size: 34px;
       font-weight: 700;
       letter-spacing: -0.02em;
       transition: opacity 0.15s ease;
@@ -271,61 +254,6 @@
 
       .poster-wrap.playing .reel {
         animation-play-state: running;
-      }
-    }
-
-    /* TABLETS */
-    @media (max-width: 900px) {
-      main {
-        padding: 24px 20px 48px;
-      }
-
-      .poster-wrap,
-      .rsvp {
-        width: min(700px, 100%);
-      }
-
-      .reel {
-        display: none;
-      }
-
-      .player {
-        width: 84%;
-      }
-    }
-
-    /* MOBILE */
-    @media (max-width: 600px) {
-      main {
-        padding: 16px 12px 40px;
-      }
-
-      .player {
-        width: 84%;
-        height: 145px;
-        max-height: 145px;
-        padding: 4px 12px;
-      }
-
-      .track {
-        font-size: 18px;
-        padding: 6px 2px;
-        gap: 8px;
-      }
-
-      .icon {
-        width: 18px;
-        height: 18px;
-      }
-
-      .time {
-        font-size: 15px;
-      }
-
-      .rsvp {
-        min-height: 80px;
-        font-size: 26px;
-        margin-top: 44px;
       }
     }
   </style>
@@ -447,21 +375,21 @@
         name.className = 'name';
 
         // Prevent a missing SoundCloud title from creating a blank row.
-      name.textContent =
-  sound.title && sound.title.trim()
-    ? sound.title
-    : index === 5
-      ? 'BOYGIRL'
-      : 'Track ' + (index + 1);
+        name.textContent =
+          sound.title && sound.title.trim()
+            ? sound.title
+            : index === 5
+              ? 'BOYGIRL'
+              : 'Track ' + (index + 1);
 
         const time = document.createElement('span');
         time.className = 'time';
         time.textContent =
-        Number(sound.duration) > 0
-        ? fmt(Number(sound.duration))
-        : index === 5
-          ? '6:36'
-          : '';
+          Number(sound.duration) > 0
+            ? fmt(Number(sound.duration))
+            : index === 5
+              ? '6:36'
+              : '';
 
         const bar = document.createElement('span');
         bar.className = 'bar';
