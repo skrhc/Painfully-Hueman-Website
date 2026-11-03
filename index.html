@@ -16,319 +16,266 @@
   <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
 
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    overflow-x: hidden;
+    background: #fff;
+    color: #000;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  main {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: clamp(20px, 3vw, 40px) 3vw 60px;
+  }
+
+  /* Everything inside scales off this box's width */
+  .stack {
+    width: min(35vw, 700px);
+    container-type: inline-size;
+  }
+
+  .poster-wrap {
+    position: relative;
+    width: 100%;
+    --player-top: 52%;
+  }
+
+  .poster {
+    display: block;
+    width: 100%;
+    height: auto;
+    background: #f2f2f2;
+  }
+
+  /* CUSTOM PLAYER */
+  .player {
+    position: absolute;
+    top: var(--player-top);
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 68%;
+    height: 31.7cqw;
+    overflow-y: auto;
+    overflow-x: hidden;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    z-index: 5;
+    padding: 1cqw 2.67cqw;
+    background: #fff;
+    border: 0.5cqw solid #000;
+    border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+    filter: url(#hand);
+    font-family: "Patrick Hand", "Comic Sans MS", cursive, sans-serif;
+    color: #000;
+    scrollbar-width: thin;
+    scrollbar-color: #000 transparent;
+  }
+
+  .tracks {
+    list-style: none;
+    height: auto;
+  }
+
+  .track {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 1.67cqw;
+    padding: 1.17cqw 0.33cqw;
+    font-size: 3.33cqw;
+    line-height: 1.1;
+    cursor: pointer;
+    border-bottom: 0.33cqw solid #000;
+  }
+
+  .track:last-child {
+    border-bottom: none;
+  }
+
+  .track:hover .name {
+    text-decoration: underline;
+  }
+
+  .icon {
+    width: 3.67cqw;
+    height: 3.67cqw;
+    flex: none;
+    display: block;
+  }
+
+  .icon svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .name {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .time {
+    flex: none;
+    font-size: 3cqw;
+  }
+
+  .bar {
+    position: absolute;
+    left: 0;
+    bottom: -0.33cqw;
+    height: 1cqw;
+    width: 0;
+    background: #000;
+  }
+
+  .knob {
+    display: none;
+    position: absolute;
+    left: 0;
+    bottom: -1.17cqw;
+    width: 2.33cqw;
+    height: 2.33cqw;
+    margin-left: -1.17cqw;
+    border-radius: 50%;
+    background: #000;
+    pointer-events: none;
+  }
+
+  .scrub {
+    display: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1.67cqw;
+    height: 3.33cqw;
+    z-index: 2;
+    cursor: pointer;
+    touch-action: none;
+  }
+
+  .track.active .knob,
+  .track.active .scrub {
+    display: block;
+  }
+
+  .track.active .name {
+    font-weight: 700;
+    text-decoration: underline;
+  }
+
+  .loading {
+    font-size: 3.33cqw;
+    padding: 1.67cqw 0.33cqw;
+  }
+
+  /* HIDDEN SOUNDCLOUD PLAYER */
+  .sc-hidden {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    border: 0;
+  }
+
+  /* SPINNING LOGO REELS */
+  .reel {
+    position: absolute;
+    top: var(--player-top);
+    width: 75%;
+    margin-top: -37.5%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    z-index: 5;
+    mix-blend-mode: multiply;
+    pointer-events: none;
+  }
+
+  .reel-left {
+    left: -75%;
+  }
+
+  .reel-right {
+    right: -75%;
+  }
+
+  .poster,
+  .rsvp {
+    filter: url(#hand);
+  }
+
+  /* RSVP */
+  .rsvp {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 11cqw;
+    margin-top: 4cqw;
+    background: #000;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    font-size: 4.6cqw;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    transition: opacity 0.15s ease;
+  }
+
+  .rsvp:hover {
+    opacity: 0.85;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.25); }
     }
 
-    body {
-      overflow-x: hidden;
-      background: #fff;
-      color: #000;
-      font-family: Arial, Helvetica, sans-serif;
+    .track.active .icon {
+      animation: pulse 1s ease-in-out infinite;
     }
 
-    main {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: clamp(20px, 3vw, 40px) 3vw 60px;
+    @keyframes spin {
+      to { transform: rotate(360deg); }
     }
 
-    /* POSTER */
-    .poster-wrap {
-      position: relative;
-      width: min(35vw, 700px);
-      --player-top: 52%;
-    }
-
-    .poster {
-      display: block;
-      width: 100%;
-      height: auto;
-      min-height: 300px;
-      background: #f2f2f2;
-    }
-
-    /* CUSTOM PLAYER */
-    .player {
-      position: absolute;
-      top: var(--player-top);
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 68%;
-      height: 190px;
-      max-height: 190px;
-      overflow-y: auto;
-      overflow-x: hidden;
-      overscroll-behavior: contain;
-      -webkit-overflow-scrolling: touch;
-      z-index: 5;
-      padding: 6px 16px;
-      background: #fff;
-      border: 3px solid #000;
-      border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
-      filter: url(#hand);
-      font-family: "Patrick Hand", "Comic Sans MS", cursive, sans-serif;
-      color: #000;
-      scrollbar-width: thin;
-      scrollbar-color: #000 transparent;
-    }
-
-    .tracks {
-      list-style: none;
-      height: auto;
-    }
-
-    .track {
-      position: relative;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 7px 2px;
-      font-size: 20px;
-      line-height: 1.1;
-      cursor: pointer;
-      border-bottom: 2px solid #000;
-    }
-
-    .track:last-child {
-      border-bottom: none;
-    }
-
-    .track:hover .name {
-      text-decoration: underline;
-    }
-
-    .icon {
-      width: 22px;
-      height: 22px;
-      flex: none;
-      display: block;
-    }
-
-    .icon svg {
-      display: block;
-      width: 100%;
-      height: 100%;
-    }
-
-    .name {
-      flex: 1;
-      min-width: 0;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    .time {
-      flex: none;
-      font-size: 18px;
-    }
-
-    .bar {
-      position: absolute;
-      left: 0;
-      bottom: -2px;
-      height: 6px;
-      width: 0;
-      background: #000;
-    }
-
-    .knob {
-      display: none;
-      position: absolute;
-      left: 0;
-      bottom: -7px;
-      width: 14px;
-      height: 14px;
-      margin-left: -7px;
-      border-radius: 50%;
-      background: #000;
-      pointer-events: none;
-    }
-
-    .scrub {
-      display: none;
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: -10px;
-      height: 20px;
-      z-index: 2;
-      cursor: pointer;
-      touch-action: none;
-    }
-
-    .track.active .knob,
-    .track.active .scrub {
-      display: block;
-    }
-
-    .track.active .name {
-      font-weight: 700;
-      text-decoration: underline;
-    }
-
-    .loading {
-      font-size: 20px;
-      padding: 10px 2px;
-    }
-
-    /* HIDDEN SOUNDCLOUD PLAYER */
-    .sc-hidden {
-      position: absolute;
-      left: -9999px;
-      width: 1px;
-      height: 1px;
-      border: 0;
-    }
-
-    /* SPINNING LOGO REELS */
     .reel {
-      position: absolute;
-      top: var(--player-top);
-      width: 14%;
-      margin-top: -7%;
-      aspect-ratio: 1;
-      border-radius: 50%;
-      z-index: 5;
-      mix-blend-mode: multiply;
-      pointer-events: none;
+      animation: spin 30s linear infinite;
+      animation-play-state: paused;
     }
 
-    .reel-left {
-      left: 1%;
+    .poster-wrap.playing .reel {
+      animation-play-state: running;
+    }
+  }
+
+  /* NARROW: poster fills the width, reels hidden. Inner proportions stay the same. */
+  @media (max-width: 900px) {
+    main {
+      padding: 24px 20px 48px;
     }
 
-    .reel-right {
-      right: 1%;
+    .stack {
+      width: min(700px, 100%);
     }
 
-    /* LARGE DESKTOP */
-    @media (min-width: 901px) {
-      .reel {
-        width: 75%;
-        margin-top: -37.5%;
-      }
-
-      .reel-left {
-        left: -75%;
-      }
-
-      .reel-right {
-        right: -75%;
-      }
+    .reel {
+      display: none;
     }
-
-    .poster,
-    .rsvp {
-      filter: url(#hand);
-    }
-
-    /* RSVP */
-    .rsvp {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: min(35vw, 700px);
-      min-height: clamp(64px, 6.5vw, 96px);
-      margin-top: 24px;
-      background: #000;
-      color: #fff;
-      text-align: center;
-      text-decoration: none;
-      font-size: clamp(22px, 2.25vw, 34px);
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      transition: opacity 0.15s ease;
-    }
-
-    .rsvp:hover {
-      opacity: 0.85;
-    }
-
-    @media (prefers-reduced-motion: no-preference) {
-      @keyframes pulse {
-        0%, 100% { transform: scale(1); }
-        50% { transform: scale(1.25); }
-      }
-
-      .track.active .icon {
-        animation: pulse 1s ease-in-out infinite;
-      }
-
-      @keyframes spin {
-        to { transform: rotate(360deg); }
-      }
-
-      .reel {
-        animation: spin 30s linear infinite;
-        animation-play-state: paused;
-      }
-
-      .poster-wrap.playing .reel {
-        animation-play-state: running;
-      }
-    }
-
-    /* TABLETS */
-    @media (max-width: 900px) {
-      main {
-        padding: 24px 20px 48px;
-      }
-
-      .poster-wrap,
-      .rsvp {
-        width: min(700px, 100%);
-      }
-
-      .reel {
-        display: none;
-      }
-
-      .player {
-        width: 84%;
-      }
-    }
-
-    /* MOBILE */
-    @media (max-width: 600px) {
-      main {
-        padding: 16px 12px 40px;
-      }
-
-      .player {
-        width: 84%;
-        height: 145px;
-        max-height: 145px;
-        padding: 4px 12px;
-      }
-
-      .track {
-        font-size: 18px;
-        padding: 6px 2px;
-        gap: 8px;
-      }
-
-      .icon {
-        width: 18px;
-        height: 18px;
-      }
-
-      .time {
-        font-size: 15px;
-      }
-
-      .rsvp {
-        min-height: 80px;
-        font-size: 26px;
-        margin-top: 44px;
-      }
-    }
-  </style>
+  }
+</style>
 </head>
 
 <body>
