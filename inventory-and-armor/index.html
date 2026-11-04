@@ -460,7 +460,7 @@
 
       zoomMeta.textContent = '';
       const top = el('div');
-      top.append(el('span', 'num', '[' + pad(item.id) + ']'), document.createTextNode(' ' + (item.maker || '') + ' // ' + (item.name || '')));
+      top.append(el('span', 'num', '[' + pad(item.id) + ']'), document.createTextNode(' ' + [item.maker, item.name].filter(Boolean).join(' // ')));
       zoomMeta.append(top);
       if (item.note) zoomMeta.append(el('div', '', item.note));
       if (item.credit) zoomMeta.append(el('div', '', 'Photo: ' + item.credit));
