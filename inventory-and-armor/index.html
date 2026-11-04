@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>INVENTORY &amp; ARMOR</title>
+  <meta property="og:title" content="Inventory & Armor">
+  <meta property="og:description" content="An index of form, material and weight. Painfully Hueman.">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: #000;
+      color: #fff;
+      font-family: "Courier New", Courier, monospace;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* HEADER + QUICK-JUMP NAV */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 10px 24px;
+      padding: 16px 32px;
+      background: #000;
+      border-bottom: 1px solid #222;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    header .title {
+      color: #fff;
+    }
+
+    header nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 20px;
+    }
+
+    header nav a {
+      color: #777;
+      text-decoration: none;
+    }
+
+    header nav a:hover {
+      color: #fff;
+    }
+
+    /* INTRO */
+    .intro {
+      padding: 90px 32px 40px;
+    }
+
+    .intro h1 {
+      font-size: clamp(28px, 5vw, 64px);
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .intro p {
+      margin-top: 16px;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      color: #777;
+      text-transform: uppercase;
+    }
+
+    .status {
+      padding: 60px 32px;
+      font-size: 12px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #777;
+    }
+
+    /* SECTIONS */
+    section {
+      padding: 60px 32px 20px;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding-bottom: 12px;
+      margin-bottom: 32px;
+      border-bottom: 1px solid #222;
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    .section-head .count {
+      color: #666;
+    }
+
+    /* GRID */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+    }
+
+    .card {
+      cursor: pointer;
+    }
+
+    .frame {
+      border: 1px solid #222;
+      padding: 14px;
+      background: #000;
+      transition: border-color 0.2s ease;
+    }
+
+    .frame img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      object-fit: contain;
+      background: #0a0a0a;
+      filter: grayscale(100%);
+      transition: filter 0.2s ease;
+    }
+
+    .card:hover .frame {
+      border-color: #fff;
+    }
+
+    .card:hover .frame img {
+      filter: grayscale(0%);
+    }
+
+    .meta {
+      margin-top: 12px;
+      font-size: 11px;
+      line-height: 1.6;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #666;
+      transition: color 0.2s ease;
+    }
+
+    .card:hover .meta {
+      color: #fff;
+    }
+
+    .meta .num {
+      color: #fff;
+    }
+
+    /* ZOOM VIEW */
+    #zoom {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      padding: 40px;
+      background: rgba(0, 0, 0, 0.96);
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    #zoom.open {
+      display: flex;
+    }
+
+    #zoom img {
+      max-width: 90vw;
+      max-height: 68vh;
+      border: 1px solid #333;
+      background: #0a0a0a;
+    }
+
+    #zoom .zoom-meta {
+      max-width: 640px;
+      text-align: center;
+      font-size: 12px;
+      line-height: 1.7;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #aaa;
+    }
+
+    #zoom .zoom-meta .num {
+      color: #fff;
+    }
+
+    .zoom-btn {
+      position: absolute;
+      background: none;
+      border: 0;
+      color: #888;
+      font-family: inherit;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      cursor: pointer;
+    }
+
+    .zoom-btn:hover {
+      color: #fff;
+    }
+
+    #zoom-close { top: 28px; right: 32px; }
+    #zoom-prev  { left: 32px; top: 50%; }
+    #zoom-next  { right: 32px; top: 50%; }
+
+    footer {
+      padding: 80px 32px 60px;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #444;
+    }
+
+    @media (max-width: 1024px) {
+      .grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 600px) {
+      header, .intro, section, footer, .status { padding-left: 16px; padding-right: 16px; }
+      .grid { grid-template-columns: 1fr; gap: 24px; }
+      #zoom { padding: 16px; }
+      #zoom-prev { left: 12px; }
+      #zoom-next { right: 12px; }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <span class="title">[ Inventory &amp; Armor ]</span>
+    <nav id="nav"></nav>
+  </header>
+
+  <div class="intro">
+    <h1>Inventory &amp; Armor</h1>
+    <p>An index of form, material and weight // Painfully Hueman</p>
+  </div>
+
+  <main id="main">
+    <div class="status">Loading archive...</div>
+  </main>
+
+  <footer>Painfully Hueman // Inventory &amp; Armor // Vol. 01</footer>
+
+  <div id="zoom">
+    <button class="zoom-btn" id="zoom-close">[CLOSE]</button>
+    <button class="zoom-btn" id="zoom-prev">[PREV]</button>
+    <button class="zoom-btn" id="zoom-next">[NEXT]</button>
+    <img id="zoom-img" alt="">
+    <div class="zoom-meta" id="zoom-meta"></div>
+  </div>
+
+  <script>
+    /* ------------------------------------------------------------
+       1. PASTE YOUR GOOGLE SHEET LINK BETWEEN THE QUOTES.
+          (File > Share > Publish to web > CSV > copy the link.)
+          Leave it empty to see four sample cards instead.
+       ------------------------------------------------------------ */
+    const SHEET_URL = '';
+
+    /* ------------------------------------------------------------
+       2. SECTION ORDER AND LABELS.
+          "key" must match what you type in the sheet's "section" column.
+          A section name in the sheet that isn't listed here still works.
+          It just appears at the end with its own name.
+       ------------------------------------------------------------ */
+    const SECTIONS = [
+      { key: 'armor',      label: '01 // Armor' },
+      { key: 'foundation', label: '02 // Foundations' },
+      { key: 'hardware',   label: '03 // Hardware' },
+      { key: 'footwear',   label: '04 // Footwear' }
+    ];
+
+    /* Sample cards, only shown when SHEET_URL is empty. */
+    const SAMPLE_ITEMS = [
+      { id: '1', section: 'armor',      img: 'images/001.jpg', maker: 'MAKER NAME', name: 'Sample overshirt', note: 'Replace with a line on cut, fabric weight or why it matters.', credit: '' },
+      { id: '2', section: 'armor',      img: 'images/002.jpg', maker: 'MAKER NAME', name: 'Sample jacket',    note: 'Placeholder note.', credit: '' },
+      { id: '3', section: 'foundation', img: 'images/003.jpg', maker: 'MAKER NAME', name: 'Sample trouser',   note: 'Placeholder note.', credit: '' },
+      { id: '4', section: 'hardware',   img: 'images/004.jpg', maker: 'MAKER NAME', name: 'Sample accessory', note: 'Placeholder note.', credit: '' }
+    ];
+
+    /* ------------------------------------------------------------
+       Everything below builds the page. No need to touch it.
+       ------------------------------------------------------------ */
+
+    const main = document.getElementById('main');
+    const nav = document.getElementById('nav');
+    const zoom = document.getElementById('zoom');
+    const zoomImg = document.getElementById('zoom-img');
+    const zoomMeta = document.getElementById('zoom-meta');
+
+    let visible = [];
+    let openIndex = -1;
+
+    function pad(n) {
+      var s = String(n).trim();
+      return /^\d+$/.test(s) ? s.padStart(3, '0') : s;
+    }
+
+    function el(tag, className, text) {
+      const node = document.createElement(tag);
+      if (className) node.className = className;
+      if (text !== undefined) node.textContent = text;
+      return node;
+    }
+
+    function showStatus(message) {
+      main.textContent = '';
+      nav.textContent = '';
+      main.append(el('div', 'status', message));
+    }
+
+    /* Reads CSV text, including quoted cells with commas and line breaks. */
+    function parseCSV(text) {
+      const rows = [];
+      let row = [];
+      let cell = '';
+      let inQuotes = false;
+
+      text = text.replace(/^\uFEFF/, '');
+
+      for (let i = 0; i < text.length; i++) {
+        const c = text[i];
+
+        if (inQuotes) {
+          if (c === '"') {
+            if (text[i + 1] === '"') { cell += '"'; i++; }
+            else { inQuotes = false; }
+          } else {
+            cell += c;
+          }
+        } else if (c === '"') {
+          inQuotes = true;
+        } else if (c === ',') {
+          row.push(cell); cell = '';
+        } else if (c === '\n') {
+          row.push(cell); rows.push(row); row = []; cell = '';
+        } else if (c !== '\r') {
+          cell += c;
+        }
+      }
+
+      if (cell !== '' || row.length) {
+        row.push(cell);
+        rows.push(row);
+      }
+
+      return rows;
+    }
+
+    function rowsToItems(rows) {
+      if (rows.length < 2) return [];
+
+      const headers = rows[0].map(function (h) { return h.trim().toLowerCase(); });
+
+      return rows.slice(1).map(function (r, n) {
+        const item = {};
+        headers.forEach(function (h, i) {
+          item[h] = (r[i] || '').trim();
+        });
+        if (!item.id) item.id = String(n + 1);
+        item.section = (item.section || '').toLowerCase();
+        return item;
+      }).filter(function (item) {
+        return item.img || item.name;
+      });
+    }
+
+    function build(items) {
+      main.textContent = '';
+      nav.textContent = '';
+      visible = [];
+
+      if (!items.length) {
+        showStatus('No items yet.');
+        return;
+      }
+
+      /* Listed sections first, then any extra section names from the sheet. */
+      const order = SECTIONS.slice();
+      items.forEach(function (item) {
+        const known = order.some(function (s) { return s.key === item.section; });
+        if (!known) {
+          order.push({ key: item.section, label: (item.section || 'other') });
+        }
+      });
+
+      order.forEach(function (sec) {
+        const group = items.filter(function (i) { return i.section === sec.key; });
+        if (!group.length) return;
+
+        const anchor = (sec.key || 'other').replace(/[^a-z0-9]+/g, '-');
+
+        const section = el('section');
+        section.id = anchor;
+
+        const head = el('div', 'section-head');
+        head.append(el('span', '', sec.label), el('span', 'count', group.length + ' items'));
+
+        const grid = el('div', 'grid');
+
+        group.forEach(function (item) {
+          const index = visible.length;
+          visible.push(item);
+
+          const card = el('div', 'card');
+
+          const frame = el('div', 'frame');
+          const img = document.createElement('img');
+          img.src = item.img;
+          img.alt = (item.maker || '') + ' ' + (item.name || '');
+          img.loading = 'lazy';
+          frame.append(img);
+
+          const meta = el('div', 'meta');
+          const line1 = el('div');
+          line1.append(el('span', 'num', '[' + pad(item.id) + ']'), document.createTextNode(' ' + (item.maker || '')));
+          meta.append(line1, el('div', '', item.name || ''));
+
+          card.append(frame, meta);
+          card.addEventListener('click', function () { openZoom(index); });
+          grid.append(card);
+        });
+
+        section.append(head, grid);
+        main.append(section);
+
+        const link = el('a', '', sec.label);
+        link.href = '#' + anchor;
+        nav.append(link);
+      });
+    }
+
+    function openZoom(index) {
+      if (!visible.length) return;
+      openIndex = (index + visible.length) % visible.length;
+      const item = visible[openIndex];
+
+      zoomImg.src = item.img;
+      zoomImg.alt = (item.maker || '') + ' ' + (item.name || '');
+
+      zoomMeta.textContent = '';
+      const top = el('div');
+      top.append(el('span', 'num', '[' + pad(item.id) + ']'), document.createTextNode(' ' + (item.maker || '') + ' // ' + (item.name || '')));
+      zoomMeta.append(top);
+      if (item.note) zoomMeta.append(el('div', '', item.note));
+      if (item.credit) zoomMeta.append(el('div', '', 'Photo: ' + item.credit));
+
+      zoom.classList.add('open');
+    }
+
+    function closeZoom() {
+      zoom.classList.remove('open');
+    }
+
+    document.getElementById('zoom-close').addEventListener('click', closeZoom);
+    document.getElementById('zoom-prev').addEventListener('click', function () { openZoom(openIndex - 1); });
+    document.getElementById('zoom-next').addEventListener('click', function () { openZoom(openIndex + 1); });
+
+    zoom.addEventListener('click', function (e) {
+      if (e.target === zoom) closeZoom();
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (!zoom.classList.contains('open')) return;
+      if (e.key === 'Escape') closeZoom();
+      if (e.key === 'ArrowLeft') openZoom(openIndex - 1);
+      if (e.key === 'ArrowRight') openZoom(openIndex + 1);
+    });
+
+    /* START */
+    if (!SHEET_URL) {
+      build(SAMPLE_ITEMS);
+    } else {
+      const sep = SHEET_URL.indexOf('?') === -1 ? '?' : '&';
+
+      fetch(SHEET_URL + sep + 't=' + Date.now())
+        .then(function (res) {
+          if (!res.ok) throw new Error('HTTP ' + res.status);
+          return res.text();
+        })
+        .then(function (text) {
+          build(rowsToItems(parseCSV(text)));
+        })
+        .catch(function () {
+          showStatus('Archive unavailable. Check the sheet link and that the sheet is published as CSV.');
+        });
+    }
+  </script>
+</body>
+</html>
