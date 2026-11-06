@@ -31,7 +31,7 @@
        then paste that link between the quotes below. Until then, the links in
        people.js are used. In the sheet's "link" column you can type a full URL,
        a website like name.com, or an Instagram handle like @name. */
-    const SHEET_URL = '';
+    const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQsba8VEur77HJUoVSxaE25r3l5rK1spvO4WPHVqDVMqTtzRMj1UwLz5ZEBFypA-w/pub?output=csv';
 
     (function () {
       const wall = document.getElementById('wall');
@@ -52,20 +52,28 @@
       for (let tries = 0; tries < 5 && people.length > 3 && startOf() === last; tries++) shuffle(people);
       try { localStorage.setItem('ph-huemans-start', startOf()); } catch (e) {}
 
-      /* "@name" -> Instagram, "name.com" -> https://name.com */
+      /* "@name" -> Instagram, "name.com" -> https://name.com;
+         tracking codes (utm_..., fbclid) are taken off the end */
       function cleanLink(raw) {
-        const v = (raw || '').trim();
+        let v = (raw || '').trim();
         if (!v) return '';
         if (/^@[\w.]+$/.test(v)) return 'https://www.instagram.com/' + v.slice(1) + '/';
-        if (/^https?:\/\//i.test(v)) return v;
-        if (/^[\w-]+(\.[\w-]+)+(\/.*)?$/.test(v)) return 'https://' + v;
-        return '';
+        if (!/^https?:\/\//i.test(v)) {
+          if (!/^[\w-]+(\.[\w-]+)+(\/.*)?$/.test(v)) return '';
+          v = 'https://' + v;
+        }
+        try {
+          const u = new URL(v);
+          ['fbclid', 'igshid', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term']
+            .forEach(function (k) { u.searchParams.delete(k); });
+          return u.toString().replace(/\?$/, '');
+        } catch (e) { return ''; }
       }
 
       function label(link) {
         const m = /instagram\.com\/([^/?#]+)/i.exec(link);
         if (m) return '@' + m[1];
-        return link.replace(/^https?:\/\/(www\.)?/i, '').replace(/\/$/, '');
+        return link.replace(/^https?:\/\/(www\.)?/i, '').replace(/[?#].*$/, '').replace(/\/$/, '');
       }
 
       function parseCSV(text) {
@@ -127,9 +135,18 @@
           const head = (rows.shift() || []).map(function (h) { return h.trim().toLowerCase(); });
           const iPhoto = head.indexOf('photo'), iLink = head.indexOf('link');
           if (iPhoto < 0 || iLink < 0) return;
-          const links = {};
-          rows.forEach(function (r) { if (r[iPhoto]) links[r[iPhoto].trim()] = r[iLink] || ''; });
-          people.forEach(function (p) { if (p.img in links) p.link = links[p.img]; });
+          const iName = head.indexOf('name');
+          const links = {}, byName = {};
+          rows.forEach(function (r) {
+            if (r[iPhoto]) links[r[iPhoto].trim()] = r[iLink] || '';
+            if (iName >= 0 && r[iName] && r[iLink]) byName[r[iName].trim().toLowerCase()] = r[iLink];
+          });
+          /* match by photo; a photo with no row of its own (e.g. a second
+             Polaroid of the same person) uses that person's link */
+          people.forEach(function (p) {
+            if (p.img in links) p.link = links[p.img];
+            else if (byName[p.name.toLowerCase()]) p.link = byName[p.name.toLowerCase()];
+          });
         })
         .catch(function () {})
         .then(function () { clearTimeout(fallback); draw(); drawn = true; });
