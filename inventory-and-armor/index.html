@@ -162,8 +162,14 @@
 
   /* GALLERY */
   main {
-    padding: 40px 40px 20px;
+    padding: 40px 0 20px;
     transition: opacity 0.25s ease;
+  }
+
+  main .section-head,
+  main .status {
+    margin-left: 40px;
+    margin-right: 40px;
   }
 
   main.fading {
@@ -189,9 +195,10 @@
   .grid {
     display: grid;
     /* five boxes per row, each the same size as in a seven-across row,
-       with the leftover width spread out as space between them */
-    grid-template-columns: repeat(5, calc((100% - 120px) / 7));
-    justify-content: space-between;
+       with the leftover width shared equally between the boxes and the
+       two side margins */
+    grid-template-columns: repeat(5, calc((100% - 200px) / 7));
+    justify-content: space-evenly;
     row-gap: 72px;
   }
 
@@ -370,7 +377,7 @@
 
   /* SMALLER SCREENS */
   @media (max-width: 1100px) {
-    .grid { grid-template-columns: repeat(4, calc((100% - 64px) / 5)); row-gap: 48px; }
+    .grid { grid-template-columns: repeat(4, calc((100% - 144px) / 5)); row-gap: 48px; }
   }
 
   @media (max-width: 700px) {
@@ -381,6 +388,8 @@
     .btn { padding: 0 9px; font-size: 10px; letter-spacing: 0.1em; }
     .intro { padding: 56px 16px 16px; }
     main { padding: 28px 16px 12px; }
+    main .section-head, main .status { margin-left: 0; margin-right: 0; }
+    .grid { justify-content: stretch; }
     .grid { grid-template-columns: repeat(3, 1fr); gap: 28px 14px; }
     .frame { padding: 6px; }
     .meta { font-size: 9px; letter-spacing: 0.04em; }
