@@ -403,7 +403,98 @@ a.project:hover .frame {
   margin-top: 33px;
 }
 
-/* CONTACT — email in the dead center of the window */
+/* EDITORIAL — covers in the same row as INDEX; covers keep their 4:5 shape */
+.project.cover img {
+  aspect-ratio: 4 / 5;
+}
+
+/* EDITORIAL ARTICLE — interview: photos and Q&A in one reading column */
+.article {
+  --read: 720px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 72px;
+  padding: 56px 24px 160px;
+}
+
+.article figure {
+  margin: 0;
+  width: 100%;
+}
+
+.article img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.article-cover { max-width: 640px; }
+.article-wide { max-width: 960px; }
+.article-portrait { max-width: 560px; }
+.article-wide.article-color { max-width: 760px; }
+
+.qa {
+  width: 100%;
+  max-width: var(--read);
+}
+
+.qa h2 {
+  margin-bottom: 14px;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 31px;
+}
+
+.qa p {
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 32px;
+}
+
+.qa p + p {
+  margin-top: 28px;
+}
+
+/* photo with the short lines beside it */
+.article-split {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+  gap: 48px;
+  align-items: center;
+  width: 100%;
+  max-width: 960px;
+}
+
+.article-split .qa p + p {
+  margin-top: 24px;
+}
+
+/* text on the left, photo on the right */
+.article-split.flip {
+  grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+}
+
+/* a second question inside the same section */
+.qa h2.qa-next {
+  margin-top: 40px;
+}
+
+.article-end {
+  font-size: 15px;
+  letter-spacing: 0.04em;
+}
+
+.article-end a:hover {
+  color: var(--active);
+}
+
+/* ABOUT — contact email at the end, a little apart from the text */
+.text p.text-contact {
+  margin-top: 56px;
+}
+
+/* (old CONTACT page) email in the dead center of the window */
 .text.center {
   position: fixed;
   inset: 0;
@@ -467,6 +558,31 @@ a.project:hover .frame {
 
   .page-title {
     padding-top: 24px;
+  }
+
+  .article {
+    gap: 48px;
+    padding: 24px 16px 96px;
+  }
+
+  .qa h2 {
+    font-size: 20px;
+    line-height: 27px;
+  }
+
+  .qa p {
+    font-size: 18px;
+    line-height: 27px;
+  }
+
+  .qa p + p {
+    margin-top: 22px;
+  }
+
+  .article-split,
+  .article-split.flip {
+    grid-template-columns: 1fr;
+    gap: 32px;
   }
 
   .projects {
