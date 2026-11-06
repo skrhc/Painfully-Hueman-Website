@@ -197,7 +197,7 @@
     /* five boxes per row, each the same size as in a seven-across row,
        with the leftover width shared equally between the boxes and the
        two side margins */
-    grid-template-columns: repeat(5, calc((100% - 200px) / 7));
+    grid-template-columns: repeat(5, calc((100% - 200px) / 7 * 1.1));
     justify-content: space-evenly;
     row-gap: 72px;
   }
@@ -377,7 +377,7 @@
 
   /* SMALLER SCREENS */
   @media (max-width: 1100px) {
-    .grid { grid-template-columns: repeat(4, calc((100% - 144px) / 5)); row-gap: 48px; }
+    .grid { grid-template-columns: repeat(4, calc((100% - 144px) / 5 * 1.1)); row-gap: 48px; }
   }
 
   @media (max-width: 700px) {
