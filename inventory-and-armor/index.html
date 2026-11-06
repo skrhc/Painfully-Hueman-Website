@@ -32,9 +32,7 @@
   body {
     background: var(--paper);
     color: var(--ink);
-    /* Apple Garamond Bold where it's installed; otherwise EB Garamond Bold */
-    font-family: "Apple Garamond", "AppleGaramond", "AppleGaramond-Bold", "EB Garamond", Garamond, "Times New Roman", serif;
-    font-weight: 700;
+    font-family: "Courier New", Courier, monospace;
     -webkit-font-smoothing: antialiased;
     text-transform: uppercase;
   }
@@ -59,39 +57,42 @@
     position: sticky;
     top: 0;
     z-index: 10;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    gap: 10px 20px;
-    padding: 14px 40px;
+    /* same side margins as the photo grid below */
+    --box: calc((100% - 200px) / 7 * 1.1);
+    padding: 14px calc((100% - 5 * var(--box)) / 6);
     background: var(--paper);
-    border-top: 1px solid var(--ink);
-    border-bottom: 1px solid var(--ink);
   }
 
+  /* all the filter boxes joined into one straight line */
   .tools {
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    width: 100%;
+  }
+
+  .tools > * + * {
+    margin-left: -1px;
   }
 
   .search {
+    flex: 1 1 auto;
+    min-width: 0;
     display: flex;
     align-items: center;
     border: 1px solid var(--ink);
   }
 
   .search input {
-    width: 240px;
+    flex: 1;
+    min-width: 0;
+    width: 100%;
     height: 34px;
     padding: 0 10px;
     border: 0;
     outline: 0;
     background: transparent;
-    font-size: 14px;
+    font-size: 12px;
     letter-spacing: 0.08em;
   }
 
@@ -110,7 +111,7 @@
     border: 0;
     border-left: 1px solid var(--ink);
     background: var(--paper);
-    font-size: 12px;
+    font-size: 10px;
     letter-spacing: 0.12em;
     cursor: pointer;
   }
@@ -124,7 +125,7 @@
     padding: 0 12px;
     border: 1px solid var(--ink);
     background: var(--paper);
-    font-size: 13px;
+    font-size: 11px;
     letter-spacing: 0.14em;
     white-space: nowrap;
     cursor: pointer;
@@ -137,7 +138,7 @@
     border-radius: 0;
     background: var(--paper) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0h10L5 6z'/%3E%3C/svg%3E") no-repeat right 10px center;
     font-family: inherit;
-    font-size: 13px;
+    font-size: 11px;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--ink);
@@ -169,30 +170,20 @@
 
   /* INTRO */
   .intro {
-    padding: 72px 40px 36px;
+    padding: 72px 40px 40px;
     text-align: center;
   }
 
   .intro h1 {
+    /* Apple Garamond Bold where it's installed; otherwise EB Garamond Bold */
+    font-family: "Apple Garamond", "AppleGaramond", "AppleGaramond-Bold", "EB Garamond", Garamond, "Times New Roman", serif;
     font-size: clamp(48px, 9vw, 128px);
     font-weight: 700;
     line-height: 1;
     letter-spacing: 0.08em;
   }
 
-  .intro p {
-    margin-top: 18px;
-    font-size: 14px;
-    letter-spacing: 0.1em;
-  }
 
-  .count {
-    padding: 28px 40px 0;
-    text-align: center;
-    font-size: 12px;
-    letter-spacing: 0.14em;
-    color: var(--soft);
-  }
 
   /* GALLERY */
   main {
@@ -221,7 +212,7 @@
     padding-bottom: 12px;
     margin-bottom: 36px;
     border-bottom: 1px solid var(--ink);
-    font-size: 14px;
+    font-size: 12px;
     letter-spacing: 0.2em;
     scroll-margin-top: calc(var(--hh) + 20px);
   }
@@ -272,7 +263,7 @@
     position: absolute;
     top: 8px;
     right: 10px;
-    font-size: 12px;
+    font-size: 10px;
     letter-spacing: 0.1em;
     background: var(--paper);
   }
@@ -284,20 +275,20 @@
   .meta {
     overflow-wrap: anywhere;
     margin-top: 10px;
-    font-size: 12px;
+    font-size: 10px;
     line-height: 1.6;
     letter-spacing: 0.06em;
   }
 
   .meta .sec {
     color: var(--soft);
-    font-size: 12px;
+    font-size: 10px;
     letter-spacing: 0.12em;
   }
 
   .status {
     padding: 40px 0 80px;
-    font-size: 14px;
+    font-size: 12px;
     letter-spacing: 0.15em;
   }
 
@@ -307,7 +298,7 @@
 
   footer {
     padding: 100px 40px 60px;
-    font-size: 13px;
+    font-size: 11px;
     letter-spacing: 0.15em;
   }
 
@@ -379,13 +370,13 @@
   .zoom-meta {
     max-width: 640px;
     text-align: center;
-    font-size: 14px;
+    font-size: 12px;
     line-height: 1.7;
     letter-spacing: 0.08em;
   }
 
   .zoom-meta .sec {
-    font-size: 12px;
+    font-size: 10px;
     letter-spacing: 0.16em;
     color: var(--soft);
   }
@@ -397,7 +388,7 @@
     padding: 10px 12px;
     border: 0;
     background: none;
-    font-size: 13px;
+    font-size: 11px;
     letter-spacing: 0.2em;
     cursor: pointer;
   }
@@ -412,28 +403,23 @@
 
   /* SMALLER SCREENS */
   @media (max-width: 1100px) {
+    header { padding: 14px calc((100% - 4 * ((100% - 144px) / 5 * 1.1)) / 5); }
     .grid { grid-template-columns: repeat(4, calc((100% - 144px) / 5 * 1.1)); row-gap: 25px; }
   }
 
   @media (max-width: 700px) {
-    header { padding: 12px 16px; gap: 10px; }
-    .tools { width: 100%; margin-left: 0; }
-    .search { flex: 1; min-width: 0; }
-    .search input { flex: 1; width: auto; min-width: 0; font-size: 16px; }
-    .tools { flex-wrap: wrap; }
-    .search { flex: 1 1 calc(100% - 110px); order: 0; }
-    #shuffle { order: 1; }
-    .pick { order: 2; flex: 1 1 40%; min-width: 0; padding: 0 22px 0 8px; font-size: 11px; letter-spacing: 0.04em; background-position: right 8px center; }
-    .btn { padding: 0 10px; font-size: 12px; letter-spacing: 0.08em; }
+    header { padding: 10px 16px; }
+    .search input { font-size: 16px; padding: 0 8px; }
+    .pick { flex: none; padding: 0 20px 0 7px; font-size: 10px; letter-spacing: 0.04em; background-position: right 6px center; }
+    .btn { padding: 0 8px; font-size: 10px; letter-spacing: 0.06em; }
     .intro { padding: 44px 16px 24px; }
-    .count { padding: 20px 16px 0; }
     main { padding: 28px 16px 12px; }
     main .section-head, main .status { margin-left: 0; margin-right: 0; }
     .grid { justify-content: stretch; }
     .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 15px 14px; }
     .frame { padding: 6px; }
-    .meta { font-size: 11px; letter-spacing: 0.04em; }
-    .meta .sec { font-size: 10px; }
+    .meta { font-size: 9px; letter-spacing: 0.04em; }
+    .meta .sec { font-size: 8px; }
     footer { padding: 72px 16px 48px; }
     #zoom { padding: 56px 16px 84px; }
     #zoom-img { max-height: 52vh; }
@@ -452,7 +438,6 @@
 <body>
   <div class="intro">
     <h1>Armory</h1>
-    <p>An index of form, material and weight // Painfully Hueman</p>
   </div>
 
   <header id="head">
@@ -462,11 +447,11 @@
         <button type="button" id="q-clear" aria-label="Clear search">Clear</button>
       </label>
       <select class="pick" id="sort" aria-label="Sort">
-        <option value="random">Sort: Random</option>
-        <option value="newest">Sort: Newest first</option>
-        <option value="oldest">Sort: Oldest first</option>
-        <option value="category">Sort: By category</option>
-        <option value="maker">Sort: Maker A–Z</option>
+        <option value="random" data-short="Random">Sort: Random</option>
+        <option value="newest" data-short="Newest">Sort: Newest first</option>
+        <option value="oldest" data-short="Oldest">Sort: Oldest first</option>
+        <option value="category" data-short="Category">Sort: By category</option>
+        <option value="maker" data-short="Maker">Sort: Maker A–Z</option>
       </select>
       <select class="pick" id="cat" aria-label="Category">
         <option value="">All categories</option>
@@ -475,7 +460,6 @@
     </div>
   </header>
 
-  <div class="count" id="count" aria-live="polite"></div>
 
   <main id="main">
     <div class="status" id="status">Loading archive...</div>
@@ -529,7 +513,7 @@
        ------------------------------------------------------------ */
 
     const $ = function (id) { return document.getElementById(id); };
-    const head = $('head'), main = $('main'), statusEl = $('status'), countEl = $('count');
+    const head = $('head'), main = $('main'), statusEl = $('status'), countEl = document.createElement('div');
     const q = $('q'), searchEl = $('search'), shuffleBtn = $('shuffle'), sortEl = $('sort'), catEl = $('cat');
     const zoom = $('zoom'), zoomImg = $('zoom-img'), zoomMeta = $('zoom-meta'), zoomThumbs = $('zoom-thumbs');
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -781,6 +765,7 @@
       catEl.textContent = '';
       const all = el('option', '', 'All categories (' + items.length + ')');
       all.value = '';
+      all.dataset.short = 'All';
       catEl.append(all);
       Object.keys(counts).sort().forEach(function (key) {
         const o = el('option', '', (key || 'other') + ' (' + counts[key] + ')');
@@ -788,9 +773,23 @@
         catEl.append(o);
       });
       if (category && !(category in counts)) category = '';
+      fitLabels();
       catEl.value = category;
       sortEl.value = sortMode;
     }
+
+    /* Phones: shorter dropdown labels so the bar stays on one line. */
+    const narrow = window.matchMedia('(max-width: 700px)');
+    function fitLabels() {
+      [sortEl, catEl].forEach(function (select) {
+        Array.prototype.forEach.call(select.options, function (o) {
+          if (!o.dataset.long) o.dataset.long = o.textContent;
+          o.textContent = narrow.matches && o.dataset.short ? o.dataset.short : o.dataset.long;
+        });
+      });
+    }
+    if (narrow.addEventListener) narrow.addEventListener('change', fitLabels);
+    fitLabels();
 
     shuffleBtn.addEventListener('click', function () {
       shuffle(items);
