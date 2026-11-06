@@ -136,6 +136,21 @@
     background: #fff;
   }
 
+  .frame {
+    position: relative;
+  }
+
+  /* "+2" badge on cards with more than one photo */
+  .frame .more {
+    position: absolute;
+    top: 6px;
+    right: 8px;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: #000;
+    background: #fff;
+  }
+
   .card:hover .frame {
     box-shadow: 0 0 0 1px #000;
   }
@@ -176,6 +191,47 @@
     max-height: 68vh;
     border: 1px solid #000;
     background: #fff;
+  }
+
+  #zoom-img.multi {
+    cursor: pointer;
+  }
+
+  /* Thumbnails for items with several photos */
+  #zoom-thumbs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    max-width: 90vw;
+  }
+
+  #zoom-thumbs:empty {
+    display: none;
+  }
+
+  #zoom-thumbs button {
+    width: 52px;
+    height: 52px;
+    padding: 3px;
+    border: 1px solid #ccc;
+    background: #fff;
+    cursor: pointer;
+  }
+
+  #zoom-thumbs button.active {
+    border-color: #000;
+    box-shadow: 0 0 0 1px #000;
+  }
+
+  #zoom-thumbs img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border: 0;
+    max-width: none;
+    max-height: none;
   }
 
   #zoom .zoom-meta {
@@ -256,6 +312,7 @@
     <button class="zoom-btn" id="zoom-prev">[PREV]</button>
     <button class="zoom-btn" id="zoom-next">[NEXT]</button>
     <img id="zoom-img" alt="">
+    <div id="zoom-thumbs"></div>
     <div class="zoom-meta" id="zoom-meta"></div>
   </div>
 
@@ -297,9 +354,11 @@
     const zoom = document.getElementById('zoom');
     const zoomImg = document.getElementById('zoom-img');
     const zoomMeta = document.getElementById('zoom-meta');
+    const zoomThumbs = document.getElementById('zoom-thumbs');
 
     let visible = [];
     let openIndex = -1;
+    let openPhoto = 0;
 
     function pad(n) {
       var s = String(n).trim();
@@ -372,6 +431,12 @@
         return item;
       }).filter(function (item) {
         return item.img || item.name;
+      }).map(function (item) {
+        /* Several photos: list them in the "img" cell, separated by commas
+           or line breaks. The first one is the cover. */
+        item.imgs = (item.img || '').split(/[\s,]+/).filter(Boolean);
+        item.img = item.imgs[0] || '';
+        return item;
       });
     }
 
@@ -420,6 +485,9 @@
           img.alt = (item.maker || '') + ' ' + (item.name || '');
           img.loading = 'lazy';
           frame.append(img);
+          if (item.imgs.length > 1) {
+            frame.append(el('span', 'more', '[+' + (item.imgs.length - 1) + ']'));
+          }
 
           const meta = el('div', 'meta');
           const line1 = el('div');
@@ -444,9 +512,24 @@
       if (!visible.length) return;
       openIndex = (index + visible.length) % visible.length;
       const item = visible[openIndex];
+      const label = (item.maker || '') + ' ' + (item.name || '');
 
-      zoomImg.src = item.img;
-      zoomImg.alt = (item.maker || '') + ' ' + (item.name || '');
+      zoomThumbs.textContent = '';
+      if (item.imgs.length > 1) {
+        item.imgs.forEach(function (src, n) {
+          const b = document.createElement('button');
+          b.setAttribute('aria-label', 'Photo ' + (n + 1) + ' of ' + item.imgs.length);
+          const t = document.createElement('img');
+          t.src = src;
+          t.alt = '';
+          b.append(t);
+          b.addEventListener('click', function () { showPhoto(n); });
+          zoomThumbs.append(b);
+        });
+      }
+      zoomImg.alt = label;
+      zoomImg.classList.toggle('multi', item.imgs.length > 1);
+      showPhoto(0);
 
       zoomMeta.textContent = '';
       const top = el('div');
@@ -458,6 +541,16 @@
       zoom.classList.add('open');
     }
 
+    function showPhoto(n) {
+      const item = visible[openIndex];
+      if (!item || !item.imgs.length) return;
+      openPhoto = (n + item.imgs.length) % item.imgs.length;
+      zoomImg.src = item.imgs[openPhoto];
+      Array.prototype.forEach.call(zoomThumbs.children, function (b, i) {
+        b.classList.toggle('active', i === openPhoto);
+      });
+    }
+
     function closeZoom() {
       zoom.classList.remove('open');
     }
@@ -465,6 +558,9 @@
     document.getElementById('zoom-close').addEventListener('click', closeZoom);
     document.getElementById('zoom-prev').addEventListener('click', function () { openZoom(openIndex - 1); });
     document.getElementById('zoom-next').addEventListener('click', function () { openZoom(openIndex + 1); });
+
+    /* Clicking the big photo shows the item's next photo. */
+    zoomImg.addEventListener('click', function () { showPhoto(openPhoto + 1); });
 
     zoom.addEventListener('click', function (e) {
       if (e.target === zoom) closeZoom();
@@ -475,6 +571,8 @@
       if (e.key === 'Escape') closeZoom();
       if (e.key === 'ArrowLeft') openZoom(openIndex - 1);
       if (e.key === 'ArrowRight') openZoom(openIndex + 1);
+      if (e.key === 'ArrowDown') { e.preventDefault(); showPhoto(openPhoto + 1); }
+      if (e.key === 'ArrowUp') { e.preventDefault(); showPhoto(openPhoto - 1); }
     });
 
     /* START */

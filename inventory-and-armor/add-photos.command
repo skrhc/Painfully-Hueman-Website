@@ -8,6 +8,9 @@
 #    e.g. outerwear - FRKM SCD - Nightblade Jacket.jpg
 #    Use space-dash-space between parts. "maker - name.jpg" also
 #    works. Start names with "1. ", "2. " to set the order.
+#    More photos of the same item: same name plus " #2", " #3"...
+#        outerwear - FRKM SCD - Nightblade Jacket #2.jpg
+#    They become one item; the first photo is the cover.
 # 2. Double-click this file (or run it in Terminal).
 #
 # Each photo has its background removed and is cropped to the item
@@ -85,12 +88,18 @@ slug() {
 }
 
 # Turn "section - maker - item name.jpg" into sheet columns.
-# Sets: SECTION MAKER NAME BASE (BASE = file name without extension).
+# Sets: SECTION MAKER NAME BASE PHOTO_NO (BASE = file name without
+# extension or photo number).
 parse_details() {
   local s parts=()
   s=$(basename "$1"); s="${s%.*}"
   # Drop an ordering prefix like "1. " or "02. "
   [[ "$s" =~ ^[0-9]+\.\ +(.*)$ ]] && s="${BASH_REMATCH[1]}"
+  # Drop a photo number like " #2" or " (2)": extra photos of one item
+  PHOTO_NO=1
+  if [[ "$s" =~ ^(.*[^[:space:]])[[:space:]]+(#|\()([0-9]+)\)?$ ]]; then
+    s="${BASH_REMATCH[1]}"; PHOTO_NO="${BASH_REMATCH[3]}"
+  fi
   BASE="$s"
   while [[ "$s" == *" - "* ]]; do parts+=("$(trim "${s%% - *}")"); s="${s#* - }"; done
   parts+=("$(trim "$s")")
@@ -130,18 +139,34 @@ if [ "$REMOVE_BG" -eq 1 ] && [ "$DRY" -eq 0 ]; then
   fi
 fi
 
+# Group photos into items: photos with the same section, maker and
+# name (e.g. "... Jacket.jpg", "... Jacket #2.jpg") become one item.
+item_keys=(); item_section=(); item_maker=(); item_name=(); item_imgs=()
+find_item() {  # sets IDX to the item for the current photo, adding one if new
+  local key i
+  if [ -n "$MAKER$NAME" ]; then
+    key=$(printf '%s|%s|%s' "$SECTION" "$MAKER" "$NAME" | tr '[:upper:]' '[:lower:]')
+  else
+    key="__single__$BASE"   # no details: each photo is its own item
+  fi
+  for ((i = 0; i < ${#item_keys[@]}; i++)); do
+    [ "${item_keys[i]}" = "$key" ] && { IDX=$i; return; }
+  done
+  IDX=${#item_keys[@]}
+  item_keys+=("$key"); item_section+=("$SECTION"); item_maker+=("$MAKER")
+  item_name+=("$NAME"); item_imgs+=("")
+}
+
 added=()
-rows=""
 for src in "${photos[@]}"; do
-  last=$((last + 1))
   parse_details "$src"
+  find_item
   out=$(pick_name)
 
   if [ "$DRY" -eq 1 ]; then
-    echo "[dry run] $(basename "$src")"
-    echo "          -> $out   (id $last)"
-    echo "          section: ${SECTION:--}   maker: ${MAKER:--}   name: ${NAME:--}"
     added+=("$out")
+    item_imgs[IDX]="${item_imgs[IDX]:+${item_imgs[IDX]}, }$out"
+    echo "[dry run] $(basename "$src")  ->  $out"
     continue
   fi
 
@@ -153,13 +178,11 @@ for src in "${photos[@]}"; do
       0) cut=0 ;;
       3) ;;  # already transparent
       4) echo "  (couldn't find a subject in $(basename "$src"), kept its background)" ;;
-      *) echo "  (background removal failed for $(basename "$src"), kept its background)" ;;
     esac
   fi
   if [ "$cut" -ne 0 ] && ! sips -s format png "$src" --out "$out" >/dev/null 2>&1; then
-    echo "Skipped $(basename "$src") (not an image sips can read)"
+    echo "Skipped $(basename "$src") (not an image that can be read)"
     rm -f "$out"
-    last=$((last - 1))
     continue
   fi
 
@@ -172,12 +195,27 @@ for src in "${photos[@]}"; do
 
   mv "$src" "$DONE/"
   added+=("$out")
-  # id, section, img, maker, name, note, credit
-  rows+="$last"$'\t'"$SECTION"$'\t'"$out"$'\t'"$MAKER"$'\t'"$NAME"$'\t\t\n'
-  echo "Added $(basename "$src")  ->  $out   (id $last)"
+  item_imgs[IDX]="${item_imgs[IDX]:+${item_imgs[IDX]}, }$out"
+  echo "Added $(basename "$src")  ->  $out"
 done
 
-[ "$DRY" -eq 1 ] && exit 0
+# One sheet row per item: id, section, img(s), maker, name, note, credit
+rows=""
+summary=""
+for ((i = 0; i < ${#item_keys[@]}; i++)); do
+  [ -n "${item_imgs[i]}" ] || continue
+  last=$((last + 1))
+  n=$(printf '%s' "${item_imgs[i]}" | awk -F', ' '{print NF}')
+  rows+="$last"$'\t'"${item_section[i]}"$'\t'"${item_imgs[i]}"$'\t'"${item_maker[i]}"$'\t'"${item_name[i]}"$'\t\t\n'
+  summary+="  $last | ${item_section[i]:--} | ${item_maker[i]:--} | ${item_name[i]:--}  ($n photo$([ "$n" -gt 1 ] && echo s || true))"$'\n'
+done
+
+if [ "$DRY" -eq 1 ]; then
+  echo
+  echo "[dry run] These sheet rows would be made:"
+  printf '%s' "$summary"
+  exit 0
+fi
 [ ${#added[@]} -eq 0 ] && { echo "Nothing added."; exit 1; }
 
 echo "$last" > "$LAST_ID_FILE"
@@ -191,15 +229,21 @@ fi
 git commit -q -m "$msg" -- "${added[@]}"
 echo "Committed: $msg"
 
-if [ "$PUSH" -eq 1 ]; then
-  git push -q && echo "Pushed to GitHub. Live in a minute or two."
-fi
-
 printf '%s' "$rows" | pbcopy
 printf '%s' "$rows" > "$DONE/sheet-rows-$(date +%Y%m%d-%H%M%S).tsv"
 echo
 echo "Sheet rows copied to your clipboard:"
-printf '%s' "$rows" | awk -F'\t' '{printf "  %s | %s | %s | %s\n", $1, $2, $4, $5}'
+printf '%s' "$summary"
 echo
 echo "Next: in the Google Sheet, click the first empty cell in the 'id'"
 echo "column and paste (Cmd+V). Add any notes or credits after."
+
+if [ "$PUSH" -eq 1 ]; then
+  echo
+  if git push -q; then
+    echo "Pushed to GitHub. Live in a minute or two."
+  else
+    echo "Couldn't push to GitHub. The photos are saved and committed on"
+    echo "this Mac; they'll go up next time a push works."
+  fi
+fi
