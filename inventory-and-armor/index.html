@@ -63,16 +63,13 @@
     background: var(--paper);
   }
 
-  /* all the filter boxes joined into one straight line */
+  /* all the filter boxes in one straight line, with space between */
   .tools {
     display: flex;
     flex-wrap: nowrap;
     align-items: stretch;
+    gap: 14px;
     width: 100%;
-  }
-
-  .tools > * + * {
-    margin-left: -1px;
   }
 
   .search {
@@ -409,6 +406,7 @@
 
   @media (max-width: 700px) {
     header { padding: 10px 16px; }
+    .tools { gap: 6px; }
     .search input { font-size: 16px; padding: 0 8px; }
     .pick { flex: none; padding: 0 20px 0 7px; font-size: 10px; letter-spacing: 0.04em; background-position: right 6px center; }
     .btn { padding: 0 8px; font-size: 10px; letter-spacing: 0.06em; }
