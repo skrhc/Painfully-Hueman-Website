@@ -14,7 +14,8 @@
 #    They become one item; the first photo is the cover.
 #    To keep a photo's background, add "(keep bg)" to its name:
 #        object - Unknown - Box (keep bg).jpg
-#    Paintings (section "painting") always keep their background.
+#    Paintings (section "painting") are cropped to the canvas instead:
+#    the wall around them is removed. "(keep bg)" keeps the whole photo.
 # 2. Double-click this file (or run it in Terminal).
 #
 # Each photo has its background removed and is cropped to the item
@@ -160,6 +161,16 @@ if [ "$REMOVE_BG" -eq 1 ] && [ "$DRY" -eq 0 ]; then
   fi
 fi
 
+# Paintings: cropped to the canvas (the wall around them removed) with
+# tools/crop-painting.swift, built once like the background tool.
+CROP_TOOL="$INBOX/.tools/crop-painting"
+if [ "$DRY" -eq 0 ]; then
+  if [ ! -x "$CROP_TOOL" ] || [ tools/crop-painting.swift -nt "$CROP_TOOL" ]; then
+    mkdir -p "$INBOX/.tools"
+    swiftc -O tools/crop-painting.swift -o "$CROP_TOOL" 2>/dev/null || true
+  fi
+fi
+
 # Order photos by file name (ignoring capitals and photo number), then by
 # photo number, so "Jacket.jpg" comes before "Jacket #2.jpg" and is the cover.
 sorted=()
@@ -218,6 +229,11 @@ for src in "${photos[@]}"; do
       3) ;;  # already transparent
       4) echo "  (couldn't find a subject in $(basename "$src"), kept its background)" ;;
     esac
+  fi
+  if [ "$sec" = "PAINTING" ] && [ "$KEEP_BG" -eq 0 ] && [ -x "$CROP_TOOL" ]; then
+    set +e; "$CROP_TOOL" "$src" "$out" 4 >/dev/null 2>&1; pc=$?; set -e
+    if [ "$pc" -eq 0 ]; then cut=0
+    else echo "  (couldn't find the edges of $(basename "$src"), kept the whole photo)"; fi
   fi
   if [ "$cut" -ne 0 ] && ! sips -s format png "$src" --out "$out" >/dev/null 2>&1; then
     echo "Skipped $(basename "$src") (not an image that can be read)"
