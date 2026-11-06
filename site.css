@@ -121,11 +121,13 @@ a {
 .projects {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 72px;
+  gap: 56px;
   width: 100%;
-  max-width: 1120px;
+  /* cards up to 495px wide: 75% larger than before (was 283px),
+     still three in one row; on narrower screens they fill the row */
+  max-width: 1693px;
   margin: 0 auto;
-  padding: 96px 64px 160px;
+  padding: 80px 48px 160px;
   align-items: start;
 }
 
@@ -188,15 +190,15 @@ a.project:hover .frame {
 }
 
 /* HUEMANS — a wall of Polaroids, each linking to the person */
+/* same grid as ARMORY: five columns, the side margins equal to the gaps */
 .wall {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 48px 40px;
+  grid-template-columns: repeat(5, calc((100% - 200px) / 7 * 1.1));
+  justify-content: space-evenly;
+  row-gap: 96px;           /* ARMORY: frame bottom to the next frame top */
   align-items: start;
   width: 100%;
-  max-width: 1320px;
-  margin: 0 auto;
-  padding: 64px 64px 160px;
+  padding: 64px 0 160px;
 }
 
 .polaroid {
@@ -251,7 +253,8 @@ a.project:hover .frame {
 
 @media (max-width: 1100px) {
   .wall {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, calc((100% - 144px) / 5 * 1.1));
+    row-gap: 83px;
   }
 }
 
@@ -457,7 +460,8 @@ a.project:hover .frame {
   /* phones: three across, spaced like the ARMORY grid */
   .wall {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 28px 14px;
+    justify-content: stretch;
+    gap: 67px 14px;
     padding: 28px 16px 96px;
   }
 
