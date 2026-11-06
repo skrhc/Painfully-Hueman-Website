@@ -11,6 +11,9 @@
 #    More photos of the same item: same name plus " #2", " #3"...
 #        outerwear - FRKM SCD - Nightblade Jacket #2.jpg
 #    They become one item; the first photo is the cover.
+#    To keep a photo's background, add "(keep bg)" to its name:
+#        object - Unknown - Box (keep bg).jpg
+#    Paintings (section "painting") always keep their background.
 # 2. Double-click this file (or run it in Terminal).
 #
 # Each photo has its background removed and is cropped to the item
@@ -97,6 +100,13 @@ parse_details() {
   # Drop an ordering prefix like "1. " or "02. "
   [[ "$s" =~ ^[0-9]+\.\ +(.*)$ ]] && s="${BASH_REMATCH[1]}"
   # Drop a photo number like " #2" or " (2)": extra photos of one item
+  # "(keep bg)" anywhere in the name: don't remove the background
+  KEEP_BG=0
+  shopt -s nocasematch
+  if [[ "$s" =~ ^(.*[^[:space:]])?[[:space:]]*\(keep[[:space:]]*bg\)(.*)$ ]]; then
+    s="${BASH_REMATCH[1]}${BASH_REMATCH[2]}"; KEEP_BG=1
+  fi
+  shopt -u nocasematch
   PHOTO_NO=1
   if [[ "$s" =~ ^(.*[^[:space:]])[[:space:]]+(#|\()([0-9]+)\)?$ ]]; then
     s="${BASH_REMATCH[1]}"; PHOTO_NO="${BASH_REMATCH[3]}"
@@ -189,7 +199,8 @@ for src in "${photos[@]}"; do
 
   # Remove the background (skipped if already transparent), else just convert.
   cut=1
-  if [ "$REMOVE_BG" -eq 1 ]; then
+  sec=$(caps "$SECTION")
+  if [ "$REMOVE_BG" -eq 1 ] && [ "$KEEP_BG" -eq 0 ] && [ "$sec" != "PAINTING" ]; then
     set +e; "$BG_TOOL" "$src" "$out" 2>/dev/null; bg=$?; set -e
     case "$bg" in
       0) cut=0 ;;
