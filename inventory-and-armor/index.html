@@ -3,9 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>INVENTORY &amp; ARMOR</title>
-  <meta property="og:title" content="Inventory & Armor">
+  <title>ARMORY</title>
+  <meta property="og:title" content="Armory">
   <meta property="og:description" content="An index of form, material and weight. Painfully Hueman.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@700&display=swap" rel="stylesheet">
 
   <style>
   * {
@@ -28,7 +32,9 @@
   body {
     background: var(--paper);
     color: var(--ink);
-    font-family: "Courier New", Courier, monospace;
+    /* Apple Garamond Bold where it's installed; otherwise EB Garamond Bold */
+    font-family: "Apple Garamond", "AppleGaramond", "AppleGaramond-Bold", "EB Garamond", Garamond, "Times New Roman", serif;
+    font-weight: 700;
     -webkit-font-smoothing: antialiased;
     text-transform: uppercase;
   }
@@ -56,25 +62,19 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
+    justify-content: center;
     gap: 10px 20px;
     padding: 14px 40px;
     background: var(--paper);
+    border-top: 1px solid var(--ink);
     border-bottom: 1px solid var(--ink);
   }
 
-  .title {
-    padding: 0;
-    border: 0;
-    background: none;
-    font-size: 12px;
-    letter-spacing: 0.15em;
-    cursor: pointer;
-  }
-
   .tools {
-    margin-left: auto;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
+    justify-content: center;
     gap: 8px;
   }
 
@@ -91,7 +91,7 @@
     border: 0;
     outline: 0;
     background: transparent;
-    font-size: 12px;
+    font-size: 14px;
     letter-spacing: 0.08em;
   }
 
@@ -110,7 +110,7 @@
     border: 0;
     border-left: 1px solid var(--ink);
     background: var(--paper);
-    font-size: 10px;
+    font-size: 12px;
     letter-spacing: 0.12em;
     cursor: pointer;
   }
@@ -124,7 +124,7 @@
     padding: 0 12px;
     border: 1px solid var(--ink);
     background: var(--paper);
-    font-size: 11px;
+    font-size: 13px;
     letter-spacing: 0.14em;
     white-space: nowrap;
     cursor: pointer;
@@ -137,7 +137,7 @@
     border-radius: 0;
     background: var(--paper) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0h10L5 6z'/%3E%3C/svg%3E") no-repeat right 10px center;
     font-family: inherit;
-    font-size: 11px;
+    font-size: 13px;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--ink);
@@ -169,24 +169,27 @@
 
   /* INTRO */
   .intro {
-    padding: 96px 40px 24px;
+    padding: 72px 40px 36px;
+    text-align: center;
   }
 
   .intro h1 {
-    font-size: clamp(28px, 5vw, 64px);
-    font-weight: 400;
-    letter-spacing: 0.12em;
+    font-size: clamp(48px, 9vw, 128px);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 0.08em;
   }
 
   .intro p {
-    margin-top: 16px;
-    font-size: 12px;
+    margin-top: 18px;
+    font-size: 14px;
     letter-spacing: 0.1em;
   }
 
-  .intro .count {
-    margin-top: 8px;
-    font-size: 10px;
+  .count {
+    padding: 28px 40px 0;
+    text-align: center;
+    font-size: 12px;
     letter-spacing: 0.14em;
     color: var(--soft);
   }
@@ -218,7 +221,7 @@
     padding-bottom: 12px;
     margin-bottom: 36px;
     border-bottom: 1px solid var(--ink);
-    font-size: 12px;
+    font-size: 14px;
     letter-spacing: 0.2em;
     scroll-margin-top: calc(var(--hh) + 20px);
   }
@@ -269,7 +272,7 @@
     position: absolute;
     top: 8px;
     right: 10px;
-    font-size: 10px;
+    font-size: 12px;
     letter-spacing: 0.1em;
     background: var(--paper);
   }
@@ -279,21 +282,22 @@
   }
 
   .meta {
+    overflow-wrap: anywhere;
     margin-top: 10px;
-    font-size: 10px;
+    font-size: 12px;
     line-height: 1.6;
     letter-spacing: 0.06em;
   }
 
   .meta .sec {
     color: var(--soft);
-    font-size: 10px;
+    font-size: 12px;
     letter-spacing: 0.12em;
   }
 
   .status {
     padding: 40px 0 80px;
-    font-size: 12px;
+    font-size: 14px;
     letter-spacing: 0.15em;
   }
 
@@ -303,7 +307,7 @@
 
   footer {
     padding: 100px 40px 60px;
-    font-size: 11px;
+    font-size: 13px;
     letter-spacing: 0.15em;
   }
 
@@ -375,13 +379,13 @@
   .zoom-meta {
     max-width: 640px;
     text-align: center;
-    font-size: 12px;
+    font-size: 14px;
     line-height: 1.7;
     letter-spacing: 0.08em;
   }
 
   .zoom-meta .sec {
-    font-size: 10px;
+    font-size: 12px;
     letter-spacing: 0.16em;
     color: var(--soft);
   }
@@ -393,7 +397,7 @@
     padding: 10px 12px;
     border: 0;
     background: none;
-    font-size: 11px;
+    font-size: 13px;
     letter-spacing: 0.2em;
     cursor: pointer;
   }
@@ -417,17 +421,19 @@
     .search { flex: 1; min-width: 0; }
     .search input { flex: 1; width: auto; min-width: 0; font-size: 16px; }
     .tools { flex-wrap: wrap; }
-    .search { flex: 1 1 100%; }
-    .pick { flex: 1; min-width: 0; padding-right: 24px; font-size: 10px; letter-spacing: 0.08em; background-position: right 8px center; }
-    .btn { padding: 0 9px; font-size: 10px; letter-spacing: 0.1em; }
-    .intro { padding: 56px 16px 16px; }
+    .search { flex: 1 1 calc(100% - 110px); order: 0; }
+    #shuffle { order: 1; }
+    .pick { order: 2; flex: 1 1 40%; min-width: 0; padding: 0 22px 0 8px; font-size: 11px; letter-spacing: 0.04em; background-position: right 8px center; }
+    .btn { padding: 0 10px; font-size: 12px; letter-spacing: 0.08em; }
+    .intro { padding: 44px 16px 24px; }
+    .count { padding: 20px 16px 0; }
     main { padding: 28px 16px 12px; }
     main .section-head, main .status { margin-left: 0; margin-right: 0; }
     .grid { justify-content: stretch; }
-    .grid { grid-template-columns: repeat(3, 1fr); gap: 15px 14px; }
+    .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 15px 14px; }
     .frame { padding: 6px; }
-    .meta { font-size: 9px; letter-spacing: 0.04em; }
-    .meta .sec { font-size: 8px; }
+    .meta { font-size: 11px; letter-spacing: 0.04em; }
+    .meta .sec { font-size: 10px; }
     footer { padding: 72px 16px 48px; }
     #zoom { padding: 56px 16px 84px; }
     #zoom-img { max-height: 52vh; }
@@ -444,8 +450,12 @@
 </head>
 
 <body>
+  <div class="intro">
+    <h1>Armory</h1>
+    <p>An index of form, material and weight // Painfully Hueman</p>
+  </div>
+
   <header id="head">
-    <button class="title" id="home" type="button">[ Inventory &amp; Armor ]</button>
     <div class="tools">
       <label class="search" id="search">
         <input id="q" type="search" placeholder="Search" autocomplete="off" spellcheck="false" aria-label="Search the inventory">
@@ -465,17 +475,13 @@
     </div>
   </header>
 
-  <div class="intro">
-    <h1>Inventory &amp; Armor</h1>
-    <p>An index of form, material and weight // Painfully Hueman</p>
-    <div class="count" id="count" aria-live="polite"></div>
-  </div>
+  <div class="count" id="count" aria-live="polite"></div>
 
   <main id="main">
     <div class="status" id="status">Loading archive...</div>
   </main>
 
-  <footer>Painfully Hueman // Inventory &amp; Armor // Vol. 01</footer>
+  <footer>Painfully Hueman // Armory // Vol. 01</footer>
 
   <div id="zoom" role="dialog" aria-modal="true" aria-label="Item detail">
     <button class="zoom-btn" id="zoom-close" type="button">[CLOSE]</button>
@@ -809,9 +815,6 @@
       backToTop();
     });
 
-    $('home').addEventListener('click', function () {
-      window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
-    });
 
     q.addEventListener('input', render);
     q.addEventListener('keydown', function (e) {
