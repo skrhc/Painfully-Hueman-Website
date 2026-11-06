@@ -108,6 +108,14 @@
     --box: calc((100% - 200px) / 7 * 1.1);
     padding: 14px calc((100% - 5 * var(--box)) / 6);
     background: var(--paper);
+    transition: opacity 0.35s ease, visibility 0.35s;
+  }
+
+  /* fades away once you scroll a little way into the gallery */
+  header.away {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
   }
 
   /* all the filter boxes in one straight line, with space between */
@@ -583,6 +591,21 @@
     setSiteHeadHeight();
     window.addEventListener('resize', setSiteHeadHeight);
     window.addEventListener('load', setSiteHeadHeight);
+
+    /* fade the search/sort/filter bar away once you're a little way into
+       the gallery; it comes back when you scroll back up */
+    const filterBar = document.getElementById('head');
+    const FADE_AFTER = 150;   /* px scrolled past the top of the gallery */
+    function fadeFilterBar() {
+      const gallery = document.getElementById('main');
+      const barBottom = siteHead.offsetHeight + filterBar.offsetHeight;
+      const intoGallery = barBottom - gallery.getBoundingClientRect().top;
+      const typing = document.activeElement && filterBar.contains(document.activeElement);
+      filterBar.classList.toggle('away', intoGallery > FADE_AFTER && !typing);
+    }
+    window.addEventListener('scroll', fadeFilterBar, { passive: true });
+    window.addEventListener('resize', fadeFilterBar);
+    filterBar.addEventListener('focusout', function () { setTimeout(fadeFilterBar, 0); });
 
     const head = $('head'), main = $('main'), statusEl = $('status'), countEl = document.createElement('div');
     const q = $('q'), searchEl = $('search'), shuffleBtn = $('shuffle'), sortEl = $('sort'), catEl = $('cat');
