@@ -3,15 +3,21 @@
 # ADD PHOTOS TO INVENTORY & ARMOR
 #
 # 1. Put new photos in the "new-photos" folder next to this file
-#    (any name; PNG, JPG, HEIC, etc.). They're added in name order.
+#    (PNG, JPG, HEIC, etc.). They're added in name order; start
+#    names with "1. ", "2. " etc. to set the order (it's ignored).
+#    Name each one:   section - maker - item name.jpg
+#    e.g.             outerwear - FRKM SCD - Nightblade Jacket.jpg
+#    (Use space-dash-space between parts. "maker - name.jpg" also
+#    works; a name with no " - " just gets a blank row.)
 # 2. Double-click this file (or run it in Terminal).
 #
 # Each photo is numbered (079.png, 080.png, ...), shrunk to max
 # 1600px, saved into images/, then committed and pushed to GitHub.
 # Originals are moved to new-photos/added/.
 #
-# Then add a row to the Google Sheet with that id and leave the
-# "img" column blank; the page finds images/<id>.png by itself.
+# 3. Finished sheet rows are copied to your clipboard. Click the
+#    first empty cell in the sheet's "id" column and paste.
+#    Columns: id, section, img (blank), maker, name, note, credit.
 #
 # Options:  --no-push   commit but don't push
 #           --dry-run   only show what would happen
@@ -54,14 +60,37 @@ if [ ${#photos[@]} -eq 0 ]; then
   exit 0
 fi
 
+# Turn "section - maker - item name.jpg" into sheet columns.
+# Sets: SECTION MAKER NAME (blank if the file name has no " - ").
+trim() { local t="$1"; t="${t#"${t%%[![:space:]]*}"}"; printf '%s' "${t%"${t##*[![:space:]]}"}"; }
+parse_details() {
+  local s parts=()
+  s=$(basename "$1"); s="${s%.*}"
+  # Drop an ordering prefix like "1. " or "02. "
+  [[ "$s" =~ ^[0-9]+\.\ +(.*)$ ]] && s="${BASH_REMATCH[1]}"
+  while [[ "$s" == *" - "* ]]; do parts+=("$(trim "${s%% - *}")"); s="${s#* - }"; done
+  parts+=("$(trim "$s")")
+  SECTION=""; MAKER=""; NAME=""
+  if [ ${#parts[@]} -eq 2 ]; then
+    MAKER="${parts[0]}"; NAME="${parts[1]}"
+  elif [ ${#parts[@]} -ge 3 ]; then
+    SECTION="${parts[0]}"; MAKER="${parts[1]}"
+    NAME="${parts[2]}"
+    local i; for ((i = 3; i < ${#parts[@]}; i++)); do NAME="$NAME - ${parts[i]}"; done
+  fi
+}
+
 added=()
+rows=""
 for src in "${photos[@]}"; do
   last=$((last + 1))
   id=$(printf '%03d' "$last")
   out="images/$id.png"
 
   if [ "$DRY" -eq 1 ]; then
+    parse_details "$src"
     echo "[dry run] $(basename "$src")  ->  $out"
+    echo "          section: ${SECTION:--}   maker: ${MAKER:--}   name: ${NAME:--}"
     continue
   fi
 
@@ -78,8 +107,11 @@ for src in "${photos[@]}"; do
     sips -Z "$MAX_SIZE" "$out" >/dev/null
   fi
 
+  parse_details "$src"
   mv "$src" "$DONE/"
   added+=("$out")
+  # id, section, img (blank), maker, name, note, credit
+  rows+="$last"$'\t'"$SECTION"$'\t\t'"$MAKER"$'\t'"$NAME"$'\t\t\n'
   echo "Added $(basename "$src")  ->  $out   (sheet id: $last)"
 done
 
@@ -99,5 +131,11 @@ if [ "$PUSH" -eq 1 ]; then
   git push -q && echo "Pushed to GitHub. Live in a minute or two."
 fi
 
+printf '%s' "$rows" | pbcopy
+printf '%s' "$rows" > "$DONE/sheet-rows-$(date +%Y%m%d-%H%M%S).tsv"
 echo
-echo "Next: add a row per id above in the Google Sheet, leave 'img' blank."
+echo "Sheet rows copied to your clipboard:"
+printf '%s' "$rows" | awk -F'\t' '{printf "  %s | %s | %s | %s\n", $1, $2, $4, $5}'
+echo
+echo "Next: in the Google Sheet, click the first empty cell in the 'id'"
+echo "column and paste (Cmd+V). Add any notes or credits after."
