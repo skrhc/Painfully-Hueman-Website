@@ -83,7 +83,8 @@ trim() { local t="$1"; t="${t#"${t%%[![:space:]]*}"}"; printf '%s' "${t%"${t##*[
 
 # "FRKM SCD 25FW Nightblade" -> "frkm-scd-25fw-nightblade"
 slug() {
-  printf '%s' "$1" | tr '[:upper:]' '[:lower:]' | LC_ALL=C sed -E \
+  printf '%s' "$1" | perl -CS -MUnicode::Normalize -pe '$_ = NFD($_); s/\pM//g' \
+    | tr '[:upper:]' '[:lower:]' | LC_ALL=C sed -E \
     -e "s/'//g" -e $'s/\xe2\x80\x99//g' -e 's/[^a-z0-9]+/-/g' -e 's/^-+//' -e 's/-+$//'
 }
 
@@ -139,6 +140,22 @@ if [ "$REMOVE_BG" -eq 1 ] && [ "$DRY" -eq 0 ]; then
   fi
 fi
 
+# Order photos by file name (ignoring capitals and photo number), then by
+# photo number, so "Jacket.jpg" comes before "Jacket #2.jpg" and is the cover.
+sorted=()
+while IFS= read -r -d '' line; do sorted+=("${line#*$'\t'*$'\t'}"); done < <(
+  for f in "${photos[@]}"; do
+    parse_details "$f"
+    k=$(basename "$f"); k="${k%.*}"
+    [[ "$k" =~ ^(.*[^[:space:]])[[:space:]]+(#|\()([0-9]+)\)?$ ]] && k="${BASH_REMATCH[1]}"
+    printf '%s\t%05d\t%s\0' "$(printf '%s' "$k" | tr '[:upper:]' '[:lower:]')" "$PHOTO_NO" "$f"
+  done | LC_ALL=C sort -z -t $'\t' -k1,1 -k2,2n
+)
+photos=("${sorted[@]}")
+
+# Sheet text is all capitals, however the file name was typed.
+caps() { printf '%s' "$1" | LC_ALL=en_US.UTF-8 tr '[:lower:]' '[:upper:]'; }
+
 # Group photos into items: photos with the same section, maker and
 # name (e.g. "... Jacket.jpg", "... Jacket #2.jpg") become one item.
 item_keys=(); item_section=(); item_maker=(); item_name=(); item_imgs=()
@@ -153,8 +170,8 @@ find_item() {  # sets IDX to the item for the current photo, adding one if new
     [ "${item_keys[i]}" = "$key" ] && { IDX=$i; return; }
   done
   IDX=${#item_keys[@]}
-  item_keys+=("$key"); item_section+=("$SECTION"); item_maker+=("$MAKER")
-  item_name+=("$NAME"); item_imgs+=("")
+  item_keys+=("$key"); item_section+=("$(caps "$SECTION")"); item_maker+=("$(caps "$MAKER")")
+  item_name+=("$(caps "$NAME")"); item_imgs+=("")
 }
 
 added=()
