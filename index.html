@@ -16,7 +16,7 @@
 </head>
 <body>
   <!-- INTRO: spinning logo when the site first loads; click to enter -->
-  <button class="intro" id="intro" type="button" aria-label="Enter Painfully Hueman">
+  <button class="intro" id="intro" type="button" aria-label="Enter Painfully Hueman" style="touch-action: manipulation">
     <img src="images/reel.png" width="708" height="720" alt="">
   </button>
   <script>
@@ -26,10 +26,15 @@
       document.documentElement.classList.add('intro-on');
       intro.focus({ preventScroll: true });
       intro.addEventListener('click', function () {
+        if (intro.classList.contains('leaving')) return;   /* ignore extra taps */
         try { sessionStorage.setItem('ph-intro-seen', '1'); } catch (e) {}
         intro.classList.add('leaving');
+        /* keep catching taps while it fades, so a second tap can't land on
+           the project underneath (on phones that's VOL. 1) */
+        intro.style.pointerEvents = 'auto';
+        intro.style.cursor = 'default';
         document.documentElement.classList.remove('intro-on');
-        setTimeout(function () { intro.remove(); }, 600);
+        setTimeout(function () { intro.remove(); }, 650);
       });
     })();
   </script>
