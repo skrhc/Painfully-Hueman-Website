@@ -188,8 +188,11 @@
 
   .grid {
     display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 20px;
+    /* six boxes per row, each the same size as in a seven-across row,
+       with the leftover width spread out as space between them */
+    grid-template-columns: repeat(6, calc((100% - 120px) / 7));
+    justify-content: space-between;
+    row-gap: 64px;
   }
 
   .card {
@@ -367,7 +370,7 @@
 
   /* SMALLER SCREENS */
   @media (max-width: 1100px) {
-    .grid { grid-template-columns: repeat(5, 1fr); gap: 16px; }
+    .grid { grid-template-columns: repeat(4, calc((100% - 64px) / 5)); row-gap: 48px; }
   }
 
   @media (max-width: 700px) {
@@ -378,7 +381,7 @@
     .btn { padding: 0 9px; font-size: 10px; letter-spacing: 0.1em; }
     .intro { padding: 56px 16px 16px; }
     main { padding: 28px 16px 12px; }
-    .grid { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .grid { grid-template-columns: repeat(3, 1fr); gap: 28px 14px; }
     .frame { padding: 6px; }
     .meta { font-size: 9px; letter-spacing: 0.04em; }
     .meta .sec { font-size: 8px; }
