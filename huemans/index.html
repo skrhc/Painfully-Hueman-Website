@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Huemans — Painfully Hueman</title>
+  <meta name="description" content="The people of Painfully Hueman.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../site.css">
+</head>
+<body>
+  <header class="site-head">
+    <a class="logo" href="../"><img src="../images/logo.png" width="1080" height="141" alt="Painfully Hueman."></a>
+    <nav class="nav">
+      <a href="../">INDEX</a>
+      <a href="../inventory-and-armor/">ARMORY</a>
+      <a href="./" aria-current="page">HUEMANS</a>
+      <a href="../about/">ABOUT</a>
+      <a href="../contact/">CONTACT</a>
+    </nav>
+  </header>
+
+  <main class="wall" id="wall"></main>
+
+  <script src="people.js"></script>
+  <script>
+    /* LINKS come from the Google Sheet "Huemans — Links".
+       In the sheet: File > Share > Publish to web > (whole document, CSV) > Publish,
+       then paste that link between the quotes below. Until then, the links in
+       people.js are used. In the sheet's "link" column you can type a full URL,
+       a website like name.com, or an Instagram handle like @name. */
+    const SHEET_URL = '';
+
+    (function () {
+      const wall = document.getElementById('wall');
+      const people = (window.HUEMANS || []).map(function (p) { return Object.assign({}, p); });
+
+      /* shuffle; if it happens to start the same way as the last visit,
+         shuffle again, so the wall never opens in the same order twice */
+      function shuffle(list) {
+        for (let i = list.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [list[i], list[j]] = [list[j], list[i]];
+        }
+      }
+      let last = '';
+      try { last = localStorage.getItem('ph-huemans-start') || ''; } catch (e) {}
+      const startOf = function () { return people.slice(0, 3).map(function (p) { return p.img; }).join(','); };
+      shuffle(people);
+      for (let tries = 0; tries < 5 && people.length > 3 && startOf() === last; tries++) shuffle(people);
+      try { localStorage.setItem('ph-huemans-start', startOf()); } catch (e) {}
+
+      /* "@name" -> Instagram, "name.com" -> https://name.com */
+      function cleanLink(raw) {
+        const v = (raw || '').trim();
+        if (!v) return '';
+        if (/^@[\w.]+$/.test(v)) return 'https://www.instagram.com/' + v.slice(1) + '/';
+        if (/^https?:\/\//i.test(v)) return v;
+        if (/^[\w-]+(\.[\w-]+)+(\/.*)?$/.test(v)) return 'https://' + v;
+        return '';
+      }
+
+      function label(link) {
+        const m = /instagram\.com\/([^/?#]+)/i.exec(link);
+        if (m) return '@' + m[1];
+        return link.replace(/^https?:\/\/(www\.)?/i, '').replace(/\/$/, '');
+      }
+
+      function parseCSV(text) {
+        const rows = []; let row = [], cell = '', quoted = false;
+        for (let i = 0; i < text.length; i++) {
+          const c = text[i];
+          if (quoted) {
+            if (c === '"' && text[i + 1] === '"') { cell += '"'; i++; }
+            else if (c === '"') quoted = false;
+            else cell += c;
+          } else if (c === '"') quoted = true;
+          else if (c === ',') { row.push(cell); cell = ''; }
+          else if (c === '\n' || c === '\r') {
+            if (c === '\r' && text[i + 1] === '\n') i++;
+            row.push(cell); rows.push(row); row = []; cell = '';
+          } else cell += c;
+        }
+        if (cell || row.length) { row.push(cell); rows.push(row); }
+        return rows;
+      }
+
+      function draw() {
+        wall.textContent = '';
+        people.forEach(function (p, i) {
+          const link = cleanLink(p.link);
+          const card = document.createElement(link ? 'a' : 'div');
+          card.className = 'polaroid' + (link ? ' linked' : '');
+          if (link) {
+            card.href = link;
+            card.target = '_blank';
+            card.rel = 'noopener';
+          }
+          const img = document.createElement('img');
+          img.src = '../images/huemans/' + p.img;
+          img.alt = p.name + (p.word ? ' — ' + p.word : '');
+          img.width = 640;
+          img.height = 1000;
+          if (i > 11) img.loading = 'lazy';
+          card.append(img);
+          if (link) {
+            const tag = document.createElement('span');
+            tag.className = 'polaroid-link';
+            tag.textContent = label(link) + ' ↗';
+            card.append(tag);
+          }
+          wall.append(card);
+        });
+      }
+
+      if (!SHEET_URL) { draw(); return; }
+
+      /* wait briefly for the sheet so the wall appears once, with its links */
+      let drawn = false;
+      const fallback = setTimeout(function () { drawn = true; draw(); }, 2500);
+      fetch(SHEET_URL, { cache: 'no-store' })
+        .then(function (r) { return r.ok ? r.text() : Promise.reject(r.status); })
+        .then(function (text) {
+          const rows = parseCSV(text);
+          const head = (rows.shift() || []).map(function (h) { return h.trim().toLowerCase(); });
+          const iPhoto = head.indexOf('photo'), iLink = head.indexOf('link');
+          if (iPhoto < 0 || iLink < 0) return;
+          const links = {};
+          rows.forEach(function (r) { if (r[iPhoto]) links[r[iPhoto].trim()] = r[iLink] || ''; });
+          people.forEach(function (p) { if (p.img in links) p.link = links[p.img]; });
+        })
+        .catch(function () {})
+        .then(function () { clearTimeout(fallback); draw(); drawn = true; });
+    })();
+  </script>
+</body>
+</html>

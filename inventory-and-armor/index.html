@@ -477,10 +477,15 @@
     .grid { grid-template-columns: repeat(4, calc((100% - 144px) / 5 * 1.1)); row-gap: 25px; }
   }
 
+  @media (max-width: 900px) {
+    .site-head { flex-direction: column; align-items: flex-start; gap: 16px; padding: 32px 40px 20px; }
+    .site-head .logo { flex: none; width: min(300px, 100%); min-width: 0; }
+  }
+
   @media (max-width: 720px) {
-    .site-head { flex-direction: column; align-items: flex-start; gap: 16px; padding: 24px 16px 16px; }
-    .site-head .logo { flex: none; width: min(280px, 100%); min-width: 0; }
-    .site-head nav { gap: 20px; font-size: 16px; }
+    .site-head { padding: 24px 16px 16px; }
+    .site-head .logo { width: min(280px, 100%); }
+    .site-head nav { align-self: stretch; justify-content: space-between; gap: 8px; font-size: 14px; }
   }
 
   @media (max-width: 700px) {
@@ -519,6 +524,7 @@
     <nav>
       <a href="../">INDEX</a>
       <a href="./" aria-current="page">ARMORY</a>
+      <a href="../huemans/">HUEMANS</a>
       <a href="../about/">ABOUT</a>
       <a href="../contact/">CONTACT</a>
     </nav>
