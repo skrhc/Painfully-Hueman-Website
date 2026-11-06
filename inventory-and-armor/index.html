@@ -598,20 +598,30 @@
     window.addEventListener('resize', setSiteHeadHeight);
     window.addEventListener('load', setSiteHeadHeight);
 
-    /* as soon as the search/sort/filter bar scrolls up and touches the site
+    /* when the search/sort/filter bar scrolls up to within 20px of the site
        navigation, the bar and the navigation fade away together; both come
-       back when you scroll up and the bar leaves the navigation again */
+       back when you scroll up past that point again */
     const filterBar = document.getElementById('head');
+    const searchInput = document.getElementById('q');
+    const FADE_EARLY = 20;   /* px before the bar touches the navigation */
     function fadeFilterBar() {
-      const touching = filterBar.getBoundingClientRect().top <= siteHead.offsetHeight + 0.5;
-      const typing = document.activeElement && filterBar.contains(document.activeElement);
-      const away = touching && !typing;
+      const stuckAt = parseFloat(getComputedStyle(filterBar).top) || 0;   /* where the bar sticks */
+      const close = filterBar.getBoundingClientRect().top <= stuckAt + FADE_EARLY;
+      const typing = document.activeElement === searchInput;            /* only while typing a search */
+      const away = close && !typing;
       filterBar.classList.toggle('away', away);
       siteHead.classList.toggle('away', away);
     }
     window.addEventListener('scroll', fadeFilterBar, { passive: true });
     window.addEventListener('resize', fadeFilterBar);
-    filterBar.addEventListener('focusout', function () { setTimeout(fadeFilterBar, 0); });
+    window.addEventListener('load', fadeFilterBar);
+    searchInput.addEventListener('focus', fadeFilterBar);   /* e.g. the "/" shortcut brings the bar back */
+    searchInput.addEventListener('blur', function () { setTimeout(fadeFilterBar, 0); });
+    /* re-check whenever the page height changes (gallery loading, filtering) */
+    if ('ResizeObserver' in window) {
+      new ResizeObserver(function () { setSiteHeadHeight(); fadeFilterBar(); }).observe(document.body);
+    }
+    fadeFilterBar();
 
     const head = $('head'), main = $('main'), statusEl = $('status'), countEl = document.createElement('div');
     const q = $('q'), searchEl = $('search'), shuffleBtn = $('shuffle'), sortEl = $('sort'), catEl = $('cat');
