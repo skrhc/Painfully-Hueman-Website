@@ -9,8 +9,31 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="site.css">
+  <script>
+    /* show the spinning-logo intro once per visit */
+    try { if (sessionStorage.getItem('ph-intro-seen')) document.documentElement.classList.add('intro-seen'); } catch (e) {}
+  </script>
 </head>
 <body>
+  <!-- INTRO: spinning logo when the site first loads; click to enter -->
+  <button class="intro" id="intro" type="button" aria-label="Enter Painfully Hueman">
+    <img src="images/reel.png" width="708" height="720" alt="">
+  </button>
+  <script>
+    (function () {
+      var intro = document.getElementById('intro');
+      if (document.documentElement.classList.contains('intro-seen')) { intro.remove(); return; }
+      document.documentElement.classList.add('intro-on');
+      intro.focus({ preventScroll: true });
+      intro.addEventListener('click', function () {
+        try { sessionStorage.setItem('ph-intro-seen', '1'); } catch (e) {}
+        intro.classList.add('leaving');
+        document.documentElement.classList.remove('intro-on');
+        setTimeout(function () { intro.remove(); }, 600);
+      });
+    })();
+  </script>
+
   <header class="site-head">
     <a class="logo" href="./"><img src="images/logo.png" width="1080" height="141" alt="Painfully Hueman."></a>
     <nav class="nav">

@@ -27,6 +27,56 @@ a {
   text-decoration: none;
 }
 
+/* INTRO — spinning reel logo over a white screen when the site first loads */
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: var(--paper);
+  cursor: pointer;
+  transition: opacity 0.6s ease;
+}
+
+.intro:focus {
+  outline: none;
+}
+
+.intro img {
+  display: block;
+  width: 360px;
+  max-width: 64vw;
+  height: auto;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes intro-spin {
+    to { transform: rotate(360deg); }
+  }
+
+  .intro img {
+    animation: intro-spin 8s linear infinite;
+  }
+}
+
+.intro.leaving {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.intro-seen .intro {
+  display: none;
+}
+
+.intro-on body {
+  overflow: hidden;
+}
+
 /* HEADER — stays at the top of the window on every page, see-through background */
 .site-head {
   position: sticky;
