@@ -207,8 +207,16 @@ find_item() {  # sets IDX to the item for the current photo, adding one if new
 
 added=()
 thumbs=()
+skipped=()
 for src in "${photos[@]}"; do
   parse_details "$src"
+  # No " - " or long dash in the name: we can't tell section, maker and name
+  # apart, so leave the photo in the inbox to be renamed instead of adding a
+  # blank row.
+  if [ -z "$MAKER$NAME" ]; then
+    skipped+=("$(basename "$src")")
+    continue
+  fi
   find_item
   out=$(pick_name)
 
@@ -259,6 +267,14 @@ for src in "${photos[@]}"; do
   echo "Added $(basename "$src")  ->  $out"
 done
 
+if [ ${#skipped[@]} -gt 0 ]; then
+  echo
+  echo "Left in new-photos (rename these, then run again):"
+  for f in "${skipped[@]}"; do echo "  $f"; done
+  echo "  Name them  section - maker - item name  (spaces around the dash),"
+  echo "  or with a long dash:  section–maker–item name"
+fi
+
 # One sheet row per item: id, section, img(s), maker, name, note, credit
 rows=""
 summary=""
@@ -289,7 +305,7 @@ fi
 git commit -q -m "$msg" -- "${added[@]}" ${thumbs[@]+"${thumbs[@]}"}
 echo "Committed: $msg"
 
-printf '%s' "$rows" | pbcopy
+printf '%s' "$rows" | LANG=en_US.UTF-8 pbcopy   # UTF-8, so long dashes and accents paste correctly
 printf '%s' "$rows" > "$DONE/sheet-rows-$(date +%Y%m%d-%H%M%S).tsv"
 echo
 echo "Sheet rows copied to your clipboard:"
