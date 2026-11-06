@@ -455,10 +455,11 @@ a.project:hover .frame {
     font-size: 14px;
   }
 
+  /* phones: three across, spaced like the ARMORY grid */
   .wall {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 32px 24px;
-    padding: 32px 20px 96px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 28px 14px;
+    padding: 28px 16px 96px;
   }
 
   .page-title {
