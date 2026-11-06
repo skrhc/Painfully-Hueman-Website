@@ -130,6 +130,37 @@
     cursor: pointer;
   }
 
+  .pick {
+    height: 36px;
+    padding: 0 30px 0 10px;
+    border: 1px solid var(--ink);
+    border-radius: 0;
+    background: var(--paper) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0h10L5 6z'/%3E%3C/svg%3E") no-repeat right 10px center;
+    font-family: inherit;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink);
+    -webkit-appearance: none;
+    appearance: none;
+    cursor: pointer;
+  }
+
+  .pick:focus {
+    outline: none;
+  }
+
+  .pick:focus-visible {
+    outline: 1px dashed var(--ink);
+    outline-offset: 3px;
+  }
+
+  .pick.on {
+    background-color: var(--ink);
+    color: var(--paper);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath fill='%23fff' d='M0 0h10L5 6z'/%3E%3C/svg%3E");
+  }
+
   .btn:hover,
   .btn.on {
     background: var(--ink);
@@ -385,6 +416,9 @@
     .tools { width: 100%; margin-left: 0; }
     .search { flex: 1; min-width: 0; }
     .search input { flex: 1; width: auto; min-width: 0; font-size: 16px; }
+    .tools { flex-wrap: wrap; }
+    .search { flex: 1 1 100%; }
+    .pick { flex: 1; min-width: 0; padding-right: 24px; font-size: 10px; letter-spacing: 0.08em; background-position: right 8px center; }
     .btn { padding: 0 9px; font-size: 10px; letter-spacing: 0.1em; }
     .intro { padding: 56px 16px 16px; }
     main { padding: 28px 16px 12px; }
@@ -417,8 +451,17 @@
         <input id="q" type="search" placeholder="Search" autocomplete="off" spellcheck="false" aria-label="Search the inventory">
         <button type="button" id="q-clear" aria-label="Clear search">Clear</button>
       </label>
+      <select class="pick" id="sort" aria-label="Sort">
+        <option value="random">Sort: Random</option>
+        <option value="newest">Sort: Newest first</option>
+        <option value="oldest">Sort: Oldest first</option>
+        <option value="category">Sort: By category</option>
+        <option value="maker">Sort: Maker A–Z</option>
+      </select>
+      <select class="pick" id="cat" aria-label="Category">
+        <option value="">All categories</option>
+      </select>
       <button class="btn" id="shuffle" type="button" title="Show everything in a new random order">Shuffle</button>
-      <button class="btn" id="by-section" type="button" aria-pressed="false">By section</button>
     </div>
   </header>
 
@@ -481,12 +524,13 @@
 
     const $ = function (id) { return document.getElementById(id); };
     const head = $('head'), main = $('main'), statusEl = $('status'), countEl = $('count');
-    const q = $('q'), searchEl = $('search'), shuffleBtn = $('shuffle'), sectionBtn = $('by-section');
+    const q = $('q'), searchEl = $('search'), shuffleBtn = $('shuffle'), sortEl = $('sort'), catEl = $('cat');
     const zoom = $('zoom'), zoomImg = $('zoom-img'), zoomMeta = $('zoom-meta'), zoomThumbs = $('zoom-thumbs');
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     let items = [];         /* every item, in its current random order */
-    let bySection = location.hash === '#by-section';
+    let sortMode = 'random';   /* random, newest, oldest, category, maker */
+    let category = '';         /* '' = all categories */
     let order = [];         /* items currently on the page, for PREV / NEXT */
     let openIndex = -1;
     let openPhoto = 0;
@@ -596,7 +640,7 @@
         el('div', '', '[' + pad(item.id) + '] ' + (item.maker || '')),
         el('div', '', item.name || '')
       );
-      if (!bySection) meta.append(el('div', 'sec', sectionName(item)));
+      if (sortMode !== 'category') meta.append(el('div', 'sec', sectionName(item)));
       card.append(frame, meta);
       card.addEventListener('click', function () { openZoom(order.indexOf(item)); });
       return card;
@@ -611,7 +655,8 @@
     function render() {
       const words = q.value.toLowerCase().split(/\s+/).filter(Boolean);
       searchEl.classList.toggle('has-text', words.length > 0);
-      const shown = items.filter(function (item) { return matches(item, words); });
+      const inCat = items.filter(function (item) { return !category || item.section === category; });
+      const shown = sorted(inCat.filter(function (item) { return matches(item, words); }));
 
       main.textContent = '';
       order = [];
@@ -622,7 +667,7 @@
         return;
       }
 
-      if (bySection) {
+      if (sortMode === 'category') {
         const keys = SECTIONS.map(function (k) { return String(k).toLowerCase(); });
         const extra = [];
         shown.forEach(function (item) {
@@ -646,16 +691,46 @@
         main.append(grid);
       }
 
+      const where = category ? ' in ' + category : '';
+      const how = {
+        random: 'in a new order every visit',
+        newest: 'newest first',
+        oldest: 'oldest first',
+        category: 'by category',
+        maker: 'by maker, A to Z'
+      }[sortMode];
       if (words.length) {
-        countEl.textContent = shown.length + ' of ' + items.length + ' pieces match “' + q.value.trim() + '”';
+        countEl.textContent = shown.length + ' of ' + inCat.length + ' pieces' + where + ' match “' + q.value.trim() + '”';
       } else {
-        countEl.textContent = items.length + ' pieces, in a new order every visit';
+        countEl.textContent = inCat.length + (inCat.length === 1 ? ' piece' : ' pieces') + where + ', ' + how;
       }
 
       if (!shown.length) {
-        statusEl.textContent = 'Nothing matches “' + q.value.trim() + '”';
+        statusEl.textContent = 'Nothing matches “' + q.value.trim() + '”' + where;
         main.append(statusEl);
       }
+    }
+
+    function idNum(item) {
+      const n = parseInt(item.id, 10);
+      return isNaN(n) ? -1 : n;
+    }
+
+    function makerKey(item) {
+      const m = (item.maker || '').trim().toLowerCase();
+      return !m || m === 'unknown' ? '\uffff' : m;   /* unknown makers go last */
+    }
+
+    function sorted(list) {
+      const out = list.slice();
+      if (sortMode === 'newest') out.sort(function (a, b) { return idNum(b) - idNum(a); });
+      if (sortMode === 'oldest') out.sort(function (a, b) { return idNum(a) - idNum(b); });
+      if (sortMode === 'maker') {
+        out.sort(function (a, b) {
+          return makerKey(a).localeCompare(makerKey(b)) || (a.name || '').localeCompare(b.name || '');
+        });
+      }
+      return out;   /* random and by-category keep the shuffled order */
     }
 
     function fadeRender() {
@@ -669,23 +744,69 @@
 
     /* ---------- buttons ---------- */
 
-    shuffleBtn.addEventListener('click', function () {
-      shuffle(items);
-      fadeRender();
+    function backToTop() {
       const top = main.getBoundingClientRect().top + window.scrollY - head.offsetHeight - 20;
       if (window.scrollY > top) window.scrollTo(0, top);
-    });
-
-    function setSectionView(on) {
-      bySection = on;
-      sectionBtn.classList.toggle('on', on);
-      sectionBtn.setAttribute('aria-pressed', on ? 'true' : 'false');
-      if (history.replaceState) history.replaceState(null, '', on ? '#by-section' : location.pathname + location.search);
     }
 
-    sectionBtn.addEventListener('click', function () {
-      setSectionView(!bySection);
+    /* Remember the choices in the address, so a link keeps them. */
+    function saveChoices() {
+      const parts = [];
+      if (sortMode !== 'random') parts.push('sort=' + sortMode);
+      if (category) parts.push('cat=' + encodeURIComponent(category));
+      if (history.replaceState) history.replaceState(null, '', parts.length ? '#' + parts.join('&') : location.pathname + location.search);
+      sortEl.classList.toggle('on', sortMode !== 'random');
+      catEl.classList.toggle('on', !!category);
+    }
+
+    function readChoices() {
+      const h = location.hash.replace(/^#/, '');
+      if (h === 'by-section') { sortMode = 'category'; return; }
+      h.split('&').forEach(function (part) {
+        const kv = part.split('=');
+        if (kv[0] === 'sort' && sortEl.querySelector('option[value="' + kv[1] + '"]')) sortMode = kv[1];
+        if (kv[0] === 'cat') category = decodeURIComponent(kv[1] || '').toLowerCase();
+      });
+    }
+
+    function fillCategories() {
+      const counts = {};
+      items.forEach(function (i) { counts[i.section] = (counts[i.section] || 0) + 1; });
+      catEl.textContent = '';
+      const all = el('option', '', 'All categories (' + items.length + ')');
+      all.value = '';
+      catEl.append(all);
+      Object.keys(counts).sort().forEach(function (key) {
+        const o = el('option', '', (key || 'other') + ' (' + counts[key] + ')');
+        o.value = key;
+        catEl.append(o);
+      });
+      if (category && !(category in counts)) category = '';
+      catEl.value = category;
+      sortEl.value = sortMode;
+    }
+
+    shuffleBtn.addEventListener('click', function () {
+      shuffle(items);
+      sortMode = 'random';
+      sortEl.value = 'random';
+      saveChoices();
       fadeRender();
+      backToTop();
+    });
+
+    sortEl.addEventListener('change', function () {
+      sortMode = sortEl.value;
+      saveChoices();
+      fadeRender();
+      backToTop();
+    });
+
+    catEl.addEventListener('change', function () {
+      category = catEl.value;
+      saveChoices();
+      fadeRender();
+      backToTop();
     });
 
     $('home').addEventListener('click', function () {
@@ -821,10 +942,12 @@
 
     /* ---------- start ---------- */
 
-    setSectionView(bySection);
+    readChoices();
 
     function start(list) {
       items = shuffle(list);
+      fillCategories();
+      saveChoices();
       render();
     }
 
