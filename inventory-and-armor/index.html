@@ -235,7 +235,7 @@
   .intro h1 {
     /* Apple Garamond Bold where it's installed; otherwise EB Garamond Bold */
     font-family: "Apple Garamond", "AppleGaramond", "AppleGaramond-Bold", "EB Garamond", Garamond, "Times New Roman", serif;
-    font-size: clamp(48px, 9vw, 128px);
+    font-size: clamp(43px, 8.1vw, 115px);   /* 10% smaller (was 48px, 9vw, 128px) */
     font-weight: 700;
     line-height: 1;
     letter-spacing: 0.08em;
@@ -331,11 +331,18 @@
   }
 
   .meta {
-    overflow-wrap: anywhere;
     margin-top: 10px;
     font-size: 10px;
     line-height: 1.6;
     letter-spacing: 0.06em;
+  }
+
+  /* the description is two lines at most: [number] maker, then the item name;
+     anything longer ends in an ellipsis */
+  .meta > div {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 
   .meta .sec {
@@ -379,9 +386,14 @@
     display: flex;
   }
 
+  /* same proportions as the preview card: a 3:4 photo area inside a thin
+     frame with a white margin (about 5% of the width, like the card's 10px) */
   #zoom-img {
-    max-width: 100%;
-    max-height: 62vh;
+    --zw: min(62vh * 3 / 4, 100vw - 180px);
+    box-sizing: content-box;
+    width: var(--zw);
+    height: calc(var(--zw) * 4 / 3);
+    padding: calc(var(--zw) * 0.053);
     object-fit: contain;
     border: 1px solid var(--ink);
     background: var(--paper);
@@ -487,7 +499,7 @@
     .meta .sec { font-size: 8px; }
     footer { padding: 72px 16px 48px; }
     #zoom { padding: 56px 16px 84px; }
-    #zoom-img { max-height: 52vh; }
+    #zoom-img { --zw: min(52vh * 3 / 4, 100vw - 32px - 12px); }
     #zoom-prev, #zoom-next { top: auto; bottom: calc(16px + env(safe-area-inset-bottom)); transform: none; border: 1px solid var(--ink); background: var(--paper); }
     #zoom-prev { left: 16px; }
     #zoom-next { right: 16px; }
@@ -736,6 +748,7 @@
       frame.append(img);
       if (item.imgs.length > 1) frame.append(el('span', 'more', '[+' + (item.imgs.length - 1) + ']'));
       const meta = el('div', 'meta');
+      meta.title = ['[' + pad(item.id) + ']', item.maker, item.name].filter(Boolean).join(' ');
       meta.append(
         el('div', '', '[' + pad(item.id) + '] ' + (item.maker || '')),
         el('div', '', item.name || '')
