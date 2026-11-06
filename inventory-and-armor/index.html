@@ -188,12 +188,13 @@
 
   .grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 56px 40px;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 20px;
   }
 
   .card {
     display: block;
+    align-self: start;
     width: 100%;
     padding: 0;
     border: 0;
@@ -204,7 +205,7 @@
 
   .frame {
     position: relative;
-    padding: 18px;
+    padding: 10px;
     border: 1px solid var(--ink);
     background: var(--paper);
     transition: box-shadow 0.15s ease;
@@ -237,8 +238,8 @@
   }
 
   .meta {
-    margin-top: 12px;
-    font-size: 11px;
+    margin-top: 10px;
+    font-size: 10px;
     line-height: 1.6;
     letter-spacing: 0.06em;
   }
@@ -366,7 +367,7 @@
 
   /* SMALLER SCREENS */
   @media (max-width: 1100px) {
-    .grid { grid-template-columns: repeat(3, 1fr); gap: 48px 32px; }
+    .grid { grid-template-columns: repeat(5, 1fr); gap: 16px; }
   }
 
   @media (max-width: 700px) {
@@ -377,8 +378,10 @@
     .btn { padding: 0 9px; font-size: 10px; letter-spacing: 0.1em; }
     .intro { padding: 56px 16px 16px; }
     main { padding: 28px 16px 12px; }
-    .grid { grid-template-columns: repeat(2, 1fr); gap: 36px 16px; }
-    .frame { padding: 10px; }
+    .grid { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .frame { padding: 6px; }
+    .meta { font-size: 9px; letter-spacing: 0.04em; }
+    .meta .sec { font-size: 8px; }
     footer { padding: 72px 16px 48px; }
     #zoom { padding: 56px 16px 84px; }
     #zoom-img { max-height: 52vh; }
