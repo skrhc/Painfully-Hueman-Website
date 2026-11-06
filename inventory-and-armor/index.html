@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>INVENTORY &amp; ARMOR</title>
   <meta property="og:title" content="Inventory & Armor">
   <meta property="og:description" content="An index of form, material and weight. Painfully Hueman.">
@@ -14,84 +14,164 @@
     box-sizing: border-box;
   }
 
+  :root {
+    --hh: 64px;          /* header height, set by script */
+    --ink: #000;
+    --paper: #fff;
+    --soft: #8a8a8a;
+  }
+
   html {
     scroll-behavior: smooth;
   }
 
   body {
-    background: #fff;
-    color: #000;
+    background: var(--paper);
+    color: var(--ink);
     font-family: "Courier New", Courier, monospace;
     -webkit-font-smoothing: antialiased;
+    text-transform: uppercase;
   }
 
-  /* HEADER + QUICK-JUMP NAV */
+  button, input {
+    font-family: inherit;
+    color: inherit;
+    text-transform: inherit;
+  }
+
+  button:focus {
+    outline: none;
+  }
+
+  button:focus-visible {
+    outline: 1px dashed var(--ink);
+    outline-offset: 3px;
+  }
+
+  /* HEADER */
   header {
     position: sticky;
     top: 0;
     z-index: 10;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 10px 24px;
-    padding: 16px 32px;
-    background: #fff;
-    border-bottom: 1px solid #000;
-    font-size: 11px;
+    align-items: center;
+    gap: 10px 20px;
+    padding: 14px 40px;
+    background: var(--paper);
+    border-bottom: 1px solid var(--ink);
+  }
+
+  .title {
+    padding: 0;
+    border: 0;
+    background: none;
+    font-size: 12px;
     letter-spacing: 0.15em;
-    text-transform: uppercase;
+    cursor: pointer;
   }
 
-  header .title {
-    color: #000;
-  }
-
-  header nav {
+  .tools {
+    margin-left: auto;
     display: flex;
-    flex-wrap: wrap;
-    gap: 6px 20px;
+    align-items: center;
+    gap: 8px;
   }
 
-  header nav a {
-    color: #000;
-    text-decoration: none;
+  .search {
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--ink);
   }
 
-  header nav a:hover {
-    text-decoration: underline;
+  .search input {
+    width: 240px;
+    height: 34px;
+    padding: 0 10px;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+  }
+
+  .search input::placeholder {
+    color: #999;
+  }
+
+  .search input::-webkit-search-cancel-button {
+    display: none;
+  }
+
+  .search button {
+    display: none;
+    height: 34px;
+    padding: 0 10px;
+    border: 0;
+    border-left: 1px solid var(--ink);
+    background: var(--paper);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    cursor: pointer;
+  }
+
+  .search.has-text button {
+    display: block;
+  }
+
+  .btn {
+    height: 36px;
+    padding: 0 12px;
+    border: 1px solid var(--ink);
+    background: var(--paper);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    white-space: nowrap;
+    cursor: pointer;
+  }
+
+  .btn:hover,
+  .btn.on {
+    background: var(--ink);
+    color: var(--paper);
   }
 
   /* INTRO */
   .intro {
-    padding: 90px 32px 40px;
+    padding: 96px 40px 24px;
   }
 
   .intro h1 {
     font-size: clamp(28px, 5vw, 64px);
     font-weight: 400;
     letter-spacing: 0.12em;
-    text-transform: uppercase;
   }
 
   .intro p {
     margin-top: 16px;
     font-size: 12px;
     letter-spacing: 0.1em;
-    color: #000;
-    text-transform: uppercase;
   }
 
-  .status {
-    padding: 60px 32px;
-    font-size: 12px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: #000;
+  .intro .count {
+    margin-top: 8px;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    color: var(--soft);
   }
 
-  /* SECTIONS */
-  section {
-    padding: 60px 32px 20px;
+  /* GALLERY */
+  main {
+    padding: 40px 40px 20px;
+    transition: opacity 0.25s ease;
+  }
+
+  main.fading {
+    opacity: 0;
+  }
+
+  section + section {
+    margin-top: 72px;
   }
 
   .section-head {
@@ -99,32 +179,34 @@
     justify-content: space-between;
     align-items: baseline;
     padding-bottom: 12px;
-    margin-bottom: 32px;
-    border-bottom: 1px solid #000;
+    margin-bottom: 36px;
+    border-bottom: 1px solid var(--ink);
     font-size: 12px;
     letter-spacing: 0.2em;
-    text-transform: uppercase;
+    scroll-margin-top: calc(var(--hh) + 20px);
   }
 
-  .section-head .count {
-    color: #000;
-  }
-
-  /* GRID: 5 PER ROW */
   .grid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 24px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 56px 40px;
   }
 
   .card {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: none;
+    text-align: left;
     cursor: pointer;
   }
 
   .frame {
-    border: 1px solid #000;
-    padding: 10px;
-    background: #fff;
+    position: relative;
+    padding: 18px;
+    border: 1px solid var(--ink);
+    background: var(--paper);
     transition: box-shadow 0.15s ease;
   }
 
@@ -133,77 +215,94 @@
     width: 100%;
     aspect-ratio: 3 / 4;
     object-fit: contain;
-    background: #fff;
+    opacity: 0;
+    transition: opacity 0.6s ease;
   }
 
-  .frame {
-    position: relative;
+  .frame img.ready {
+    opacity: 1;
   }
 
-  /* "+2" badge on cards with more than one photo */
   .frame .more {
     position: absolute;
-    top: 6px;
-    right: 8px;
+    top: 8px;
+    right: 10px;
     font-size: 10px;
     letter-spacing: 0.1em;
-    color: #000;
-    background: #fff;
+    background: var(--paper);
   }
 
   .card:hover .frame {
-    box-shadow: 0 0 0 1px #000;
+    box-shadow: 0 0 0 1px var(--ink);
   }
 
   .meta {
-    margin-top: 10px;
+    margin-top: 12px;
     font-size: 11px;
     line-height: 1.6;
     letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: #000;
   }
 
-  .meta .num {
-    color: #000;
+  .meta .sec {
+    color: var(--soft);
+    font-size: 10px;
+    letter-spacing: 0.12em;
   }
 
-  /* ZOOM VIEW */
+  .status {
+    padding: 40px 0 80px;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+  }
+
+  .status:empty {
+    display: none;
+  }
+
+  footer {
+    padding: 100px 40px 60px;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+  }
+
+  /* DETAIL VIEW */
   #zoom {
     display: none;
     position: fixed;
     inset: 0;
     z-index: 100;
-    padding: 40px;
+    padding: 60px 90px 40px;
     background: rgba(255, 255, 255, 0.97);
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    gap: 18px;
+    gap: 16px;
+    touch-action: pan-y;
   }
 
   #zoom.open {
     display: flex;
   }
 
-  #zoom img {
-    max-width: 90vw;
-    max-height: 68vh;
-    border: 1px solid #000;
-    background: #fff;
+  #zoom-img {
+    max-width: 100%;
+    max-height: 62vh;
+    object-fit: contain;
+    border: 1px solid var(--ink);
+    background: var(--paper);
+    user-select: none;
+    -webkit-user-drag: none;
   }
 
   #zoom-img.multi {
     cursor: pointer;
   }
 
-  /* Thumbnails for items with several photos */
   #zoom-thumbs {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 8px;
-    max-width: 90vw;
   }
 
   #zoom-thumbs:empty {
@@ -215,13 +314,13 @@
     height: 52px;
     padding: 3px;
     border: 1px solid #ccc;
-    background: #fff;
+    background: var(--paper);
     cursor: pointer;
   }
 
   #zoom-thumbs button.active {
-    border-color: #000;
-    box-shadow: 0 0 0 1px #000;
+    border-color: var(--ink);
+    box-shadow: 0 0 0 1px var(--ink);
   }
 
   #zoom-thumbs img {
@@ -229,31 +328,29 @@
     width: 100%;
     height: 100%;
     object-fit: contain;
-    border: 0;
-    max-width: none;
-    max-height: none;
   }
 
-  #zoom .zoom-meta {
+  .zoom-meta {
     max-width: 640px;
     text-align: center;
     font-size: 12px;
     line-height: 1.7;
     letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: #000;
   }
 
-  #zoom .zoom-meta .num {
-    color: #000;
+  .zoom-meta .sec {
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    color: var(--soft);
   }
 
   .zoom-btn {
     position: absolute;
-    background: none;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 10px 12px;
     border: 0;
-    color: #000;
-    font-family: inherit;
+    background: none;
     font-size: 11px;
     letter-spacing: 0.2em;
     cursor: pointer;
@@ -263,54 +360,69 @@
     text-decoration: underline;
   }
 
-  #zoom-close { top: 28px; right: 32px; }
-  #zoom-prev  { left: 32px; top: 50%; }
-  #zoom-next  { right: 32px; top: 50%; }
-
-  footer {
-    padding: 80px 32px 60px;
-    font-size: 11px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: #000;
-  }
+  #zoom-close { top: 12px; right: 16px; }
+  #zoom-prev  { left: 16px; top: 50%; transform: translateY(-50%); }
+  #zoom-next  { right: 16px; top: 50%; transform: translateY(-50%); }
 
   /* SMALLER SCREENS */
   @media (max-width: 1100px) {
-    .grid { grid-template-columns: repeat(3, 1fr); }
+    .grid { grid-template-columns: repeat(3, 1fr); gap: 48px 32px; }
   }
 
-  @media (max-width: 600px) {
-    header, .intro, section, footer, .status { padding-left: 16px; padding-right: 16px; }
-    .grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
-    #zoom { padding: 16px; }
-    #zoom-prev { left: 12px; }
-    #zoom-next { right: 12px; }
+  @media (max-width: 700px) {
+    header { padding: 12px 16px; gap: 10px; }
+    .tools { width: 100%; margin-left: 0; }
+    .search { flex: 1; min-width: 0; }
+    .search input { flex: 1; width: auto; min-width: 0; font-size: 16px; }
+    .btn { padding: 0 9px; font-size: 10px; letter-spacing: 0.1em; }
+    .intro { padding: 56px 16px 16px; }
+    main { padding: 28px 16px 12px; }
+    .grid { grid-template-columns: repeat(2, 1fr); gap: 36px 16px; }
+    .frame { padding: 10px; }
+    footer { padding: 72px 16px 48px; }
+    #zoom { padding: 56px 16px 84px; }
+    #zoom-img { max-height: 52vh; }
+    #zoom-prev, #zoom-next { top: auto; bottom: calc(16px + env(safe-area-inset-bottom)); transform: none; border: 1px solid var(--ink); background: var(--paper); }
+    #zoom-prev { left: 16px; }
+    #zoom-next { right: 16px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    main, .frame img { transition: none; }
   }
 </style>
 </head>
 
 <body>
-  <header>
-    <span class="title">[ Inventory &amp; Armor ]</span>
-    <nav id="nav"></nav>
+  <header id="head">
+    <button class="title" id="home" type="button">[ Inventory &amp; Armor ]</button>
+    <div class="tools">
+      <label class="search" id="search">
+        <input id="q" type="search" placeholder="Search" autocomplete="off" spellcheck="false" aria-label="Search the inventory">
+        <button type="button" id="q-clear" aria-label="Clear search">Clear</button>
+      </label>
+      <button class="btn" id="shuffle" type="button" title="Show everything in a new random order">Shuffle</button>
+      <button class="btn" id="by-section" type="button" aria-pressed="false">By section</button>
+    </div>
   </header>
 
   <div class="intro">
     <h1>Inventory &amp; Armor</h1>
     <p>An index of form, material and weight // Painfully Hueman</p>
+    <div class="count" id="count" aria-live="polite"></div>
   </div>
 
   <main id="main">
-    <div class="status">Loading archive...</div>
+    <div class="status" id="status">Loading archive...</div>
   </main>
 
   <footer>Painfully Hueman // Inventory &amp; Armor // Vol. 01</footer>
 
-  <div id="zoom">
-    <button class="zoom-btn" id="zoom-close">[CLOSE]</button>
-    <button class="zoom-btn" id="zoom-prev">[PREV]</button>
-    <button class="zoom-btn" id="zoom-next">[NEXT]</button>
+  <div id="zoom" role="dialog" aria-modal="true" aria-label="Item detail">
+    <button class="zoom-btn" id="zoom-close" type="button">[CLOSE]</button>
+    <button class="zoom-btn" id="zoom-prev" type="button">[PREV]</button>
+    <button class="zoom-btn" id="zoom-next" type="button">[NEXT]</button>
     <img id="zoom-img" alt="">
     <div id="zoom-thumbs"></div>
     <div class="zoom-meta" id="zoom-meta"></div>
@@ -320,80 +432,99 @@
     /* ------------------------------------------------------------
        1. PASTE YOUR GOOGLE SHEET LINK BETWEEN THE QUOTES.
           (File > Share > Publish to web > CSV > copy the link.)
-          Leave it empty to see four sample cards instead.
+          Leave it empty to see four sample items instead.
        ------------------------------------------------------------ */
     const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSE513ZgOlmm1qaN-eqwirFBi09oqZS6vCQmrTVoTrXk3NnQhD8lVI5OyTdvrbaYg/pub?output=csv';
 
     /* ------------------------------------------------------------
-       2. SECTION ORDER AND LABELS.
-          "key" must match what you type in the sheet's "section" column.
-          A section name in the sheet that isn't listed here still works.
-          It just appears at the end with its own name.
+       2. SECTION ORDER for the "By section" view (optional).
+          Sections listed here come first, in this order. Any other
+          section in the sheet still shows up, after these, A to Z.
+          The normal view ignores sections and mixes everything.
        ------------------------------------------------------------ */
     const SECTIONS = [
-      { key: 'armor',      label: '01 // Armor' },
-      { key: 'foundation', label: '02 // Foundations' },
-      { key: 'hardware',   label: '03 // Hardware' },
-      { key: 'footwear',   label: '04 // Footwear' }
+      'armor',
+      'outerwear',
+      'top',
+      'bottoms',
+      'footwear',
+      'headwear',
+      'hardware'
     ];
 
-    /* Sample cards, only shown when SHEET_URL is empty. */
+    /* Sample items, only shown when SHEET_URL is empty. */
     const SAMPLE_ITEMS = [
-      { id: '1', section: 'armor',      img: 'images/001.jpg', maker: 'MAKER NAME', name: 'Sample overshirt', note: 'Replace with a line on cut, fabric weight or why it matters.', credit: '' },
-      { id: '2', section: 'armor',      img: 'images/002.jpg', maker: 'MAKER NAME', name: 'Sample jacket',    note: 'Placeholder note.', credit: '' },
-      { id: '3', section: 'foundation', img: 'images/003.jpg', maker: 'MAKER NAME', name: 'Sample trouser',   note: 'Placeholder note.', credit: '' },
-      { id: '4', section: 'hardware',   img: 'images/004.jpg', maker: 'MAKER NAME', name: 'Sample accessory', note: 'Placeholder note.', credit: '' }
+      { id: '1', section: 'armor',    img: 'images/001.png', maker: 'MAKER NAME', name: 'Sample overshirt', note: 'Placeholder note.', credit: '' },
+      { id: '2', section: 'armor',    img: 'images/002.png', maker: 'MAKER NAME', name: 'Sample jacket',    note: '', credit: '' },
+      { id: '3', section: 'bottoms',  img: 'images/003.png', maker: 'MAKER NAME', name: 'Sample trouser',   note: '', credit: '' },
+      { id: '4', section: 'hardware', img: 'images/004.png', maker: 'MAKER NAME', name: 'Sample accessory', note: '', credit: '' }
     ];
 
     /* ------------------------------------------------------------
        Everything below builds the page. No need to touch it.
        ------------------------------------------------------------ */
 
-    const main = document.getElementById('main');
-    const nav = document.getElementById('nav');
-    const zoom = document.getElementById('zoom');
-    const zoomImg = document.getElementById('zoom-img');
-    const zoomMeta = document.getElementById('zoom-meta');
-    const zoomThumbs = document.getElementById('zoom-thumbs');
+    const $ = function (id) { return document.getElementById(id); };
+    const head = $('head'), main = $('main'), statusEl = $('status'), countEl = $('count');
+    const q = $('q'), searchEl = $('search'), shuffleBtn = $('shuffle'), sectionBtn = $('by-section');
+    const zoom = $('zoom'), zoomImg = $('zoom-img'), zoomMeta = $('zoom-meta'), zoomThumbs = $('zoom-thumbs');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    let visible = [];
+    let items = [];         /* every item, in its current random order */
+    let bySection = location.hash === '#by-section';
+    let order = [];         /* items currently on the page, for PREV / NEXT */
     let openIndex = -1;
     let openPhoto = 0;
 
     function pad(n) {
-      var s = String(n).trim();
+      const s = String(n).trim();
       return /^\d+$/.test(s) ? s.padStart(3, '0') : s;
     }
 
-    function el(tag, className, text) {
-      const node = document.createElement(tag);
+    function el(tagName, className, text) {
+      const node = document.createElement(tagName);
       if (className) node.className = className;
       if (text !== undefined) node.textContent = text;
       return node;
     }
 
-    function showStatus(message) {
-      main.textContent = '';
-      nav.textContent = '';
-      main.append(el('div', 'status', message));
+    function thumbOf(src) {
+      return /^images\//.test(src) ? src.replace(/^images\//, 'images/thumbs/') : src;
     }
 
-    /* Reads CSV text, including quoted cells with commas and line breaks. */
+    /* Load the small copy; fall back to the full photo if there isn't one. */
+    function setImg(img, src) {
+      img.addEventListener('load', function () { img.classList.add('ready'); });
+      img.addEventListener('error', function retry() {
+        img.removeEventListener('error', retry);
+        if (img.src.indexOf('/thumbs/') !== -1) img.src = src;
+      });
+      img.src = thumbOf(src);
+    }
+
+    function shuffle(list) {
+      for (let i = list.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        const t = list[i]; list[i] = list[j]; list[j] = t;
+      }
+      return list;
+    }
+
+    function sectionName(item) {
+      return item.section || 'other';
+    }
+
+    /* ---------- reading the sheet ---------- */
+
     function parseCSV(text) {
       const rows = [];
-      let row = [];
-      let cell = '';
-      let inQuotes = false;
-
-      text = text.replace(/^\uFEFF/, '');
-
+      let row = [], cell = '', inQuotes = false;
+      text = text.replace(/^﻿/, '');
       for (let i = 0; i < text.length; i++) {
         const c = text[i];
-
         if (inQuotes) {
           if (c === '"') {
-            if (text[i + 1] === '"') { cell += '"'; i++; }
-            else { inQuotes = false; }
+            if (text[i + 1] === '"') { cell += '"'; i++; } else { inQuotes = false; }
           } else {
             cell += c;
           }
@@ -407,25 +538,16 @@
           cell += c;
         }
       }
-
-      if (cell !== '' || row.length) {
-        row.push(cell);
-        rows.push(row);
-      }
-
+      if (cell !== '' || row.length) { row.push(cell); rows.push(row); }
       return rows;
     }
 
     function rowsToItems(rows) {
       if (rows.length < 2) return [];
-
       const headers = rows[0].map(function (h) { return h.trim().toLowerCase(); });
-
       return rows.slice(1).map(function (r, n) {
         const item = {};
-        headers.forEach(function (h, i) {
-          item[h] = (r[i] || '').trim();
-        });
+        headers.forEach(function (h, i) { item[h] = (r[i] || '').trim(); });
         if (!item.id) item.id = String(n + 1);
         item.section = (item.section || '').toLowerCase();
         return item;
@@ -436,113 +558,187 @@
            or line breaks. The first one is the cover. */
         item.imgs = (item.img || '').split(/[\s,]+/).filter(Boolean);
         item.img = item.imgs[0] || '';
+        item.text = [item.id, pad(item.id), item.section, item.maker, item.name, item.note].join(' ').toLowerCase();
         return item;
       });
     }
 
-    function build(items) {
+    /* ---------- cards ---------- */
+
+    function makeCard(item) {
+      const card = el('button', 'card');
+      card.type = 'button';
+      const frame = el('div', 'frame');
+      const img = document.createElement('img');
+      img.alt = [item.maker, item.name].filter(Boolean).join(' ');
+      img.loading = 'lazy';
+      img.decoding = 'async';
+      setImg(img, item.img);
+      frame.append(img);
+      if (item.imgs.length > 1) frame.append(el('span', 'more', '[+' + (item.imgs.length - 1) + ']'));
+      const meta = el('div', 'meta');
+      meta.append(
+        el('div', '', '[' + pad(item.id) + '] ' + (item.maker || '')),
+        el('div', '', item.name || '')
+      );
+      if (!bySection) meta.append(el('div', 'sec', sectionName(item)));
+      card.append(frame, meta);
+      card.addEventListener('click', function () { openZoom(order.indexOf(item)); });
+      return card;
+    }
+
+    /* ---------- drawing the page ---------- */
+
+    function matches(item, words) {
+      return words.every(function (w) { return item.text.indexOf(w) !== -1; });
+    }
+
+    function render() {
+      const words = q.value.toLowerCase().split(/\s+/).filter(Boolean);
+      searchEl.classList.toggle('has-text', words.length > 0);
+      const shown = items.filter(function (item) { return matches(item, words); });
+
       main.textContent = '';
-      nav.textContent = '';
-      visible = [];
+      order = [];
 
       if (!items.length) {
-        showStatus('No items yet.');
+        statusEl.textContent = 'No items yet.';
+        main.append(statusEl);
         return;
       }
 
-      /* Listed sections first, then any extra section names from the sheet. */
-      const order = SECTIONS.slice();
-      items.forEach(function (item) {
-        const known = order.some(function (s) { return s.key === item.section; });
-        if (!known) {
-          order.push({ key: item.section, label: (item.section || 'other') });
-        }
-      });
-
-      order.forEach(function (sec) {
-        const group = items.filter(function (i) { return i.section === sec.key; });
-        if (!group.length) return;
-
-        const anchor = (sec.key || 'other').replace(/[^a-z0-9]+/g, '-');
-
-        const section = el('section');
-        section.id = anchor;
-
-        const head = el('div', 'section-head');
-        head.append(el('span', '', sec.label), el('span', 'count', group.length + ' items'));
-
-        const grid = el('div', 'grid');
-
-        group.forEach(function (item) {
-          const index = visible.length;
-          visible.push(item);
-
-          const card = el('div', 'card');
-
-          const frame = el('div', 'frame');
-          const img = document.createElement('img');
-          img.src = item.img;
-          img.alt = (item.maker || '') + ' ' + (item.name || '');
-          img.loading = 'lazy';
-          frame.append(img);
-          if (item.imgs.length > 1) {
-            frame.append(el('span', 'more', '[+' + (item.imgs.length - 1) + ']'));
-          }
-
-          const meta = el('div', 'meta');
-          const line1 = el('div');
-          line1.append(el('span', 'num', '[' + pad(item.id) + ']'), document.createTextNode(' ' + (item.maker || '')));
-          meta.append(line1, el('div', '', item.name || ''));
-
-          card.append(frame, meta);
-          card.addEventListener('click', function () { openZoom(index); });
-          grid.append(card);
+      if (bySection) {
+        const keys = SECTIONS.map(function (k) { return String(k).toLowerCase(); });
+        const extra = [];
+        shown.forEach(function (item) {
+          if (keys.indexOf(item.section) === -1 && extra.indexOf(item.section) === -1) extra.push(item.section);
         });
+        extra.sort();
+        keys.concat(extra).forEach(function (key) {
+          const group = shown.filter(function (i) { return i.section === key; });
+          if (!group.length) return;
+          const section = el('section');
+          const headRow = el('div', 'section-head');
+          headRow.append(el('span', '', key || 'other'), el('span', '', group.length + (group.length === 1 ? ' item' : ' items')));
+          const grid = el('div', 'grid');
+          group.forEach(function (item) { order.push(item); grid.append(makeCard(item)); });
+          section.append(headRow, grid);
+          main.append(section);
+        });
+      } else {
+        const grid = el('div', 'grid');
+        shown.forEach(function (item) { order.push(item); grid.append(makeCard(item)); });
+        main.append(grid);
+      }
 
-        section.append(head, grid);
-        main.append(section);
+      if (words.length) {
+        countEl.textContent = shown.length + ' of ' + items.length + ' pieces match “' + q.value.trim() + '”';
+      } else {
+        countEl.textContent = items.length + ' pieces, in a new order every visit';
+      }
 
-        const link = el('a', '', sec.label);
-        link.href = '#' + anchor;
-        nav.append(link);
-      });
+      if (!shown.length) {
+        statusEl.textContent = 'Nothing matches “' + q.value.trim() + '”';
+        main.append(statusEl);
+      }
     }
 
+    function fadeRender() {
+      if (reduceMotion) { render(); return; }
+      main.classList.add('fading');
+      setTimeout(function () {
+        render();
+        main.classList.remove('fading');
+      }, 250);
+    }
+
+    /* ---------- buttons ---------- */
+
+    shuffleBtn.addEventListener('click', function () {
+      shuffle(items);
+      fadeRender();
+      const top = main.getBoundingClientRect().top + window.scrollY - head.offsetHeight - 20;
+      if (window.scrollY > top) window.scrollTo(0, top);
+    });
+
+    function setSectionView(on) {
+      bySection = on;
+      sectionBtn.classList.toggle('on', on);
+      sectionBtn.setAttribute('aria-pressed', on ? 'true' : 'false');
+      if (history.replaceState) history.replaceState(null, '', on ? '#by-section' : location.pathname + location.search);
+    }
+
+    sectionBtn.addEventListener('click', function () {
+      setSectionView(!bySection);
+      fadeRender();
+    });
+
+    $('home').addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+    });
+
+    q.addEventListener('input', render);
+    q.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') { clearSearch(); q.blur(); }
+      if (e.key === 'Enter') {
+        q.blur();
+        if (order.length === 1) openZoom(0);
+      }
+    });
+
+    function clearSearch() {
+      if (!q.value) return;
+      q.value = '';
+      render();
+    }
+
+    $('q-clear').addEventListener('click', function () { clearSearch(); q.focus(); });
+
+    document.addEventListener('keydown', function (e) {
+      if (zoom.classList.contains('open') || document.activeElement === q) return;
+      if (e.key === '/') { e.preventDefault(); q.focus(); }
+    });
+
+    /* ---------- detail view ---------- */
+
     function openZoom(index) {
-      if (!visible.length) return;
-      openIndex = (index + visible.length) % visible.length;
-      const item = visible[openIndex];
-      const label = (item.maker || '') + ' ' + (item.name || '');
+      if (!order.length || index < 0) return;
+      openIndex = (index + order.length) % order.length;
+      const item = order[openIndex];
 
       zoomThumbs.textContent = '';
       if (item.imgs.length > 1) {
         item.imgs.forEach(function (src, n) {
           const b = document.createElement('button');
+          b.type = 'button';
           b.setAttribute('aria-label', 'Photo ' + (n + 1) + ' of ' + item.imgs.length);
           const t = document.createElement('img');
-          t.src = src;
           t.alt = '';
+          setImg(t, src);
           b.append(t);
           b.addEventListener('click', function () { showPhoto(n); });
           zoomThumbs.append(b);
         });
       }
-      zoomImg.alt = label;
+      zoomImg.alt = [item.maker, item.name].filter(Boolean).join(' ');
       zoomImg.classList.toggle('multi', item.imgs.length > 1);
       showPhoto(0);
 
       zoomMeta.textContent = '';
-      const top = el('div');
-      top.append(el('span', 'num', '[' + pad(item.id) + ']'), document.createTextNode(' ' + [item.maker, item.name].filter(Boolean).join(' // ')));
-      zoomMeta.append(top);
+      zoomMeta.append(el('div', 'sec', '[' + pad(item.id) + '] ' + sectionName(item)));
+      zoomMeta.append(el('div', '', [item.maker, item.name].filter(Boolean).join(' // ')));
       if (item.note) zoomMeta.append(el('div', '', item.note));
-      if (item.credit) zoomMeta.append(el('div', '', 'Photo: ' + item.credit));
+      if (item.credit) zoomMeta.append(el('div', 'sec', 'Photo: ' + item.credit));
 
-      zoom.classList.add('open');
+      if (!zoom.classList.contains('open')) {
+        zoom.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        $('zoom-close').focus({ preventScroll: true });
+      }
     }
 
     function showPhoto(n) {
-      const item = visible[openIndex];
+      const item = order[openIndex];
       if (!item || !item.imgs.length) return;
       openPhoto = (n + item.imgs.length) % item.imgs.length;
       zoomImg.src = item.imgs[openPhoto];
@@ -551,19 +747,52 @@
       });
     }
 
-    function closeZoom() {
-      zoom.classList.remove('open');
+    /* Step through this item's photos, then on to the next item. */
+    function stepPhoto(dir) {
+      const item = order[openIndex];
+      const next = openPhoto + dir;
+      if (item && next >= 0 && next < item.imgs.length) { showPhoto(next); return; }
+      openZoom(openIndex + dir);
+      if (dir < 0) {
+        const prev = order[openIndex];
+        if (prev && prev.imgs.length > 1) showPhoto(prev.imgs.length - 1);
+      }
     }
 
-    document.getElementById('zoom-close').addEventListener('click', closeZoom);
-    document.getElementById('zoom-prev').addEventListener('click', function () { openZoom(openIndex - 1); });
-    document.getElementById('zoom-next').addEventListener('click', function () { openZoom(openIndex + 1); });
+    function closeZoom() {
+      zoom.classList.remove('open');
+      document.body.style.overflow = '';
+      const cards = main.querySelectorAll('.card');
+      const card = cards[openIndex];
+      if (card) card.focus({ preventScroll: true });
+    }
 
-    /* Clicking the big photo shows the item's next photo. */
-    zoomImg.addEventListener('click', function () { showPhoto(openPhoto + 1); });
+    $('zoom-close').addEventListener('click', closeZoom);
+    $('zoom-prev').addEventListener('click', function () { openZoom(openIndex - 1); });
+    $('zoom-next').addEventListener('click', function () { openZoom(openIndex + 1); });
+    zoomImg.addEventListener('click', function () { if (!swiped) showPhoto(openPhoto + 1); });
 
     zoom.addEventListener('click', function (e) {
       if (e.target === zoom) closeZoom();
+    });
+
+    /* Swipe left / right on phones */
+    let swipe = null, swiped = false;
+    zoom.addEventListener('touchstart', function (e) {
+      if (e.touches.length !== 1) { swipe = null; return; }
+      swipe = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+      swiped = false;
+    }, { passive: true });
+    zoom.addEventListener('touchend', function (e) {
+      if (!swipe) return;
+      const t = e.changedTouches[0];
+      const dx = t.clientX - swipe.x, dy = t.clientY - swipe.y;
+      swipe = null;
+      if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.4) {
+        swiped = true;
+        setTimeout(function () { swiped = false; }, 400);
+        stepPhoto(dx < 0 ? 1 : -1);
+      }
     });
 
     document.addEventListener('keydown', function (e) {
@@ -575,22 +804,30 @@
       if (e.key === 'ArrowUp') { e.preventDefault(); showPhoto(openPhoto - 1); }
     });
 
-    /* START */
+    /* ---------- start ---------- */
+
+    setSectionView(bySection);
+
+    function start(list) {
+      items = shuffle(list);
+      render();
+    }
+
     if (!SHEET_URL) {
-      build(SAMPLE_ITEMS);
+      start(rowsToItems([['id', 'section', 'img', 'maker', 'name', 'note', 'credit']].concat(
+        SAMPLE_ITEMS.map(function (i) { return [i.id, i.section, i.img, i.maker, i.name, i.note, i.credit]; }))));
     } else {
       const sep = SHEET_URL.indexOf('?') === -1 ? '?' : '&';
-
       fetch(SHEET_URL + sep + 't=' + Date.now())
         .then(function (res) {
           if (!res.ok) throw new Error('HTTP ' + res.status);
           return res.text();
         })
         .then(function (text) {
-          build(rowsToItems(parseCSV(text)));
+          start(rowsToItems(parseCSV(text)));
         })
         .catch(function () {
-          showStatus('Archive unavailable. Check the sheet link and that the sheet is published as CSV.');
+          statusEl.textContent = 'Archive unavailable right now. Please try again in a moment.';
         });
     }
   </script>

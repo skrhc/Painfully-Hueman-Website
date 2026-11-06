@@ -185,6 +185,7 @@ find_item() {  # sets IDX to the item for the current photo, adding one if new
 }
 
 added=()
+thumbs=()
 for src in "${photos[@]}"; do
   parse_details "$src"
   find_item
@@ -221,6 +222,11 @@ for src in "${photos[@]}"; do
     sips -Z "$MAX_SIZE" "$out" >/dev/null
   fi
 
+  # Small preview copy for the gallery on the website.
+  mkdir -p images/thumbs
+  thumb="images/thumbs/$(basename "$out")"
+  sips -Z 600 "$out" --out "$thumb" >/dev/null 2>&1 && thumbs+=("$thumb")
+
   mv "$src" "$DONE/"
   added+=("$out")
   item_imgs[IDX]="${item_imgs[IDX]:+${item_imgs[IDX]}, }$out"
@@ -248,13 +254,13 @@ fi
 
 echo "$last" > "$LAST_ID_FILE"
 
-git add -- "${added[@]}"
+git add -- "${added[@]}" ${thumbs[@]+"${thumbs[@]}"}
 if [ ${#added[@]} -eq 1 ]; then
   msg="Add inventory photo ${added[0]#images/}"
 else
   msg="Add ${#added[@]} inventory photos"
 fi
-git commit -q -m "$msg" -- "${added[@]}"
+git commit -q -m "$msg" -- "${added[@]}" ${thumbs[@]+"${thumbs[@]}"}
 echo "Committed: $msg"
 
 printf '%s' "$rows" | pbcopy
