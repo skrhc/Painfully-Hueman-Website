@@ -368,6 +368,8 @@
       <img
         class="poster"
         src="../pH vol. 1 party flyer blank middle.jpg"
+        width="1080"
+        height="1350"
         alt="Party poster"
       >
 
@@ -737,6 +739,28 @@
         noise.setAttribute('seed', seed);
       }, 150);
     }
+  </script>
+
+  <script>
+    /* Fit the whole flyer arrangement (poster, player, GET TIX button) into
+       the window under the header, so it all shows at once, centered. It is
+       never made bigger than its normal size, only smaller when needed. */
+    (function () {
+      const main = document.querySelector('main');
+      const head = document.querySelector('.site-head');
+      const GAP = 16;   /* breathing room below the arrangement */
+      function fit() {
+        main.style.zoom = '';
+        const base = parseFloat(getComputedStyle(main).zoom) || 1;
+        const height = main.getBoundingClientRect().height;
+        const room = window.innerHeight - head.offsetHeight - GAP;
+        if (height > room) main.style.zoom = String(base * room / height);
+      }
+      fit();
+      window.addEventListener('resize', fit);
+      window.addEventListener('load', fit);
+      if (document.fonts) document.fonts.ready.then(fit);
+    })();
   </script>
 </body>
 </html>
