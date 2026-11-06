@@ -6,7 +6,8 @@
 #    (PNG, JPG, HEIC, etc.). Name each one:
 #        section - maker - item name.jpg
 #    e.g. outerwear - FRKM SCD - Nightblade Jacket.jpg
-#    Use space-dash-space between parts. "maker - name.jpg" also
+#    Use space-dash-space between parts, or a long dash (–) with or
+#    without spaces. "maker - name.jpg" also
 #    works. Start names with "1. ", "2. " to set the order.
 #    More photos of the same item: same name plus " #2", " #3"...
 #        outerwear - FRKM SCD - Nightblade Jacket #2.jpg
@@ -82,6 +83,10 @@ if [ "$last" -eq 0 ]; then
   exit 1
 fi
 
+# A photo number at the end of a name: " #2" or " (2)". One or two digits
+# only, so a year like "(2025)" stays part of the item name.
+PHOTO_NO_RE='^(.*[^[:space:]])[[:space:]]+(#|\()([0-9]{1,2})\)?$'
+
 trim() { local t="$1"; t="${t#"${t%%[![:space:]]*}"}"; printf '%s' "${t%"${t##*[![:space:]]}"}"; }
 
 # "FRKM SCD 25FW Nightblade" -> "frkm-scd-25fw-nightblade"
@@ -108,12 +113,17 @@ parse_details() {
   fi
   shopt -u nocasematch
   PHOTO_NO=1
-  if [[ "$s" =~ ^(.*[^[:space:]])[[:space:]]+(#|\()([0-9]+)\)?$ ]]; then
+  if [[ "$s" =~ $PHOTO_NO_RE ]]; then
     s="${BASH_REMATCH[1]}"; PHOTO_NO="${BASH_REMATCH[3]}"
   fi
   BASE="$s"
-  while [[ "$s" == *" - "* ]]; do parts+=("$(trim "${s%% - *}")"); s="${s#* - }"; done
-  parts+=("$(trim "$s")")
+  # Split into section / maker / name at " - " or a long dash (– or —,
+  # with or without spaces). Only the first two count, so a dash inside
+  # the item name, like "Nocturne (2023–2025)", stays in the name.
+  local rest sep=$'\x1f'
+  rest=$(printf '%s' "$s" | perl -CS -ne 'print join("\x1f", split(/\s+-\s+|\s*[\x{2013}\x{2014}]\s*/, $_, 3))')
+  while [[ "$rest" == *"$sep"* ]]; do parts+=("$(trim "${rest%%"$sep"*}")"); rest="${rest#*"$sep"}"; done
+  parts+=("$(trim "$rest")")
   SECTION=""; MAKER=""; NAME=""
   if [ ${#parts[@]} -eq 2 ]; then
     MAKER="${parts[0]}"; NAME="${parts[1]}"
@@ -157,7 +167,7 @@ while IFS= read -r -d '' line; do sorted+=("${line#*$'\t'*$'\t'}"); done < <(
   for f in "${photos[@]}"; do
     parse_details "$f"
     k=$(basename "$f"); k="${k%.*}"
-    [[ "$k" =~ ^(.*[^[:space:]])[[:space:]]+(#|\()([0-9]+)\)?$ ]] && k="${BASH_REMATCH[1]}"
+    [[ "$k" =~ $PHOTO_NO_RE ]] && k="${BASH_REMATCH[1]}"
     printf '%s\t%05d\t%s\0' "$(printf '%s' "$k" | tr '[:upper:]' '[:lower:]')" "$PHOTO_NO" "$f"
   done | LC_ALL=C sort -z -t $'\t' -k1,1 -k2,2n
 )
