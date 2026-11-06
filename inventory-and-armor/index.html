@@ -107,6 +107,7 @@
     /* same side margins as the photo grid below */
     --box: calc((100% - 200px) / 7 * 1.1);
     padding: 14px calc((100% - 5 * var(--box)) / 6);
+    margin-top: 40px;      /* space under the site navigation (no page title) */
     background: var(--paper);
     transition: opacity 0.35s ease, visibility 0.35s;
   }
@@ -225,23 +226,6 @@
     background: var(--ink);
     color: var(--paper);
   }
-
-  /* INTRO */
-  .intro {
-    padding: 32px 40px 40px;
-    text-align: center;
-  }
-
-  .intro h1 {
-    /* Apple Garamond Bold where it's installed; otherwise EB Garamond Bold */
-    font-family: "Apple Garamond", "AppleGaramond", "AppleGaramond-Bold", "EB Garamond", Garamond, "Times New Roman", serif;
-    font-size: clamp(43px, 8.1vw, 115px);   /* 10% smaller (was 48px, 9vw, 128px) */
-    font-weight: 700;
-    line-height: 1;
-    letter-spacing: 0.08em;
-  }
-
-
 
   /* GALLERY */
   main {
@@ -494,7 +478,7 @@
     .search input { font-size: 16px; padding: 0 8px; }
     .pick { flex: none; padding: 0 20px 0 7px; font-size: 10px; letter-spacing: 0.04em; background-position: right 6px center; }
     .btn { padding: 0 8px; font-size: 10px; letter-spacing: 0.06em; }
-    .intro { padding: 44px 16px 24px; }
+    header { margin-top: 32px; }
     main { padding: 28px 16px 12px; }
     main .section-head, main .status { margin-left: 0; margin-right: 0; }
     .grid { justify-content: stretch; }
@@ -530,9 +514,6 @@
     </nav>
   </div>
 
-  <div class="intro">
-    <h1>Armory</h1>
-  </div>
 
   <header id="head">
     <div class="tools">
