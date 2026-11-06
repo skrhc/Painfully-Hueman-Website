@@ -9,7 +9,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@700;800&display=swap" rel="stylesheet">
 
   <style>
   * {
@@ -52,10 +52,57 @@
     outline-offset: 3px;
   }
 
+  /* SITE NAVIGATION — same logo and menu as the rest of the site;
+     stays at the top of the window, see-through background */
+  .site-head {
+    position: sticky;
+    top: 0;
+    z-index: 11;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    padding: 56px 64px 28px;
+    font-family: "EB Garamond", Garamond, "Times New Roman", serif;
+  }
+
+  .site-head .logo {
+    display: block;
+    flex: 0 1 360px;   /* shrinks a little on medium screens so the menu always fits */
+    min-width: 220px;
+  }
+
+  .site-head .logo img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .site-head nav {
+    flex: none;
+    white-space: nowrap;
+    display: flex;
+    gap: 28px;
+    font-size: 17px;
+    font-weight: 800;
+    line-height: 23px;
+  }
+
+  .site-head nav a {
+    color: #000;
+    text-decoration: none;
+  }
+
+  .site-head nav a:hover,
+  .site-head nav a[aria-current="page"] {
+    color: #0080ff;
+  }
+
   /* HEADER */
   header {
     position: sticky;
-    top: 0;
+    top: var(--sh, 0px);   /* sits right under the site navigation */
     z-index: 10;
     /* same side margins as the photo grid below */
     --box: calc((100% - 200px) / 7 * 1.1);
@@ -167,7 +214,7 @@
 
   /* INTRO */
   .intro {
-    padding: 72px 40px 40px;
+    padding: 32px 40px 40px;
     text-align: center;
   }
 
@@ -211,7 +258,7 @@
     border-bottom: 1px solid var(--ink);
     font-size: 12px;
     letter-spacing: 0.2em;
-    scroll-margin-top: calc(var(--hh) + 20px);
+    scroll-margin-top: calc(var(--sh, 0px) + var(--hh) + 20px);
   }
 
   .grid {
@@ -404,6 +451,12 @@
     .grid { grid-template-columns: repeat(4, calc((100% - 144px) / 5 * 1.1)); row-gap: 25px; }
   }
 
+  @media (max-width: 720px) {
+    .site-head { flex-direction: column; align-items: flex-start; gap: 16px; padding: 24px 16px 16px; }
+    .site-head .logo { flex: none; width: min(280px, 100%); min-width: 0; }
+    .site-head nav { gap: 20px; font-size: 16px; }
+  }
+
   @media (max-width: 700px) {
     header { padding: 10px 16px; }
     .tools { gap: 6px; }
@@ -434,6 +487,17 @@
 </head>
 
 <body>
+  <!-- Site navigation (same logo and menu as every other page) -->
+  <div class="site-head">
+    <a class="logo" href="../"><img src="../images/logo.png" width="1080" height="141" alt="Painfully Hueman."></a>
+    <nav>
+      <a href="../">INDEX</a>
+      <a href="./" aria-current="page">ARMORY</a>
+      <a href="../about/">ABOUT</a>
+      <a href="../contact/">CONTACT</a>
+    </nav>
+  </div>
+
   <div class="intro">
     <h1>Armory</h1>
   </div>
@@ -511,6 +575,15 @@
        ------------------------------------------------------------ */
 
     const $ = function (id) { return document.getElementById(id); };
+    /* keep the filter bar tucked right under the site navigation */
+    const siteHead = document.querySelector('.site-head');
+    function setSiteHeadHeight() {
+      document.documentElement.style.setProperty('--sh', siteHead.offsetHeight + 'px');
+    }
+    setSiteHeadHeight();
+    window.addEventListener('resize', setSiteHeadHeight);
+    window.addEventListener('load', setSiteHeadHeight);
+
     const head = $('head'), main = $('main'), statusEl = $('status'), countEl = document.createElement('div');
     const q = $('q'), searchEl = $('search'), shuffleBtn = $('shuffle'), sortEl = $('sort'), catEl = $('cat');
     const zoom = $('zoom'), zoomImg = $('zoom-img'), zoomMeta = $('zoom-meta'), zoomThumbs = $('zoom-thumbs');
@@ -733,7 +806,7 @@
     /* ---------- buttons ---------- */
 
     function backToTop() {
-      const top = main.getBoundingClientRect().top + window.scrollY - head.offsetHeight - 20;
+      const top = main.getBoundingClientRect().top + window.scrollY - siteHead.offsetHeight - head.offsetHeight - 20;
       if (window.scrollY > top) window.scrollTo(0, top);
     }
 

@@ -1,0 +1,341 @@
+/* Painfully Hueman — shared styles for every page */
+
+:root {
+  --ink: #222;
+  --line: #282828;
+  --paper: #fff;
+  --active: #0080ff;
+  --side: 64px;          /* left/right page margin */
+  --column: 629px;       /* width of the project boxes */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "EB Garamond", Garamond, "Times New Roman", serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* HEADER — stays at the top of the window on every page, see-through background */
+.site-head {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  padding: 56px var(--side) 28px;
+  background: transparent;
+}
+
+.logo {
+  display: block;
+  flex: 0 1 360px;     /* shrinks a little on medium screens so the menu always fits */
+  min-width: 220px;
+}
+
+.logo img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.nav {
+  flex: none;
+  white-space: nowrap;
+  display: flex;
+  gap: 28px;
+  font-size: 17px;
+  font-weight: 800;
+  line-height: 23px;
+  color: #000;
+}
+
+.nav a:hover,
+.nav a[aria-current="page"] {
+  color: var(--active);
+}
+
+/* INDEX — project boxes */
+.projects {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  padding: 36px 16px 120px;
+}
+
+.project {
+  display: block;
+  width: 100%;
+  max-width: var(--column);
+  padding: 15px 15px 20px;
+  border: 1px solid var(--line);
+}
+
+.project img {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: #f2f2f2;
+  transition: opacity 0.2s ease;
+}
+
+a.project:hover img {
+  opacity: 0.85;
+}
+
+.project h2 {
+  margin-top: 15px;
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 30px;
+}
+
+.project p {
+  margin-top: 6px;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+/* PROJECT PAGE — logo, text, then a grid of photos */
+.story {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 48px 16px 120px;
+}
+
+.story-logo {
+  display: block;
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+}
+
+.story-text {
+  max-width: 600px;
+  margin-top: 32px;
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 24px;
+  text-align: center;
+}
+
+.photos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  align-items: start;
+  width: 100%;
+  max-width: 762px;      /* photos 25% smaller than the first version */
+  margin-top: 64px;
+}
+
+.photos button {
+  display: block;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: zoom-in;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.photos button:hover,
+.photos button:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.22);
+}
+
+.photos button:focus {
+  outline: none;
+}
+
+.photos img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* PHOTO VIEWER — same look as the ARMORY detail view */
+.zoom {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  padding: 60px 90px 40px;
+  background: rgba(255, 255, 255, 0.97);
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 16px;
+  touch-action: pan-y;
+  font-family: "Courier New", Courier, monospace;
+  text-transform: uppercase;
+}
+
+.zoom.open {
+  display: flex;
+}
+
+.zoom-img {
+  max-width: 100%;
+  max-height: calc(100vh - 160px);
+  object-fit: contain;
+  border: 1px solid #000;
+  background: var(--paper);
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.zoom-meta {
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  color: #8a8a8a;
+}
+
+.zoom-btn {
+  position: absolute;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 10px 12px;
+  border: 0;
+  background: none;
+  font-family: inherit;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: #000;
+  cursor: pointer;
+}
+
+.zoom-btn:hover {
+  text-decoration: underline;
+}
+
+.zoom-close { top: 12px; right: 16px; }
+.zoom-prev  { left: 16px; top: 50%; transform: translateY(-50%); }
+.zoom-next  { right: 16px; top: 50%; transform: translateY(-50%); }
+
+/* ABOUT / CONTACT — single text column */
+.text {
+  width: 100%;
+  max-width: 512px;
+  margin: 0 auto;
+  padding: 120px 16px 120px;
+}
+
+.text h1 {
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 30px;
+  margin-bottom: 32px;
+}
+
+.text p {
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 22px;
+}
+
+.text p + p {
+  margin-top: 22px;
+}
+
+.text.center {
+  text-align: center;
+}
+
+.text a:hover {
+  color: var(--active);
+}
+
+/* PHONE */
+@media (max-width: 720px) {
+  :root {
+    --side: 16px;
+  }
+
+  .site-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 24px var(--side) 16px;
+  }
+
+  .logo {
+    flex: none;
+    width: min(280px, 100%);
+    min-width: 0;
+  }
+
+  .nav {
+    gap: 20px;
+    font-size: 16px;
+  }
+
+  .projects {
+    padding-top: 16px;
+  }
+
+  .project {
+    padding: 10px 10px 14px;
+  }
+
+  .project h2 {
+    margin-top: 10px;
+    font-size: 20px;
+    line-height: 25px;
+  }
+
+  .text {
+    padding-top: 56px;
+  }
+
+  .story {
+    padding-top: 24px;
+  }
+
+  .story-text {
+    font-size: 16px;
+    line-height: 22px;
+  }
+
+  .photos {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    max-width: 75%;
+    margin-top: 40px;
+  }
+
+  .zoom {
+    padding: 56px 16px 84px;
+  }
+
+  .zoom-img {
+    max-height: calc(100vh - 200px);
+  }
+
+  .zoom-prev,
+  .zoom-next {
+    top: auto;
+    bottom: calc(16px + env(safe-area-inset-bottom));
+    transform: none;
+    border: 1px solid #000;
+    background: var(--paper);
+  }
+}
