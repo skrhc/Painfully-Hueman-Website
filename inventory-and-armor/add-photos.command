@@ -10,9 +10,10 @@
 #    works. Start names with "1. ", "2. " to set the order.
 # 2. Double-click this file (or run it in Terminal).
 #
-# Each photo is saved into images/ with a web-safe name built from
-# the maker and item name (frkm-scd-nightblade-jacket.png), shrunk
-# to max 1600px, then committed and pushed to GitHub. Originals
+# Each photo has its background removed and is cropped to the item
+# (photos that are already transparent are left as they are), saved
+# into images/ with a web-safe name built from the maker and item
+# name (frkm-scd-nightblade-jacket.png), shrunk to max 1600px, then committed and pushed to GitHub. Originals
 # are moved to new-photos/added/.
 #
 # 3. Finished sheet rows are copied to your clipboard. Click the
@@ -21,6 +22,7 @@
 #
 # Options:  --no-push   commit but don't push
 #           --dry-run   only show what would happen
+#           --keep-bg   don't remove backgrounds
 # ------------------------------------------------------------------
 
 set -euo pipefail
@@ -32,10 +34,12 @@ DONE="$INBOX/added"
 LAST_ID_FILE="$DONE/.last-id"
 PUSH=1
 DRY=0
+REMOVE_BG=1
 for arg in "$@"; do
   case "$arg" in
     --no-push) PUSH=0 ;;
     --dry-run) DRY=1 ;;
+    --keep-bg) REMOVE_BG=0 ;;
   esac
 done
 
@@ -112,6 +116,20 @@ pick_name() {
   printf '%s' "$out"
 }
 
+# Background removal helper: built once from tools/remove-bg.swift
+# (about a minute the first time), then reused.
+BG_TOOL="$INBOX/.tools/remove-bg"
+if [ "$REMOVE_BG" -eq 1 ] && [ "$DRY" -eq 0 ]; then
+  if [ ! -x "$BG_TOOL" ] || [ tools/remove-bg.swift -nt "$BG_TOOL" ]; then
+    echo "Setting up background removal (one time, about a minute)..."
+    mkdir -p "$INBOX/.tools"
+    if ! swiftc -O tools/remove-bg.swift -o "$BG_TOOL" 2>/dev/null; then
+      echo "  Couldn't set it up; photos will keep their backgrounds."
+      REMOVE_BG=0
+    fi
+  fi
+fi
+
 added=()
 rows=""
 for src in "${photos[@]}"; do
@@ -127,7 +145,18 @@ for src in "${photos[@]}"; do
     continue
   fi
 
-  if ! sips -s format png "$src" --out "$out" >/dev/null 2>&1; then
+  # Remove the background (skipped if already transparent), else just convert.
+  cut=1
+  if [ "$REMOVE_BG" -eq 1 ]; then
+    set +e; "$BG_TOOL" "$src" "$out" 2>/dev/null; bg=$?; set -e
+    case "$bg" in
+      0) cut=0 ;;
+      3) ;;  # already transparent
+      4) echo "  (couldn't find a subject in $(basename "$src"), kept its background)" ;;
+      *) echo "  (background removal failed for $(basename "$src"), kept its background)" ;;
+    esac
+  fi
+  if [ "$cut" -ne 0 ] && ! sips -s format png "$src" --out "$out" >/dev/null 2>&1; then
     echo "Skipped $(basename "$src") (not an image sips can read)"
     rm -f "$out"
     last=$((last - 1))

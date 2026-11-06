@@ -372,10 +372,6 @@
         return item;
       }).filter(function (item) {
         return item.img || item.name;
-      }).map(function (item) {
-        /* Blank "img" cell: use images/<id>.png, e.g. id 79 -> images/079.png */
-        if (!item.img) item.img = 'images/' + pad(item.id) + '.png';
-        return item;
       });
     }
 
