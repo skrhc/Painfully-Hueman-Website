@@ -111,8 +111,14 @@
     transition: opacity 0.35s ease, visibility 0.35s;
   }
 
-  /* fades away once you scroll a little way into the gallery */
-  header.away {
+  /* the filter bar and the site navigation fade away together
+     once the bar touches the navigation */
+  .site-head {
+    transition: opacity 0.35s ease, visibility 0.35s;
+  }
+
+  header.away,
+  .site-head.away {
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
@@ -592,16 +598,16 @@
     window.addEventListener('resize', setSiteHeadHeight);
     window.addEventListener('load', setSiteHeadHeight);
 
-    /* fade the search/sort/filter bar away once you're a little way into
-       the gallery; it comes back when you scroll back up */
+    /* as soon as the search/sort/filter bar scrolls up and touches the site
+       navigation, the bar and the navigation fade away together; both come
+       back when you scroll up and the bar leaves the navigation again */
     const filterBar = document.getElementById('head');
-    const FADE_AFTER = 150;   /* px scrolled past the top of the gallery */
     function fadeFilterBar() {
-      const gallery = document.getElementById('main');
-      const barBottom = siteHead.offsetHeight + filterBar.offsetHeight;
-      const intoGallery = barBottom - gallery.getBoundingClientRect().top;
+      const touching = filterBar.getBoundingClientRect().top <= siteHead.offsetHeight + 0.5;
       const typing = document.activeElement && filterBar.contains(document.activeElement);
-      filterBar.classList.toggle('away', intoGallery > FADE_AFTER && !typing);
+      const away = touching && !typing;
+      filterBar.classList.toggle('away', away);
+      siteHead.classList.toggle('away', away);
     }
     window.addEventListener('scroll', fadeFilterBar, { passive: true });
     window.addEventListener('resize', fadeFilterBar);
