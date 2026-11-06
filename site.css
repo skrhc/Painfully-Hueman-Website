@@ -49,8 +49,7 @@ a {
 
 .intro img {
   display: block;
-  width: 360px;
-  max-width: 64vw;
+  width: min(630px, 90vw, 76vh);   /* 75% bigger (was 360px), still fits small screens */
   height: auto;
 }
 
