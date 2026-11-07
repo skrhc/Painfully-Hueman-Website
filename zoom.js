@@ -1,20 +1,23 @@
-/* Photo viewer: click a photo in .photos to open it full screen,
-   the same way the ARMORY page does. */
+/* Photo viewer: click a photo in any .photos grid to open it full screen,
+   the same way the ARMORY page does. PREV/NEXT stay within that grid. */
 (function () {
-  const grid = document.querySelector('.photos');
-  if (!grid) return;
+  const grids = Array.prototype.slice.call(document.querySelectorAll('.photos'));
+  if (!grids.length) return;
 
-  const photos = Array.prototype.slice.call(grid.querySelectorAll('img'));
-  if (!photos.length) return;
+  let photos = [];   // the photos of the grid that's open
+  let lastGrid = null;
 
   // Wrap each photo in a button so it can be clicked or opened with the keyboard
-  photos.forEach(function (img, i) {
-    const b = document.createElement('button');
-    b.type = 'button';
-    b.setAttribute('aria-label', 'Open photo ' + (i + 1) + ' of ' + photos.length);
-    img.replaceWith(b);
-    b.append(img);
-    b.addEventListener('click', function () { open(i); });
+  grids.forEach(function (grid) {
+    const list = Array.prototype.slice.call(grid.querySelectorAll('img'));
+    list.forEach(function (img, i) {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.setAttribute('aria-label', 'Open photo ' + (i + 1) + ' of ' + list.length);
+      img.replaceWith(b);
+      b.append(img);
+      b.addEventListener('click', function () { photos = list; lastGrid = grid; open(i); });
+    });
   });
 
   // Build the viewer
@@ -51,7 +54,7 @@
   function close() {
     zoom.classList.remove('open');
     document.body.style.overflow = '';
-    grid.querySelectorAll('button')[current].focus({ preventScroll: true });
+    if (lastGrid) lastGrid.querySelectorAll('button')[current].focus({ preventScroll: true });
   }
 
   zoom.querySelector('.zoom-close').addEventListener('click', close);
