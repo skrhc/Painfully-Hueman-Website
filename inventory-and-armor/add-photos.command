@@ -14,6 +14,7 @@
 #    They become one item; the first photo is the cover.
 #    To keep a photo's background, add "(keep bg)" to its name:
 #        object - Unknown - Box (keep bg).jpg
+#    Books (section "book") keep their whole cover.
 #    Paintings (section "painting") are cropped to the canvas instead:
 #    the wall around them is removed. "(keep bg)" keeps the whole photo.
 # 2. Double-click this file (or run it in Terminal).
@@ -230,7 +231,7 @@ for src in "${photos[@]}"; do
   # Remove the background (skipped if already transparent), else just convert.
   cut=1
   sec=$(caps "$SECTION")
-  if [ "$REMOVE_BG" -eq 1 ] && [ "$KEEP_BG" -eq 0 ] && [ "$sec" != "PAINTING" ]; then
+  if [ "$REMOVE_BG" -eq 1 ] && [ "$KEEP_BG" -eq 0 ] && [ "$sec" != "PAINTING" ] && [ "$sec" != "BOOK" ]; then
     set +e; "$BG_TOOL" "$src" "$out" 2>/dev/null; bg=$?; set -e
     case "$bg" in
       0) cut=0 ;;
