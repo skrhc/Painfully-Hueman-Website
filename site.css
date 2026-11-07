@@ -713,6 +713,16 @@ a.project:hover .frame {
   max-width: 460px;
 }
 
+/* photo credit under a portrait, in the ARMORY "Photo:" style */
+.photo-credit {
+  margin-top: -56px;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #8a8a8a;
+}
+
 /* a single photo, kept narrow */
 .photos.photos-single {
   grid-template-columns: 1fr;
