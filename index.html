@@ -23,6 +23,9 @@
     /* show the spinning-logo intro once per visit */
     try { if (sessionStorage.getItem('ph-intro-seen')) document.documentElement.classList.add('intro-seen'); } catch (e) {}
   </script>
+  <!-- Vercel Web Analytics: visit counts, no cookies -->
+  <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+  <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
   <!-- INTRO: spinning logo when the site first loads; click to enter -->
