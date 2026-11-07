@@ -15,6 +15,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="../favicon.png" type="image/png">
   <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="preconnect" href="https://docs.google.com">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;700;800&display=swap" rel="stylesheet">
@@ -38,8 +39,9 @@
   <script>
     /* LINKS come from the Google Sheet "Huemans — Links".
        In the sheet: File > Share > Publish to web > (whole document, CSV) > Publish,
-       then paste that link between the quotes below. Until then, the links in
-       people.js are used. In the sheet's "link" column you can type a full URL,
+       then paste that link between the quotes below. The wall shows straight
+       away with the links saved in people.js, then picks up any changes from
+       the sheet. In the sheet's "link" column you can type a full URL,
        a website like name.com, or an Instagram handle like @name. */
     const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQsba8VEur77HJUoVSxaE25r3l5rK1spvO4WPHVqDVMqTtzRMj1UwLz5ZEBFypA-w/pub?output=csv';
 
@@ -105,39 +107,43 @@
         return rows;
       }
 
-      function draw() {
-        wall.textContent = '';
-        people.forEach(function (p, i) {
-          const link = cleanLink(p.link);
-          const card = document.createElement(link ? 'a' : 'div');
-          card.className = 'polaroid' + (link ? ' linked' : '');
-          if (link) {
-            card.href = link;
-            card.target = '_blank';
-            card.rel = 'noopener';
-          }
-          const img = document.createElement('img');
-          img.src = '../images/huemans/' + p.img;
-          img.alt = p.name + (p.word ? ' — ' + p.word : '');
-          img.width = 640;
-          img.height = 1000;
-          if (i > 11) img.loading = 'lazy';
-          card.append(img);
-          if (link) {
-            const tag = document.createElement('span');
-            tag.className = 'polaroid-link';
-            tag.textContent = label(link) + ' ↗';
-            card.append(tag);
-          }
-          wall.append(card);
-        });
+      /* Build the wall once, straight away. Every Polaroid is a link element;
+         one without a link simply has no href, so it isn't clickable. */
+      const cards = {};
+      function setLink(card, raw) {
+        const link = cleanLink(raw);
+        let tag = card.querySelector('.polaroid-link');
+        card.classList.toggle('linked', !!link);
+        if (link) {
+          card.href = link;
+          card.target = '_blank';
+          card.rel = 'noopener';
+          if (!tag) { tag = document.createElement('span'); tag.className = 'polaroid-link'; card.append(tag); }
+          tag.textContent = label(link) + ' ↗';
+        } else {
+          card.removeAttribute('href');
+          card.removeAttribute('target');
+          if (tag) tag.remove();
+        }
       }
+      people.forEach(function (p, i) {
+        const card = document.createElement('a');
+        card.className = 'polaroid';
+        const img = document.createElement('img');
+        img.src = '../images/huemans/' + p.img;
+        img.alt = p.name + (p.word ? ' — ' + p.word : '');
+        img.width = 420;
+        img.height = 660;
+        img.decoding = 'async';
+        if (i > 9) img.loading = 'lazy';
+        card.append(img);
+        setLink(card, p.link);   /* links saved in people.js: clickable at once */
+        cards[p.img] = card;
+        wall.append(card);
+      });
 
-      if (!SHEET_URL) { draw(); return; }
-
-      /* wait briefly for the sheet so the wall appears once, with its links */
-      let drawn = false;
-      const fallback = setTimeout(function () { drawn = true; draw(); }, 2500);
+      /* Then check the Google Sheet for newer links and update them in place. */
+      if (!SHEET_URL) return;
       fetch(SHEET_URL, { cache: 'no-store' })
         .then(function (r) { return r.ok ? r.text() : Promise.reject(r.status); })
         .then(function (text) {
@@ -154,12 +160,13 @@
           /* match by photo; a photo with no row of its own (e.g. a second
              Polaroid of the same person) uses that person's link */
           people.forEach(function (p) {
-            if (p.img in links) p.link = links[p.img];
-            else if (byName[p.name.toLowerCase()]) p.link = byName[p.name.toLowerCase()];
+            let link = p.link;
+            if (p.img in links) link = links[p.img];
+            else if (byName[p.name.toLowerCase()]) link = byName[p.name.toLowerCase()];
+            if (link !== p.link) { p.link = link; setLink(cards[p.img], link); }
           });
         })
-        .catch(function () {})
-        .then(function () { clearTimeout(fallback); draw(); drawn = true; });
+        .catch(function () {});
     })();
   </script>
 </body>
