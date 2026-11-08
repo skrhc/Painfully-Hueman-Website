@@ -1,3 +1,4 @@
 # Published-to-web CSV link of the "Site Text" Google Sheet (File > Share > Publish to web > CSV).
 # Paste it on the next line.
 
+https://docs.google.com/spreadsheets/d/e/2PACX-1vR0nmfSNWuJsnHr70pNBSZkyyAIOrshQ7_qk0Yc2JTihg1U24zc-ayUQbeoXL0wKUsrop5ewmfuAd1K/pub?output=csv
