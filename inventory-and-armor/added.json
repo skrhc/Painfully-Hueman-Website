@@ -25,5 +25,14 @@
   "name": "TOMB CHAIR BLACK OAK RIGHT",
   "note": "Edition of 8 plus 4 AP\n2012\nBlack Oak, Moose Antler",
   "credit": "Carpenters"
+ },
+ {
+  "id": "148",
+  "section": "FURNITURE",
+  "img": "images/rick-owens-pedalo-rust.png, images/rick-owens-pedalo-rust-2.png, images/rick-owens-pedalo-rust-3.png",
+  "maker": "RICK OWENS",
+  "name": "PEDALÒ RUST",
+  "note": "Edition of 20 plus 4 artist's proofs\n2025\nSteel Rust",
+  "credit": "Carpenters"
  }
 ]
