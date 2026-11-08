@@ -75,6 +75,11 @@ if [ -n "$SHEET_URL" ]; then
     | awk -F, '$1 ~ /^[0-9]+$/ && $1+0 > m { m = $1+0 } END { print m+0 }' || echo 0)
   last=${sheet_max:-0}
 fi
+# Items sent from the private ADD page (added.json) use ids too.
+if [ -f added.json ]; then
+  json_max=$(python3 -c 'import json; print(max([0] + [int(i["id"]) for i in json.load(open("added.json")) if str(i.get("id", "")).isdigit()]))' 2>/dev/null || echo 0)
+  [ "${json_max:-0}" -gt "$last" ] && last=$json_max
+fi
 if [ -f "$LAST_ID_FILE" ]; then
   local_last=$(cat "$LAST_ID_FILE")
   [[ "$local_last" =~ ^[0-9]+$ ]] && [ "$local_last" -gt "$last" ] && last=$local_last

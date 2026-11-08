@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add to ARMORY</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" href="../../favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --ink: #222; --line: #282828; --paper: #fff; --soft: #777; --active: #0080ff; --bad: #c0392b; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--paper); color: var(--ink);
+      font-family: "EB Garamond", Garamond, "Times New Roman", serif; font-size: 18px; line-height: 1.35; }
+    main { max-width: 560px; margin: 0 auto; padding: 40px 16px 80px; }
+    .logo { display: block; width: 220px; margin: 0 auto 28px; }
+    .logo img { width: 100%; height: auto; display: block; }
+    h1 { font-size: 30px; font-weight: 800; margin: 0 0 4px; text-align: center; letter-spacing: .02em; }
+    .sub { text-align: center; color: var(--soft); margin: 0 0 28px; }
+    .box { border: 1px solid var(--line); padding: 18px; margin-bottom: 16px; background: var(--paper); }
+    label, .label { display: block; font-family: "Courier New", Courier, monospace; font-size: 13px;
+      text-transform: uppercase; letter-spacing: .04em; margin: 0 0 6px; }
+    .field { margin-bottom: 16px; }
+    .field:last-child { margin-bottom: 0; }
+    input[type=text], input[type=password], textarea, select {
+      width: 100%; font: inherit; color: inherit; background: var(--paper);
+      border: 1px solid var(--line); border-radius: 0; padding: 10px 12px; }
+    textarea { min-height: 84px; resize: vertical; }
+    input:focus, textarea:focus { outline: 2px solid var(--active); outline-offset: -1px; }
+    .hint { font-size: 15px; color: var(--soft); margin: 6px 0 0; }
+    .check { display: flex; gap: 10px; align-items: flex-start; font-size: 16px; }
+    .check input { margin-top: 4px; width: 18px; height: 18px; }
+    .drop { border: 1px dashed var(--line); padding: 22px 12px; text-align: center; cursor: pointer; }
+    .drop.over { background: #f3f3f3; }
+    .drop input { display: none; }
+    .thumbs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 12px; }
+    .thumb { position: relative; aspect-ratio: 1; border: 1px solid var(--line); background: #f3f3f3; }
+    .thumb img { width: 100%; height: 100%; object-fit: contain; display: block; }
+    .thumb .tag { position: absolute; left: 0; top: 0; background: var(--ink); color: var(--paper);
+      font: 11px "Courier New", monospace; padding: 2px 5px; }
+    .thumb button { position: absolute; right: 0; top: 0; border: 0; background: var(--paper); color: var(--ink);
+      font: 14px "Courier New", monospace; padding: 2px 6px; cursor: pointer; border-left: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .thumb .noprev { display: flex; align-items: center; justify-content: center; height: 100%;
+      font: 12px "Courier New", monospace; padding: 4px; text-align: center; word-break: break-all; }
+    .go { width: 100%; font: 800 20px "EB Garamond", serif; letter-spacing: .04em; padding: 14px;
+      background: var(--ink); color: var(--paper); border: 1px solid var(--line); cursor: pointer; }
+    .go:disabled { opacity: .45; cursor: default; }
+    .link { background: none; border: 0; padding: 0; font: inherit; color: var(--active); text-decoration: underline; cursor: pointer; }
+    #msg { margin-top: 16px; min-height: 24px; }
+    #msg.bad { color: var(--bad); }
+    .row { display: flex; gap: 12px; }
+    .row .field { flex: 1; }
+    ol { padding-left: 22px; margin: 8px 0 0; }
+    ol li { margin-bottom: 4px; }
+    a { color: var(--active); }
+    @media (max-width: 480px) { .row { display: block; } .thumbs { grid-template-columns: repeat(3, 1fr); } }
+  </style>
+</head>
+<body>
+<main>
+  <a class="logo" href="../"><img src="../../images/logo.png" width="1080" height="141" alt="Painfully Hueman."></a>
+  <h1>ADD TO ARMORY</h1>
+  <p class="sub">Private. Not linked from the site.</p>
+
+  <!-- Step 1: key (shown until a working key is saved on this device) -->
+  <section class="box" id="keybox" hidden>
+    <div class="field">
+      <label for="key">GitHub key</label>
+      <input type="password" id="key" autocomplete="off" spellcheck="false" placeholder="github_pat_…">
+      <p class="hint">Only needed once on each device. It stays saved in this browser, and anyone without it can't add anything.</p>
+    </div>
+    <details>
+      <summary class="hint" style="cursor:pointer">How to make the key</summary>
+      <ol class="hint">
+        <li>Open <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">github.com/settings/personal-access-tokens/new</a>.</li>
+        <li>Name it "ARMORY", set an expiration you're happy with.</li>
+        <li>Repository access: <b>Only select repositories</b> → Painfully-Hueman-Website.</li>
+        <li>Permissions → Repository → <b>Contents: Read and write</b>.</li>
+        <li>Generate, copy, paste it above.</li>
+      </ol>
+    </details>
+    <div class="field" style="margin-top:16px"><button class="go" id="savekey" type="button">SAVE KEY</button></div>
+  </section>
+
+  <!-- Step 2: the item -->
+  <form id="form" hidden>
+    <section class="box">
+      <div class="field">
+        <label for="section">Section</label>
+        <input type="text" id="section" list="sections" autocomplete="off" placeholder="outerwear, book, painting…">
+        <datalist id="sections"></datalist>
+      </div>
+      <div class="row">
+        <div class="field">
+          <label for="maker">Maker</label>
+          <input type="text" id="maker" autocomplete="off" required>
+        </div>
+        <div class="field">
+          <label for="name">Item name</label>
+          <input type="text" id="name" autocomplete="off" required>
+        </div>
+      </div>
+      <div class="field">
+        <label for="note">Note <span style="text-transform:none">(optional)</span></label>
+        <textarea id="note"></textarea>
+      </div>
+      <div class="field">
+        <label for="credit">Credit <span style="text-transform:none">(optional)</span></label>
+        <input type="text" id="credit" autocomplete="off">
+      </div>
+    </section>
+
+    <section class="box">
+      <span class="label">Photos</span>
+      <label class="drop" id="drop">
+        <input type="file" id="files" accept="image/*" multiple>
+        Tap to choose photos, or drop them here
+      </label>
+      <div class="thumbs" id="thumbs"></div>
+      <p class="hint">The first photo is the cover. Backgrounds are cut out automatically. Paintings are cropped to the canvas; books keep the whole photo.</p>
+      <div class="field" style="margin-top:12px">
+        <label class="check"><input type="checkbox" id="keepbg"> Keep the background on these photos</label>
+      </div>
+    </section>
+
+    <button class="go" id="send" type="submit">ADD TO ARMORY</button>
+    <div id="msg" role="status"></div>
+    <p class="hint" style="text-align:center;margin-top:28px">
+      <button class="link" id="forget" type="button">Remove the key from this device</button>
+    </p>
+  </form>
+</main>
+
+<script>
+  const REPO = 'skrhc/Painfully-Hueman-Website';
+  const BRANCH = 'main';
+  const API = 'https://api.github.com/repos/' + REPO;
+  const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSE513ZgOlmm1qaN-eqwirFBi09oqZS6vCQmrTVoTrXk3NnQhD8lVI5OyTdvrbaYg/pub?output=csv';
+  const MAX_SIDE = 2400;   // photos are shrunk in the browser before sending
+
+  const $ = function (id) { return document.getElementById(id); };
+  const store = {
+    get: function () { try { return localStorage.getItem('armory-key') || ''; } catch (e) { return ''; } },
+    set: function (v) { try { localStorage.setItem('armory-key', v); } catch (e) {} },
+    clear: function () { try { localStorage.removeItem('armory-key'); } catch (e) {} }
+  };
+  let key = store.get();
+  let photos = [];   // { file, url }
+
+  function say(text, bad) { $('msg').textContent = text; $('msg').className = bad ? 'bad' : ''; }
+
+  function gh(path, opts) {
+    opts = opts || {};
+    return fetch(path.indexOf('http') === 0 ? path : API + path, {
+      method: opts.method || 'GET',
+      headers: { 'Authorization': 'Bearer ' + key, 'Accept': 'application/vnd.github+json',
+                 'X-GitHub-Api-Version': '2022-11-28' },
+      body: opts.body ? JSON.stringify(opts.body) : undefined,
+      cache: 'no-store'
+    }).then(function (res) {
+      if (opts.allow404 && res.status === 404) return null;
+      if (!res.ok) return res.text().then(function (t) {
+        const err = new Error('GitHub said ' + res.status + ': ' + t.slice(0, 160)); err.status = res.status; throw err;
+      });
+      return res.status === 204 ? null : res.json();
+    });
+  }
+
+  function show() {
+    $('keybox').hidden = !!key;
+    $('form').hidden = !key;
+    if (key) loadSections();
+  }
+
+  /* ---------- key ---------- */
+  $('savekey').addEventListener('click', function () {
+    const v = $('key').value.trim();
+    if (!v) return;
+    key = v;
+    $('savekey').disabled = true; $('savekey').textContent = 'CHECKING…';
+    gh('').then(function (repo) {
+      if (!repo.permissions || !repo.permissions.push) throw new Error('This key can read but not write. Give it Contents: Read and write.');
+      store.set(key); $('key').value = ''; show();
+    }).catch(function (e) {
+      key = ''; alert(e.status === 401 || e.status === 404 ? "That key doesn't work for this site's repository." : e.message);
+    }).then(function () { $('savekey').disabled = false; $('savekey').textContent = 'SAVE KEY'; });
+  });
+  $('forget').addEventListener('click', function () {
+    if (!confirm('Remove the key from this device?')) return;
+    store.clear(); key = ''; show();
+  });
+
+  /* ---------- sections from the sheet + added items ---------- */
+  function parseCSV(text) {
+    const rows = []; let row = [], cell = '', q = false;
+    for (let i = 0; i < text.length; i++) {
+      const c = text[i];
+      if (q) { if (c === '"') { if (text[i + 1] === '"') { cell += '"'; i++; } else q = false; } else cell += c; }
+      else if (c === '"') q = true;
+      else if (c === ',') { row.push(cell); cell = ''; }
+      else if (c === '\n' || c === '\r') { if (c === '\r' && text[i + 1] === '\n') i++; row.push(cell); rows.push(row); row = []; cell = ''; }
+      else cell += c;
+    }
+    if (cell || row.length) { row.push(cell); rows.push(row); }
+    return rows;
+  }
+  let sectionsLoaded = false;
+  function loadSections() {
+    if (sectionsLoaded) return; sectionsLoaded = true;
+    const seen = {};
+    const add = function (s) { s = (s || '').trim().toLowerCase(); if (s) seen[s] = 1; };
+    Promise.all([
+      fetch(SHEET_URL + '&t=' + Date.now()).then(function (r) { return r.text(); }).then(function (t) {
+        const rows = parseCSV(t); const i = rows[0].map(function (h) { return h.trim().toLowerCase(); }).indexOf('section');
+        rows.slice(1).forEach(function (r) { add(r[i]); });
+      }).catch(function () {}),
+      fetch('../added.json?t=' + Date.now()).then(function (r) { return r.json(); }).then(function (list) {
+        list.forEach(function (it) { add(it.section); });
+      }).catch(function () {})
+    ]).then(function () {
+      $('sections').innerHTML = '';
+      Object.keys(seen).sort().forEach(function (s) {
+        const o = document.createElement('option'); o.value = s; $('sections').append(o);
+      });
+    });
+  }
+
+  /* ---------- photos ---------- */
+  function addFiles(list) {
+    Array.prototype.forEach.call(list, function (f) {
+      if (!/^image\//.test(f.type) && !/\.(heic|heif)$/i.test(f.name)) return;
+      photos.push({ file: f, url: URL.createObjectURL(f) });
+    });
+    drawThumbs();
+  }
+  function drawThumbs() {
+    const box = $('thumbs'); box.innerHTML = '';
+    photos.forEach(function (p, n) {
+      const t = document.createElement('div'); t.className = 'thumb';
+      const img = document.createElement('img'); img.src = p.url; img.alt = '';
+      img.onerror = function () { t.replaceChild(Object.assign(document.createElement('div'), { className: 'noprev', textContent: p.file.name }), img); };
+      t.append(img);
+      if (n === 0) t.append(Object.assign(document.createElement('span'), { className: 'tag', textContent: 'COVER' }));
+      const x = document.createElement('button'); x.type = 'button'; x.textContent = '×'; x.setAttribute('aria-label', 'Remove photo');
+      x.onclick = function () { URL.revokeObjectURL(p.url); photos.splice(n, 1); drawThumbs(); };
+      t.append(x);
+      box.append(t);
+    });
+  }
+  $('files').addEventListener('change', function () { addFiles(this.files); this.value = ''; });
+  ['dragenter', 'dragover'].forEach(function (ev) { $('drop').addEventListener(ev, function (e) { e.preventDefault(); $('drop').classList.add('over'); }); });
+  ['dragleave', 'drop'].forEach(function (ev) { $('drop').addEventListener(ev, function (e) { e.preventDefault(); $('drop').classList.remove('over'); }); });
+  $('drop').addEventListener('drop', function (e) { addFiles(e.dataTransfer.files); });
+
+  /* Shrink a photo and turn it upright. Returns { blob, ext }. Files the
+     browser can't open (HEIC in some browsers) are sent as they are. */
+  function prepare(file) {
+    const ext0 = ((file.name.match(/\.([a-z0-9]+)$/i) || [])[1] || 'jpg').toLowerCase();
+    if (!window.createImageBitmap) return Promise.resolve({ blob: file, ext: ext0 });
+    return createImageBitmap(file, { imageOrientation: 'from-image' }).then(function (bmp) {
+      const s = Math.min(1, MAX_SIDE / Math.max(bmp.width, bmp.height));
+      const c = document.createElement('canvas');
+      c.width = Math.round(bmp.width * s); c.height = Math.round(bmp.height * s);
+      c.getContext('2d').drawImage(bmp, 0, 0, c.width, c.height);
+      const png = file.type === 'image/png' || file.type === 'image/webp';
+      return new Promise(function (ok) { c.toBlob(ok, png ? 'image/png' : 'image/jpeg', 0.92); })
+        .then(function (blob) { return { blob: blob, ext: png ? 'png' : 'jpg' }; });
+    }).catch(function () { return { blob: file, ext: ext0 }; });
+  }
+  function toBase64(blob) {
+    return new Promise(function (ok, no) {
+      const r = new FileReader();
+      r.onload = function () { ok(String(r.result).split(',')[1]); };
+      r.onerror = no; r.readAsDataURL(blob);
+    });
+  }
+  function utf8Base64(text) { return btoa(unescape(encodeURIComponent(text))); }
+
+  /* ---------- send: one commit with entry.json + photos in inbox/<stamp>/ ---------- */
+  $('form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    const entry = {
+      section: $('section').value.trim(), maker: $('maker').value.trim(), name: $('name').value.trim(),
+      note: $('note').value.trim(), credit: $('credit').value.trim(), keep_bg: $('keepbg').checked
+    };
+    if (!entry.maker || !entry.name) return say('Add a maker and an item name.', true);
+    if (!photos.length) return say('Add at least one photo.', true);
+
+    const stamp = new Date().toISOString().replace(/[-:]/g, '').replace(/\..*/, '') + '-' + Math.random().toString(36).slice(2, 6);
+    const dir = 'inventory-and-armor/inbox/' + stamp + '/';
+    $('send').disabled = true;
+    say('Preparing photos…');
+
+    Promise.all(photos.map(function (p) { return prepare(p.file); })).then(function (prepped) {
+      say('Uploading…');
+      const files = [{ path: dir + 'entry.json', content: utf8Base64(JSON.stringify(entry, null, 1)) }];
+      return Promise.all(prepped.map(function (p, n) {
+        return toBase64(p.blob).then(function (b64) { files.push({ path: dir + (n + 1) + '.' + p.ext, content: b64 }); });
+      })).then(function () {
+        return Promise.all(files.map(function (f) {
+          return gh('/git/blobs', { method: 'POST', body: { content: f.content, encoding: 'base64' } })
+            .then(function (b) { return { path: f.path, mode: '100644', type: 'blob', sha: b.sha }; });
+        }));
+      });
+    }).then(function (tree) {
+      const label = [entry.maker, entry.name].join(' — ');
+      function commit(tries) {
+        return gh('/git/ref/heads/' + BRANCH).then(function (ref) {
+          const parent = ref.object.sha;
+          return gh('/git/commits/' + parent).then(function (c) {
+            return gh('/git/trees', { method: 'POST', body: { base_tree: c.tree.sha, tree: tree } });
+          }).then(function (t) {
+            return gh('/git/commits', { method: 'POST', body: { message: 'ARMORY: submit ' + label, tree: t.sha, parents: [parent] } });
+          }).then(function (nc) {
+            return gh('/git/refs/heads/' + BRANCH, { method: 'PATCH', body: { sha: nc.sha } });
+          });
+        }).catch(function (err) {
+          if (err.status === 422 && tries > 0) return commit(tries - 1);   // someone else pushed first
+          throw err;
+        });
+      }
+      return commit(3);
+    }).then(function () {
+      say('Sent. Cutting out the photos now (about 3–5 minutes)…');
+      const doneMsg = 'Added: ' + entry.maker.toUpperCase() + ' — ' + entry.name.toUpperCase() + '. It shows on ARMORY within a couple of minutes.';
+      photos.forEach(function (p) { URL.revokeObjectURL(p.url); });
+      photos = []; drawThumbs();
+      ['maker', 'name', 'note', 'credit'].forEach(function (id) { $(id).value = ''; });
+      $('keepbg').checked = false;
+      $('send').disabled = false;
+      watch(dir.replace(/\/$/, ''), doneMsg, 0);
+    }).catch(function (err) {
+      $('send').disabled = false;
+      if (err.status === 401) { say('The saved key stopped working (expired or deleted). Remove it below and add a new one.', true); return; }
+      say("Couldn't send: " + err.message, true);
+    });
+  });
+
+  /* The inbox folder disappears once the job has added the item. */
+  function watch(path, doneMsg, n) {
+    if (n > 60) { say('Still working. Check back on ARMORY in a few minutes.'); return; }
+    setTimeout(function () {
+      gh('/contents/' + path + '?ref=' + BRANCH, { allow404: true }).then(function (r) {
+        if (r === null) say(doneMsg); else watch(path, doneMsg, n + 1);
+      }).catch(function () { watch(path, doneMsg, n + 1); });
+    }, 15000);
+  }
+
+  show();
+</script>
+</body>
+</html>

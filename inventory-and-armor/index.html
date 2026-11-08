@@ -1080,13 +1080,25 @@
         SAMPLE_ITEMS.map(function (i) { return [i.id, i.section, i.img, i.maker, i.name, i.note, i.credit]; }))));
     } else {
       const sep = SHEET_URL.indexOf('?') === -1 ? '?' : '&';
+      /* Items sent from the private ADD page live in added.json and are
+         shown along with the sheet's rows. */
+      const added = fetch('added.json?t=' + Date.now())
+        .then(function (res) { return res.ok ? res.json() : []; })
+        .catch(function () { return []; });
       fetch(SHEET_URL + sep + 't=' + Date.now())
         .then(function (res) {
           if (!res.ok) throw new Error('HTTP ' + res.status);
           return res.text();
         })
         .then(function (text) {
-          start(rowsToItems(parseCSV(text)));
+          return added.then(function (extra) {
+            const rows = parseCSV(text);
+            const head = rows[0].map(function (h) { return h.trim().toLowerCase(); });
+            (Array.isArray(extra) ? extra : []).forEach(function (item) {
+              rows.push(head.map(function (h) { return String(item[h] || ''); }));
+            });
+            start(rowsToItems(rows));
+          });
         })
         .catch(function () {
           statusEl.textContent = 'Archive unavailable right now. Please try again in a moment.';
