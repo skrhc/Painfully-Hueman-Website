@@ -1094,8 +1094,16 @@
           return added.then(function (extra) {
             const rows = parseCSV(text);
             const head = rows[0].map(function (h) { return h.trim().toLowerCase(); });
+            /* An added item is copied into the sheet a few minutes later.
+               Only show the ones the sheet doesn't have yet (id above the
+               sheet's highest), so nothing shows twice and rows deleted
+               from the sheet stay deleted. */
+            const idCol = head.indexOf('id');
+            const sheetMax = rows.slice(1).reduce(function (m, r) {
+              const n = parseInt(r[idCol], 10); return n > m ? n : m;
+            }, 0);
             (Array.isArray(extra) ? extra : []).forEach(function (item) {
-              rows.push(head.map(function (h) { return String(item[h] || ''); }));
+              if (!item.deleted && parseInt(item.id, 10) > sheetMax) rows.push(head.map(function (h) { return String(item[h] || ''); }));
             });
             start(rowsToItems(rows));
           });

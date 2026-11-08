@@ -56,6 +56,21 @@
     ol { padding-left: 22px; margin: 8px 0 0; }
     ol li { margin-bottom: 4px; }
     a { color: var(--active); }
+    .mine-title { font-size: 24px; font-weight: 800; text-align: center; margin: 56px 0 4px; letter-spacing: .02em; }
+    .entry { border: 1px solid var(--line); margin-bottom: 10px; }
+    .entry > summary { display: flex; gap: 12px; align-items: center; padding: 8px; cursor: pointer; list-style: none; }
+    .entry > summary::-webkit-details-marker { display: none; }
+    .entry > summary img { width: 56px; height: 56px; object-fit: contain; background: #f3f3f3; flex: none; }
+    .entry .who { font: 13px "Courier New", monospace; text-transform: uppercase; line-height: 1.4; min-width: 0; }
+    .entry .who span { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .entry .who .state { color: var(--soft); }
+    .entry .body { padding: 4px 14px 14px; border-top: 1px solid var(--line); }
+    .entry .body .field { margin: 12px 0 0; }
+    .entry .btns { display: flex; gap: 10px; margin-top: 14px; }
+    .entry .btns .go { font-size: 16px; padding: 10px; }
+    .entry .btns .del { background: var(--paper); color: var(--bad); border-color: var(--bad); width: auto; padding: 10px 16px; }
+    .entry .note { margin-top: 10px; font-size: 15px; }
+    .entry.gone { opacity: .45; }
     @media (max-width: 480px) { .row { display: block; } .thumbs { grid-template-columns: repeat(3, 1fr); } }
   </style>
 </head>
@@ -128,10 +143,17 @@
 
     <button class="go" id="send" type="submit">ADD TO ARMORY</button>
     <div id="msg" role="status"></div>
+  </form>
+
+  <!-- Step 3: everything sent from this page, editable -->
+  <section id="mine" hidden>
+    <h2 class="mine-title">YOUR SUBMISSIONS</h2>
+    <p class="hint" style="text-align:center;margin:0 0 16px">Tap one to change it. Changes reach the Google Sheet and ARMORY within about 10 minutes.</p>
+    <div id="list"><p class="hint" style="text-align:center">Loading…</p></div>
     <p class="hint" style="text-align:center;margin-top:28px">
       <button class="link" id="forget" type="button">Remove the key from this device</button>
     </p>
-  </form>
+  </section>
 </main>
 
 <script>
@@ -172,7 +194,8 @@
   function show() {
     $('keybox').hidden = !!key;
     $('form').hidden = !key;
-    if (key) loadSections();
+    $('mine').hidden = !key;
+    if (key) { loadSections(); loadList(); }
   }
 
   /* ---------- key ---------- */
@@ -344,9 +367,160 @@
     if (n > 60) { say('Still working. Check back on ARMORY in a few minutes.'); return; }
     setTimeout(function () {
       gh('/contents/' + path + '?ref=' + BRANCH, { allow404: true }).then(function (r) {
-        if (r === null) say(doneMsg); else watch(path, doneMsg, n + 1);
+        if (r === null) { say(doneMsg); loadList(); } else watch(path, doneMsg, n + 1);
       }).catch(function () { watch(path, doneMsg, n + 1); });
     }, 15000);
+  }
+
+  /* ---------- your submissions: read and edit added.json ---------- */
+  const ADDED_PATH = 'inventory-and-armor/added.json';
+  const EDIT_FIELDS = [['section', 'Section'], ['maker', 'Maker'], ['name', 'Item name'], ['note', 'Note'], ['credit', 'Credit']];
+
+  function fromB64(b64) { return decodeURIComponent(escape(atob(b64.replace(/\s/g, '')))); }
+  function readAdded() {
+    return gh('/contents/' + ADDED_PATH + '?ref=' + BRANCH, { allow404: true }).then(function (f) {
+      return f ? { sha: f.sha, items: JSON.parse(fromB64(f.content) || '[]') } : { sha: null, items: [] };
+    });
+  }
+  /* Change one item and save added.json; tries again if the file changed meanwhile. */
+  function saveItem(id, change, tries) {
+    return readAdded().then(function (f) {
+      const it = f.items.filter(function (x) { return String(x.id) === String(id); })[0];
+      if (!it) throw new Error('Item not found.');
+      change(it);
+      it.updated = new Date().toISOString();
+      return gh('/contents/' + ADDED_PATH, { method: 'PUT', body: {
+        message: 'ARMORY: edit item ' + id, branch: BRANCH, sha: f.sha,
+        content: utf8Base64(JSON.stringify(f.items, null, 1) + '\n')
+      } });
+    }).catch(function (err) {
+      if ((err.status === 409 || err.status === 422) && (tries || 0) < 3) return saveItem(id, change, (tries || 0) + 1);
+      throw err;
+    });
+  }
+
+  /* The sheet's current text for each id, so the list shows edits made in the sheet. */
+  function sheetRows() {
+    return fetch(SHEET_URL + '&t=' + Date.now()).then(function (r) { return r.text(); }).then(function (t) {
+      const rows = parseCSV(t), head = rows[0].map(function (h) { return h.trim().toLowerCase(); }), out = {};
+      rows.slice(1).forEach(function (r) {
+        const o = {}; head.forEach(function (h, i) { o[h] = (r[i] || '').trim(); });
+        if (o.id) out[o.id] = o;
+      });
+      return out;
+    }).catch(function () { return null; });
+  }
+
+  function loadList() {
+    Promise.all([readAdded(), sheetRows()]).then(function (res) {
+      const items = res[0].items.slice().reverse(), sheet = res[1];
+      const sheetMax = sheet ? Object.keys(sheet).reduce(function (m, k) { return Math.max(m, parseInt(k, 10) || 0); }, 0) : 0;
+      const list = $('list'); list.innerHTML = '';
+      if (!items.length) { list.innerHTML = '<p class="hint" style="text-align:center">Nothing yet. Items you add show up here.</p>'; return; }
+      items.forEach(function (it) { list.append(entryView(it, sheet, sheetMax)); });
+    }).catch(function (err) {
+      $('list').innerHTML = '';
+      $('list').append(Object.assign(document.createElement('p'), { className: 'hint', textContent: "Couldn't load your submissions: " + err.message }));
+    });
+  }
+
+  function entryView(it, sheet, sheetMax) {
+    const inSheet = sheet && sheet[String(it.id)];
+    const removedInSheet = sheet && !inSheet && parseInt(it.id, 10) <= sheetMax;
+    /* After an edit here, this page's version is newest until the sheet catches up. */
+    const cur = inSheet && !it.updated ? inSheet : it;
+    const d = document.createElement('details'); d.className = 'entry' + (it.deleted || removedInSheet ? ' gone' : '');
+    const s = document.createElement('summary');
+    const img = document.createElement('img'); img.alt = '';
+    const first = (it.img || '').split(/[\s,]+/).filter(Boolean)[0] || '';
+    img.src = '../' + first.replace('images/', 'images/thumbs/');
+    img.onerror = function () { img.onerror = null; img.src = '../' + first; };
+    const who = el('div', 'who');
+    who.append(el('span', '', '[' + it.id + '] ' + (cur.maker || '')), el('span', '', cur.name || ''),
+      el('span', 'state', it.deleted ? 'deleted' : removedInSheet ? 'removed in the sheet' : (cur.section || '')));
+    s.append(img, who); d.append(s);
+    if (it.deleted || removedInSheet) return d;
+
+    const body = el('div', 'body'), inputs = {};
+    EDIT_FIELDS.forEach(function (f) {
+      const wrap = el('div', 'field'), lab = el('label', '', f[1]);
+      const inp = document.createElement(f[0] === 'note' ? 'textarea' : 'input');
+      if (inp.tagName === 'INPUT') inp.type = 'text';
+      inp.value = cur[f[0]] || ''; inputs[f[0]] = inp;
+      if (f[0] === 'section') inp.setAttribute('list', 'sections');
+      wrap.append(lab, inp); body.append(wrap);
+    });
+    /* Redo photos: made again from the originals in another way. */
+    const redoWrap = el('div', 'field');
+    const redoLab = el('label', '', 'Photos');
+    const redoRow = el('div', 'btns'); redoRow.style.marginTop = '0';
+    const mode = document.createElement('select');
+    [['cut', 'Cut out the background'], ['keep', 'Keep the whole photo'], ['painting', 'Crop to the canvas (painting)']].forEach(function (o) {
+      const op = document.createElement('option'); op.value = o[0]; op.textContent = o[1]; mode.append(op);
+    });
+    mode.value = it.photos || (String(cur.section).toUpperCase() === 'PAINTING' ? 'painting' : String(cur.section).toUpperCase() === 'BOOK' ? 'keep' : 'cut');
+    const redo = el('button', 'go', 'REDO PHOTOS'); redo.type = 'button'; redo.style.width = 'auto'; redo.style.flex = 'none';
+    redoRow.append(mode, redo);
+    redoWrap.append(redoLab, redoRow, el('p', 'hint', 'Now: ' + ({ cut: 'background cut out', keep: 'whole photo', painting: 'cropped to the canvas' }[it.photos] || 'set by the section')));
+    body.append(redoWrap);
+
+    const note = el('div', 'hint note');
+    const save = el('button', 'go', 'SAVE'); save.type = 'button';
+    const del = el('button', 'go del', 'DELETE'); del.type = 'button';
+    const btns = el('div', 'btns'); btns.append(save, del); body.append(btns, note);
+
+    save.onclick = function () {
+      save.disabled = true; note.textContent = 'Saving…';
+      saveItem(it.id, function (x) {
+        EDIT_FIELDS.forEach(function (f) {
+          const v = inputs[f[0]].value.trim();
+          x[f[0]] = (f[0] === 'note' || f[0] === 'credit') ? v : v.toUpperCase();
+        });
+      }).then(function () {
+        note.textContent = 'Saved. Shows on ARMORY within about 10 minutes.';
+        who.children[0].textContent = '[' + it.id + '] ' + inputs.maker.value.trim().toUpperCase();
+        who.children[1].textContent = inputs.name.value.trim().toUpperCase();
+      }).catch(function (err) { note.textContent = "Couldn't save: " + err.message; })
+        .then(function () { save.disabled = false; });
+    };
+    redo.onclick = function () {
+      redo.disabled = true; note.textContent = 'Sending…';
+      const stamp = new Date().toISOString().replace(/[-:]/g, '').replace(/\..*/, '') + '-redo' + it.id;
+      const path = 'inventory-and-armor/inbox/' + stamp;
+      gh('/contents/' + path + '/redo.json', { method: 'PUT', body: {
+        message: 'ARMORY: redo photos for item ' + it.id + ' (' + mode.value + ')', branch: BRANCH,
+        content: utf8Base64(JSON.stringify({ id: String(it.id), mode: mode.value }))
+      } }).then(function () {
+        note.textContent = 'Redoing the photos (about 2 minutes)…';
+        poll(path, function () {
+          note.textContent = 'Photos redone. Shows on ARMORY within a couple of minutes.';
+          redo.disabled = false;
+          img.src = 'https://raw.githubusercontent.com/' + REPO + '/' + BRANCH + '/inventory-and-armor/' + first.replace('images/', 'images/thumbs/') + '?t=' + Date.now();
+        }, 0);
+      }).catch(function (err) { redo.disabled = false; note.textContent = "Couldn't send: " + err.message; });
+    };
+    del.onclick = function () {
+      if (!confirm('Delete [' + it.id + '] ' + (cur.name || '') + ' from ARMORY? It is also removed from the Google Sheet.')) return;
+      del.disabled = true; note.textContent = 'Deleting…';
+      saveItem(it.id, function (x) { x.deleted = true; }).then(function () {
+        d.className = 'entry gone'; d.open = false; who.children[2].textContent = 'deleted';
+        body.remove();
+      }).catch(function (err) { del.disabled = false; note.textContent = "Couldn't delete: " + err.message; });
+    };
+    d.append(body);
+    return d;
+  }
+  /* Calls done() once the inbox folder at path is gone (the job finished). */
+  function poll(path, done, n) {
+    if (n > 60) return;
+    setTimeout(function () {
+      gh('/contents/' + path + '?ref=' + BRANCH, { allow404: true }).then(function (r) {
+        if (r === null) done(); else poll(path, done, n + 1);
+      }).catch(function () { poll(path, done, n + 1); });
+    }, 15000);
+  }
+  function el(tag, cls, text) {
+    const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e;
   }
 
   show();
