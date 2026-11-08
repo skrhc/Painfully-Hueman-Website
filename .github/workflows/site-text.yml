@@ -1,0 +1,36 @@
+# Copies the writing from the "Site Text" Google Sheet into the website.
+# Runs every hour, and any time from the Actions tab ("Run workflow").
+name: Site text from Google Sheet
+
+on:
+  schedule:
+    - cron: '7 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: site-text
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Copy text from the sheet into the pages
+        run: |
+          SRC=$(grep -v '^#' tools/site-text-source.txt | tr -d '[:space:]')
+          if [ -z "$SRC" ]; then echo "No sheet link yet in tools/site-text-source.txt"; exit 0; fi
+          python3 tools/site_text.py apply "$SRC"
+
+      - name: Publish if anything changed
+        run: |
+          if git diff --quiet; then echo "No text changes."; exit 0; fi
+          git config user.name "site-text"
+          git config user.email "site-text@users.noreply.github.com"
+          git add -A
+          git commit -m "Site text: update from the Google Sheet"
+          git push
