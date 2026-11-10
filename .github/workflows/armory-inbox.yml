@@ -19,15 +19,29 @@ jobs:
   process:
     runs-on: macos-15
     steps:
+      # Always start from the newest main, not the commit that triggered
+      # the run: when two items are sent close together, the second run
+      # waits in the queue and must see what the first one added.
       - uses: actions/checkout@v4
-      - name: Process submissions
-        run: bash inventory-and-armor/tools/process-inbox.sh
-      - name: Commit
+        with:
+          ref: main
+      # If main moves while photos are processed (an edit from the ADD page,
+      # another push), throw the work away and redo it on the newest main.
+      # The inbox is only cleared by a successful push, so nothing is lost.
+      - name: Process submissions and commit
         run: |
           git config user.name "armory"
           git config user.email "armory@users.noreply.github.com"
-          git add -A inventory-and-armor
-          if git diff --cached --quiet; then echo "Nothing to add."; exit 0; fi
-          git commit -q -m "ARMORY: add submitted item(s)"
-          for i in 1 2 3; do git pull -q --rebase && git push -q && exit 0; sleep 5; done
+          for i in 1 2 3 4; do
+            bash inventory-and-armor/tools/process-inbox.sh
+            git add -A inventory-and-armor
+            if git diff --cached --quiet; then echo "Nothing to add."; exit 0; fi
+            git commit -q -m "ARMORY: add submitted item(s)"
+            if git push -q; then exit 0; fi
+            echo "main moved during processing; starting over from the newest main ($i)"
+            git fetch -q origin main
+            git reset -q --hard origin/main
+            git clean -fdq inventory-and-armor
+            sleep 5
+          done
           exit 1
