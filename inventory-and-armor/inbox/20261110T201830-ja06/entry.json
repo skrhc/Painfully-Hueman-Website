@@ -1,11 +1,15 @@
 {
- "section": "",
- "maker": "",
- "name": "",
- "note": "",
+ "section": "PAINTING",
+ "maker": "Chaz Bojorquez",
+ "name": "Los Avenues, 1987",
+ "note": "Four-colour serigraph with stencil spray paint on Zolatone prepared paper, edition 10/40. The sheet measures about 129.5 × 97.8 cm (51 × 38.5 in) per the gallery listing; the 137.7 × 106 cm figure in the image is probably a framed size and I could not confirm it.",
  "credit": "",
  "keep_bg": false,
  "photo_mode": "",
  "video_url": "",
- "lookup": true
+ "lookup": true,
+ "looked_up": {
+  "sure": true,
+  "source": "https://www.easternprojectsgallery.com/chaz_bojorquez"
+ }
 }
