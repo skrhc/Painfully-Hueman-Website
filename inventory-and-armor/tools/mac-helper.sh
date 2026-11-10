@@ -24,10 +24,12 @@ LOCK="$HOME_DIR/lock"
 mkdir -p "$HOME_DIR"
 # one run at a time (a long download can outlast a minute)
 if ! mkdir "$LOCK" 2>/dev/null; then
-  # a lock older than 30 minutes is left over from a crash
-  if [ -n "$(find "$LOCK" -maxdepth 0 -mmin +30 2>/dev/null)" ]; then rmdir "$LOCK"; mkdir "$LOCK" || exit 0; else exit 0; fi
+  # the run holding the lock is gone (stopped or crashed): take it over
+  if kill -0 "$(cat "$LOCK/pid" 2>/dev/null || echo 0)" 2>/dev/null; then exit 0; fi
+  rm -rf "$LOCK"; mkdir "$LOCK" || exit 0
 fi
-trap 'rmdir "$LOCK" 2>/dev/null' EXIT
+echo $$ > "$LOCK/pid"
+trap 'rm -rf "$LOCK"' EXIT
 log() { echo "$(date '+%Y-%m-%d %H:%M:%S') $*"; }
 
 # a small copy: only the ARMORY inbox and tools are checked out
