@@ -18,8 +18,9 @@ SECTIONS = ('FOOTWEAR TOP BOTTOMS OUTERWEAR HEADWEAR HOOD EYEWEAR JEWELRY BAG PA
             'BOOK OBJECT FURNITURE LIGHTING HARDWARE FILM PERFORMANCE')
 FIELDS = ('section', 'maker', 'name', 'note', 'credit')
 # the small, quick model: uses much less of the Claude plan's allowance.
-# Change to 'sonnet' for harder items.
+# When it can't place an item, it tries once more with BACKUP_MODEL.
 MODEL = 'haiku'
+BACKUP_MODEL = 'sonnet'
 
 sub = sys.argv[1]
 entry_path = os.path.join(sub, 'entry.json')
@@ -64,8 +65,8 @@ Reply with ONLY one JSON object, no other text:
  "sure": true if a source confirms it, false if it's your best guess}}
 If you can't tell what it is, use "" for maker and name and false for sure."""
 
-try:
-    r = subprocess.run([claude, '-p', prompt, '--output-format', 'json', '--model', MODEL,
+def ask(model):
+    r = subprocess.run([claude, '-p', prompt, '--output-format', 'json', '--model', model,
                         '--allowedTools', 'Read', 'WebSearch', 'WebFetch'],
                        capture_output=True, text=True, timeout=420, cwd=tmp)
     out = json.loads(r.stdout or '{}')
@@ -73,7 +74,17 @@ try:
     if r.returncode or out.get('is_error'):
         raise RuntimeError((text or r.stderr or 'claude failed').strip()[-400:])
     m = re.search(r'\{.*\}', text, re.S)
-    found = json.loads(m.group(0)) if m else {}
+    return json.loads(m.group(0)) if m else {}
+
+def unknown(f):
+    return not ((f.get('maker') or given['maker']).strip() and (f.get('name') or given['name']).strip())
+
+try:
+    found = ask(MODEL)
+    if unknown(found):   # the small model couldn't place it: one try with the bigger one
+        better = ask(BACKUP_MODEL)
+        if not unknown(better) or len([v for v in better.values() if v]) > len([v for v in found.values() if v]):
+            found = better
 except Exception as err:   # still add the item; it just stays unknown
     sys.stderr.write(f'lookup failed: {err}\n')
     found = {'sure': False, 'error': str(err)[-300:]}
