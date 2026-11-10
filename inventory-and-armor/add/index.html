@@ -174,8 +174,14 @@
 
   function say(text, bad) { $('msg').textContent = text; $('msg').className = bad ? 'bad' : ''; }
 
-  function gh(path, opts) {
+  /* GitHub now and then answers a good key with 401, or a rate-limit / server error,
+     especially during uploads. Retry those a few times before giving up, so a
+     one-off hiccup doesn't look like a dead key. */
+  const RETRY = { 401: 1, 403: 1, 429: 1, 500: 1, 502: 1, 503: 1, 504: 1 };
+  function wait(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
+  function gh(path, opts, attempt) {
     opts = opts || {};
+    attempt = attempt || 0;
     return fetch(path.indexOf('http') === 0 ? path : API + path, {
       method: opts.method || 'GET',
       headers: { 'Authorization': 'Bearer ' + key, 'Accept': 'application/vnd.github+json',
@@ -184,10 +190,17 @@
       cache: 'no-store'
     }).then(function (res) {
       if (opts.allow404 && res.status === 404) return null;
+      if (!res.ok && RETRY[res.status] && attempt < 3) {
+        return wait(1500 * (attempt + 1)).then(function () { return gh(path, opts, attempt + 1); });
+      }
       if (!res.ok) return res.text().then(function (t) {
         const err = new Error('GitHub said ' + res.status + ': ' + t.slice(0, 160)); err.status = res.status; throw err;
       });
       return res.status === 204 ? null : res.json();
+    }, function (netErr) {
+      // dropped connection: retry too
+      if (attempt < 3) return wait(1500 * (attempt + 1)).then(function () { return gh(path, opts, attempt + 1); });
+      throw netErr;
     });
   }
 
@@ -323,10 +336,15 @@
       return Promise.all(prepped.map(function (p, n) {
         return toBase64(p.blob).then(function (b64) { files.push({ path: dir + (n + 1) + '.' + p.ext, content: b64 }); });
       })).then(function () {
-        return Promise.all(files.map(function (f) {
-          return gh('/git/blobs', { method: 'POST', body: { content: f.content, encoding: 'base64' } })
-            .then(function (b) { return { path: f.path, mode: '100644', type: 'blob', sha: b.sha }; });
-        }));
+        // one upload at a time: parallel multi-MB uploads are what trip GitHub's spurious 401s
+        const tree = [];
+        return files.reduce(function (chain, f, n) {
+          return chain.then(function () {
+            if (files.length > 2) say('Uploading ' + (n + 1) + ' of ' + files.length + '…');
+            return gh('/git/blobs', { method: 'POST', body: { content: f.content, encoding: 'base64' } })
+              .then(function (b) { tree.push({ path: f.path, mode: '100644', type: 'blob', sha: b.sha }); });
+          });
+        }, Promise.resolve()).then(function () { return tree; });
       });
     }).then(function (tree) {
       const label = [entry.maker, entry.name].join(' — ');
