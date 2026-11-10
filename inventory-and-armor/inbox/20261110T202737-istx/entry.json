@@ -1,11 +1,15 @@
 {
- "section": "",
- "maker": "",
- "name": "",
- "note": "",
+ "section": "OBJECT",
+ "maker": "UNKNOWN",
+ "name": "UNKNOWN",
+ "note": "Mexican folk-art ex-voto heart (corazón) with a blue-painted base and scalloped crest, covered in small metal milagros and with a flaming Sacred Heart at the centre; material, size and date are not confirmed. Not matched to a specific maker or listing.",
  "credit": "",
  "keep_bg": false,
  "photo_mode": "",
  "video_url": "",
- "lookup": true
+ "lookup": true,
+ "looked_up": {
+  "sure": false,
+  "source": ""
+ }
 }
