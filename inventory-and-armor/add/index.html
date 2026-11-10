@@ -140,6 +140,7 @@
         Tap to choose photos or videos, or drop them here
       </label>
       <div class="thumbs" id="thumbs"></div>
+      <label class="check" style="margin-top:12px"><input type="checkbox" id="bulk"> Bulk: each photo is a separate item (each one looked up on its own)</label>
       <div class="field" style="margin-top:14px">
         <label for="videourl">Or a video link <span style="text-transform:none">(YouTube, Vimeo…)</span></label>
         <input type="text" id="videourl" inputmode="url" autocomplete="off" placeholder="https://www.youtube.com/watch?v=…">
@@ -358,18 +359,24 @@
     if ((!entry.maker || !entry.name) && !entry.video_url) entry.lookup = true;   // the studio Mac looks it up
     say('');
 
-    const job = { entry: entry, photos: photos.slice() };
-    job.label = [entry.maker, entry.name].filter(Boolean).join(' — ') || entry.video_url || ('Photo ' + (photos[0].file.name || ''));
-    job.row = el('div', 'job');
-    job.say = function (text, bad) { job.row.textContent = job.label + ': ' + text; job.row.className = 'job' + (bad ? ' bad' : ''); };
-    $('jobs').prepend(job.row);
-    job.say('waiting to upload…');
+    // bulk: one item per photo (each with its own copy of what was typed)
+    const groups = $('bulk').checked && photos.length > 1 && !entry.video_url
+      ? photos.map(function (p) { return [p]; }) : [photos.slice()];
+    groups.forEach(function (group) {
+      const job = { entry: Object.assign({}, entry), photos: group };
+      job.label = [entry.maker, entry.name].filter(Boolean).join(' — ') || entry.video_url || ('Photo ' + (group[0].file.name || ''));
+      if (groups.length > 1 && job.label.indexOf('Photo ') !== 0) job.label += ' (' + group[0].file.name + ')';
+      job.row = el('div', 'job');
+      job.say = function (text, bad) { job.row.textContent = job.label + ': ' + text; job.row.className = 'job' + (bad ? ' bad' : ''); };
+      $('jobs').prepend(job.row);
+      job.say('waiting to upload…');
+      queueSend(job);
+    });
 
     // clear the form for the next item (the photos' previews stay alive until sent)
     photos = []; drawThumbs();
     ['maker', 'name', 'note', 'credit', 'videourl'].forEach(function (id) { $(id).value = ''; });
     $('photomode').value = '';
-    queueSend(job);
   });
 
   function queueSend(job) { line = line.then(function () { return send(job); }); }
