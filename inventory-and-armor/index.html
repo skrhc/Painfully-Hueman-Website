@@ -310,6 +310,47 @@
     opacity: 1;
   }
 
+  .frame .shot {
+    position: relative;
+  }
+
+  /* the short silent loop on a video card, laid over its still */
+  .frame .shot video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+    pointer-events: none;
+  }
+
+  .frame .shot video.on {
+    opacity: 1;
+  }
+
+  #zoom-thumbs button {
+    position: relative;
+  }
+
+  #zoom-thumbs .play {
+    position: absolute;
+    right: 3px;
+    bottom: 2px;
+    font-size: 9px;
+    background: var(--paper);
+  }
+
+  .frame .vid {
+    position: absolute;
+    top: 8px;
+    left: 10px;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    background: var(--paper);
+  }
+
   .frame .more {
     position: absolute;
     top: 8px;
@@ -381,7 +422,7 @@
 
   /* same proportions as the preview card: a 3:4 photo area inside a thin
      frame with a white margin (about 5% of the width, like the card's 10px) */
-  #zoom-img {
+  #zoom-img, #zoom-video {
     --zw: min(62vh * 3 / 4, 100vw - 180px);
     box-sizing: content-box;
     width: var(--zw);
@@ -497,7 +538,7 @@
     .meta .sec { font-size: 8px; }
     footer { padding: 72px 16px 48px; }
     #zoom { padding: 56px 16px 84px; }
-    #zoom-img { --zw: min(52vh * 3 / 4, 100vw - 32px - 12px); }
+    #zoom-img, #zoom-video { --zw: min(52vh * 3 / 4, 100vw - 32px - 12px); }
     #zoom-prev, #zoom-next { top: auto; bottom: calc(16px + env(safe-area-inset-bottom)); transform: none; border: 1px solid var(--ink); background: var(--paper); }
     #zoom-prev { left: 16px; }
     #zoom-next { right: 16px; }
@@ -559,6 +600,7 @@
     <button class="zoom-btn" id="zoom-prev" type="button">[PREV]</button>
     <button class="zoom-btn" id="zoom-next" type="button">[NEXT]</button>
     <img id="zoom-img" alt="">
+    <video id="zoom-video" muted loop playsinline preload="auto" hidden></video>
     <div id="zoom-thumbs"></div>
     <div class="zoom-meta" id="zoom-meta"></div>
   </div>
@@ -636,7 +678,7 @@
 
     const head = $('head'), main = $('main'), statusEl = $('status'), countEl = document.createElement('div');
     const q = $('q'), searchEl = $('search'), shuffleBtn = $('shuffle'), sortEl = $('sort'), catEl = $('cat');
-    const zoom = $('zoom'), zoomImg = $('zoom-img'), zoomMeta = $('zoom-meta'), zoomThumbs = $('zoom-thumbs');
+    const zoom = $('zoom'), zoomVideo = $('zoom-video'), zoomImg = $('zoom-img'), zoomMeta = $('zoom-meta'), zoomThumbs = $('zoom-thumbs');
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     let items = [];         /* every item, in its current random order */
@@ -656,6 +698,32 @@
       if (className) node.className = className;
       if (text !== undefined) node.textContent = text;
       return node;
+    }
+
+    function isVid(src) { return /\.(mp4|webm|mov|m4v)$/i.test(src); }
+    function stemOf(src) { return src.split('/').pop().replace(/\.[^.]+$/, ''); }
+    function stillOf(video) { return 'images/' + stemOf(video) + '.png'; }
+
+    /* Card loops load and play only while they're on screen (and never for
+       people who've asked their device for reduced motion). */
+    let loopWatch = null;
+    function watchLoop(v) {
+      if (reduceMotion || !('IntersectionObserver' in window)) return;
+      if (!loopWatch) {
+        loopWatch = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            const vid = e.target;
+            if (e.isIntersecting) {
+              if (!vid.src) vid.src = vid.dataset.src;
+              const p = vid.play();
+              if (p && p.catch) p.catch(function () {});
+            } else if (!vid.paused) {
+              vid.pause();
+            }
+          });
+        }, { rootMargin: '150px 0px' });
+      }
+      loopWatch.observe(v);
     }
 
     function thumbOf(src) {
@@ -782,8 +850,15 @@
       }).map(function (item) {
         /* Several photos: list them in the "img" cell, separated by commas
            or line breaks. The first one is the cover. */
-        item.imgs = (item.img || '').split(/[\s,]+/).filter(Boolean);
-        item.img = item.imgs[0] || '';
+        const all = (item.img || '').split(/[\s,]+/).filter(Boolean);
+        /* An animated cover (videos/x.mp4, a short silent loop like a GIF)
+           comes with a still (images/x.png): the still shows until the loop
+           plays, and in the detail view the loop takes the still's place. */
+        const vids = all.filter(isVid).map(stemOf);
+        item.img = all.filter(function (s) { return !isVid(s); })[0] || '';
+        item.imgs = all.filter(function (s) { return isVid(s) || vids.indexOf(stemOf(s)) === -1; });
+        const firstVid = all.filter(isVid)[0];
+        item.loop = firstVid || '';
         item.text = [item.id, pad(item.id), item.section, item.maker, item.name, item.note].join(' ').toLowerCase();
         return item;
       });
@@ -800,7 +875,21 @@
       img.loading = 'lazy';
       img.decoding = 'async';
       setImg(img, item.img);
-      frame.append(img);
+      const shot = el('div', 'shot');
+      shot.append(img);
+      if (item.loop) {
+        /* the animated cover plays while the card is on screen */
+        const v = document.createElement('video');
+        v.muted = true; v.loop = true; v.playsInline = true;
+        v.setAttribute('muted', ''); v.setAttribute('playsinline', '');
+        v.preload = 'none';
+        v.dataset.src = item.loop;
+        v.addEventListener('playing', function () { v.classList.add('on'); });
+        shot.append(v);
+        watchLoop(v);
+        frame.append(el('span', 'vid', '[▶]'));
+      }
+      frame.prepend(shot);
       if (item.imgs.length > 1) frame.append(el('span', 'more', '[+' + (item.imgs.length - 1) + ']'));
       const meta = el('div', 'meta');
       meta.title = ['[' + pad(item.id) + ']', item.maker, item.name].filter(Boolean).join(' ');
@@ -821,6 +910,7 @@
     }
 
     function render() {
+      if (loopWatch) loopWatch.disconnect();   /* old cards are about to be replaced */
       const words = q.value.toLowerCase().split(/\s+/).filter(Boolean);
       searchEl.classList.toggle('has-text', words.length > 0);
       const inCat = items.filter(function (item) { return !category || item.section === category; });
@@ -1030,8 +1120,9 @@
           b.setAttribute('aria-label', 'Photo ' + (n + 1) + ' of ' + item.imgs.length);
           const t = document.createElement('img');
           t.alt = '';
-          setImg(t, src);
+          setImg(t, isVid(src) ? stillOf(src) : src);
           b.append(t);
+          if (isVid(src)) b.append(el('span', 'play', '▶'));
           b.addEventListener('click', function () { showPhoto(n); });
           zoomThumbs.append(b);
         });
@@ -1057,7 +1148,20 @@
       const item = order[openIndex];
       if (!item || !item.imgs.length) return;
       openPhoto = (n + item.imgs.length) % item.imgs.length;
-      zoomImg.src = item.imgs[openPhoto];
+      const src = item.imgs[openPhoto];
+      if (isVid(src)) {
+        zoomImg.hidden = true;
+        zoomVideo.hidden = false;
+        zoomVideo.poster = stillOf(src);
+        if (zoomVideo.getAttribute('src') !== src) zoomVideo.src = src;
+        const p = zoomVideo.play();
+        if (p && p.catch) p.catch(function () {});
+      } else {
+        zoomVideo.pause();
+        zoomVideo.hidden = true;
+        zoomImg.hidden = false;
+        zoomImg.src = src;
+      }
       Array.prototype.forEach.call(zoomThumbs.children, function (b, i) {
         b.classList.toggle('active', i === openPhoto);
       });
@@ -1076,6 +1180,7 @@
     }
 
     function closeZoom() {
+      zoomVideo.pause();
       zoom.classList.remove('open');
       document.body.style.overflow = '';
       const cards = main.querySelectorAll('.card');
@@ -1087,6 +1192,7 @@
     $('zoom-prev').addEventListener('click', function () { openZoom(openIndex - 1); });
     $('zoom-next').addEventListener('click', function () { openZoom(openIndex + 1); });
     zoomImg.addEventListener('click', function () { if (!swiped) showPhoto(openPhoto + 1); });
+    zoomVideo.addEventListener('click', function () { if (!swiped) showPhoto(openPhoto + 1); });
 
     zoom.addEventListener('click', function (e) {
       if (e.target === zoom) closeZoom();

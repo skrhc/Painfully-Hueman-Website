@@ -12,6 +12,13 @@
 #     "painting" (crop to the canvas)
 # Originals are kept in originals/ (same name as the finished photo).
 # Finished photos: shrunk to 1600px, plus a 600px copy in images/thumbs/.
+#
+# Videos (1.mp4, 2.mov...) need ffmpeg. They become an animated cover, like a
+# GIF, not a hosted video: the item's img list gets "images/<n>.png, videos/<n>.mp4":
+#   images/<n>.png  a still frame (thumbnail, colors, and what shows until it moves)
+#   videos/<n>.mp4  an 8-second silent loop, 720px wide (a GIF-like clip, about
+#                   a tenth the size of an actual GIF)
+# The original video is not kept.
 # ------------------------------------------------------------------
 
 set -euo pipefail
@@ -56,6 +63,26 @@ make_photo() {
   echo "$src -> $out ($mode)"
 }
 
+is_video() { case "$(printf '%s' "${1##*.}" | tr '[:upper:]' '[:lower:]')" in mp4|mov|m4v|webm) return 0 ;; esac; return 1; }
+
+# make_video SRC STEM  -> images/STEM.png (still) + videos/STEM.mp4 (silent loop)
+make_video() {
+  local src="$1" stem="$2" dur start still
+  command -v ffmpeg >/dev/null || { echo "ffmpeg is missing; can't process $src"; return 1; }
+  mkdir -p videos
+  dur=$(ffprobe -v error -show_entries format=duration -of csv=p=0 "$src" 2>/dev/null || echo 0)
+  dur=${dur%.*}; [ -n "$dur" ] || dur=0
+  # the loop starts a little way in (pieces often open slowly), at most 5s in
+  start=$(( dur / 10 )); [ "$start" -gt 5 ] && start=5
+  still="$TOOLS/still.png"; rm -f "$still"
+  ffmpeg -v error -y -ss "$(( start + 1 ))" -i "$src" -frames:v 1 "$still" ||
+    ffmpeg -v error -y -i "$src" -frames:v 1 "$still"
+  make_photo "$still" "images/$stem.png" keep || return 1
+  ffmpeg -v error -y -ss "$start" -t 8 -i "$src" -an -vf "fps=24,scale='min(720,iw)':-2" \
+    -c:v libx264 -preset slow -crf 27 -pix_fmt yuv420p -movflags +faststart "videos/$stem.mp4"
+  echo "$src -> videos/$stem.mp4 (8s loop) + images/$stem.png"
+}
+
 # The mode a new photo gets from its section.
 auto_mode() {
   if [ "$2" = "True" ] || [ "$1" = "BOOK" ]; then echo keep
@@ -76,6 +103,8 @@ for i in json.load(open("added.json")):
     if str(i["id"]) == sys.argv[1]: print("\n".join(p.strip() for p in i["img"].split(",") if p.strip()))' "$id")
     while IFS= read -r out; do
       [ -n "$out" ] || continue
+      is_video "$out" && continue          # videos and their still frames stay as they are
+      [ -e "videos/$(basename "${out%.*}").mp4" ] && continue
       base=$(basename "${out%.*}")
       orig=(originals/"$base".*)
       if [ ${#orig[@]} -gt 0 ]; then src="${orig[0]}"
@@ -113,7 +142,13 @@ EOF
   for f in $(ls "$sub" | grep -v '\.json$' | sort -n); do
     src="$sub/$f"
     out="images/$base.png"; k=2
-    while [ -e "$out" ]; do out="images/$base-$k.png"; k=$((k + 1)); done
+    while [ -e "$out" ] || [ -e "videos/$(basename "${out%.*}").mp4" ]; do out="images/$base-$k.png"; k=$((k + 1)); done
+    if is_video "$f"; then
+      stem=$(basename "${out%.*}")
+      make_video "$src" "$stem" || continue
+      imgs+=("$out" "videos/$stem.mp4")
+      continue
+    fi
     make_photo "$src" "$out" "$mode" || continue
     cp "$src" "originals/$(basename "${out%.*}").${f##*.}"
     imgs+=("$out")

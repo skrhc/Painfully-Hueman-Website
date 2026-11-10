@@ -38,7 +38,8 @@
     .drop input { display: none; }
     .thumbs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 12px; }
     .thumb { position: relative; aspect-ratio: 1; border: 1px solid var(--line); background: #f3f3f3; }
-    .thumb img { width: 100%; height: 100%; object-fit: contain; display: block; }
+    .thumb img, .thumb video { width: 100%; height: 100%; object-fit: contain; display: block; }
+    .thumb .tag.vid { top: auto; bottom: 0; }
     .thumb .tag { position: absolute; left: 0; top: 0; background: var(--ink); color: var(--paper);
       font: 11px "Courier New", monospace; padding: 2px 5px; }
     .thumb button { position: absolute; right: 0; top: 0; border: 0; background: var(--paper); color: var(--ink);
@@ -131,11 +132,11 @@
     <section class="box">
       <span class="label">Photos</span>
       <label class="drop" id="drop">
-        <input type="file" id="files" accept="image/*" multiple>
-        Tap to choose photos, or drop them here
+        <input type="file" id="files" accept="image/*,video/*" multiple>
+        Tap to choose photos or videos, or drop them here
       </label>
       <div class="thumbs" id="thumbs"></div>
-      <p class="hint">The first photo is the cover. Backgrounds are cut out automatically. Paintings are cropped to the canvas; books keep the whole photo.</p>
+      <p class="hint">The first photo is the cover. Backgrounds are cut out automatically. Paintings are cropped to the canvas; books keep the whole photo. Videos (up to 70 MB) become an animated cover: an 8-second silent loop, like a GIF. The full video and its sound are not put online.</p>
       <div class="field" style="margin-top:12px">
         <label class="check"><input type="checkbox" id="keepbg"> Keep the background on these photos</label>
       </div>
@@ -265,20 +266,28 @@
   }
 
   /* ---------- photos ---------- */
+  const MAX_VIDEO_MB = 70;   // sent base64-encoded (a third bigger), and GitHub caps uploads at 100 MB
+  function isVideo(f) { return /^video\//.test(f.type) || /\.(mp4|mov|m4v|webm)$/i.test(f.name); }
   function addFiles(list) {
+    let tooBig = '';
     Array.prototype.forEach.call(list, function (f) {
-      if (!/^image\//.test(f.type) && !/\.(heic|heif)$/i.test(f.name)) return;
-      photos.push({ file: f, url: URL.createObjectURL(f) });
+      if (!/^image\//.test(f.type) && !/\.(heic|heif)$/i.test(f.name) && !isVideo(f)) return;
+      if (isVideo(f) && f.size > MAX_VIDEO_MB * 1048576) { tooBig = f.name + ' is ' + Math.round(f.size / 1048576) + ' MB'; return; }
+      photos.push({ file: f, url: URL.createObjectURL(f), video: isVideo(f) });
     });
     drawThumbs();
+    if (tooBig) say(tooBig + '. Videos can be up to ' + MAX_VIDEO_MB + ' MB: export a smaller copy (1080p or 720p) and add that.', true);
   }
   function drawThumbs() {
     const box = $('thumbs'); box.innerHTML = '';
     photos.forEach(function (p, n) {
       const t = document.createElement('div'); t.className = 'thumb';
-      const img = document.createElement('img'); img.src = p.url; img.alt = '';
+      const img = document.createElement(p.video ? 'video' : 'img'); img.src = p.url;
+      if (p.video) { img.muted = true; img.loop = true; img.autoplay = true; img.playsInline = true; }
+      else img.alt = '';
       img.onerror = function () { t.replaceChild(Object.assign(document.createElement('div'), { className: 'noprev', textContent: p.file.name }), img); };
       t.append(img);
+      if (p.video) t.append(Object.assign(document.createElement('span'), { className: 'tag vid', textContent: 'VIDEO' }));
       if (n === 0) t.append(Object.assign(document.createElement('span'), { className: 'tag', textContent: 'COVER' }));
       const x = document.createElement('button'); x.type = 'button'; x.textContent = '×'; x.setAttribute('aria-label', 'Remove photo');
       x.onclick = function () { URL.revokeObjectURL(p.url); photos.splice(n, 1); drawThumbs(); };
@@ -295,6 +304,7 @@
      browser can't open (HEIC in some browsers) are sent as they are. */
   function prepare(file) {
     const ext0 = ((file.name.match(/\.([a-z0-9]+)$/i) || [])[1] || 'jpg').toLowerCase();
+    if (isVideo(file)) return Promise.resolve({ blob: file, ext: ext0 });   // videos go as they are
     if (!window.createImageBitmap) return Promise.resolve({ blob: file, ext: ext0 });
     return createImageBitmap(file, { imageOrientation: 'from-image' }).then(function (bmp) {
       const s = Math.min(1, MAX_SIDE / Math.max(bmp.width, bmp.height));

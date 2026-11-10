@@ -33,6 +33,10 @@ jobs:
           git config user.name "armory"
           git config user.email "armory@users.noreply.github.com"
           command -v magick >/dev/null || brew install --quiet imagemagick
+          # ffmpeg only when a video is waiting (it takes a minute to install)
+          if find inventory-and-armor/inbox -type f 2>/dev/null | grep -qiE '\.(mp4|mov|m4v|webm)$'; then
+            command -v ffmpeg >/dev/null || brew install --quiet ffmpeg
+          fi
           for i in 1 2 3 4; do
             bash inventory-and-armor/tools/process-inbox.sh
             # photo colors for the spread-out shuffle on the ARMORY page
