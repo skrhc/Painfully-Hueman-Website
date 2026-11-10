@@ -1,11 +1,15 @@
 {
- "section": "",
- "maker": "",
- "name": "",
- "note": "",
- "credit": "",
+ "section": "SCULPTURE",
+ "maker": "Unknown (Roman Egypt)",
+ "name": "Bewitchment figurine pierced with needles, 3rd–4th century",
+ "note": "Unfired clay figurine of a nude female with bound arms, kneeling, pierced with copper needles (about 12 survive, out of 13 in the accompanying text). It is a love-spell (defixio) figure from Egypt, said to have been found with a lead curse tablet in a small ceramic jar. About 9.6 x 4.2 cm.",
+ "credit": "Musée du Louvre, Département des Antiquités égyptiennes, E 27145",
  "keep_bg": false,
  "photo_mode": "",
  "video_url": "",
- "lookup": true
+ "lookup": true,
+ "looked_up": {
+  "sure": true,
+  "source": "https://utpictura18.univ-amu.fr/en/notice/22213-bewitchment-figurine-pierced-with-needles-egypt-3rd-4th-century"
+ }
 }
