@@ -283,5 +283,15 @@
   "photos": "painting",
   "deleted": true,
   "updated": "2026-11-10T19:37:19.984Z"
+ },
+ {
+  "id": "2044",
+  "section": "FILM",
+  "img": "images/bill-viola-martyrs-earth-air-fire-water-2014.png, videos/bill-viola-martyrs-earth-air-fire-water-2014.mp4",
+  "maker": "BILL VIOLA",
+  "name": "MARTYRS (EARTH, AIR, FIRE, WATER) (2014)",
+  "note": "Reflecting that the Greek word for martyr originally meant ‘witness’, Viola has explained that the martyrs ‘exemplify the human capacity to bear pain, hardship and even death in order to remain faithful to their values, beliefs and principles.’ Like much of Viola’s work, Martyrs offers a contemporary contemplation on life, death and afterlife, and is also the first permanent installation of a video work in a cathedral or church in Britain.",
+  "credit": "Bill Viola",
+  "photos": "cut"
  }
 ]
