@@ -1,11 +1,15 @@
 {
- "section": "",
- "maker": "",
- "name": "",
- "note": "",
- "credit": "",
+ "section": "PAINTING",
+ "maker": "Yolanda González",
+ "name": "Mi Indio, 1991",
+ "note": "Silkscreen on paper in ten colors, sheet 38½ × 28 in. (98 × 71.4 cm); the Blanton's copy is numbered 8/70 from an edition of 70.",
+ "credit": "Blanton Museum of Art, The University of Texas at Austin, Gift of Gilberto Cárdenas, 2017.405.",
  "keep_bg": false,
  "photo_mode": "",
  "video_url": "",
- "lookup": true
+ "lookup": true,
+ "looked_up": {
+  "sure": true,
+  "source": "https://blanton.emuseum.com/objects/21755/mi-indio"
+ }
 }
