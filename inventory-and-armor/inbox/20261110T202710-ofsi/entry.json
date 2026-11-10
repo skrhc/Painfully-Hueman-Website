@@ -1,11 +1,15 @@
 {
- "section": "",
- "maker": "",
- "name": "",
- "note": "",
+ "section": "PAINTING",
+ "maker": "UNKNOWN",
+ "name": "UNKNOWN",
+ "note": "Illustrative painting of a burning city under a meteor shower, with an overturned car, a man with a revolver, a woman in a headscarf and several people lying in the foreground. The style suggests 1970s–80s commercial or paperback illustration, but I couldn't identify the artist or title.",
  "credit": "",
  "keep_bg": false,
  "photo_mode": "",
  "video_url": "",
- "lookup": true
+ "lookup": true,
+ "looked_up": {
+  "sure": false,
+  "source": ""
+ }
 }
