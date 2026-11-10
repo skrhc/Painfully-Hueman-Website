@@ -1,11 +1,15 @@
 {
- "section": "",
- "maker": "",
- "name": "",
- "note": "",
+ "section": "OBJECT",
+ "maker": "UNKNOWN",
+ "name": "UNKNOWN",
+ "note": "Painted wood cross with a carved polychrome corpus of Christ, a painted INRI plaque, radiating tin or wood knobs, and Arma Christi-style Passion symbols including a ladder, rooster and a figure at the base. Probably Mexican or New Mexican folk devotional work, but I could not confirm the date or origin.",
  "credit": "",
  "keep_bg": false,
  "photo_mode": "",
  "video_url": "",
- "lookup": true
+ "lookup": true,
+ "looked_up": {
+  "sure": false,
+  "source": ""
+ }
 }
