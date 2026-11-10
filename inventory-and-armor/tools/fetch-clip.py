@@ -23,7 +23,11 @@ url, out_dir = sys.argv[1], sys.argv[2]
 os.makedirs(out_dir, exist_ok=True)
 YT = ['yt-dlp', '--no-playlist', '--quiet', '--no-warnings']
 
-info = json.loads(subprocess.run(YT + ['-J', url], capture_output=True, text=True, check=True).stdout)
+r = subprocess.run(YT + ['-J', url], capture_output=True, text=True)
+if r.returncode:
+    sys.stderr.write((r.stderr or 'yt-dlp failed').strip()[-600:] + '\n')
+    sys.exit(1)
+info = json.loads(r.stdout)
 dur = float(info.get('duration') or 0)
 
 heat = info.get('heatmap') or []
@@ -48,4 +52,13 @@ subprocess.run(YT + ['-f', 'bv*[height<=720]/b[height<=720]/bv*/b',
                      '--download-sections', f'*{start}-{end}', '--force-keyframes-at-cuts',
                      '-o', os.path.join(out_dir, '0.%(ext)s'), url], check=True)
 open(os.path.join(out_dir, '0.start'), 'w').write('0\n')
+
+# an ARMORY submission: fill in a missing maker / name from the channel / title
+entry = os.path.join(out_dir, 'entry.json')
+if os.path.exists(entry):
+    e = json.load(open(entry))
+    if not (e.get('maker') or '').strip(): e['maker'] = info.get('uploader') or ''
+    if not (e.get('name') or '').strip(): e['name'] = info.get('title') or ''
+    json.dump(e, open(entry, 'w'), ensure_ascii=False)
+
 print(json.dumps({'title': info.get('title'), 'uploader': info.get('uploader'), 'start': start, 'how': how}))

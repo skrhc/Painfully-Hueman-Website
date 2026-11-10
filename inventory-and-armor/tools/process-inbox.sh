@@ -63,7 +63,7 @@ make_photo() {
   echo "$src -> $out ($mode)"
 }
 
-is_video() { case "$(printf '%s' "${1##*.}" | tr '[:upper:]' '[:lower:]')" in mp4|mov|m4v|webm) return 0 ;; esac; return 1; }
+is_video() { case "$(printf '%s' "${1##*.}" | tr '[:upper:]' '[:lower:]')" in mp4|mov|m4v|webm|mkv) return 0 ;; esac; return 1; }
 
 # make_video SRC STEM  -> images/STEM.png (still) + videos/STEM.mp4 (silent loop)
 # The 8 seconds: SRC's .start file if there is one (a YouTube clip, already
@@ -137,23 +137,23 @@ EOF
       | awk -F, '$1 ~ /^[0-9]+$/ && $1+0 > m { m = $1+0 } END { print m+0 }')
     [ "${sheet_max:-0}" -gt 0 ] || { echo "Couldn't read the Google Sheet."; exit 1; }
   fi
-  # a video link (YouTube etc.): fetch its best 8 seconds as 0.<ext>, the cover
+  # a video link (YouTube etc.): its best 8 seconds arrive as 0.<ext>, the cover.
+  # YouTube refuses GitHub's servers, so on GitHub the clip is fetched by the
+  # Mac helper (tools/mac-helper.sh), which adds 0.<ext> to this folder; until
+  # then the submission waits here. Run by hand on a Mac, it's fetched now.
+  if [ -f "$sub/failed.txt" ]; then           # the Mac helper gave up on the link
+    cat "$sub/failed.txt"; rm -rf "$sub"; continue
+  fi
   video_url=$(field "$entry" video_url)
   fetched=("$sub"/0.*)   # (nullglob: empty until the clip has been fetched)
   if [ -n "$video_url" ] && [ ${#fetched[@]} -eq 0 ]; then
+    if [ -n "${GITHUB_ACTIONS:-}" ]; then
+      echo "Waiting for the Mac helper to fetch $video_url ($sub)."; continue
+    fi
     if ! meta=$(python3 tools/fetch-clip.py "$video_url" "$sub"); then
-      echo "Couldn't fetch $video_url; dropped $sub (upload the video file instead)."
-      rm -rf "$sub"; continue
+      echo "Couldn't fetch $video_url; left in the inbox."; continue
     fi
     echo "Fetched $video_url: $meta"
-    # fill in a missing maker / name from the video's channel / title
-    python3 - "$entry" "$meta" <<'EOF'
-import json, sys
-e, m = json.load(open(sys.argv[1])), json.loads(sys.argv[2])
-if not (e.get('maker') or '').strip(): e['maker'] = m.get('uploader') or ''
-if not (e.get('name') or '').strip(): e['name'] = m.get('title') or ''
-json.dump(e, open(sys.argv[1], 'w'), ensure_ascii=False)
-EOF
   fi
   section=$(field "$entry" section | tr '[:lower:]' '[:upper:]')
   maker=$(field "$entry" maker); name=$(field "$entry" name)
