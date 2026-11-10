@@ -1,11 +1,15 @@
 {
- "section": "",
- "maker": "",
- "name": "",
- "note": "",
+ "section": "PHOTO",
+ "maker": "Danny Lyon",
+ "name": "Cell of two Chicano convicts, The Walls, 1968",
+ "note": "Gelatin silver print from the series Conversations with the Dead, shot at the Walls Unit in Huntsville, Texas. Print dates vary by collection (1968, printed 2011 or 1983).",
  "credit": "",
  "keep_bg": false,
  "photo_mode": "",
  "video_url": "",
- "lookup": true
+ "lookup": true,
+ "looked_up": {
+  "sure": false,
+  "source": "https://onlinecollections.syr.edu/objects/45060/cell-of-two-chicano-convicts"
+ }
 }
