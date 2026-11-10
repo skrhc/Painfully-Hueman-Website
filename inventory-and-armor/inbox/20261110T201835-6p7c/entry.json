@@ -1,11 +1,15 @@
 {
- "section": "",
- "maker": "",
- "name": "",
- "note": "",
- "credit": "",
+ "section": "PAINTING",
+ "maker": "Chaz Bojórquez",
+ "name": "ANGEL, 1985",
+ "note": "Spray paint and gold ink on paper, with a blackletter \"Angel\" and a handwritten script on the right; signed \"CHAZ 85\" at lower right. Size and medium are unconfirmed.",
+ "credit": "Imaged by Heritage Auctions, HA.com",
  "keep_bg": false,
  "photo_mode": "",
  "video_url": "",
- "lookup": true
+ "lookup": true,
+ "looked_up": {
+  "sure": false,
+  "source": ""
+ }
 }
