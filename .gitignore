@@ -1,1 +1,3 @@
 inventory-and-armor/new-photos/
+__pycache__/
+*.pyc

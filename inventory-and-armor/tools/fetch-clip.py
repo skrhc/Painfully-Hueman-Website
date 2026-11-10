@@ -13,6 +13,7 @@ Only that stretch is downloaded at full size (720p at most, no sound).
 Needs yt-dlp and ffmpeg.
 """
 import glob, json, os, subprocess, sys, tempfile
+sys.dont_write_bytecode = True   # keep __pycache__ out of the repo
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from importlib import import_module

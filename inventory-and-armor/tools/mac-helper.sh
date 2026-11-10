@@ -15,6 +15,7 @@
 # ------------------------------------------------------------------
 set -uo pipefail
 export PATH="/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+export PYTHONDONTWRITEBYTECODE=1   # no __pycache__ files left in the repo
 REPO_URL="https://github.com/skrhc/Painfully-Hueman-Website.git"
 HOME_DIR="$HOME/Library/Application Support/ArmoryHelper"
 WORK="$HOME_DIR/repo"
@@ -36,7 +37,7 @@ if [ ! -d "$WORK/.git" ]; then
   git -C "$WORK" sparse-checkout set inventory-and-armor/inbox inventory-and-armor/tools
 fi
 cd "$WORK" || exit 1
-git fetch -q --depth 1 origin main && git reset -q --hard origin/main || { log "can't reach GitHub"; exit 0; }
+git fetch -q --depth 1 origin main && git reset -q --hard origin/main && git clean -qfdx || { log "can't reach GitHub"; exit 0; }
 
 # YouTube changes often; keep yt-dlp fresh (at most once a day)
 STAMP="$HOME_DIR/yt-dlp-updated"
@@ -63,7 +64,7 @@ for entry in inventory-and-armor/inbox/*/entry.json; do
   git add -A "$sub"
   git -c user.name="armory-mac" -c user.email="armory@users.noreply.github.com" commit -q -m "$msg"
   for i in 1 2 3; do
-    git pull -q --rebase origin main && git push -q origin HEAD:main && break
+    git pull -q --rebase --autostash origin main && git push -q origin HEAD:main && break
     sleep 5
   done || log "push failed"
 done
