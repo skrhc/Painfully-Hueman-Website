@@ -344,6 +344,7 @@
       note: $('note').value.trim(), credit: $('credit').value.trim(), keep_bg: $('photomode').value === 'keep', photo_mode: $('photomode').value,
       video_url: $('videourl').value.trim()
     };
+    function label() { return [entry.maker, entry.name].filter(Boolean).join(' — ') || entry.video_url; }
     if (entry.video_url && !/^https?:\/\/\S+$/.test(entry.video_url)) return say('That video link doesn\'t look right. Paste the full address, starting with https://', true);
     if ((!entry.maker || !entry.name) && !entry.video_url) return say('Add a maker and an item name.', true);
     if (!photos.length && !entry.video_url) return say('Add at least one photo, a video, or a video link.', true);
@@ -370,14 +371,13 @@
         }, Promise.resolve()).then(function () { return tree; });
       });
     }).then(function (tree) {
-      const label = [entry.maker, entry.name].filter(Boolean).join(' — ') || entry.video_url;
       function commit(tries) {
         return gh('/git/ref/heads/' + BRANCH).then(function (ref) {
           const parent = ref.object.sha;
           return gh('/git/commits/' + parent).then(function (c) {
             return gh('/git/trees', { method: 'POST', body: { base_tree: c.tree.sha, tree: tree } });
           }).then(function (t) {
-            return gh('/git/commits', { method: 'POST', body: { message: 'ARMORY: submit ' + label, tree: t.sha, parents: [parent] } });
+            return gh('/git/commits', { method: 'POST', body: { message: 'ARMORY: submit ' + label(), tree: t.sha, parents: [parent] } });
           }).then(function (nc) {
             return gh('/git/refs/heads/' + BRANCH, { method: 'PATCH', body: { sha: nc.sha } });
           });
@@ -389,7 +389,7 @@
       return commit(3);
     }).then(function () {
       say(entry.video_url ? 'Sent. The studio Mac fetches the clip, then it\'s added (a few minutes; longer if the Mac is asleep)…' : 'Sent. Cutting out the photos now (about 3–5 minutes)…');
-      const doneMsg = 'Added: ' + (label.toUpperCase()) + '. It shows on ARMORY within a couple of minutes.';
+      const doneMsg = 'Added: ' + (label().toUpperCase()) + '. It shows on ARMORY within a couple of minutes.';
       photos.forEach(function (p) { URL.revokeObjectURL(p.url); });
       photos = []; drawThumbs();
       ['maker', 'name', 'note', 'credit', 'videourl'].forEach(function (id) { $(id).value = ''; });
