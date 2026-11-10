@@ -257,5 +257,15 @@
   "note": "",
   "credit": "Courtesy the artist and Gallery Wendi Norris, San Francisco. Photo: STUDIO LHOOQ",
   "photos": "painting"
+ },
+ {
+  "id": "2042",
+  "section": "PERFORMANCE",
+  "img": "images/dv8-physical-theatre-dead-dreams-of-monochrome-men.png, videos/dv8-physical-theatre-dead-dreams-of-monochrome-men.mp4",
+  "maker": "DV8 PHYSICAL THEATRE",
+  "name": "DEAD DREAMS OF MONOCHROME MEN",
+  "note": "Film by David Hinton, 1990, from the 1988 stage work by Lloyd Newson / DV8 Physical Theatre.",
+  "credit": "DV8 Physical Theatre",
+  "photos": "cut"
  }
 ]
