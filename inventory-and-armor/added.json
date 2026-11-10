@@ -188,13 +188,14 @@
  },
  {
   "id": "2035",
-  "section": "SCULPTURE",
+  "section": "PHOTO",
   "img": "images/dave-holland-teen-angels-magazine.png",
   "maker": "DAVE HOLLAND",
   "name": "TEEN ANGELS MAGAZINE",
   "note": "published 1981-2006",
   "credit": "",
-  "photos": "cut"
+  "photos": "cut",
+  "updated": "2026-11-10T01:19:01.093Z"
  },
  {
   "id": "2036",
