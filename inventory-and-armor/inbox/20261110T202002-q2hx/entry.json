@@ -1,11 +1,15 @@
 {
- "section": "",
- "maker": "",
- "name": "",
- "note": "",
- "credit": "",
+ "section": "JEWELRY",
+ "maker": "Unknown, Spanish",
+ "name": "Pendant with the Virgin of the Immaculate Conception, first third of the 17th century",
+ "note": "Gold, enamel and pearls; H. 10.2 cm, W. 6 cm. Spain, first third of the 17th century. The Virgin is shown standing on a crescent moon within a rayed, pearl-set oval.",
+ "credit": "The Metropolitan Museum of Art, Robert Lehman Collection, 1975 (1975.1.1515)",
  "keep_bg": false,
  "photo_mode": "",
  "video_url": "",
- "lookup": true
+ "lookup": true,
+ "looked_up": {
+  "sure": true,
+  "source": "https://www.metmuseum.org/art/collection/search/460483"
+ }
 }
