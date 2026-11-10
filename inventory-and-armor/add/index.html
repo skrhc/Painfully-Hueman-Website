@@ -52,6 +52,9 @@
     .link { background: none; border: 0; padding: 0; font: inherit; color: var(--active); text-decoration: underline; cursor: pointer; }
     #msg { margin-top: 16px; min-height: 24px; }
     #msg.bad { color: var(--bad); }
+    .job { margin-top: 10px; font-size: 15px; }
+    .job.bad { color: var(--bad); }
+    .job .link { margin-left: 4px; }
     .row { display: flex; gap: 12px; }
     .row .field { flex: 1; }
     ol { padding-left: 22px; margin: 8px 0 0; }
@@ -155,6 +158,7 @@
 
     <button class="go" id="send" type="submit">ADD TO ARMORY</button>
     <div id="msg" role="status"></div>
+    <div id="jobs" aria-live="polite"></div>
   </form>
 
   <!-- Step 3: everything sent from this page, editable -->
@@ -336,7 +340,11 @@
   }
   function utf8Base64(text) { return btoa(unescape(encodeURIComponent(text))); }
 
-  /* ---------- send: one commit with entry.json + photos in inbox/<stamp>/ ---------- */
+  /* ---------- send: one commit with entry.json + photos in inbox/<stamp>/ ----------
+     Sends wait in line, one at a time, each with its own status line. The form
+     clears as soon as you press ADD, so the next item can be filled in while
+     the last one uploads. */
+  let line = Promise.resolve();
   $('form').addEventListener('submit', function (e) {
     e.preventDefault();
     const entry = {
@@ -344,18 +352,35 @@
       note: $('note').value.trim(), credit: $('credit').value.trim(), keep_bg: $('photomode').value === 'keep', photo_mode: $('photomode').value,
       video_url: $('videourl').value.trim()
     };
-    function label() { return [entry.maker, entry.name].filter(Boolean).join(' — ') || entry.video_url; }
     if (entry.video_url && !/^https?:\/\/\S+$/.test(entry.video_url)) return say('That video link doesn\'t look right. Paste the full address, starting with https://', true);
     if ((!entry.maker || !entry.name) && !entry.video_url) return say('Add a maker and an item name.', true);
     if (!photos.length && !entry.video_url) return say('Add at least one photo, a video, or a video link.', true);
+    say('');
 
+    const job = { entry: entry, photos: photos.slice() };
+    job.label = [entry.maker, entry.name].filter(Boolean).join(' — ') || entry.video_url;
+    job.row = el('div', 'job');
+    job.say = function (text, bad) { job.row.textContent = job.label + ': ' + text; job.row.className = 'job' + (bad ? ' bad' : ''); };
+    $('jobs').prepend(job.row);
+    job.say('waiting to upload…');
+
+    // clear the form for the next item (the photos' previews stay alive until sent)
+    photos = []; drawThumbs();
+    ['maker', 'name', 'note', 'credit', 'videourl'].forEach(function (id) { $(id).value = ''; });
+    $('photomode').value = '';
+    queueSend(job);
+  });
+
+  function queueSend(job) { line = line.then(function () { return send(job); }); }
+
+  function send(job) {
+    const entry = job.entry;
     const stamp = new Date().toISOString().replace(/[-:]/g, '').replace(/\..*/, '') + '-' + Math.random().toString(36).slice(2, 6);
     const dir = 'inventory-and-armor/inbox/' + stamp + '/';
-    $('send').disabled = true;
-    say('Preparing photos…');
-
-    Promise.all(photos.map(function (p) { return prepare(p.file); })).then(function (prepped) {
-      say('Uploading…');
+    let committed = false;
+    job.say('preparing photos…');
+    return Promise.all(job.photos.map(function (p) { return prepare(p.file); })).then(function (prepped) {
+      job.say('uploading…');
       const files = [{ path: dir + 'entry.json', content: utf8Base64(JSON.stringify(entry, null, 1)) }];
       return Promise.all(prepped.map(function (p, n) {
         return toBase64(p.blob).then(function (b64) { files.push({ path: dir + (n + 1) + '.' + p.ext, content: b64 }); });
@@ -364,7 +389,7 @@
         const tree = [];
         return files.reduce(function (chain, f, n) {
           return chain.then(function () {
-            if (files.length > 2) say('Uploading ' + (n + 1) + ' of ' + files.length + '…');
+            if (files.length > 2) job.say('uploading ' + (n + 1) + ' of ' + files.length + '…');
             return gh('/git/blobs', { method: 'POST', body: { content: f.content, encoding: 'base64' } })
               .then(function (b) { tree.push({ path: f.path, mode: '100644', type: 'blob', sha: b.sha }); });
           });
@@ -377,39 +402,38 @@
           return gh('/git/commits/' + parent).then(function (c) {
             return gh('/git/trees', { method: 'POST', body: { base_tree: c.tree.sha, tree: tree } });
           }).then(function (t) {
-            return gh('/git/commits', { method: 'POST', body: { message: 'ARMORY: submit ' + label(), tree: t.sha, parents: [parent] } });
+            return gh('/git/commits', { method: 'POST', body: { message: 'ARMORY: submit ' + job.label, tree: t.sha, parents: [parent] } });
           }).then(function (nc) {
             return gh('/git/refs/heads/' + BRANCH, { method: 'PATCH', body: { sha: nc.sha } });
           });
         }).catch(function (err) {
-          if (err.status === 422 && tries > 0) return commit(tries - 1);   // someone else pushed first
+          if (err.status === 422 && tries > 0) return wait(1000).then(function () { return commit(tries - 1); });   // someone else pushed first
           throw err;
         });
       }
-      return commit(3);
+      return commit(5);
     }).then(function () {
-      say(entry.video_url ? 'Sent. The studio Mac fetches the clip, then it\'s added (a few minutes; longer if the Mac is asleep)…' : 'Sent. Cutting out the photos now (about 3–5 minutes)…');
-      const doneMsg = 'Added: ' + (label().toUpperCase()) + '. It shows on ARMORY within a couple of minutes.';
-      photos.forEach(function (p) { URL.revokeObjectURL(p.url); });
-      photos = []; drawThumbs();
-      ['maker', 'name', 'note', 'credit', 'videourl'].forEach(function (id) { $(id).value = ''; });
-      $('photomode').value = '';
-      $('send').disabled = false;
-      watch(dir.replace(/\/$/, ''), doneMsg, 0);
+      committed = true;
+      job.photos.forEach(function (p) { URL.revokeObjectURL(p.url); });
+      job.say(entry.video_url ? 'sent. The studio Mac fetches the clip, then it\'s added (a few minutes; longer if the Mac is asleep)…' : 'sent. Making the photos now (about 3–5 minutes)…');
+      watch(dir.replace(/\/$/, ''), job, 0);
     }).catch(function (err) {
-      $('send').disabled = false;
-      if (err.status === 401) { say('The saved key stopped working (expired or deleted). Remove it below and add a new one.', true); return; }
-      say("Couldn't send: " + err.message, true);
+      if (committed) return;
+      const why = err.status === 401 ? 'the saved key stopped working (expired or deleted). Remove it below and add a new one.' : "couldn't send (" + err.message + ').';
+      job.say(why + ' Nothing was added. ', true);
+      const again = el('button', 'link', 'Try again'); again.type = 'button';
+      again.onclick = function () { job.say('waiting to upload…'); queueSend(job); };
+      job.row.append(again);
     });
-  });
+  }
 
   /* The inbox folder disappears once the job has added the item. */
-  function watch(path, doneMsg, n) {
-    if (n > 60) { say('Still working. Check back on ARMORY in a few minutes.'); return; }
+  function watch(path, job, n) {
+    if (n > 60) { job.say('still working. Check back on ARMORY in a few minutes.'); return; }
     setTimeout(function () {
       gh('/contents/' + path + '?ref=' + BRANCH, { allow404: true }).then(function (r) {
-        if (r === null) { say(doneMsg); loadList(); } else watch(path, doneMsg, n + 1);
-      }).catch(function () { watch(path, doneMsg, n + 1); });
+        if (r === null) { job.say('added. Shows on ARMORY within a couple of minutes.'); loadList(); } else watch(path, job, n + 1);
+      }).catch(function () { watch(path, job, n + 1); });
     }, 15000);
   }
 
