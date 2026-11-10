@@ -1,11 +1,15 @@
 {
- "section": "",
- "maker": "",
- "name": "",
- "note": "",
- "credit": "",
+ "section": "SCULPTURE",
+ "maker": "澄川喜一 (Kiichi Sumikawa)",
+ "name": "飛ぶかたち (Tobu katachi), 1984",
+ "note": "Stone and wood, shown at the 2nd Toyama International Contemporary Art Exhibition, Toyama Prefectural Museum of Modern Art, 1984. The page also shows 鳴るかたち (60×65×186 cm) and 梳くかたち (170×107×50 cm), both 1984, stone and wood. The maker is a best guess from the style and the 'かたち' titles, and I could not confirm it.",
+ "credit": "photo: 東京画廊写真部 (Tokyo Gallery)",
  "keep_bg": false,
  "photo_mode": "",
  "video_url": "",
- "lookup": true
+ "lookup": true,
+ "looked_up": {
+  "sure": false,
+  "source": ""
+ }
 }
