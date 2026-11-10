@@ -139,7 +139,7 @@
       <div class="field" style="margin-top:14px">
         <label for="videourl">Or a video link <span style="text-transform:none">(YouTube, Vimeo…)</span></label>
         <input type="text" id="videourl" inputmode="url" autocomplete="off" placeholder="https://www.youtube.com/watch?v=…">
-        <p class="hint">The best 8 seconds become the animated cover: the most replayed part when YouTube has that, otherwise the part with the most movement. Maker and name are filled in from the channel and title if you leave them empty.</p>
+        <p class="hint">The best 8 seconds become the animated cover: the most replayed part when YouTube has that, otherwise the part with the most movement. Maker and name are filled in from the channel and title if you leave them empty. Links are fetched by the studio Mac, so they go through while it's on and awake.</p>
       </div>
       <p class="hint">The first photo is the cover. Backgrounds are cut out automatically. Paintings are cropped to the canvas; books keep the whole photo. Videos (up to 70 MB) become an animated cover: an 8-second silent loop, like a GIF. The full video and its sound are not put online.</p>
       <div class="field" style="margin-top:12px">
@@ -382,7 +382,7 @@
       }
       return commit(3);
     }).then(function () {
-      say('Sent. Cutting out the photos now (about 3–5 minutes)…');
+      say(entry.video_url ? 'Sent. The studio Mac fetches the clip, then it\'s added (a few minutes; longer if the Mac is asleep)…' : 'Sent. Cutting out the photos now (about 3–5 minutes)…');
       const doneMsg = 'Added: ' + (label.toUpperCase()) + '. It shows on ARMORY within a couple of minutes.';
       photos.forEach(function (p) { URL.revokeObjectURL(p.url); });
       photos = []; drawThumbs();
