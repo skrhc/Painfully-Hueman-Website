@@ -1,11 +1,15 @@
 {
- "section": "",
- "maker": "",
- "name": "",
- "note": "",
- "credit": "",
+ "section": "OBJECT",
+ "maker": "UNKNOWN",
+ "name": "Custodia (monstrance), Castilla, first third of the 17th century (base) and 18th century (astil and sun)",
+ "note": "Gilded sunburst monstrance with a knopped stem and a round glass lunette, topped by a cross. Per the printed caption, the foot dates to the early 17th century and the stem and radiant sun to the 18th century. The maker is unknown and I did not find a source online.",
+ "credit": "Caption: \"3. Custodia, Castilla, primer tercio del siglo XVII (pie) y siglo XVIII (astil y sol).\" Collection and publication not identified.",
  "keep_bg": false,
  "photo_mode": "",
  "video_url": "",
- "lookup": true
+ "lookup": true,
+ "looked_up": {
+  "sure": false,
+  "source": ""
+ }
 }
