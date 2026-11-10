@@ -302,6 +302,11 @@ fi
 
 echo "$last" > "$LAST_ID_FILE"
 
+# photo colors for the spread-out shuffle (skipped quietly without ImageMagick)
+if command -v magick >/dev/null 2>&1 && python3 tools/colors.py >/dev/null 2>&1; then
+  thumbs+=("colors.json")
+fi
+
 git add -- "${added[@]}" ${thumbs[@]+"${thumbs[@]}"}
 if [ ${#added[@]} -eq 1 ]; then
   msg="Add inventory photo ${added[0]#images/}"

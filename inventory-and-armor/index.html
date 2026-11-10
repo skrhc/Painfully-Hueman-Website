@@ -680,6 +680,62 @@
       return list;
     }
 
+    /* ---------- spread-out shuffle ----------
+       Random, but each next card is picked from a handful of random
+       candidates as the one least like the cards just before it (same
+       category, same maker, similar color), so a row doesn't end up all
+       shoes from one designer or all dark paintings. Colors come from
+       colors.json, made by tools/colors.py: [lightness, colorfulness, hue]. */
+    let colors = {};
+    const colorsReady = fetch('colors.json?t=' + Date.now())
+      .then(function (res) { return res.ok ? res.json() : {}; })
+      .then(function (c) { colors = c || {}; })
+      .catch(function () {});
+
+    function makerKey(item) {
+      const m = (item.maker || '').toLowerCase().trim();
+      return /^(unknown|n\/a|-)?$/.test(m) ? '' : m;
+    }
+    /* 0 = look the same, 1 = clearly different */
+    function colorGap(a, b) {
+      const ca = colors[a.img], cb = colors[b.img];
+      if (!ca || !cb) return 0.5;
+      let dh = Math.abs(ca[2] - cb[2]);
+      if (dh > 180) dh = 360 - dh;
+      const hue = Math.min(ca[1], cb[1]) > 12 ? dh / 180 : 0;   /* hue only counts when both are colorful */
+      return Math.min(1, Math.abs(ca[0] - cb[0]) / 100 * 1.6 + Math.abs(ca[1] - cb[1]) / 60 * 0.6 + hue * 0.8);
+    }
+    function likeness(a, b) {
+      let s = (1 - colorGap(a, b)) * 2.5;
+      if (a.section && a.section === b.section) s += 3.5;
+      const m = makerKey(a);
+      if (m && m === makerKey(b)) s += 7;
+      return s;
+    }
+    /* how much each earlier card counts: the one just before most, then the
+       ones that may sit directly above in a 3-, 4- or 5-column grid */
+    const NEAR = [1, 0.5, 0.9, 0.9, 0.9, 0.3];
+    function spread(list) {
+      const pool = shuffle(list.slice()), out = [], left = {};
+      pool.forEach(function (item) { left[item.section] = (left[item.section] || 0) + 1; });
+      while (pool.length) {
+        let best = 0, bestScore = Infinity;
+        for (let c = 0; c < Math.min(30, pool.length); c++) {
+          /* big categories (shoes) get placed steadily all the way through,
+             instead of piling up together at the end */
+          let s = Math.random() * 0.3 - 4 * left[pool[c].section] / pool.length;
+          for (let d = 1; d <= NEAR.length && d <= out.length; d++) s += likeness(pool[c], out[out.length - d]) * NEAR[d - 1];
+          if (s < bestScore) { bestScore = s; best = c; }
+        }
+        const picked = pool.splice(best, 1)[0];
+        left[picked.section]--;
+        out.push(picked);
+      }
+      list.length = 0;
+      Array.prototype.push.apply(list, out);
+      return list;
+    }
+
     function sectionName(item) {
       return item.section || 'other';
     }
@@ -914,7 +970,7 @@
     fitLabels();
 
     shuffleBtn.addEventListener('click', function () {
-      shuffle(items);
+      spread(items);
       sortMode = 'random';
       sortEl.value = 'random';
       saveChoices();
@@ -1069,10 +1125,12 @@
     readChoices();
 
     function start(list) {
-      items = shuffle(list);
-      fillCategories();
-      saveChoices();
-      render();
+      colorsReady.then(function () {
+        items = spread(list);
+        fillCategories();
+        saveChoices();
+        render();
+      });
     }
 
     if (!SHEET_URL) {

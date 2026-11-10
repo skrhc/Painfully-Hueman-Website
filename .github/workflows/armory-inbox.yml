@@ -32,8 +32,11 @@ jobs:
         run: |
           git config user.name "armory"
           git config user.email "armory@users.noreply.github.com"
+          command -v magick >/dev/null || brew install --quiet imagemagick
           for i in 1 2 3 4; do
             bash inventory-and-armor/tools/process-inbox.sh
+            # photo colors for the spread-out shuffle on the ARMORY page
+            python3 inventory-and-armor/tools/colors.py || echo "colors.json not updated"
             git add -A inventory-and-armor
             if git diff --cached --quiet; then echo "Nothing to add."; exit 0; fi
             git commit -q -m "ARMORY: add submitted item(s)"
