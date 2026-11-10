@@ -1,6 +1,7 @@
 #!/bin/bash
 # ------------------------------------------------------------------
-# ARMORY Mac helper: fetches video-link clips for the ADD page.
+# ARMORY Mac helper: fetches video-link clips for the ADD page, and looks up
+# what photo-only submissions are (tools/lookup-item.py, with Claude Code).
 #
 # YouTube refuses downloads from GitHub's servers, so when a submission
 # has a video link, this Mac fetches its best 8 seconds (tools/fetch-clip.py)
@@ -11,10 +12,13 @@
 # (macOS LaunchAgent). It keeps its own small copy of the repository (just
 # the inbox and tools) in ~/Library/Application Support/ArmoryHelper,
 # outside the Desktop. Log: ~/Library/Logs/ArmoryHelper.log
-# Needs: git (with push access), python3, yt-dlp, ffmpeg (Homebrew).
+# Needs: git (with push access), python3, yt-dlp, ffmpeg (Homebrew), claude.
 # ------------------------------------------------------------------
 set -uo pipefail
-export PATH="/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+export PATH="$HOME/.local/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+# Claude Code sign-in for photo lookups (saved in the keychain by install-mac-helper.command)
+CLAUDE_CODE_OAUTH_TOKEN=$(security find-generic-password -a armory -s armory-claude-token -w 2>/dev/null || true)
+export CLAUDE_CODE_OAUTH_TOKEN
 export PYTHONDONTWRITEBYTECODE=1   # no __pycache__ files left in the repo
 REPO_URL="https://github.com/skrhc/Painfully-Hueman-Website.git"
 HOME_DIR="$HOME/Library/Application Support/ArmoryHelper"
@@ -50,6 +54,20 @@ fi
 shopt -s nullglob
 for entry in inventory-and-armor/inbox/*/entry.json; do
   sub=$(dirname "$entry")
+  [ -f "$sub/failed.txt" ] && continue
+  # a photo with no maker / name: look it up
+  if python3 -c 'import json,sys; e=json.load(open(sys.argv[1])); sys.exit(0 if e.get("lookup") and not e.get("looked_up") else 1)' "$entry"; then
+    log "looking up $sub"
+    out=$(python3 inventory-and-armor/tools/lookup-item.py "$sub" 2>"$HOME_DIR/last-error.txt")
+    log "looked up: $out $(tail -c 300 "$HOME_DIR/last-error.txt")"
+    git add -A "$sub"
+    git -c user.name="armory-mac" -c user.email="armory@users.noreply.github.com" commit -q -m "ARMORY: looked up $(basename "$sub")"
+    for i in 1 2 3; do
+      git pull -q --rebase --autostash origin main && git push -q origin HEAD:main && break
+      sleep 5
+    done || log "push failed"
+    continue
+  fi
   url=$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1])).get("video_url") or "")' "$entry")
   [ -n "$url" ] || continue
   have=("$sub"/0.*); [ ${#have[@]} -eq 0 ] || continue

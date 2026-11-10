@@ -5,7 +5,7 @@
 # Mac runner; it can also be run by hand on a Mac.
 #
 # Each request is a folder inbox/<time>/ holding either:
-#   entry.json ({section, maker, name, note, credit, keep_bg, photo_mode}) + photos
+#   entry.json ({section, maker, name, note, credit, keep_bg, photo_mode, lookup}) + photos
 #     1.jpg, 2.png...  -> a new item, added to added.json with the next id
 #   redo.json ({id, mode}) -> that item's photos made again from the
 #     originals; mode: "cut" (remove background), "keep" (whole photo),
@@ -145,6 +145,12 @@ EOF
   if [ -f "$sub/failed.txt" ]; then           # the Mac helper gave up on the link
     cat "$sub/failed.txt"; rm -rf "$sub"; continue
   fi
+  # a photo sent without maker / name: the Mac helper looks it up first
+  # (tools/lookup-item.py) and marks entry.json "looked_up"; until then it waits.
+  if [ "$(field "$entry" lookup)" = "True" ] && [ -z "$(field "$entry" looked_up)" ]; then
+    if [ -n "${GITHUB_ACTIONS:-}" ]; then echo "Waiting for the Mac helper to look up $sub."; continue; fi
+    python3 tools/lookup-item.py "$sub" || true
+  fi
   video_url=$(field "$entry" video_url)
   fetched=("$sub"/0.*)   # (nullglob: empty until the clip has been fetched)
   if [ -n "$video_url" ] && [ ${#fetched[@]} -eq 0 ]; then
@@ -198,6 +204,8 @@ items.append({
     'credit': (e.get('credit') or '').strip(),
     'photos': mode,
 })
+if e.get('looked_up'):   # filled in by the lookup: worth a check
+    items[-1]['looked_up'] = e['looked_up']
 json.dump(items, open('added.json', 'w'), ensure_ascii=False, indent=1)
 open('added.json', 'a').write('\n')
 print('Added item', next_id)

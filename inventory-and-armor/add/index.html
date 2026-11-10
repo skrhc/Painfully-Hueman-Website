@@ -115,13 +115,14 @@
       <div class="row">
         <div class="field">
           <label for="maker">Maker</label>
-          <input type="text" id="maker" autocomplete="off" required>
+          <input type="text" id="maker" autocomplete="off">
         </div>
         <div class="field">
           <label for="name">Item name</label>
-          <input type="text" id="name" autocomplete="off" required>
+          <input type="text" id="name" autocomplete="off">
         </div>
       </div>
+      <p class="hint" style="margin-top:-4px">Don't know? Leave maker and name empty and just add the photo: the studio Mac looks it up (what it is, who made it, the credit) and fills in whatever you left blank. Check it afterwards in Your submissions.</p>
       <div class="field">
         <label for="note">Note <span style="text-transform:none">(optional)</span></label>
         <textarea id="note"></textarea>
@@ -353,12 +354,12 @@
       video_url: $('videourl').value.trim()
     };
     if (entry.video_url && !/^https?:\/\/\S+$/.test(entry.video_url)) return say('That video link doesn\'t look right. Paste the full address, starting with https://', true);
-    if ((!entry.maker || !entry.name) && !entry.video_url) return say('Add a maker and an item name.', true);
     if (!photos.length && !entry.video_url) return say('Add at least one photo, a video, or a video link.', true);
+    if ((!entry.maker || !entry.name) && !entry.video_url) entry.lookup = true;   // the studio Mac looks it up
     say('');
 
     const job = { entry: entry, photos: photos.slice() };
-    job.label = [entry.maker, entry.name].filter(Boolean).join(' — ') || entry.video_url;
+    job.label = [entry.maker, entry.name].filter(Boolean).join(' — ') || entry.video_url || ('Photo ' + (photos[0].file.name || ''));
     job.row = el('div', 'job');
     job.say = function (text, bad) { job.row.textContent = job.label + ': ' + text; job.row.className = 'job' + (bad ? ' bad' : ''); };
     $('jobs').prepend(job.row);
@@ -415,7 +416,7 @@
     }).then(function () {
       committed = true;
       job.photos.forEach(function (p) { URL.revokeObjectURL(p.url); });
-      job.say(entry.video_url ? 'sent. The studio Mac fetches the clip, then it\'s added (a few minutes; longer if the Mac is asleep)…' : 'sent. Making the photos now (about 3–5 minutes)…');
+      job.say(entry.lookup ? 'sent. The studio Mac looks it up, then it\'s added (a few minutes; longer if the Mac is asleep)…' : entry.video_url ? 'sent. The studio Mac fetches the clip, then it\'s added (a few minutes; longer if the Mac is asleep)…' : 'sent. Making the photos now (about 3–5 minutes)…');
       watch(dir.replace(/\/$/, ''), job, 0);
     }).catch(function (err) {
       if (committed) return;
@@ -502,7 +503,8 @@
     img.onerror = function () { img.onerror = null; img.src = '../' + first; };
     const who = el('div', 'who');
     who.append(el('span', '', '[' + it.id + '] ' + (cur.maker || '')), el('span', '', cur.name || ''),
-      el('span', 'state', it.deleted ? 'deleted' : removedInSheet ? 'removed in the sheet' : (cur.section || '')));
+      el('span', 'state', it.deleted ? 'deleted' : removedInSheet ? 'removed in the sheet' : (cur.section || '') +
+        (it.looked_up && !it.updated ? (it.looked_up.sure ? ' · looked up' : ' · looked up, a guess: check it') : '')));
     s.append(img, who); d.append(s);
     if (it.deleted || removedInSheet) return d;
 
@@ -528,6 +530,13 @@
     redoRow.append(mode, redo);
     redoWrap.append(redoLab, redoRow, el('p', 'hint', 'Now: ' + ({ cut: 'background cut out', keep: 'whole photo', painting: 'cropped to the canvas' }[it.photos] || 'set by the section')));
     body.append(redoWrap);
+    if (it.looked_up) {
+      const src = el('p', 'hint', it.looked_up.sure ? 'Looked up by the studio Mac. ' : 'Looked up by the studio Mac: a best guess, so check it. ');
+      if (/^https?:\/\//.test(it.looked_up.source || '')) {
+        const a = el('a', '', 'Source'); a.href = it.looked_up.source; a.target = '_blank'; a.rel = 'noopener'; src.append(a);
+      }
+      body.append(src);
+    }
 
     const note = el('div', 'hint note');
     const save = el('button', 'go', 'SAVE'); save.type = 'button';
