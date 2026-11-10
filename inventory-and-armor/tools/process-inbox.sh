@@ -66,21 +66,25 @@ make_photo() {
 is_video() { case "$(printf '%s' "${1##*.}" | tr '[:upper:]' '[:lower:]')" in mp4|mov|m4v|webm) return 0 ;; esac; return 1; }
 
 # make_video SRC STEM  -> images/STEM.png (still) + videos/STEM.mp4 (silent loop)
+# The 8 seconds: SRC's .start file if there is one (a YouTube clip, already
+# trimmed to its best part), otherwise the liveliest stretch (tools/best-clip.py).
+# Black bars around the picture are cropped off.
 make_video() {
-  local src="$1" stem="$2" dur start still
+  local src="$1" stem="$2" start still crop
   command -v ffmpeg >/dev/null || { echo "ffmpeg is missing; can't process $src"; return 1; }
   mkdir -p videos
-  dur=$(ffprobe -v error -show_entries format=duration -of csv=p=0 "$src" 2>/dev/null || echo 0)
-  dur=${dur%.*}; [ -n "$dur" ] || dur=0
-  # the loop starts a little way in (pieces often open slowly), at most 5s in
-  start=$(( dur / 10 )); [ "$start" -gt 5 ] && start=5
+  if [ -f "${src%.*}.start" ]; then start=$(cat "${src%.*}.start")
+  else start=$(python3 tools/best-clip.py "$src" 8 2>/dev/null || echo 0); fi
+  crop=$(ffmpeg -v info -ss "$start" -t 8 -i "$src" -an -vf "fps=2,cropdetect=limit=24:round=2:reset=0" -f null - 2>&1 \
+    | grep -o 'crop=[0-9:]*' | tail -1)
+  [ -n "$crop" ] && crop="$crop," || crop=""
   still="$TOOLS/still.png"; rm -f "$still"
-  ffmpeg -v error -y -ss "$(( start + 1 ))" -i "$src" -frames:v 1 "$still" ||
+  ffmpeg -v error -y -ss "$(python3 -c "print($start + 2)")" -i "$src" -vf "${crop%,}" -frames:v 1 "$still" 2>/dev/null ||
     ffmpeg -v error -y -i "$src" -frames:v 1 "$still"
   make_photo "$still" "images/$stem.png" keep || return 1
-  ffmpeg -v error -y -ss "$start" -t 8 -i "$src" -an -vf "fps=24,scale='min(720,iw)':-2" \
+  ffmpeg -v error -y -ss "$start" -t 8 -i "$src" -an -vf "${crop}fps=24,scale='min(720,iw)':-2" \
     -c:v libx264 -preset slow -crf 27 -pix_fmt yuv420p -movflags +faststart "videos/$stem.mp4"
-  echo "$src -> videos/$stem.mp4 (8s loop) + images/$stem.png"
+  echo "$src -> videos/$stem.mp4 (8s loop from ${start}s) + images/$stem.png"
 }
 
 # The mode a new photo gets from its section.
@@ -133,13 +137,31 @@ EOF
       | awk -F, '$1 ~ /^[0-9]+$/ && $1+0 > m { m = $1+0 } END { print m+0 }')
     [ "${sheet_max:-0}" -gt 0 ] || { echo "Couldn't read the Google Sheet."; exit 1; }
   fi
+  # a video link (YouTube etc.): fetch its best 8 seconds as 0.<ext>, the cover
+  video_url=$(field "$entry" video_url)
+  fetched=("$sub"/0.*)   # (nullglob: empty until the clip has been fetched)
+  if [ -n "$video_url" ] && [ ${#fetched[@]} -eq 0 ]; then
+    if ! meta=$(python3 tools/fetch-clip.py "$video_url" "$sub"); then
+      echo "Couldn't fetch $video_url; dropped $sub (upload the video file instead)."
+      rm -rf "$sub"; continue
+    fi
+    echo "Fetched $video_url: $meta"
+    # fill in a missing maker / name from the video's channel / title
+    python3 - "$entry" "$meta" <<'EOF'
+import json, sys
+e, m = json.load(open(sys.argv[1])), json.loads(sys.argv[2])
+if not (e.get('maker') or '').strip(): e['maker'] = m.get('uploader') or ''
+if not (e.get('name') or '').strip(): e['name'] = m.get('title') or ''
+json.dump(e, open(sys.argv[1], 'w'), ensure_ascii=False)
+EOF
+  fi
   section=$(field "$entry" section | tr '[:lower:]' '[:upper:]')
   maker=$(field "$entry" maker); name=$(field "$entry" name)
   mode=$(auto_mode "$section" "$(field "$entry" keep_bg)")
   base=$(slug "$maker $name"); [ -n "$base" ] || base="item"
 
   imgs=()
-  for f in $(ls "$sub" | grep -v '\.json$' | sort -n); do
+  for f in $(ls "$sub" | grep -v -E '\.(json|start)$' | sort -n); do
     src="$sub/$f"
     out="images/$base.png"; k=2
     while [ -e "$out" ] || [ -e "videos/$(basename "${out%.*}").mp4" ]; do out="images/$base-$k.png"; k=$((k + 1)); done

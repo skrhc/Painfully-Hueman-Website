@@ -136,6 +136,11 @@
         Tap to choose photos or videos, or drop them here
       </label>
       <div class="thumbs" id="thumbs"></div>
+      <div class="field" style="margin-top:14px">
+        <label for="videourl">Or a video link <span style="text-transform:none">(YouTube, Vimeo…)</span></label>
+        <input type="text" id="videourl" inputmode="url" autocomplete="off" placeholder="https://www.youtube.com/watch?v=…">
+        <p class="hint">The best 8 seconds become the animated cover: the most replayed part when YouTube has that, otherwise the part with the most movement. Maker and name are filled in from the channel and title if you leave them empty.</p>
+      </div>
       <p class="hint">The first photo is the cover. Backgrounds are cut out automatically. Paintings are cropped to the canvas; books keep the whole photo. Videos (up to 70 MB) become an animated cover: an 8-second silent loop, like a GIF. The full video and its sound are not put online.</p>
       <div class="field" style="margin-top:12px">
         <label class="check"><input type="checkbox" id="keepbg"> Keep the background on these photos</label>
@@ -330,10 +335,12 @@
     e.preventDefault();
     const entry = {
       section: $('section').value.trim(), maker: $('maker').value.trim(), name: $('name').value.trim(),
-      note: $('note').value.trim(), credit: $('credit').value.trim(), keep_bg: $('keepbg').checked
+      note: $('note').value.trim(), credit: $('credit').value.trim(), keep_bg: $('keepbg').checked,
+      video_url: $('videourl').value.trim()
     };
-    if (!entry.maker || !entry.name) return say('Add a maker and an item name.', true);
-    if (!photos.length) return say('Add at least one photo.', true);
+    if (entry.video_url && !/^https?:\/\/\S+$/.test(entry.video_url)) return say('That video link doesn\'t look right. Paste the full address, starting with https://', true);
+    if ((!entry.maker || !entry.name) && !entry.video_url) return say('Add a maker and an item name.', true);
+    if (!photos.length && !entry.video_url) return say('Add at least one photo, a video, or a video link.', true);
 
     const stamp = new Date().toISOString().replace(/[-:]/g, '').replace(/\..*/, '') + '-' + Math.random().toString(36).slice(2, 6);
     const dir = 'inventory-and-armor/inbox/' + stamp + '/';
@@ -357,7 +364,7 @@
         }, Promise.resolve()).then(function () { return tree; });
       });
     }).then(function (tree) {
-      const label = [entry.maker, entry.name].join(' — ');
+      const label = [entry.maker, entry.name].filter(Boolean).join(' — ') || entry.video_url;
       function commit(tries) {
         return gh('/git/ref/heads/' + BRANCH).then(function (ref) {
           const parent = ref.object.sha;
@@ -376,10 +383,10 @@
       return commit(3);
     }).then(function () {
       say('Sent. Cutting out the photos now (about 3–5 minutes)…');
-      const doneMsg = 'Added: ' + entry.maker.toUpperCase() + ' — ' + entry.name.toUpperCase() + '. It shows on ARMORY within a couple of minutes.';
+      const doneMsg = 'Added: ' + (label.toUpperCase()) + '. It shows on ARMORY within a couple of minutes.';
       photos.forEach(function (p) { URL.revokeObjectURL(p.url); });
       photos = []; drawThumbs();
-      ['maker', 'name', 'note', 'credit'].forEach(function (id) { $(id).value = ''; });
+      ['maker', 'name', 'note', 'credit', 'videourl'].forEach(function (id) { $(id).value = ''; });
       $('keepbg').checked = false;
       $('send').disabled = false;
       watch(dir.replace(/\/$/, ''), doneMsg, 0);
