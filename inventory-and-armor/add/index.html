@@ -141,10 +141,16 @@
         <input type="text" id="videourl" inputmode="url" autocomplete="off" placeholder="https://www.youtube.com/watch?v=…">
         <p class="hint">The best 8 seconds become the animated cover: the most replayed part when YouTube has that, otherwise the part with the most movement. Maker and name are filled in from the channel and title if you leave them empty. Links are fetched by the studio Mac, so they go through while it's on and awake.</p>
       </div>
-      <p class="hint">The first photo is the cover. Backgrounds are cut out automatically. Paintings are cropped to the canvas; books keep the whole photo. Videos (up to 70 MB) become an animated cover: an 8-second silent loop, like a GIF. The full video and its sound are not put online.</p>
-      <div class="field" style="margin-top:12px">
-        <label class="check"><input type="checkbox" id="keepbg"> Keep the background on these photos</label>
+      <div class="field" style="margin-top:14px">
+        <label for="photomode">Background</label>
+        <select id="photomode">
+          <option value="">Automatic (by section)</option>
+          <option value="cut">Cut out the background</option>
+          <option value="keep">Keep the whole photo</option>
+          <option value="painting">Crop to the canvas (painting)</option>
+        </select>
       </div>
+      <p class="hint">The first photo is the cover. Automatic: backgrounds are cut out, paintings are cropped to the canvas, books keep the whole photo. You can change it later with Redo photos. Videos (up to 70 MB) become an animated cover: an 8-second silent loop, like a GIF. The full video and its sound are not put online.</p>
     </section>
 
     <button class="go" id="send" type="submit">ADD TO ARMORY</button>
@@ -335,7 +341,7 @@
     e.preventDefault();
     const entry = {
       section: $('section').value.trim(), maker: $('maker').value.trim(), name: $('name').value.trim(),
-      note: $('note').value.trim(), credit: $('credit').value.trim(), keep_bg: $('keepbg').checked,
+      note: $('note').value.trim(), credit: $('credit').value.trim(), keep_bg: $('photomode').value === 'keep', photo_mode: $('photomode').value,
       video_url: $('videourl').value.trim()
     };
     if (entry.video_url && !/^https?:\/\/\S+$/.test(entry.video_url)) return say('That video link doesn\'t look right. Paste the full address, starting with https://', true);
@@ -387,7 +393,7 @@
       photos.forEach(function (p) { URL.revokeObjectURL(p.url); });
       photos = []; drawThumbs();
       ['maker', 'name', 'note', 'credit', 'videourl'].forEach(function (id) { $(id).value = ''; });
-      $('keepbg').checked = false;
+      $('photomode').value = '';
       $('send').disabled = false;
       watch(dir.replace(/\/$/, ''), doneMsg, 0);
     }).catch(function (err) {

@@ -5,7 +5,7 @@
 # Mac runner; it can also be run by hand on a Mac.
 #
 # Each request is a folder inbox/<time>/ holding either:
-#   entry.json ({section, maker, name, note, credit, keep_bg}) + photos
+#   entry.json ({section, maker, name, note, credit, keep_bg, photo_mode}) + photos
 #     1.jpg, 2.png...  -> a new item, added to added.json with the next id
 #   redo.json ({id, mode}) -> that item's photos made again from the
 #     originals; mode: "cut" (remove background), "keep" (whole photo),
@@ -89,6 +89,7 @@ make_video() {
 
 # The mode a new photo gets from its section.
 auto_mode() {
+  case "${3:-}" in cut|keep|painting) echo "$3"; return ;; esac   # chosen on the ADD page
   if [ "$2" = "True" ] || [ "$1" = "BOOK" ]; then echo keep
   elif [ "$1" = "PAINTING" ]; then echo painting
   else echo cut; fi
@@ -157,7 +158,7 @@ EOF
   fi
   section=$(field "$entry" section | tr '[:lower:]' '[:upper:]')
   maker=$(field "$entry" maker); name=$(field "$entry" name)
-  mode=$(auto_mode "$section" "$(field "$entry" keep_bg)")
+  mode=$(auto_mode "$section" "$(field "$entry" keep_bg)" "$(field "$entry" photo_mode)")
   base=$(slug "$maker $name"); [ -n "$base" ] || base="item"
 
   imgs=()
