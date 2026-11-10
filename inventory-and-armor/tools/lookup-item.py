@@ -17,6 +17,9 @@ sys.dont_write_bytecode = True
 SECTIONS = ('FOOTWEAR TOP BOTTOMS OUTERWEAR HEADWEAR HOOD EYEWEAR JEWELRY BAG PAINTING SCULPTURE PHOTO '
             'BOOK OBJECT FURNITURE LIGHTING HARDWARE FILM PERFORMANCE')
 FIELDS = ('section', 'maker', 'name', 'note', 'credit')
+# the small, quick model: uses much less of the Claude plan's allowance.
+# Change to 'sonnet' for harder items.
+MODEL = 'haiku'
 
 sub = sys.argv[1]
 entry_path = os.path.join(sub, 'entry.json')
@@ -62,7 +65,7 @@ Reply with ONLY one JSON object, no other text:
 If you can't tell what it is, use "" for maker and name and false for sure."""
 
 try:
-    r = subprocess.run([claude, '-p', prompt, '--output-format', 'json',
+    r = subprocess.run([claude, '-p', prompt, '--output-format', 'json', '--model', MODEL,
                         '--allowedTools', 'Read', 'WebSearch', 'WebFetch'],
                        capture_output=True, text=True, timeout=420, cwd=tmp)
     out = json.loads(r.stdout or '{}')
