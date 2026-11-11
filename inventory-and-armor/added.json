@@ -754,5 +754,75 @@
    "sure": false,
    "source": ""
   }
+ },
+ {
+  "id": "2079",
+  "section": "HARDWARE",
+  "img": "images/rene-lalique-door-with-athletes-glass-relief-panels-c-1902-1912-possibly-laliques-own-mansion-cours-albert-1er-or-the-jacques-doucet-mansion.png",
+  "maker": "RENÉ LALIQUE",
+  "name": "DOOR WITH ATHLETES GLASS RELIEF PANELS, C. 1902–1912 (POSSIBLY LALIQUE'S OWN MANSION, COURS ALBERT 1ER, OR THE JACQUES DOUCET MANSION)",
+  "note": "Vintage black-and-white photograph of a double door with an iron frame, frosted glass and four moulded glass relief panels of dancing or running nude figures. It looks like Lalique's athlete-theme doors, but I could not confirm which door it shows or whether it is the wrought-iron one.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": "https://www.musee-lalique.com/en/?p=14419"
+  }
+ },
+ {
+  "id": "2080",
+  "section": "OBJECT",
+  "img": "images/unknown-unknown-14.png",
+  "maker": "UNKNOWN",
+  "name": "UNKNOWN",
+  "note": "Blown art glass vase with a crackled (craquelé) surface, ribbed sides, red and green colour streaks, and a gold-flecked foot, photographed from a printed book page (page 234). Its style suggests Venetian (Murano) glass, but I could not confirm the maker, date or collection.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2081",
+  "section": "LIGHTING",
+  "img": "images/rene-lalique-lamp-peacocks-paons-1910.png",
+  "maker": "RENÉ LALIQUE",
+  "name": "LAMP – PEACOCKS (PAONS), 1910",
+  "note": "Mould-pressed glass with satin finish and patina, set in patinated bronze. Published as cat. 324 in Yvonne Brunhammer's Lalique catalogue. Auction records give a height of about 42.5 cm.",
+  "credit": "Strasbourg, Conseil Général du Bas-Rhin (cat. 324); photographed in Yvonne Brunhammer's book on Lalique",
+  "photos": "cut",
+  "looked_up": {
+   "sure": true,
+   "source": "https://marcilhacgalerie.com/artworks/1137-rene-lalique-paons-lamp-1910"
+  }
+ },
+ {
+  "id": "2082",
+  "section": "JEWELRY",
+  "img": "images/rene-lalique-attribution-unconfirmed-long-chain-necklace-with-square-enamel-plaques-c-1900.png",
+  "maker": "RENÉ LALIQUE (ATTRIBUTION UNCONFIRMED)",
+  "name": "LONG CHAIN NECKLACE WITH SQUARE ENAMEL PLAQUES, C. 1900",
+  "note": "Long chain of dark oval links alternating with square open-work gold plaques that hold pale blue translucent enamel and foliate motifs. The Art Nouveau style suggests René Lalique, but I found no source for this exact piece.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2083",
+  "section": "JEWELRY",
+  "img": "images/rene-lalique-enamel-and-pearl-pendant-circa-1902-1903.png",
+  "maker": "RENÉ LALIQUE",
+  "name": "ENAMEL AND PEARL PENDANT, CIRCA 1902–1903",
+  "note": "A pendant in 18k gold with blue guilloche enamel frame, a carved and stained simulated ivory plaque of five dancing nymphs, and a drop-shaped pearl. Dated circa 1902–1903 by the auction house.",
+  "credit": "Christie's, lot 391 (sale probably \"Magnificent Jewels\", not confirmed on the page)",
+  "photos": "cut",
+  "looked_up": {
+   "sure": true,
+   "source": "https://www.christies.com.cn/lot/lot-3980139"
+  }
  }
 ]
