@@ -573,7 +573,7 @@
   "name": "EL HOYO MARAVILLA, EAST LOS ANGELES, 1983",
   "note": "Black-and-white group portrait of seven young men against a brick wall, in pleated trousers, cropped sweatpants, white tees, belts, hairnets and Converse. Attributed from style and period to Beckman's 1983 El Hoyo Maravilla series. I found no source that captions this exact image.",
   "credit": "",
-  "photos": "cut",
+  "photos": "keep",
   "looked_up": {
    "sure": false,
    "source": "https://www.dazeddigital.com/art-photography/article/51632/1/janette-beckman-tender-portraits-immortalise-mexican-gang-1980s-los-angeles"
@@ -645,7 +645,7 @@
   "name": "UNKNOWN",
   "note": "Colour photograph of two riders performing wheelies on white custom bicycles in a sunlit paved lot, with motion blur in the background. Year and photographer are not known.",
   "credit": "",
-  "photos": "cut",
+  "photos": "keep",
   "looked_up": {
    "sure": false,
    "source": ""
@@ -916,7 +916,7 @@
   "name": "MADONNA CON COLUMNAS DE LA HUMANIDAD, 1975",
   "note": "Lithograph in blue-black ink on paper, signed 'Vallejo 75' and numbered 14/16. The title and year come from the caption on the image. I couldn't confirm the artist's full name or any other details.",
   "credit": "",
-  "photos": "painting",
+  "photos": "cut",
   "looked_up": {
    "sure": false,
    "source": ""
