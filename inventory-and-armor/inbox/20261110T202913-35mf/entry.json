@@ -1,11 +1,15 @@
 {
- "section": "",
- "maker": "",
- "name": "",
- "note": "",
- "credit": "",
+ "section": "OBJECT",
+ "maker": "Francisco de Paula Palomino",
+ "name": "CUSTODIA DE TEMPLETE, 1829",
+ "note": "Sunburst processional monstrance (custodia de templete) from Seville, dated c. 1829 by the caption printed under the photo. The Pange Lingua catalogue cites a Palomino entry for a custodia procesional de templete.",
+ "credit": "Photo: V. Herrera, per the caption printed under the image (\"14. Custodia, Sevilla, Francisco de Paula Palomino, hacia 1829 (foto V. Herrera)\").",
  "keep_bg": false,
  "photo_mode": "",
  "video_url": "",
- "lookup": true
+ "lookup": true,
+ "looked_up": {
+  "sure": false,
+  "source": "https://www.upo.es/revistas/index.php/atrio/article/download/6815/6529/30723"
+ }
 }
