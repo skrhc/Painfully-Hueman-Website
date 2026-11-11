@@ -1,11 +1,15 @@
 {
- "section": "",
- "maker": "",
- "name": "",
- "note": "",
- "credit": "",
+ "section": "JEWELRY",
+ "maker": "René Lalique",
+ "name": "Two Female Profiles and Swallows, c. 1898–1900",
+ "note": "Neck pendant or brooch in gold, plique-à-jour enamel and a baroque pearl, with a sculpted pair of female profiles and enamel swallows. The printed caption on the book page lists it as cat. 116 in a Lalique catalogue; the photo on the page is plate 113.",
+ "credit": "Lalique Museum, Hakone (Japan), per the printed caption (cat. 116)",
  "keep_bg": false,
  "photo_mode": "",
  "video_url": "",
- "lookup": true
+ "lookup": true,
+ "looked_up": {
+  "sure": false,
+  "source": ""
+ }
 }
