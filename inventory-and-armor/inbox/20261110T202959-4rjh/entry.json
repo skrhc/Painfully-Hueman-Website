@@ -1,11 +1,15 @@
 {
- "section": "",
- "maker": "",
- "name": "",
- "note": "",
- "credit": "",
+ "section": "SCULPTURE",
+ "maker": "UNKNOWN",
+ "name": "飛ぶかたち, 1984 (g/8); 鳴るかたち, 1984 (h); 梳くかたち, 1984 (i)",
+ "note": "Three stone and wood sculptures, each pairing a rough stone with carved wood forms. Sizes printed for h are 60×65×186 cm and for i are 170×107×50 cm; g/8 has no dimensions. The page lists them as shown at the 2nd Toyama International Contemporary Art Exhibition, Toyama Prefectural Museum of Modern Art, 1984.",
+ "credit": "photo: 東京画廊写真部 (Tokyo Gallery photo department)",
  "keep_bg": false,
  "photo_mode": "",
  "video_url": "",
- "lookup": true
+ "lookup": true,
+ "looked_up": {
+  "sure": false,
+  "source": ""
+ }
 }
