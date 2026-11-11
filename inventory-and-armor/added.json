@@ -557,13 +557,14 @@
   "img": "images/unknown-unknown-4.png",
   "maker": "UNKNOWN",
   "name": "UNKNOWN",
-  "note": "A painting of two figures with skull faces, one firing a revolver at the other, against a red background with a muzzle flash; the artist, year and collection could not be confirmed.",
+  "note": "A painting of two figures with skull faces, one firing a revolver at the other, against a red background with a muzzle flash.",
   "credit": "",
   "photos": "painting",
   "looked_up": {
    "sure": false,
    "source": ""
-  }
+  },
+  "updated": "2026-11-11T01:04:51.632Z"
  },
  {
   "id": "2065",
