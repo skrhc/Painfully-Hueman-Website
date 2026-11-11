@@ -486,7 +486,9 @@
   "looked_up": {
    "sure": true,
    "source": "https://www.moma.org/collection/works/68777"
-  }
+  },
+  "deleted": true,
+  "updated": "2026-11-11T00:43:29.911Z"
  },
  {
   "id": "2060",
