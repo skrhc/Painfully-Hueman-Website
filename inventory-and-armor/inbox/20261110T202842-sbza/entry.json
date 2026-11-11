@@ -1,11 +1,15 @@
 {
- "section": "",
- "maker": "",
- "name": "",
- "note": "",
+ "section": "PHOTO",
+ "maker": "Karl Blossfeldt",
+ "name": "Urformen der Kunst (Art Forms in Nature), 1928 — book spread of plant studies (fern fronds, thistle heads, seed pods)",
+ "note": "Photogravure plates from Blossfeldt's 1928 book of enlarged plant forms, shown as a two-page spread with four black-and-white close-ups. Publisher and exact plate numbers are not confirmed.",
  "credit": "",
  "keep_bg": false,
  "photo_mode": "",
  "video_url": "",
- "lookup": true
+ "lookup": true,
+ "looked_up": {
+  "sure": false,
+  "source": "https://publicdomainreview.org/collections/karl-blossfeldts-urformen-der-kunst-1928/"
+ }
 }
