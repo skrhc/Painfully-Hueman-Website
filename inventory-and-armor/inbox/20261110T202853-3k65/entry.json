@@ -1,11 +1,15 @@
 {
- "section": "",
- "maker": "",
- "name": "",
- "note": "",
+ "section": "PAINTING",
+ "maker": "Vallejo",
+ "name": "MADONNA CON COLUMNAS DE LA HUMANIDAD, 1975",
+ "note": "Lithograph in blue-black ink on paper, signed 'Vallejo 75' and numbered 14/16. The title and year come from the caption on the image. I couldn't confirm the artist's full name or any other details.",
  "credit": "",
  "keep_bg": false,
  "photo_mode": "",
  "video_url": "",
- "lookup": true
+ "lookup": true,
+ "looked_up": {
+  "sure": false,
+  "source": ""
+ }
 }
