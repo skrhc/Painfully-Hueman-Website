@@ -1,11 +1,15 @@
 {
- "section": "",
- "maker": "",
- "name": "",
- "note": "",
- "credit": "",
+ "section": "PAINTING",
+ "maker": "Jean Charlot",
+ "name": "TORTILLERA WITH CHILD, 1941",
+ "note": "Color lithograph printed by Albert Carman, 315 × 475 mm (12 3/8 × 18 11/16 in.). Dated 1941 in the Baltimore Museum of Art record.",
+ "credit": "Baltimore Museum of Art, Gift of Lilian Sarah Greif, 1966.48.7",
  "keep_bg": false,
  "photo_mode": "",
  "video_url": "",
- "lookup": true
+ "lookup": true,
+ "looked_up": {
+  "sure": true,
+  "source": "https://artbmadevsite.org/artwork/tortillera-with-child/"
+ }
 }
