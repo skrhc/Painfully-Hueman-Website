@@ -1,11 +1,15 @@
 {
- "section": "",
- "maker": "",
- "name": "",
- "note": "",
+ "section": "OBJECT",
+ "maker": "UNKNOWN",
+ "name": "Custodia (sun monstrance)",
+ "note": "Gilded sun monstrance from Castile, with a foot dated to the first third of the 17th century and a stem and sun dated to the 18th century, according to the caption printed beneath the photo. The caption is the only dating source I found.",
  "credit": "",
  "keep_bg": false,
  "photo_mode": "",
  "video_url": "",
- "lookup": true
+ "lookup": true,
+ "looked_up": {
+  "sure": false,
+  "source": ""
+ }
 }
