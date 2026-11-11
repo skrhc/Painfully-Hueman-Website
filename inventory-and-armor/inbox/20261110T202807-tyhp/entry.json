@@ -1,11 +1,15 @@
 {
- "section": "",
- "maker": "",
- "name": "",
- "note": "",
+ "section": "OBJECT",
+ "maker": "UNKNOWN",
+ "name": "UNKNOWN",
+ "note": "Blown art glass vase with a crackled (craquelé) surface, ribbed sides, red and green colour streaks, and a gold-flecked foot, photographed from a printed book page (page 234). Its style suggests Venetian (Murano) glass, but I could not confirm the maker, date or collection.",
  "credit": "",
  "keep_bg": false,
  "photo_mode": "",
  "video_url": "",
- "lookup": true
+ "lookup": true,
+ "looked_up": {
+  "sure": false,
+  "source": ""
+ }
 }
