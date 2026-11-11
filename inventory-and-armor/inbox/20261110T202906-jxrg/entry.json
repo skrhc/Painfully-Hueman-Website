@@ -1,11 +1,15 @@
 {
- "section": "",
- "maker": "",
- "name": "",
- "note": "",
+ "section": "PAINTING",
+ "maker": "Chaz Bojórquez",
+ "name": "ANGEL, 1985",
+ "note": "Appears to be spray paint and gold-toned pigment on paper, signed \"CHAZ 85\" lower right. Not confirmed by any source.",
  "credit": "",
  "keep_bg": false,
  "photo_mode": "",
  "video_url": "",
- "lookup": true
+ "lookup": true,
+ "looked_up": {
+  "sure": false,
+  "source": ""
+ }
 }
