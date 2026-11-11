@@ -824,5 +824,285 @@
    "sure": true,
    "source": "https://www.christies.com.cn/lot/lot-3980139"
   }
+ },
+ {
+  "id": "2084",
+  "section": "JEWELRY",
+  "img": "images/rene-lalique-two-female-profiles-and-swallows-c-1898-1900.png",
+  "maker": "RENÉ LALIQUE",
+  "name": "TWO FEMALE PROFILES AND SWALLOWS, C. 1898–1900",
+  "note": "Neck pendant or brooch in gold, plique-à-jour enamel and a baroque pearl, with a sculpted pair of female profiles and enamel swallows. The printed caption on the book page lists it as cat. 116 in a Lalique catalogue; the photo on the page is plate 113.",
+  "credit": "Lalique Museum, Hakone (Japan), per the printed caption (cat. 116)",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2085",
+  "section": "JEWELRY",
+  "img": "images/rene-lalique-female-face-pendant-c-1898-1900.png",
+  "maker": "RENÉ LALIQUE",
+  "name": "'FEMALE FACE' PENDANT, C. 1898–1900",
+  "note": "Moulded opalescent glass face set in chased and patinated silver with four open poppy petals, with a hanging baroque pearl (26 mm); overall 70 × 52 mm, made in Paris and purchased by the museum in 1901.",
+  "credit": "Calouste Gulbenkian Museum, Lisbon, inv. 1141",
+  "photos": "cut",
+  "looked_up": {
+   "sure": true,
+   "source": "https://gulbenkian.pt/museu/en/works/female-face-pendant-2/"
+  }
+ },
+ {
+  "id": "2086",
+  "section": "JEWELRY",
+  "img": "images/rene-lalique-forest-c-1899-1900.png",
+  "maker": "RENÉ LALIQUE",
+  "name": "FOREST, C. 1899–1900",
+  "note": "Neck pendant in glass, gold, enamel and baroque pearl, c. 1899–1900. It was one of the first pieces of jewellery Calouste Gulbenkian bought directly from Lalique in 1900.",
+  "credit": "Calouste Gulbenkian collection, inv. 1135",
+  "photos": "cut",
+  "looked_up": {
+   "sure": true,
+   "source": "https://gulbenkian.pt/cam/en/agenda/rene-lalique-and-the-age-of-glass-art-and-industry/"
+  }
+ },
+ {
+  "id": "2087",
+  "section": "PHOTO",
+  "img": "images/karl-blossfeldt-urformen-der-kunst-art-forms-in-nature-1928-book-spread-of-plant-studies-fern-fronds-thistle-heads-seed-pods.png",
+  "maker": "KARL BLOSSFELDT",
+  "name": "URFORMEN DER KUNST (ART FORMS IN NATURE), 1928 — BOOK SPREAD OF PLANT STUDIES (FERN FRONDS, THISTLE HEADS, SEED PODS)",
+  "note": "Photogravure plates from Blossfeldt's 1928 book of enlarged plant forms, shown as a two-page spread with four black-and-white close-ups. Publisher and exact plate numbers are not confirmed.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": "https://publicdomainreview.org/collections/karl-blossfeldts-urformen-der-kunst-1928/"
+  }
+ },
+ {
+  "id": "2088",
+  "section": "PAINTING",
+  "img": "images/salomon-huerta-drive-by-1992-2.png",
+  "maker": "SALOMÓN HUERTA",
+  "name": "DRIVE BY, 1992",
+  "note": "",
+  "credit": "© Salomón Huerta",
+  "photos": "painting",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2089",
+  "section": "PAINTING",
+  "img": "images/vallejo-madonna-con-columnas-de-la-humanidad-1975-2.png",
+  "maker": "VALLEJO",
+  "name": "MADONNA CON COLUMNAS DE LA HUMANIDAD, 1975",
+  "note": "Lithograph in blue-black ink on paper, signed 'Vallejo 75' and numbered 14/16. The title and year come from the caption on the image. I couldn't confirm the artist's full name or any other details.",
+  "credit": "",
+  "photos": "painting",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2090",
+  "section": "PAINTING",
+  "img": "images/linda-vallejo-los-cielos-1996-2.png",
+  "maker": "LINDA VALLEJO",
+  "name": "LOS CIELOS, 1996",
+  "note": "Acrylic on canvas, 55½ x 67 in. (about 141 x 170 cm), from the Durón Family Collection. The artist's site files it under her Los Cielos series (1995–2008), and lists the title as \"Los Cielos Untitled\".",
+  "credit": "© Linda Vallejo",
+  "photos": "painting",
+  "looked_up": {
+   "sure": true,
+   "source": "https://lindavallejo.com/los-cielos/"
+  }
+ },
+ {
+  "id": "2091",
+  "section": "PAINTING",
+  "img": "images/chaz-bojorquez-angel-1985-2.png",
+  "maker": "CHAZ BOJÓRQUEZ",
+  "name": "ANGEL, 1985",
+  "note": "Appears to be spray paint and gold-toned pigment on paper, signed \"CHAZ 85\" lower right. Not confirmed by any source.",
+  "credit": "",
+  "photos": "painting",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2092",
+  "section": "PAINTING",
+  "img": "images/chaz-bojorquez-los-avenues-1987-2.png",
+  "maker": "CHAZ BOJORQUEZ",
+  "name": "LOS AVENUES, 1987",
+  "note": "Screenprint with stenciled spray paint on Zolatone-prepared paper, 1987, in an edition of 40. Auction listings give 129.5 × 97.8 cm, while the photographed caption gives 137.7 × 106 cm, so the size may vary between editions or the caption may be wrong.",
+  "credit": "",
+  "photos": "painting",
+  "looked_up": {
+   "sure": true,
+   "source": "https://www.artnet.com/auctions/artists/chaz-bojorquez/los-avenues"
+  }
+ },
+ {
+  "id": "2093",
+  "section": "OBJECT",
+  "img": "images/francisco-de-paula-palomino-custodia-de-templete-1829.png",
+  "maker": "FRANCISCO DE PAULA PALOMINO",
+  "name": "CUSTODIA DE TEMPLETE, 1829",
+  "note": "Sunburst processional monstrance (custodia de templete) from Seville, dated c. 1829 by the caption printed under the photo. The Pange Lingua catalogue cites a Palomino entry for a custodia procesional de templete.",
+  "credit": "Photo: V. Herrera, per the caption printed under the image (\"14. Custodia, Sevilla, Francisco de Paula Palomino, hacia 1829 (foto V. Herrera)\").",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": "https://www.upo.es/revistas/index.php/atrio/article/download/6815/6529/30723"
+  }
+ },
+ {
+  "id": "2094",
+  "section": "OBJECT",
+  "img": "images/unknown-custodia-sun-monstrance.png",
+  "maker": "UNKNOWN",
+  "name": "CUSTODIA (SUN MONSTRANCE)",
+  "note": "Gilded sun monstrance from Castile, with a foot dated to the first third of the 17th century and a stem and sun dated to the 18th century, according to the caption printed beneath the photo. The caption is the only dating source I found.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2095",
+  "section": "PAINTING",
+  "img": "images/david-botello-long-life-to-the-creative-force-1989-2.png",
+  "maker": "DAVID BOTELLO",
+  "name": "LONG LIFE TO THE CREATIVE FORCE, 1989",
+  "note": "Screenprint (silkscreen) on paper in thirteen colors; sheet 25 1/2 x 38 1/4 in. (64.77 x 97.16 cm), 1989.",
+  "credit": "Los Angeles County Museum of Art, Art Museum Council Fund; accession AC1997.123.101",
+  "photos": "painting",
+  "looked_up": {
+   "sure": true,
+   "source": "https://collections.lacma.org/object/83267"
+  }
+ },
+ {
+  "id": "2096",
+  "section": "PAINTING",
+  "img": "images/yolanda-gonzalez-mi-indio-1991-2.png",
+  "maker": "YOLANDA GONZÁLEZ",
+  "name": "MI INDIO, 1991",
+  "note": "Silkscreen on paper in ten colors, edition of 70; the printed caption gives 38½ x 28 in, while the UMN record gives 36 x 26 in (image) and 39 x 28 in (paper).",
+  "credit": "Library, Department of Special Research Collections (University of Minnesota), via Calisphere; Mexican American Art Since 1848 collection",
+  "photos": "painting",
+  "looked_up": {
+   "sure": true,
+   "source": "https://maas1848.umn.edu/s/mexican-american-art-since-1848/item/108535"
+  }
+ },
+ {
+  "id": "2097",
+  "section": "PRINT",
+  "img": "images/alfredo-de-batuc-seven-views-of-city-hall-1987.png",
+  "maker": "ALFREDO DE BATUC",
+  "name": "SEVEN VIEWS OF CITY HALL, 1987",
+  "note": "Silkscreen (screenprint) on paper, ten colors; sheet 40 x 26 in, image 36 x 24 1/8 in.",
+  "credit": "Los Angeles County Museum of Art, Art Museum Council Fund, accession number AC1997.123.69",
+  "photos": "cut",
+  "looked_up": {
+   "sure": true,
+   "source": "https://collections.lacma.org/object/83258"
+  }
+ },
+ {
+  "id": "2098",
+  "section": "PAINTING",
+  "img": "images/jean-charlot-tortillera-with-child-1941-2.png",
+  "maker": "JEAN CHARLOT",
+  "name": "TORTILLERA WITH CHILD, 1941",
+  "note": "Color lithograph printed by Albert Carman, 315 × 475 mm (12 3/8 × 18 11/16 in.). Dated 1941 in the Baltimore Museum of Art record.",
+  "credit": "Baltimore Museum of Art, Gift of Lilian Sarah Greif, 1966.48.7",
+  "photos": "painting",
+  "looked_up": {
+   "sure": true,
+   "source": "https://artbmadevsite.org/artwork/tortillera-with-child/"
+  }
+ },
+ {
+  "id": "2099",
+  "section": "PAINTING",
+  "img": "images/jose-guadalupe-posada-demons-running-away-from-a-woman-on-a-deer-riding-through-a-field-of-crosses-2.png",
+  "maker": "JOSÉ GUADALUPE POSADA",
+  "name": "DEMONS RUNNING AWAY FROM A WOMAN ON A DEER RIDING THROUGH A FIELD OF CROSSES",
+  "note": "Relief print (type-metal engraving or relief etching) by the Mexican printmaker José Guadalupe Posada, probably a later printing from his plate. I could not open the museum page, so the medium, date and size are unconfirmed.",
+  "credit": "",
+  "photos": "painting",
+  "looked_up": {
+   "sure": false,
+   "source": "https://www.metmuseum.org/art/collection/search/735921"
+  }
+ },
+ {
+  "id": "2100",
+  "section": "OBJECT",
+  "img": "images/jose-guadalupe-posada-terribilisimo-ejemplar-una-nina-calumniadora-a-quien-se-lleva-el-demonio-terrible-specimen-a-slanderous-girl-taken-away-by-the-demon-after-1891.png",
+  "maker": "JOSÉ GUADALUPE POSADA",
+  "name": "¡TERRIBILISIMO EJEMPLAR! ¡¡¡¡ UNA NIÑA CALUMNIADORA, Á QUIEN SE LLEVA EL DEMONIO!!!! (TERRIBLE SPECIMEN! A SLANDEROUS GIRL, TAKEN AWAY BY THE DEMON!!!!), AFTER 1891",
+  "note": "Relief engraving (print), dated after 1891, held in the MoMA collection and currently not on view. Dimensions not confirmed.",
+  "credit": "Larry Aldrich Fund",
+  "photos": "cut",
+  "looked_up": {
+   "sure": true,
+   "source": "https://www.moma.org/collection/works/68777"
+  }
+ },
+ {
+  "id": "2101",
+  "section": "PHOTO",
+  "img": "images/unknown-unknown-15.png",
+  "maker": "UNKNOWN",
+  "name": "UNKNOWN",
+  "note": "Colour photograph of a seated person in a gold lamé top, wearing a multi-strand turquoise heishi necklace with a cluster-set pendant and cluster-set turquoise bracelets and rings; it appears to be a printed reproduction. Style suggests Diné (Navajo) or Zuni jewellery, but this is not confirmed.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2102",
+  "section": "SCULPTURE",
+  "img": "images/unknown-1984-g-8-1984-h-1984-i.png",
+  "maker": "UNKNOWN",
+  "name": "飛ぶかたち, 1984 (G/8); 鳴るかたち, 1984 (H); 梳くかたち, 1984 (I)",
+  "note": "Three stone and wood sculptures, each pairing a rough stone with carved wood forms. Sizes printed for h are 60×65×186 cm and for i are 170×107×50 cm; g/8 has no dimensions. The page lists them as shown at the 2nd Toyama International Contemporary Art Exhibition, Toyama Prefectural Museum of Modern Art, 1984.",
+  "credit": "photo: 東京画廊写真部 (Tokyo Gallery photo department)",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2103",
+  "section": "JEWELRY",
+  "img": "images/maya-unidentified-workshop-jade-bead-necklace-with-t-bar-and-carved-head-pendant.png",
+  "maker": "MAYA (UNIDENTIFIED WORKSHOP)",
+  "name": "JADE BEAD NECKLACE WITH T-BAR AND CARVED HEAD PENDANT",
+  "note": "Appears to be a Maya necklace of large green jadeite beads with a horizontal bar and a carved human head pendant with an open mouth, probably Classic period (c. 250–900 CE). I couldn't match it to a specific museum record, so the date and attribution are unconfirmed.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
  }
 ]
