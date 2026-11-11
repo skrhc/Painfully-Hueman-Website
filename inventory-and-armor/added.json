@@ -627,15 +627,16 @@
   "id": "2069",
   "section": "PAINTING",
   "img": "images/unknown-unknown-7.png",
-  "maker": "UNKNOWN",
+  "maker": "WATCHTOWER",
   "name": "UNKNOWN",
-  "note": "Illustrative painting of a burning city under a meteor shower, with an overturned car, a man with a revolver, a woman in a headscarf and several people lying in the foreground. The style suggests 1970s–80s commercial or paperback illustration, but I couldn't identify the artist or title.",
-  "credit": "",
+  "note": "",
+  "credit": "Watchtower publishing",
   "photos": "painting",
   "looked_up": {
    "sure": false,
    "source": ""
-  }
+  },
+  "updated": "2026-11-11T01:04:11.684Z"
  },
  {
   "id": "2070",
