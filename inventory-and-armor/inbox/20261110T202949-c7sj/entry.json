@@ -1,11 +1,15 @@
 {
- "section": "",
- "maker": "",
- "name": "",
- "note": "",
- "credit": "",
+ "section": "OBJECT",
+ "maker": "José Guadalupe Posada",
+ "name": "¡Terribilisimo ejemplar! ¡¡¡¡ Una niña calumniadora, á quien se lleva el demonio!!!! (Terrible Specimen! A Slanderous Girl, Taken Away by the Demon!!!!), after 1891",
+ "note": "Relief engraving (print), dated after 1891, held in the MoMA collection and currently not on view. Dimensions not confirmed.",
+ "credit": "Larry Aldrich Fund",
  "keep_bg": false,
  "photo_mode": "",
  "video_url": "",
- "lookup": true
+ "lookup": true,
+ "looked_up": {
+  "sure": true,
+  "source": "https://www.moma.org/collection/works/68777"
+ }
 }
