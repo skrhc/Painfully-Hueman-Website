@@ -596,10 +596,10 @@
         <button type="button" id="q-clear" aria-label="Clear search">Clear</button>
       </label>
       <select class="pick" id="sort" aria-label="Sort">
+        <option value="category" data-short="Category">Sort: By category</option>
         <option value="random" data-short="Random">Sort: Random</option>
         <option value="newest" data-short="Newest">Sort: Newest first</option>
         <option value="oldest" data-short="Oldest">Sort: Oldest first</option>
-        <option value="category" data-short="Category">Sort: By category</option>
         <option value="maker" data-short="Maker">Sort: Maker A–Z</option>
       </select>
       <select class="pick" id="cat" aria-label="Category">
@@ -703,7 +703,8 @@
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     let items = [];         /* every item, in its current random order */
-    let sortMode = 'random';   /* random, newest, oldest, category, maker */
+    const DEFAULT_SORT = 'category';   /* what ARMORY opens on: folded sections */
+    let sortMode = DEFAULT_SORT;   /* random, newest, oldest, category, maker */
     const openSections = {};   /* sections opened in the By category view */
     let category = '';         /* '' = all categories */
     let order = [];         /* items currently on the page, for PREV / NEXT */
@@ -1057,10 +1058,10 @@
     /* Remember the choices in the address, so a link keeps them. */
     function saveChoices() {
       const parts = [];
-      if (sortMode !== 'random') parts.push('sort=' + sortMode);
+      if (sortMode !== DEFAULT_SORT) parts.push('sort=' + sortMode);
       if (category) parts.push('cat=' + encodeURIComponent(category));
       if (history.replaceState) history.replaceState(null, '', parts.length ? '#' + parts.join('&') : location.pathname + location.search);
-      sortEl.classList.toggle('on', sortMode !== 'random');
+      sortEl.classList.toggle('on', sortMode !== DEFAULT_SORT);
       catEl.classList.toggle('on', !!category);
     }
 
