@@ -697,5 +697,62 @@
    "sure": false,
    "source": ""
   }
+ },
+ {
+  "id": "2075",
+  "section": "OBJECT",
+  "img": "images/unknown-unknown-11.png",
+  "maker": "UNKNOWN",
+  "name": "UNKNOWN",
+  "note": "",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": "",
+   "error": "API Error: Can't reach the API server — check your internet or DNS (ENOTFOUND)"
+  }
+ },
+ {
+  "id": "2076",
+  "section": "OBJECT",
+  "img": "images/unknown-unknown-12.png",
+  "maker": "UNKNOWN",
+  "name": "UNKNOWN",
+  "note": "Clear glass scent bottle with a flame-shaped stopper, vertical ribs, and teardrop-shaped bosses at the shoulder and base. Photographed against a black-to-grey backdrop; the medium is glass, and the size and date are not shown.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2077",
+  "section": "OBJECT",
+  "img": "images/unknown-unknown-13.png",
+  "maker": "UNKNOWN",
+  "name": "UNKNOWN",
+  "note": "Art Nouveau glass vase with a silver overlay of lizard-like forms climbing the body, on a pale blue opalescent ground, with dark cabochon feet on a silver base. Maker, date and collection were not confirmed by any source found.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2078",
+  "section": "JEWELRY",
+  "img": "images/rene-lalique-brooch-with-three-peacock-heads-c-1900.png",
+  "maker": "RENÉ LALIQUE",
+  "name": "BROOCH WITH THREE PEACOCK HEADS, C. 1900",
+  "note": "Brooch with a blue enamel plaque showing three bird heads in a silver frame with leaf-shaped corner points. It looks like Lalique's Art Nouveau work, but I couldn't match it to a specific catalogued piece, so the title and date are my best guess.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
  }
 ]
