@@ -268,7 +268,7 @@
     scroll-margin-top: calc(var(--sh, 0px) + var(--hh) + 20px);
   }
 
-  /* By category: folded sections show one row until opened */
+  /* By category: folded sections show only their names until opened */
   button.section-head {
     width: 100%; background: none; color: inherit; font: inherit; font-size: 12px;
     border: 0; border-bottom: 1px solid var(--ink); border-radius: 0; cursor: pointer; text-align: left;
@@ -276,14 +276,16 @@
   }
   main button.section-head { width: calc(100% - 80px); }
   button.section-head:hover span:first-child { text-decoration: underline; }
-  .fold.closed .grid > :nth-child(n+6) { display: none; }
+  .fold.closed .grid, .fold.closed .more { display: none; }
+  .fold.closed .section-head { margin-bottom: 0; }
   .fold .more {
     display: block; margin: 28px 40px 0 auto; padding: 0; border: 0; background: none;
     color: inherit; font: inherit; font-size: 12px; letter-spacing: 0.2em; cursor: pointer;
   }
   .fold .more:hover { text-decoration: underline; }
   .fold:not(.closed) .more { margin-top: 36px; }
-  section.fold + section.fold { margin-top: 56px; }
+  section.fold + section.fold { margin-top: 28px; }
+  section.fold:not(.closed) + section.fold { margin-top: 56px; }
 
   .grid {
     display: grid;
@@ -526,7 +528,6 @@
   @media (max-width: 1100px) {
     header { padding: 14px calc((100% - 4 * ((100% - 144px) / 5 * 1.1)) / 5); }
     .grid { grid-template-columns: repeat(4, calc((100% - 144px) / 5 * 1.1)); row-gap: 25px; }
-    .fold.closed .grid > :nth-child(n+5) { display: none; }
   }
 
   @media (max-width: 900px) {
@@ -551,7 +552,6 @@
     main .section-head, main .status { margin-left: 0; margin-right: 0; }
     .grid { justify-content: stretch; }
     .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 15px 14px; }
-    .fold.closed .grid > :nth-child(n+4) { display: none; }
     main button.section-head { width: 100%; }
     .fold .more { margin-right: 0; }
     .frame { padding: 6px; }
@@ -958,7 +958,7 @@
         keys.concat(extra).forEach(function (key) {
           const group = shown.filter(function (i) { return i.section === key; });
           if (!group.length) return;
-          /* folded: a section shows one row until it's opened. Searching or
+          /* folded: a section is just its name until it's opened. Searching or
              picking one category opens everything. */
           const folds = !words.length && !category;
           const section = el('section', folds && !openSections[key] ? 'fold closed' : (folds ? 'fold' : ''));
@@ -977,7 +977,7 @@
               section.classList.toggle('closed', !open);
               headRow.firstChild.textContent = (open ? '[−] ' : '[+] ') + (key || 'other');
               headRow.setAttribute('aria-expanded', open ? 'true' : 'false');
-              more.textContent = open ? '[−] Show less' : '[+] Show all ' + count;
+              more.textContent = '[−] Close ' + (key || 'other');
             };
             set(!!openSections[key]);
             const toggle = function () {
