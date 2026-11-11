@@ -1,11 +1,15 @@
 {
- "section": "",
- "maker": "",
- "name": "",
- "note": "",
- "credit": "",
+ "section": "JEWELRY",
+ "maker": "René Lalique",
+ "name": "ENAMEL AND PEARL PENDANT, circa 1902–1903",
+ "note": "A pendant in 18k gold with blue guilloche enamel frame, a carved and stained simulated ivory plaque of five dancing nymphs, and a drop-shaped pearl. Dated circa 1902–1903 by the auction house.",
+ "credit": "Christie's, lot 391 (sale probably \"Magnificent Jewels\", not confirmed on the page)",
  "keep_bg": false,
  "photo_mode": "",
  "video_url": "",
- "lookup": true
+ "lookup": true,
+ "looked_up": {
+  "sure": true,
+  "source": "https://www.christies.com.cn/lot/lot-3980139"
+ }
 }
