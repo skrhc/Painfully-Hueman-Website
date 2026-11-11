@@ -1,11 +1,15 @@
 {
- "section": "",
- "maker": "",
- "name": "",
+ "section": "PAINTING",
+ "maker": "Salomón Huerta",
+ "name": "Drive By, 1992",
  "note": "",
- "credit": "",
+ "credit": "© Salomón Huerta",
  "keep_bg": false,
  "photo_mode": "",
  "video_url": "",
- "lookup": true
+ "lookup": true,
+ "looked_up": {
+  "sure": false,
+  "source": ""
+ }
 }
