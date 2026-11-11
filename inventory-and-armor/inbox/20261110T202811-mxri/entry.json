@@ -1,11 +1,15 @@
 {
- "section": "",
- "maker": "",
- "name": "",
- "note": "",
- "credit": "",
+ "section": "LIGHTING",
+ "maker": "René Lalique",
+ "name": "Lamp – Peacocks (Paons), 1910",
+ "note": "Mould-pressed glass with satin finish and patina, set in patinated bronze. Published as cat. 324 in Yvonne Brunhammer's Lalique catalogue. Auction records give a height of about 42.5 cm.",
+ "credit": "Strasbourg, Conseil Général du Bas-Rhin (cat. 324); photographed in Yvonne Brunhammer's book on Lalique",
  "keep_bg": false,
  "photo_mode": "",
  "video_url": "",
- "lookup": true
+ "lookup": true,
+ "looked_up": {
+  "sure": true,
+  "source": "https://marcilhacgalerie.com/artworks/1137-rene-lalique-paons-lamp-1910"
+ }
 }
