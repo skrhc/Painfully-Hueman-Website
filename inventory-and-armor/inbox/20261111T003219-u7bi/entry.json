@@ -1,11 +1,15 @@
 {
- "section": "",
- "maker": "",
- "name": "",
- "note": "",
+ "section": "JEWELRY",
+ "maker": "Maya (unidentified workshop)",
+ "name": "Jade bead necklace with T-bar and carved head pendant",
+ "note": "Appears to be a Maya necklace of large green jadeite beads with a horizontal bar and a carved human head pendant with an open mouth, probably Classic period (c. 250–900 CE). I couldn't match it to a specific museum record, so the date and attribution are unconfirmed.",
  "credit": "",
  "keep_bg": false,
  "photo_mode": "",
  "video_url": "",
- "lookup": true
+ "lookup": true,
+ "looked_up": {
+  "sure": false,
+  "source": ""
+ }
 }
