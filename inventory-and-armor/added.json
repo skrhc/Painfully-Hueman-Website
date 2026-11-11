@@ -745,13 +745,14 @@
   "img": "images/unknown-unknown-13.png",
   "maker": "UNKNOWN",
   "name": "UNKNOWN",
-  "note": "Art Nouveau glass vase with a silver overlay of lizard-like forms climbing the body, on a pale blue opalescent ground, with dark cabochon feet on a silver base. Maker, date and collection were not confirmed by any source found.",
+  "note": "Art Nouveau glass vase with a silver overlay of lizard-like forms climbing the body, on a pale blue opalescent ground, with dark cabochon feet on a silver base.",
   "credit": "",
   "photos": "cut",
   "looked_up": {
    "sure": false,
    "source": ""
-  }
+  },
+  "updated": "2026-11-11T01:03:03.105Z"
  },
  {
   "id": "2078",
