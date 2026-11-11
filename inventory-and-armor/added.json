@@ -899,15 +899,16 @@
   "id": "2088",
   "section": "PAINTING",
   "img": "images/salomon-huerta-drive-by-1992-2.png",
-  "maker": "SALOMÓN HUERTA",
-  "name": "DRIVE BY, 1992",
+  "maker": "UNKNOWN",
+  "name": "UNKNOWN",
   "note": "",
-  "credit": "© Salomón Huerta",
+  "credit": "",
   "photos": "painting",
   "looked_up": {
    "sure": false,
    "source": ""
-  }
+  },
+  "updated": "2026-11-11T01:01:39.228Z"
  },
  {
   "id": "2089",
