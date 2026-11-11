@@ -1,11 +1,15 @@
 {
- "section": "",
- "maker": "",
- "name": "",
- "note": "",
+ "section": "PAINTING",
+ "maker": "José Guadalupe Posada",
+ "name": "Demons running away from a woman on a deer riding through a field of crosses",
+ "note": "Relief print (type-metal engraving or relief etching) by the Mexican printmaker José Guadalupe Posada, probably a later printing from his plate. I could not open the museum page, so the medium, date and size are unconfirmed.",
  "credit": "",
  "keep_bg": false,
  "photo_mode": "",
  "video_url": "",
- "lookup": true
+ "lookup": true,
+ "looked_up": {
+  "sure": false,
+  "source": "https://www.metmuseum.org/art/collection/search/735921"
+ }
 }
