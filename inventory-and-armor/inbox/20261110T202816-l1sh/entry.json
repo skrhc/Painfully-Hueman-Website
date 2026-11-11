@@ -1,11 +1,15 @@
 {
- "section": "",
- "maker": "",
- "name": "",
- "note": "",
+ "section": "JEWELRY",
+ "maker": "René Lalique (attribution unconfirmed)",
+ "name": "Long chain necklace with square enamel plaques, c. 1900",
+ "note": "Long chain of dark oval links alternating with square open-work gold plaques that hold pale blue translucent enamel and foliate motifs. The Art Nouveau style suggests René Lalique, but I found no source for this exact piece.",
  "credit": "",
  "keep_bg": false,
  "photo_mode": "",
  "video_url": "",
- "lookup": true
+ "lookup": true,
+ "looked_up": {
+  "sure": false,
+  "source": ""
+ }
 }
