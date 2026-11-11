@@ -1,11 +1,15 @@
 {
- "section": "",
- "maker": "",
- "name": "",
- "note": "",
- "credit": "",
+ "section": "PRINT",
+ "maker": "Alfredo de Batuc",
+ "name": "Seven Views of City Hall, 1987",
+ "note": "Silkscreen (screenprint) on paper, ten colors; sheet 40 x 26 in, image 36 x 24 1/8 in.",
+ "credit": "Los Angeles County Museum of Art, Art Museum Council Fund, accession number AC1997.123.69",
  "keep_bg": false,
  "photo_mode": "",
  "video_url": "",
- "lookup": true
+ "lookup": true,
+ "looked_up": {
+  "sure": true,
+  "source": "https://collections.lacma.org/object/83258"
+ }
 }
