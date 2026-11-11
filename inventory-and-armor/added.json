@@ -1065,17 +1065,18 @@
  },
  {
   "id": "2101",
-  "section": "PHOTO",
+  "section": "JEWELRY",
   "img": "images/unknown-unknown-15.png",
   "maker": "UNKNOWN",
   "name": "UNKNOWN",
-  "note": "Colour photograph of a seated person in a gold lamé top, wearing a multi-strand turquoise heishi necklace with a cluster-set pendant and cluster-set turquoise bracelets and rings; it appears to be a printed reproduction. Style suggests Diné (Navajo) or Zuni jewellery, but this is not confirmed.",
+  "note": "",
   "credit": "",
   "photos": "cut",
   "looked_up": {
    "sure": false,
    "source": ""
-  }
+  },
+  "updated": "2026-11-11T00:40:31.520Z"
  },
  {
   "id": "2102",
