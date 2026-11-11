@@ -1,11 +1,15 @@
 {
- "section": "",
- "maker": "",
- "name": "",
- "note": "",
+ "section": "PAINTING",
+ "maker": "Chaz Bojorquez",
+ "name": "LOS AVENUES, 1987",
+ "note": "Screenprint with stenciled spray paint on Zolatone-prepared paper, 1987, in an edition of 40. Auction listings give 129.5 × 97.8 cm, while the photographed caption gives 137.7 × 106 cm, so the size may vary between editions or the caption may be wrong.",
  "credit": "",
  "keep_bg": false,
  "photo_mode": "",
  "video_url": "",
- "lookup": true
+ "lookup": true,
+ "looked_up": {
+  "sure": true,
+  "source": "https://www.artnet.com/auctions/artists/chaz-bojorquez/los-avenues"
+ }
 }
