@@ -1,11 +1,15 @@
 {
- "section": "",
- "maker": "",
- "name": "",
- "note": "",
- "credit": "",
+ "section": "PAINTING",
+ "maker": "Linda Vallejo",
+ "name": "Los Cielos, 1996",
+ "note": "Acrylic on canvas, 55½ x 67 in. (about 141 x 170 cm), from the Durón Family Collection. The artist's site files it under her Los Cielos series (1995–2008), and lists the title as \"Los Cielos Untitled\".",
+ "credit": "© Linda Vallejo",
  "keep_bg": false,
  "photo_mode": "",
  "video_url": "",
- "lookup": true
+ "lookup": true,
+ "looked_up": {
+  "sure": true,
+  "source": "https://lindavallejo.com/los-cielos/"
+ }
 }
