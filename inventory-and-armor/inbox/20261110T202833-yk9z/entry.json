@@ -1,11 +1,15 @@
 {
- "section": "",
- "maker": "",
- "name": "",
- "note": "",
- "credit": "",
+ "section": "JEWELRY",
+ "maker": "René Lalique",
+ "name": "'Female Face' Pendant, c. 1898–1900",
+ "note": "Moulded opalescent glass face set in chased and patinated silver with four open poppy petals, with a hanging baroque pearl (26 mm); overall 70 × 52 mm, made in Paris and purchased by the museum in 1901.",
+ "credit": "Calouste Gulbenkian Museum, Lisbon, inv. 1141",
  "keep_bg": false,
  "photo_mode": "",
  "video_url": "",
- "lookup": true
+ "lookup": true,
+ "looked_up": {
+  "sure": true,
+  "source": "https://gulbenkian.pt/museu/en/works/female-face-pendant-2/"
+ }
 }
