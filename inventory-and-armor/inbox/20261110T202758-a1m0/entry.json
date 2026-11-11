@@ -1,11 +1,15 @@
 {
- "section": "",
- "maker": "",
- "name": "",
- "note": "",
+ "section": "JEWELRY",
+ "maker": "René Lalique",
+ "name": "Brooch with three peacock heads, c. 1900",
+ "note": "Brooch with a blue enamel plaque showing three bird heads in a silver frame with leaf-shaped corner points. It looks like Lalique's Art Nouveau work, but I couldn't match it to a specific catalogued piece, so the title and date are my best guess.",
  "credit": "",
  "keep_bg": false,
  "photo_mode": "",
  "video_url": "",
- "lookup": true
+ "lookup": true,
+ "looked_up": {
+  "sure": false,
+  "source": ""
+ }
 }
