@@ -2233,12 +2233,13 @@
   "img": "images/unknown-unknown-53.png",
   "maker": "UNKNOWN",
   "name": "UNKNOWN",
-  "note": "Digital 3D render of a virus-like particle with green protein-ribbon spikes and a blue inner core on a black background. Source and year not confirmed.",
+  "note": "Digital 3D render of a virus-like particle with green protein-ribbon spikes and a blue inner core on a black background.",
   "credit": "",
   "photos": "cut",
   "looked_up": {
    "sure": false,
    "source": ""
-  }
+  },
+  "updated": "2026-11-12T03:28:55.207Z"
  }
 ]
