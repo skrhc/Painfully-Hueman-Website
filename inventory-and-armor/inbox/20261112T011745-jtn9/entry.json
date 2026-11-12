@@ -1,11 +1,15 @@
 {
- "section": "",
- "maker": "",
- "name": "",
- "note": "",
+ "section": "HARDWARE",
+ "maker": "UNKNOWN",
+ "name": "UNKNOWN",
+ "note": "Black-painted wrought iron post with scrolled and leaf-like arms, fixed into a concrete plinth at a wall corner. Maker, date and collection are not identifiable from the photo.",
  "credit": "",
  "keep_bg": false,
  "photo_mode": "",
  "video_url": "",
- "lookup": true
+ "lookup": true,
+ "looked_up": {
+  "sure": false,
+  "source": ""
+ }
 }
