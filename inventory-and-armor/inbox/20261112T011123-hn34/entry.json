@@ -1,11 +1,15 @@
 {
- "section": "",
- "maker": "",
- "name": "",
- "note": "",
+ "section": "JEWELRY",
+ "maker": "UNKNOWN",
+ "name": "Scottish game-bird foot brooch, citrine and gold mount",
+ "note": "Probably a Victorian Scottish brooch made from a mounted bird's foot (grouse or capercaillie type). It has an engraved gold collar set with an oval citrine, and a second round citrine on the foot. I couldn't find the exact piece, so the maker, date and collection are unconfirmed.",
  "credit": "",
  "keep_bg": false,
  "photo_mode": "",
  "video_url": "",
- "lookup": true
+ "lookup": true,
+ "looked_up": {
+  "sure": false,
+  "source": "https://www.victorianweb.org/art/design/jewelry/44.html"
+ }
 }
