@@ -1,11 +1,15 @@
 {
- "section": "",
- "maker": "",
- "name": "",
- "note": "",
+ "section": "BOTTOMS",
+ "maker": "UNKNOWN",
+ "name": "UNKNOWN",
+ "note": "Wide-leg trousers in grey melange wool-blend fabric, with a raw-edge waistband, front pleats and a waist tab. Maker and season not identified.",
  "credit": "",
  "keep_bg": false,
  "photo_mode": "",
  "video_url": "",
- "lookup": true
+ "lookup": true,
+ "looked_up": {
+  "sure": false,
+  "source": ""
+ }
 }
