@@ -1,11 +1,15 @@
 {
- "section": "",
- "maker": "",
- "name": "",
- "note": "",
- "credit": "",
+ "section": "FOOTWEAR",
+ "maker": "Rombaut",
+ "name": "Typhoon Silver Boots",
+ "note": "Knee-high boot with a non-removable ruched metallic overlayer and a lug sole. Rombaut's site lists the upper as 63% PU and 37% PL and the sole as 100% TPU, though some retailers give different materials.",
+ "credit": "Rombaut",
  "keep_bg": false,
  "photo_mode": "",
  "video_url": "",
- "lookup": true
+ "lookup": true,
+ "looked_up": {
+  "sure": true,
+  "source": "https://rombaut.com/products/typhoon-silver"
+ }
 }
