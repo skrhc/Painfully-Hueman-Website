@@ -1,11 +1,15 @@
 {
- "section": "",
- "maker": "",
- "name": "",
- "note": "",
+ "section": "PHOTO",
+ "maker": "UNKNOWN",
+ "name": "UNKNOWN",
+ "note": "False-colour 3D rendering of a spiked, roughly symmetrical virus-like particle, coloured from red at the centre through yellow and green to blue at the spike tips, on a black background.",
  "credit": "",
  "keep_bg": false,
  "photo_mode": "",
  "video_url": "",
- "lookup": true
+ "lookup": true,
+ "looked_up": {
+  "sure": false,
+  "source": ""
+ }
 }
