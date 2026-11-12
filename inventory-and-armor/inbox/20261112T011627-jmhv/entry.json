@@ -1,11 +1,15 @@
 {
- "section": "",
- "maker": "",
- "name": "",
- "note": "",
+ "section": "PHOTO",
+ "maker": "UNKNOWN",
+ "name": "Tanker truck rear graphic, \"C22 CUM TRUCK – BACK OFF! WE AINT HAULIN MILK!\"",
+ "note": "Snapshot of the rear of a fuel tanker (placard 1203, gasoline) with a custom decal. The decal shows a Yosemite Sam-style cartoon character in a feathered headdress holding two hatchets. The photographer and date are unknown, and the image circulates online as a meme. I did not run a web search, so no source confirms the photo's origin.",
  "credit": "",
  "keep_bg": false,
  "photo_mode": "",
  "video_url": "",
- "lookup": true
+ "lookup": true,
+ "looked_up": {
+  "sure": false,
+  "source": ""
+ }
 }
