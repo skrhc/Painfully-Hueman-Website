@@ -2061,17 +2061,18 @@
  },
  {
   "id": "2169",
-  "section": "FOOTWEAR",
+  "section": "PHOTO",
   "img": "images/mia-unknown.png",
-  "maker": "MIA",
-  "name": "UNKNOWN",
-  "note": "White EVA two-strap buckle slide sandal with a molded footbed, photographed on a beach at sunset. The \"MIA\" mark is printed on the footbed.",
+  "maker": "SK CSARO",
+  "name": "BEACH, BARBADOS",
+  "note": "",
   "credit": "",
   "photos": "cut",
   "looked_up": {
    "sure": false,
    "source": ""
-  }
+  },
+  "updated": "2026-11-12T03:32:36.775Z"
  },
  {
   "id": "2170",
