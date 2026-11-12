@@ -1,11 +1,15 @@
 {
- "section": "",
- "maker": "",
- "name": "",
- "note": "",
+ "section": "PAINTING",
+ "maker": "UNKNOWN",
+ "name": "Nebuchadnezzar's dream of the statue and the stone cut out of the mountain (Daniel 2)",
+ "note": "Illustration of the golden-headed statue from Daniel 2, with a stone rolling down from a glowing mountain. It looks like a scan from a printed publication, possibly a Watchtower Society book. I couldn't confirm the artist, year or publication.",
  "credit": "",
  "keep_bg": false,
  "photo_mode": "",
  "video_url": "",
- "lookup": true
+ "lookup": true,
+ "looked_up": {
+  "sure": false,
+  "source": ""
+ }
 }
