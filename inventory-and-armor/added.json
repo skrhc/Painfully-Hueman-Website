@@ -1433,13 +1433,14 @@
   "img": "images/unknown-razorbill-alca-torda-close-up-of-head-and-bill.png",
   "maker": "UNKNOWN",
   "name": "RAZORBILL (ALCA TORDA), CLOSE-UP OF HEAD AND BILL",
-  "note": "Close-up of a razorbill's head and thick bill against a dark background, with a white-and-black body visible below. The bill's thin white line is consistent with the species, but the photo's date, camera and original photographer are unknown.",
+  "note": "Close-up of a razorbill's head and thick bill against a dark background, with a white-and-black body visible below.",
   "credit": "",
   "photos": "cut",
   "looked_up": {
    "sure": false,
    "source": ""
-  }
+  },
+  "updated": "2026-11-12T03:47:07.645Z"
  },
  {
   "id": "2125",
