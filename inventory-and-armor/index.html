@@ -236,6 +236,38 @@
     color: var(--paper);
   }
 
+  /* group tabs and category links under the search bar */
+  #cat { display: none; }   /* the groups replace the category dropdown */
+  .groups {
+    display: flex; gap: 22px; margin-top: 14px;
+    overflow-x: auto; scrollbar-width: none; white-space: nowrap;
+  }
+  .groups::-webkit-scrollbar { display: none; }
+  .groups .tab, .subcats .sub {
+    padding: 0 0 3px; border: 0; border-bottom: 1px solid transparent; background: none;
+    font: inherit; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--ink); cursor: pointer;
+  }
+  .groups .tab:hover, .subcats .sub:hover { border-bottom-color: var(--ink); }
+  .groups .tab.on, .subcats .sub.on { border-bottom-color: var(--ink); font-weight: bold; }
+  .groups sup, .subcats sup { font-size: 8px; margin-left: 3px; letter-spacing: 0; color: #888; }
+  .subcats { margin-top: 10px; }
+  .subcats .subrow {
+    display: flex; gap: 16px; align-items: baseline; margin-top: 6px;
+    overflow-x: auto; scrollbar-width: none; white-space: nowrap;
+  }
+  .subcats .subrow::-webkit-scrollbar { display: none; }
+  .subcats .sub { font-size: 10px; }
+  .subcats .sublabel { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: #888; min-width: 52px; }
+  main .part-head {
+    margin: 0 40px 24px; font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase; color: #888;
+  }
+  main section + .part-head { margin-top: 72px; }
+  @media (max-width: 700px) {
+    main .part-head { margin-left: 0; margin-right: 0; }
+    .groups { gap: 16px; }
+  }
+
   /* GALLERY */
   main {
     padding: 40px 0 20px;
@@ -607,6 +639,8 @@
       </select>
       <button class="btn" id="shuffle" type="button" title="Show everything in a new random order">Shuffle</button>
     </div>
+    <nav class="groups" id="groups" aria-label="Groups"></nav>
+    <div class="subcats" id="subcats" hidden></div>
   </header>
 
 
@@ -648,6 +682,21 @@
       'footwear',
       'headwear',
       'hardware'
+    ];
+
+    /* GROUPS: the tabs at the top. Each group lists its categories (the
+       sheet's "section" column), in the order they show. Fashion is split
+       into Wear and Adorn. A category not listed here shows under Other. */
+    const GROUPS = [
+      { key: 'fashion', label: 'Fashion', parts: [
+        { label: 'Wear',  sections: ['armor', 'outerwear', 'top', 'bottoms', 'uniform', 'hood', 'footwear', 'headwear'] },
+        { label: 'Adorn', sections: ['jewelry', 'bag', 'eyewear', 'hardware'] } ] },
+      { key: 'art', label: 'Art', parts: [
+        { sections: ['painting', 'sculpture', 'photo', 'print', 'rendering'] } ] },
+      { key: 'design', label: 'Design', parts: [
+        { sections: ['furniture', 'lighting', 'object', 'architecture'] } ] },
+      { key: 'screen-page', label: 'Screen & Page', parts: [
+        { sections: ['book', 'film', 'performance', 'music video'] } ] }
     ];
 
     /* Sample items, only shown when SHEET_URL is empty. */
@@ -707,6 +756,19 @@
     let sortMode = DEFAULT_SORT;   /* random, newest, oldest, category, maker */
     const openSections = {};   /* sections opened in the By category view */
     let category = '';         /* '' = all categories */
+    let group = '';            /* '' = all groups; else a GROUPS key */
+    function groupOf(section) {
+      for (let g = 0; g < GROUPS.length; g++) {
+        for (let p = 0; p < GROUPS[g].parts.length; p++) {
+          if (GROUPS[g].parts[p].sections.indexOf(section) !== -1) return GROUPS[g].key;
+        }
+      }
+      return 'other';
+    }
+    function groupInfo(key) {
+      return GROUPS.filter(function (g) { return g.key === key; })[0] ||
+        { key: 'other', label: 'Other', parts: [{ sections: [] }] };
+    }
     let order = [];         /* items currently on the page, for PREV / NEXT */
     let openIndex = -1;
     let openPhoto = 0;
@@ -936,11 +998,14 @@
       if (loopWatch) loopWatch.disconnect();   /* old cards are about to be replaced */
       const words = q.value.toLowerCase().split(/\s+/).filter(Boolean);
       searchEl.classList.toggle('has-text', words.length > 0);
-      const inCat = items.filter(function (item) { return !category || item.section === category; });
+      const inCat = items.filter(function (item) {
+        return (!group || groupOf(item.section) === group) && (!category || item.section === category);
+      });
       const shown = sorted(inCat.filter(function (item) { return matches(item, words); }));
 
       main.textContent = '';
       order = [];
+      drawNav();
 
       if (!items.length) {
         statusEl.textContent = 'No items yet.';
@@ -949,55 +1014,51 @@
       }
 
       if (sortMode === 'category') {
-        const keys = SECTIONS.map(function (k) { return String(k).toLowerCase(); });
-        const extra = [];
-        shown.forEach(function (item) {
-          if (keys.indexOf(item.section) === -1 && extra.indexOf(item.section) === -1) extra.push(item.section);
-        });
-        extra.sort();
-        keys.concat(extra).forEach(function (key) {
-          const group = shown.filter(function (i) { return i.section === key; });
-          if (!group.length) return;
-          /* folded: a section shows one row until it's opened. Searching or
-             picking one category opens everything. */
-          const folds = !words.length && !category;
-          const section = el('section', folds && !openSections[key] ? 'fold closed' : (folds ? 'fold' : ''));
-          const headRow = el(folds ? 'button' : 'div', 'section-head');
-          const count = group.length + (group.length === 1 ? ' item' : ' items');
-          headRow.append(el('span', '', (folds ? (openSections[key] ? '[−] ' : '[+] ') : '') + (key || 'other')), el('span', '', count));
-          const grid = el('div', 'grid');
-          group.forEach(function (item) { order.push(item); grid.append(makeCard(item)); });
-          section.append(headRow, grid);
-          if (folds) {
-            headRow.type = 'button';
-            const more = el('button', 'more', '');
-            more.type = 'button';
-            const set = function (open) {
-              if (open) openSections[key] = true; else delete openSections[key];
-              section.classList.toggle('closed', !open);
-              headRow.firstChild.textContent = (open ? '[−] ' : '[+] ') + (key || 'other');
-              headRow.setAttribute('aria-expanded', open ? 'true' : 'false');
-              more.textContent = open ? '[−] Show less' : '[+] Show all ' + count;
-            };
-            set(!!openSections[key]);
-            const toggle = function () {
-              const open = section.classList.contains('closed');
-              set(open);
-              if (!open && section.getBoundingClientRect().top < 0) headRow.scrollIntoView();
-            };
-            headRow.addEventListener('click', toggle);
-            more.addEventListener('click', toggle);
-            section.append(more);
-          }
-          main.append(section);
-        });
+        /* folded: a section shows one row until it's opened. Searching or
+           picking one category opens everything. */
+        const folds = !words.length && !category;
+        if (!group && !category && !words.length) {
+          /* the front page: one section per group */
+          GROUPS.concat([groupInfo('other')]).forEach(function (g) {
+            const list = shown.filter(function (i) { return groupOf(i.section) === g.key; });
+            if (list.length) main.append(sectionBlock('g:' + g.key, g.label, list, true));
+          });
+        } else {
+          /* one group (or a search): one section per category, in the group's order */
+          const keys = [], parts = [];
+          (group ? [groupInfo(group)] : GROUPS.concat([groupInfo('other')])).forEach(function (g) {
+            g.parts.forEach(function (part) {
+              parts.push({ label: g.parts.length > 1 ? part.label : '', at: keys.length });
+              part.sections.forEach(function (k) { if (keys.indexOf(k) === -1) keys.push(k); });
+            });
+          });
+          const extra = [];
+          shown.forEach(function (item) {
+            if (keys.indexOf(item.section) === -1 && extra.indexOf(item.section) === -1) extra.push(item.section);
+          });
+          extra.sort();
+          const all = keys.concat(extra);
+          let partShown = {};
+          all.forEach(function (key, n) {
+            const list = shown.filter(function (i) { return i.section === key; });
+            if (!list.length) return;
+            /* Wear / Adorn labels inside Fashion */
+            let part = null;
+            parts.forEach(function (pt) { if (pt.at <= n) part = pt; });
+            if (part && part.label && !partShown[part.label] && group) {
+              partShown[part.label] = true;
+              main.append(el('div', 'part-head', part.label));
+            }
+            main.append(sectionBlock(key, key || 'other', list, folds));
+          });
+        }
       } else {
         const grid = el('div', 'grid');
         shown.forEach(function (item) { order.push(item); grid.append(makeCard(item)); });
         main.append(grid);
       }
 
-      const where = category ? ' in ' + category : '';
+      const where = category ? ' in ' + category : group ? ' in ' + groupInfo(group).label : '';
       const how = {
         random: 'in a new order every visit',
         newest: 'newest first',
@@ -1015,6 +1076,84 @@
         statusEl.textContent = 'Nothing matches “' + q.value.trim() + '”' + where;
         main.append(statusEl);
       }
+    }
+
+    /* A section of the By category view; folds to one row when asked. */
+    function sectionBlock(key, label, list, folds) {
+      const section = el('section', folds && !openSections[key] ? 'fold closed' : (folds ? 'fold' : ''));
+      const headRow = el(folds ? 'button' : 'div', 'section-head');
+      const count = list.length + (list.length === 1 ? ' item' : ' items');
+      headRow.append(el('span', '', label), el('span', '', count));
+      const grid = el('div', 'grid');
+      list.forEach(function (item) { order.push(item); grid.append(makeCard(item)); });
+      section.append(headRow, grid);
+      if (folds) {
+        headRow.type = 'button';
+        const more = el('button', 'more', '');
+        more.type = 'button';
+        const set = function (open) {
+          if (open) openSections[key] = true; else delete openSections[key];
+          section.classList.toggle('closed', !open);
+          headRow.firstChild.textContent = (open ? '[−] ' : '[+] ') + label;
+          headRow.setAttribute('aria-expanded', open ? 'true' : 'false');
+          more.textContent = open ? '[−] Show less' : '[+] Show all ' + count;
+        };
+        set(!!openSections[key]);
+        const toggle = function () {
+          const open = section.classList.contains('closed');
+          set(open);
+          if (!open && section.getBoundingClientRect().top < 0) headRow.scrollIntoView();
+        };
+        headRow.addEventListener('click', toggle);
+        more.addEventListener('click', toggle);
+        section.append(more);
+      }
+      return section;
+    }
+
+    /* The group tabs, and the category links under the chosen group. */
+    function drawNav() {
+      const tabs = $('groups'), subs = $('subcats');
+      const counts = {}, gcounts = {};
+      items.forEach(function (i) {
+        counts[i.section] = (counts[i.section] || 0) + 1;
+        const g = groupOf(i.section); gcounts[g] = (gcounts[g] || 0) + 1;
+      });
+      tabs.textContent = '';
+      const list = [{ key: '', label: 'All' }].concat(GROUPS, gcounts.other ? [groupInfo('other')] : []);
+      list.forEach(function (g) {
+        const b = el('button', 'tab' + (group === g.key && !(g.key === '' && category) ? ' on' : ''), g.label);
+        b.type = 'button';
+        b.append(el('sup', '', String(g.key ? (gcounts[g.key] || 0) : items.length)));
+        b.addEventListener('click', function () { pickGroup(g.key, ''); });
+        tabs.append(b);
+      });
+      subs.textContent = '';
+      subs.hidden = !group;
+      if (!group) return;
+      groupInfo(group).parts.forEach(function (part) {
+        const row = el('div', 'subrow');
+        if (part.label) row.append(el('span', 'sublabel', part.label));
+        const keys = part.sections.slice();
+        if (group === 'other') Object.keys(counts).forEach(function (k) { if (groupOf(k) === 'other') keys.push(k); });
+        keys.forEach(function (k) {
+          if (!counts[k]) return;
+          const b = el('button', 'sub' + (category === k ? ' on' : ''), k || 'other');
+          b.type = 'button';
+          b.append(el('sup', '', String(counts[k])));
+          b.addEventListener('click', function () { pickGroup(group, category === k ? '' : k); });
+          row.append(b);
+        });
+        if (row.querySelector('.sub')) subs.append(row);
+      });
+    }
+
+    function pickGroup(g, c) {
+      group = g; category = c;
+      catEl.value = category;
+      saveChoices();
+      fadeRender();
+      backToTop();
     }
 
     function idNum(item) {
@@ -1059,6 +1198,7 @@
     function saveChoices() {
       const parts = [];
       if (sortMode !== DEFAULT_SORT) parts.push('sort=' + sortMode);
+      if (group) parts.push('group=' + encodeURIComponent(group));
       if (category) parts.push('cat=' + encodeURIComponent(category));
       if (history.replaceState) history.replaceState(null, '', parts.length ? '#' + parts.join('&') : location.pathname + location.search);
       sortEl.classList.toggle('on', sortMode !== DEFAULT_SORT);
@@ -1072,6 +1212,7 @@
         const kv = part.split('=');
         if (kv[0] === 'sort' && sortEl.querySelector('option[value="' + kv[1] + '"]')) sortMode = kv[1];
         if (kv[0] === 'cat') category = decodeURIComponent(kv[1] || '').toLowerCase();
+        if (kv[0] === 'group') group = decodeURIComponent(kv[1] || '').toLowerCase();
       });
     }
 
@@ -1089,6 +1230,8 @@
         catEl.append(o);
       });
       if (category && !(category in counts)) category = '';
+      if (group && group !== 'other' && !GROUPS.some(function (g) { return g.key === group; })) group = '';
+      if (category && !group) group = groupOf(category);
       fitLabels();
       catEl.value = category;
       sortEl.value = sortMode;
@@ -1125,6 +1268,7 @@
 
     catEl.addEventListener('change', function () {
       category = catEl.value;
+      group = category ? groupOf(category) : '';
       saveChoices();
       fadeRender();
       backToTop();
