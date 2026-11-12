@@ -1,11 +1,15 @@
 {
- "section": "",
- "maker": "",
- "name": "",
- "note": "",
+ "section": "PHOTO",
+ "maker": "UNKNOWN",
+ "name": "UNKNOWN",
+ "note": "Colour photograph reproduced on a printed book page, showing a figure seated in a chair wearing a red fur-trimmed jacket, red leather trousers and knee-high red platform boots, with white face makeup. Year and photographer are not established.",
  "credit": "",
  "keep_bg": false,
  "photo_mode": "",
  "video_url": "",
- "lookup": true
+ "lookup": true,
+ "looked_up": {
+  "sure": false,
+  "source": ""
+ }
 }
