@@ -133,6 +133,24 @@ def _safe(f, q):
         return []
 
 
+HEDGE = re.compile(r'\s*(?:,\s*|\()\s*(?:best guess|probable|attribution unconfirmed|unconfirmed|uncertain|attributed|unverified|possibly)\s*\)?\s*$', re.I)
+MISSING = re.compile(r"no caption|no credit|not confirmed|unconfirmed|couldn.t|could not|no matching|is unknown|are unknown|not visible|visual inspection|no source", re.I)
+
+
+def tidy(found):
+    """Keep what the lookup found, drop its talk about what it didn't."""
+    for k in ('maker', 'name', 'credit'):
+        v = found.get(k)
+        if isinstance(v, str):
+            v2 = HEDGE.sub('', v)
+            v2 = re.sub(r'\s*\([^)]*(?:not confirmed|unverified|closest match)[^)]*\)', '', v2)
+            found[k] = v2 + (' (?)' if v2 != v and k != 'credit' else '')
+    if isinstance(found.get('note'), str):
+        parts = re.split(r'(?<=[.!?])\s+', found['note'].strip())
+        found['note'] = ' '.join(x for x in parts if x and not MISSING.search(x))
+    return found
+
+
 def main():
     sub = sys.argv[1]
     entry_path = os.path.join(sub, 'entry.json')
@@ -219,7 +237,7 @@ Reply with ONLY one JSON object, no other text:
 {{"section": one of [{SECTIONS}],
  "maker": the designer, brand, artist, workshop or culture (as the source writes it),
  "name": the item or work's title; for artworks add the year, like "CLAVO, 1978"; for fashion include the season or model if known,
- "note": one or two plain factual sentences (medium, size, year, collection), or "",
+ "note": one or two plain factual sentences (medium, size, year, collection), or ""; never write about what you couldn't find or confirm,
  "credit": the credit line as the source publishes it (museum/collection and accession number, gallery and photographer, or the brand), or "",
  "source": the URL that confirms it, or "",
  "sure": true if a source confirms it, false if it's your best guess}}
@@ -243,6 +261,7 @@ If you can't tell what it is, use "" for maker and name and false for sure."""
     finally:
         shutil.rmtree(tmp, ignore_errors=True)
 
+    tidy(found)
     for k in FIELDS:
         if not given[k] and isinstance(found.get(k), str) and found[k].strip():
             entry[k] = found[k].strip()

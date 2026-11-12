@@ -131,11 +131,17 @@
   "id": "2029",
   "section": "BOOK",
   "img": "images/unknown-lindau-gospels-ca-880.png, images/unknown-lindau-gospels-ca-880-2.png",
-  "maker": "UNKNOWN",
+  "maker": "ABBEY OF ST. GALL, SWITZERLAND",
   "name": "LINDAU GOSPELS, CA. 880",
   "note": "\"Lindau Gospels,\" in Latin\nSwitzerland, St. Gall, ca. 880 (manuscript)\nEastern France, ca. 870 (front cover)\nAustria, Salzburg region, ca. 780–800 (back cover)\nPurchased by J. Pierpont Morgan, 1901",
   "credit": "The Morgan Library & Museum, MS M.1",
-  "photos": "keep"
+  "photos": "keep",
+  "updated": "2026-11-12T05:07:03.280464Z",
+  "looked_up": {
+   "sure": true,
+   "source": "https://www.themorgan.org/print/937",
+   "how": "web"
+  }
  },
  {
   "id": "2030",
@@ -151,31 +157,49 @@
   "id": "2031",
   "section": "FURNITURE",
   "img": "images/unknown-table-legs.png",
-  "maker": "UNKNOWN",
+  "maker": "WILLIAM SPRATS",
   "name": "TABLE LEGS",
-  "note": "",
-  "credit": "",
-  "photos": "cut"
+  "note": "Cherry. 28 1/2 x 10 1/4 x 17 in. (72.4 x 26 x 43.2 cm)",
+  "credit": "The Metropolitan Museum of Art, Gift of Elizabeth B. Carrick, 1969, 69.207",
+  "photos": "cut",
+  "updated": "2026-11-12T05:07:23.474212Z",
+  "looked_up": {
+   "sure": true,
+   "source": "https://www.metmuseum.org/art/collection/search/1180",
+   "how": "museum: The Metropolitan Museum of Art"
+  }
  },
  {
   "id": "2032",
   "section": "FURNITURE",
   "img": "images/unknown-finials.png",
-  "maker": "UNKNOWN",
+  "maker": "AMERICAN, VARIOUS MAKERS",
   "name": "FINIALS",
-  "note": "",
+  "note": "Catalogue plate of twelve carved wooden furniture finials (urn, flame, spiral and ball forms, one female bust), attributed to Boston, Newport, Philadelphia, Norwich and New Hampshire.",
   "credit": "",
-  "photos": "cut"
+  "photos": "cut",
+  "updated": "2026-11-12T05:08:00.186249Z",
+  "looked_up": {
+   "sure": false,
+   "source": "",
+   "how": "web"
+  }
  },
  {
   "id": "2033",
   "section": "OBJECT",
   "img": "images/unknown-pair-of-bird-shaped-handles-iran-ca-9th-century-bce.png",
-  "maker": "UNKNOWN",
+  "maker": "IRAN",
   "name": "PAIR OF BIRD-SHAPED HANDLES, IRAN CA. 9TH CENTURY BCE",
   "note": "Such bird-head protome attachments are represented in Near Eastern art in the round on buckets and cauldrons as well as on bowls and basins. They were popular in Assyria and Iran during the ninth and eighth centuries B.C.",
   "credit": "The Metropolitan museum of art",
-  "photos": "cut"
+  "photos": "cut",
+  "updated": "2026-11-12T05:08:19.831299Z",
+  "looked_up": {
+   "sure": true,
+   "source": "https://www.metmuseum.org/art/collection/search/325138",
+   "how": "museum: The Metropolitan Museum of Art"
+  }
  },
  {
   "id": "2034",
@@ -212,12 +236,17 @@
   "id": "2037",
   "section": "PHOTO",
   "img": "images/unknown-unknown-2.png",
-  "maker": "UNKNOWN",
-  "name": "UNKNOWN",
-  "note": "",
-  "credit": "",
+  "maker": "DANA SALVO",
+  "name": "SENORA DE GUADALUPE WITH STAR PAPER, MEXICO, 1987",
+  "note": "Chromogenic print, 15 1/4 × 19 3/8 in (38.8 × 49.3 cm), in the Museum of Modern Art's Photography collection; the MoMA record describes it as a statue with star paper and a yellow bulb.",
+  "credit": "The Museum of Modern Art, New York. Gift of the artist. Object number 249.1988.x1-x2",
   "photos": "painting",
-  "updated": "2026-11-10T01:16:23.677Z"
+  "updated": "2026-11-12T05:08:58.193661Z",
+  "looked_up": {
+   "sure": false,
+   "source": "https://www.moma.org/collection/works/49520",
+   "how": "web"
+  }
  },
  {
   "id": "2038",
@@ -419,16 +448,17 @@
   "id": "2054",
   "section": "OBJECT",
   "img": "images/unknown-custodia-monstrance-castilla-first-third-of-the-17th-century-base-and-18th-century-astil-and-sun.png",
-  "maker": "UNKNOWN",
+  "maker": "CASTILLA, SPAIN",
   "name": "CUSTODIA (MONSTRANCE), CASTILLA, FIRST THIRD OF THE 17TH CENTURY (BASE) AND 18TH CENTURY (ASTIL AND SUN)",
   "note": "Gilded sunburst monstrance with a knopped stem and a round glass lunette, topped by a cross. Per the printed caption, the foot dates to the early 17th century and the stem and radiant sun to the 18th century.",
   "credit": "Caption: \"3. Custodia, Castilla, primer tercio del siglo XVII (pie) y siglo XVIII (astil y sol).\" Collection and publication not identified.",
   "photos": "cut",
   "looked_up": {
    "sure": false,
-   "source": ""
+   "source": "",
+   "how": "web"
   },
-  "updated": "2026-11-11T01:05:51.285Z"
+  "updated": "2026-11-12T05:09:45.074456Z"
  },
  {
   "id": "2055",
@@ -540,16 +570,17 @@
   "id": "2062",
   "section": "OBJECT",
   "img": "images/unknown-unknown-3.png",
-  "maker": "UNKNOWN",
-  "name": "UNKNOWN",
+  "maker": "DAVID JARAMILLO",
+  "name": "LOWRIDER \"DAVE'S DREAM\", 1992",
   "note": "Interior of a custom car with red velvet upholstery in a scale-like tufted pattern on the headliner and seats, a small mirror ball hanging from the overhead console, and a steering wheel ringed with chain-like studs.",
-  "credit": "",
+  "credit": "National Museum of American History, Smithsonian Institution, accession 1990.0567.01; photograph by Eric Long/NMAH",
   "photos": "keep",
   "looked_up": {
-   "sure": false,
-   "source": ""
+   "sure": true,
+   "source": "https://si.edu/object/lowrider-daves-dream-1992:nmah_1000887",
+   "how": "web"
   },
-  "updated": "2026-11-11T01:05:03.363Z"
+  "updated": "2026-11-12T05:11:20.057552Z"
  },
  {
   "id": "2063",
@@ -576,9 +607,10 @@
   "photos": "painting",
   "looked_up": {
    "sure": false,
-   "source": ""
+   "source": "",
+   "how": "web"
   },
-  "updated": "2026-11-11T01:04:51.632Z"
+  "updated": "2026-11-12T05:12:48.866110Z"
  },
  {
   "id": "2065",
@@ -606,9 +638,10 @@
   "photos": "keep",
   "looked_up": {
    "sure": false,
-   "source": ""
+   "source": "",
+   "how": "web"
   },
-  "updated": "2026-11-11T01:04:32.406Z"
+  "updated": "2026-11-12T05:13:36.893041Z"
  },
  {
   "id": "2067",
@@ -621,8 +654,10 @@
   "photos": "cut",
   "looked_up": {
    "sure": false,
-   "source": ""
-  }
+   "source": "",
+   "how": "web"
+  },
+  "updated": "2026-11-12T05:14:47.181894Z"
  },
  {
   "id": "2068",
@@ -644,14 +679,15 @@
   "img": "images/unknown-unknown-7.png",
   "maker": "WATCHTOWER",
   "name": "UNKNOWN",
-  "note": "",
+  "note": "Painted illustration of a burning city under streaking meteors, with an overturned car and figures in the street.",
   "credit": "Watchtower publishing",
   "photos": "painting",
   "looked_up": {
    "sure": false,
-   "source": ""
+   "source": "",
+   "how": "web"
   },
-  "updated": "2026-11-11T01:04:11.684Z"
+  "updated": "2026-11-12T05:16:06.810645Z"
  },
  {
   "id": "2070",
@@ -659,14 +695,15 @@
   "img": "images/unknown-unknown-8.png",
   "maker": "UNKNOWN",
   "name": "UNKNOWN",
-  "note": "",
+  "note": "Two riders on custom bicycles doing wheelies on a paved lot, shot on colour film with motion blur and a saturated blue sky.",
   "credit": "",
   "photos": "keep",
   "looked_up": {
    "sure": false,
-   "source": ""
+   "source": "",
+   "how": "web"
   },
-  "updated": "2026-11-11T01:03:47.440Z"
+  "updated": "2026-11-12T05:16:35.443442Z"
  },
  {
   "id": "2071",
@@ -688,62 +725,65 @@
   "id": "2072",
   "section": "OBJECT",
   "img": "images/unknown-unknown-9.png",
-  "maker": "UNKNOWN",
-  "name": "UNKNOWN",
-  "note": "",
+  "maker": "MEXICAN, 19TH CENTURY (?)",
+  "name": "CRUZ DE ÁNIMAS",
+  "note": "A painted and carved wooden cross with a polychrome corpus of Christ, an INRI plaque, rosette-tipped rays, and painted panels with Passion symbols and a small Virgin of Sorrows at the foot.",
   "credit": "",
   "photos": "cut",
   "looked_up": {
    "sure": false,
-   "source": ""
+   "source": "",
+   "how": "web"
   },
-  "updated": "2026-11-11T01:03:39.971Z"
+  "updated": "2026-11-12T05:17:18.095600Z"
  },
  {
   "id": "2073",
   "section": "OBJECT",
   "img": "images/unknown-handmade-silver-tin-sacred-heart-wall-art-with-roses.png",
-  "maker": "UNKNOWN",
+  "maker": "SAN MIGUEL DE ALLENDE, MEXICO",
   "name": "HANDMADE SILVER TIN SACRED HEART WALL ART WITH ROSES",
   "note": "Laminated tin wall piece with dozens of metallic roses around a flame-topped sacred heart, about 34 × 26 cm, handmade in San Miguel de Allende, Mexico.",
   "credit": "uFurnish",
   "photos": "cut",
   "looked_up": {
    "sure": true,
-   "source": "https://www.ufurnish.com/en-gb/p/a/28931265/handmade-silver-tin-sacred-heart-wall-art-roses-san-miguel-de-allende-folk-decor"
+   "source": "https://www.ufurnish.com/en-gb/p/a/28931265/handmade-silver-tin-sacred-heart-wall-art-roses-san-miguel-de-allende-folk-decor",
+   "how": "web"
   },
-  "updated": "2026-11-11T01:03:32.667Z"
+  "updated": "2026-11-12T05:17:38.972873Z"
  },
  {
   "id": "2074",
   "section": "OBJECT",
   "img": "images/unknown-unknown-10.png",
-  "maker": "UNKNOWN",
-  "name": "UNKNOWN",
+  "maker": "MEXICAN",
+  "name": "SACRED HEART EX-VOTO WITH MILAGROS",
   "note": "Mexican folk-art ex-voto heart (corazón) with a blue-painted base and scalloped crest, covered in small metal milagros and with a flaming Sacred Heart at the centre;.",
   "credit": "",
   "photos": "cut",
   "looked_up": {
    "sure": false,
-   "source": ""
+   "source": "",
+   "how": "web"
   },
-  "updated": "2026-11-11T01:03:25.180Z"
+  "updated": "2026-11-12T05:18:11.982126Z"
  },
  {
   "id": "2075",
   "section": "OBJECT",
   "img": "images/unknown-unknown-11.png",
-  "maker": "UNKNOWN",
-  "name": "UNKNOWN",
-  "note": "",
+  "maker": "RENÉ LALIQUE",
+  "name": "POCKET WATCH WITH DANCING FIGURES",
+  "note": "Pocket watch with a gold-coloured bow and crown and a round moulded glass case. The back has a relief ring of dancing women around a central sunburst, signed LALIQUE near the lower edge.",
   "credit": "",
   "photos": "cut",
   "looked_up": {
    "sure": false,
    "source": "",
-   "error": "API Error: Can't reach the API server — check your internet or DNS (ENOTFOUND)"
+   "how": "web"
   },
-  "updated": "2026-11-11T01:03:13.771Z"
+  "updated": "2026-11-12T05:19:14.411073Z"
  },
  {
   "id": "2076",
@@ -751,14 +791,15 @@
   "img": "images/unknown-unknown-12.png",
   "maker": "UNKNOWN",
   "name": "UNKNOWN",
-  "note": "",
+  "note": "Clear molded glass scent bottle with a pointed bud-shaped stopper, tapering body and arched lobed relief along the lower half.",
   "credit": "",
   "photos": "cut",
   "looked_up": {
    "sure": false,
-   "source": ""
+   "source": "",
+   "how": "web"
   },
-  "updated": "2026-11-11T01:03:10.823Z"
+  "updated": "2026-11-12T05:20:20.243139Z"
  },
  {
   "id": "2077",
@@ -771,9 +812,10 @@
   "photos": "cut",
   "looked_up": {
    "sure": false,
-   "source": ""
+   "source": "",
+   "how": "web"
   },
-  "updated": "2026-11-11T01:03:03.105Z"
+  "updated": "2026-11-12T05:21:45.873709Z"
  },
  {
   "id": "2078",
@@ -809,16 +851,17 @@
   "id": "2080",
   "section": "OBJECT",
   "img": "images/unknown-unknown-14.png",
-  "maker": "UNKNOWN",
+  "maker": "KRALIK, BOHEMIA (?)",
   "name": "UNKNOWN",
   "note": "Blown art glass vase with a crackled (craquelé) surface, ribbed sides, red and green colour streaks, and a gold-flecked foot, photographed from a printed book page (page 234).",
   "credit": "",
   "photos": "cut",
   "looked_up": {
    "sure": false,
-   "source": ""
+   "source": "",
+   "how": "web"
   },
-  "updated": "2026-11-11T01:02:35.338Z"
+  "updated": "2026-11-12T05:22:52.475557Z"
  },
  {
   "id": "2081",
@@ -923,16 +966,17 @@
   "id": "2088",
   "section": "PAINTING",
   "img": "images/salomon-huerta-drive-by-1992-2.png",
-  "maker": "UNKNOWN",
-  "name": "UNKNOWN",
-  "note": "",
-  "credit": "",
+  "maker": "SALOMÓN HUERTA",
+  "name": "DRIVE BY, 1992",
+  "note": "Charcoal and white chalk on dark blue-grey paper, showing a boy in a T-shirt and jeans seen from behind, turning his head.",
+  "credit": "© Salomón Huerta",
   "photos": "painting",
   "looked_up": {
    "sure": false,
-   "source": ""
+   "source": "",
+   "how": "web"
   },
-  "updated": "2026-11-11T01:01:39.228Z"
+  "updated": "2026-11-12T05:23:30.235283Z"
  },
  {
   "id": "2089",
@@ -1011,15 +1055,17 @@
   "id": "2094",
   "section": "OBJECT",
   "img": "images/unknown-custodia-sun-monstrance.png",
-  "maker": "UNKNOWN",
+  "maker": "CASTILLA, SPAIN",
   "name": "CUSTODIA (SUN MONSTRANCE)",
   "note": "Gilded sun monstrance from Castile, with a foot dated to the first third of the 17th century and a stem and sun dated to the 18th century, according to the caption printed beneath the photo. The caption is the only dating source I found.",
   "credit": "",
   "photos": "cut",
   "looked_up": {
    "sure": false,
-   "source": ""
-  }
+   "source": "",
+   "how": "web"
+  },
+  "updated": "2026-11-12T05:24:11.231574Z"
  },
  {
   "id": "2095",
@@ -1116,14 +1162,15 @@
   "img": "images/unknown-unknown-15.png",
   "maker": "UNKNOWN",
   "name": "UNKNOWN",
-  "note": "",
+  "note": "Printed photograph of a seated wearer in a gold lamé garment, with a multi-strand heishi turquoise necklace, a cluster-set pendant, cluster-work bracelets and cluster rings.",
   "credit": "",
   "photos": "keep",
   "looked_up": {
    "sure": false,
-   "source": ""
+   "source": "",
+   "how": "web"
   },
-  "updated": "2026-11-11T00:40:31.520Z"
+  "updated": "2026-11-12T05:24:51.315586Z"
  },
  {
   "id": "2102",
@@ -1160,16 +1207,17 @@
   "id": "2104",
   "section": "OBJECT",
   "img": "images/unknown-kukri-and-sheath.png",
-  "maker": "UNKNOWN",
+  "maker": "NEPALESE",
   "name": "KUKRI AND SHEATH",
   "note": "A Nepalese kukri (Gurkha knife) with its scabbard, shown in a black-and-white photograph on a plain background. The sheath has studded, decorated panels and side fittings with tassels.",
   "credit": "",
   "photos": "cut",
   "looked_up": {
    "sure": false,
-   "source": ""
+   "source": "",
+   "how": "web"
   },
-  "updated": "2026-11-12T03:51:47.823Z"
+  "updated": "2026-11-12T05:25:31.772428Z"
  },
  {
   "id": "2105",
@@ -1182,8 +1230,10 @@
   "photos": "cut",
   "looked_up": {
    "sure": false,
-   "source": ""
-  }
+   "source": "",
+   "how": "web"
+  },
+  "updated": "2026-11-12T05:27:09.752035Z"
  },
  {
   "id": "2106",
@@ -1204,31 +1254,33 @@
   "id": "2107",
   "section": "OBJECT",
   "img": "images/unknown-unknown-17.png",
-  "maker": "UNKNOWN",
-  "name": "UNKNOWN",
+  "maker": "LUBA PEOPLES",
+  "name": "KIBANGO (CEREMONIAL STAFF)",
   "note": "A carved wooden staff or scepter with a metal-capped finial, a figurative carved top section, and a shaft wrapped in metal bands.",
   "credit": "",
   "photos": "cut",
   "looked_up": {
    "sure": false,
-   "source": ""
+   "source": "https://www.metmuseum.org/art/collection/search/311105",
+   "how": "web"
   },
-  "updated": "2026-11-12T03:51:24.744Z"
+  "updated": "2026-11-12T05:27:59.731473Z"
  },
  {
   "id": "2108",
   "section": "PHOTO",
   "img": "images/unknown-unknown-18.png",
-  "maker": "UNKNOWN",
+  "maker": "CANDOMBLÉ, BAHIA (BRAZIL) (?)",
   "name": "UNKNOWN",
   "note": "Photograph of a seated woman in a white dress with painted face, in a whitewashed room with brass bowls, a red cloth and other ritual objects.",
   "credit": "",
   "photos": "keep",
   "looked_up": {
    "sure": false,
-   "source": ""
+   "source": "",
+   "how": "web"
   },
-  "updated": "2026-11-12T03:51:17.464Z"
+  "updated": "2026-11-12T05:28:58.412488Z"
  },
  {
   "id": "2109",
@@ -1249,31 +1301,33 @@
   "id": "2110",
   "section": "SCULPTURE",
   "img": "images/unknown-silver-plaque-of-christ-as-the-man-of-sorrows-ecce-homo-in-a-strapwork-frame.png",
-  "maker": "UNKNOWN",
+  "maker": "GERMAN, AUGSBURG",
   "name": "SILVER PLAQUE OF CHRIST AS THE MAN OF SORROWS (ECCE HOMO) IN A STRAPWORK FRAME",
   "note": "Repoussé silver rectangular plaque showing Christ crowned with thorns, bound and holding a rod, set in a raised inner frame with scrolling strapwork.",
-  "credit": "",
+  "credit": "The Metropolitan Museum of Art (?)",
   "photos": "cut",
   "looked_up": {
    "sure": false,
-   "source": ""
+   "source": "https://www.metmuseum.org/art/collection/search/205519",
+   "how": "web"
   },
-  "updated": "2026-11-12T03:50:55.346Z"
+  "updated": "2026-11-12T05:30:38.451812Z"
  },
  {
   "id": "2111",
   "section": "FURNITURE",
   "img": "images/unknown-painted-leather-trunk-with-tobias-and-the-archangel-raphael.png",
-  "maker": "UNKNOWN",
+  "maker": "SPANISH COLONIAL, PROBABLY PERU",
   "name": "PAINTED LEATHER TRUNK WITH TOBIAS AND THE ARCHANGEL RAPHAEL",
   "note": "Domed-lid wooden trunk covered in painted leather and studded with nails. It shows Tobias, the Archangel Raphael and the dog on the front, and a standing Virgin on the end panel. It looks like Spanish colonial work, probably Peruvian, from the 17th or 18th century.",
   "credit": "",
   "photos": "cut",
   "looked_up": {
    "sure": false,
-   "source": ""
+   "source": "",
+   "how": "web"
   },
-  "updated": "2026-11-12T03:50:47.603Z"
+  "updated": "2026-11-12T05:31:22.721152Z"
  },
  {
   "id": "2112",
@@ -1286,9 +1340,10 @@
   "photos": "keep",
   "looked_up": {
    "sure": false,
-   "source": ""
+   "source": "",
+   "how": "web"
   },
-  "updated": "2026-11-12T03:50:35.299Z"
+  "updated": "2026-11-12T05:32:26.351005Z"
  },
  {
   "id": "2113",
@@ -1330,9 +1385,10 @@
   "photos": "cut",
   "looked_up": {
    "sure": false,
-   "source": ""
+   "source": "",
+   "how": "web"
   },
-  "updated": "2026-11-12T03:50:10.147Z"
+  "updated": "2026-11-12T05:34:23.962588Z"
  },
  {
   "id": "2116",
@@ -1360,9 +1416,10 @@
   "photos": "cut",
   "looked_up": {
    "sure": false,
-   "source": ""
+   "source": "",
+   "how": "web"
   },
-  "updated": "2026-11-12T03:48:17.929Z"
+  "updated": "2026-11-12T05:35:51.388426Z"
  },
  {
   "id": "2118",
@@ -1405,9 +1462,10 @@
   "photos": "cut",
   "looked_up": {
    "sure": false,
-   "source": ""
+   "source": "",
+   "how": "web"
   },
-  "updated": "2026-11-12T03:47:55.018Z"
+  "updated": "2026-11-12T05:36:34.634022Z"
  },
  {
   "id": "2121",
@@ -1436,39 +1494,42 @@
   "photos": "keep",
   "looked_up": {
    "sure": false,
-   "source": ""
+   "source": "",
+   "how": "web"
   },
-  "updated": "2026-11-12T03:47:33.265Z"
+  "updated": "2026-11-12T05:37:21.567128Z"
  },
  {
   "id": "2123",
   "section": "JEWELRY",
   "img": "images/unknown-scottish-game-bird-foot-brooch-citrine-and-gold-mount.png",
-  "maker": "UNKNOWN",
+  "maker": "SCOTTISH",
   "name": "SCOTTISH GAME-BIRD FOOT BROOCH, CITRINE AND GOLD MOUNT",
   "note": "Probably a Victorian Scottish brooch made from a mounted bird's foot (grouse or capercaillie type). It has an engraved gold collar set with an oval citrine, and a second round citrine on the foot.",
   "credit": "",
   "photos": "cut",
   "looked_up": {
    "sure": false,
-   "source": "https://www.victorianweb.org/art/design/jewelry/44.html"
+   "source": "",
+   "how": "web"
   },
-  "updated": "2026-11-12T03:47:15.339Z"
+  "updated": "2026-11-12T05:38:11.900487Z"
  },
  {
   "id": "2124",
   "section": "PHOTO",
   "img": "images/unknown-razorbill-alca-torda-close-up-of-head-and-bill.png",
-  "maker": "UNKNOWN",
+  "maker": "@NATURESPARRATE",
   "name": "RAZORBILL (ALCA TORDA), CLOSE-UP OF HEAD AND BILL",
   "note": "Close-up of a razorbill's head and thick bill against a dark background, with a white-and-black body visible below.",
-  "credit": "",
+  "credit": "@naturesparrate (TikTok)",
   "photos": "keep",
   "looked_up": {
    "sure": false,
-   "source": ""
+   "source": "",
+   "how": "web"
   },
-  "updated": "2026-11-12T03:47:07.645Z"
+  "updated": "2026-11-12T05:38:33.591955Z"
  },
  {
   "id": "2125",
@@ -1477,12 +1538,14 @@
   "maker": "UNKNOWN MAKER (XOCHIPALA CULTURE, GUERRERO, MEXICO)",
   "name": "STANDING FEMALE FIGURINE, C. 1500–500 BC",
   "note": "Hand-built earthenware figurine with pigment decoration, in the Xochipala style of Guerrero, Mexico. Approximate date 1500–500 BC; size not confirmed.",
-  "credit": "",
+  "credit": "The Cleveland Museum of Art, John L. Severance Fund, 1993.203",
   "photos": "cut",
   "looked_up": {
-   "sure": false,
-   "source": ""
-  }
+   "sure": true,
+   "source": "https://clevelandart.org/art/1993.203",
+   "how": "museum: The Cleveland Museum of Art"
+  },
+  "updated": "2026-11-12T05:38:54.412666Z"
  },
  {
   "id": "2126",
@@ -1526,9 +1589,10 @@
   "photos": "cut",
   "looked_up": {
    "sure": false,
-   "source": ""
+   "source": "",
+   "how": "web"
   },
-  "updated": "2026-11-12T03:46:25.117Z"
+  "updated": "2026-11-12T05:39:48.985093Z"
  },
  {
   "id": "2129",
@@ -1541,9 +1605,10 @@
   "photos": "cut",
   "looked_up": {
    "sure": false,
-   "source": ""
+   "source": "",
+   "how": "web"
   },
-  "updated": "2026-11-12T03:46:20.134Z"
+  "updated": "2026-11-12T05:40:37.711168Z"
  },
  {
   "id": "2130",
@@ -1556,8 +1621,10 @@
   "photos": "cut",
   "looked_up": {
    "sure": false,
-   "source": ""
-  }
+   "source": "",
+   "how": "web"
+  },
+  "updated": "2026-11-12T05:41:27.835354Z"
  },
  {
   "id": "2131",
@@ -1593,31 +1660,33 @@
   "id": "2133",
   "section": "SCULPTURE",
   "img": "images/unknown-standing-female-figure-andean-ceramic-probably-peruvian-central-south-coast.png",
-  "maker": "UNKNOWN",
+  "maker": "ANDEAN, PROBABLY PERUVIAN COAST",
   "name": "STANDING FEMALE FIGURE, ANDEAN CERAMIC (PROBABLY PERUVIAN CENTRAL/SOUTH COAST)",
   "note": "Painted ceramic standing female figure with hands on hips, a red slip body, and cream and black stepped-fret face paint, zigzag chest bands and banded thighs, shown on a metal stand.",
   "credit": "",
   "photos": "cut",
   "looked_up": {
    "sure": false,
-   "source": ""
+   "source": "",
+   "how": "web"
   },
-  "updated": "2026-11-12T03:45:38.242Z"
+  "updated": "2026-11-12T05:42:36.020512Z"
  },
  {
   "id": "2134",
   "section": "HEADWEAR",
   "img": "images/biltwell-best-guess-from-the-decal-on-the-helmet-not-confirmed-custom-painted-full-face-helmet-cream-and-black-flame-pattern-with-gold-pinstripe-model-unconfirmed-likely-gringo.png",
-  "maker": "UNKNOWN",
+  "maker": "MIKE BILHAUELL (ART & WHEELS) (?)",
   "name": "CUSTOM-PAINTED FULL-FACE HELMET, CREAM AND BLACK FLAME PATTERN WITH GOLD PINSTRIPE (MODEL UNCONFIRMED, LIKELY GRINGO)",
   "note": "A retro full-face motorcycle helmet with a cream base, black flame-style graphics and gold pinstriping, with a DOT marking on the rear.",
   "credit": "",
   "photos": "cut",
   "looked_up": {
    "sure": false,
-   "source": ""
+   "source": "",
+   "how": "web"
   },
-  "updated": "2026-11-12T03:45:29.067Z"
+  "updated": "2026-11-12T05:43:19.731225Z"
  },
  {
   "id": "2135",
@@ -1638,16 +1707,17 @@
   "id": "2136",
   "section": "PHOTO",
   "img": "images/unknown-unknown-29.png",
-  "maker": "UNKNOWN",
-  "name": "UNKNOWN",
+  "maker": "ABBAS / MAGNUM PHOTOS (?)",
+  "name": "POPULAR DEFENCE MILITIA TRAINING, KHARTOUM, 1993 (?)",
   "note": "Colour photograph of a girl in a white headscarf and sunglasses aiming an AK-pattern rifle, with a line of similarly dressed women behind her. Photographer, date and location are unconfirmed.",
-  "credit": "",
+  "credit": "Abbas / Magnum Photos (?)",
   "photos": "keep",
   "looked_up": {
    "sure": false,
-   "source": ""
+   "source": "https://pro.magnumphotos.com/Asset/-2S5RYD130NFZ.html",
+   "how": "web"
   },
-  "updated": "2026-11-12T03:44:08.963Z"
+  "updated": "2026-11-12T05:44:23.952459Z"
  },
  {
   "id": "2137",
@@ -1700,16 +1770,17 @@
   "id": "2140",
   "section": "OBJECT",
   "img": "images/unknown-eight-pointed-star-mesopotamian-star-of-ishtar-inanna-motif.png",
-  "maker": "UNKNOWN",
+  "maker": "MESOPOTAMIAN (SUMERIAN OR AKKADIAN)",
   "name": "EIGHT-POINTED STAR, MESOPOTAMIAN (STAR OF ISHTAR / INANNA) MOTIF",
   "note": "High-contrast ink-style reproduction of an eight-pointed star with a raised central disc and spiral, in the style of the Ishtar/Inanna star symbol of ancient Mesopotamia.",
   "credit": "",
   "photos": "cut",
   "looked_up": {
    "sure": false,
-   "source": ""
+   "source": "https://en.wikipedia.org/wiki/Star_of_Ishtar",
+   "how": "web"
   },
-  "updated": "2026-11-12T03:43:24.871Z"
+  "updated": "2026-11-12T05:45:21.461859Z"
  },
  {
   "id": "2141",
@@ -1744,16 +1815,17 @@
   "id": "2143",
   "section": "HEADWEAR",
   "img": "images/unknown-unknown-31.png",
-  "maker": "UNKNOWN",
-  "name": "UNKNOWN",
+  "maker": "ROBERT WUN",
+  "name": "FALL 2024 COUTURE (?)",
   "note": "Runway-style look: a translucent, frosted skull-shaped head mask with cut-out eyes and fanged teeth, worn with a multi-strand white pearl collar, pearl drop earrings, and white sculpted shoulder pieces over a black garment.",
   "credit": "",
   "photos": "cut",
   "looked_up": {
    "sure": false,
-   "source": ""
+   "source": "",
+   "how": "web"
   },
-  "updated": "2026-11-12T03:41:15.631Z"
+  "updated": "2026-11-12T05:46:55.340560Z"
  },
  {
   "id": "2144",
@@ -1789,16 +1861,17 @@
   "id": "2146",
   "section": "OBJECT",
   "img": "images/unknown-unknown-32.png",
-  "maker": "UNKNOWN",
+  "maker": "JAPAN",
   "name": "GOURD",
   "note": "A dried gourd (hyōtan-type double gourd) with a glossy red-brown lacquered or varnished surface, bound with tan braided cord and a red silk tassel, shown on a flat metal base.",
   "credit": "",
   "photos": "cut",
   "looked_up": {
    "sure": false,
-   "source": ""
+   "source": "https://www.1stdibs.com/furniture/asian-art-furniture/antiquities/japanese-antique-samurai-wine-sake-gourd-hyotan-lacquered-calabash-flask/id-f_36312522",
+   "how": "web"
   },
-  "updated": "2026-11-12T03:40:44.597Z"
+  "updated": "2026-11-12T05:48:05.500449Z"
  },
  {
   "id": "2147",
@@ -1820,16 +1893,17 @@
   "id": "2148",
   "section": "OBJECT",
   "img": "images/unknown-unknown-34.png",
-  "maker": "UNKNOWN",
-  "name": "UNKNOWN",
+  "maker": "IGBO (AWKA REGION), NIGERIA (?)",
+  "name": "CARVED WOODEN DOOR PANEL (MGBO EZI TYPE)",
   "note": "Carved wooden panel, a long plank with symmetrical shallow-relief figures and incised geometric borders (diamond and zigzag patterns).",
   "credit": "",
   "photos": "cut",
   "looked_up": {
    "sure": false,
-   "source": ""
+   "source": "",
+   "how": "web"
   },
-  "updated": "2026-11-12T03:40:22.570Z"
+  "updated": "2026-11-12T05:49:19.596291Z"
  },
  {
   "id": "2149",
@@ -1912,15 +1986,16 @@
   "section": "TOP",
   "img": "images/unknown-unknown-38.png",
   "maker": "ADER ERROR",
-  "name": "UNKNOWN",
+  "name": "PINK CHECK COTTON SHIRT WITH DRAPED SHOULDER",
   "note": "Pink cotton check shirt with a collarless neckline, front button placket and a draped fabric panel across one shoulder, worn with black wide-leg trousers and black flat shoes.",
   "credit": "",
   "photos": "cut",
   "looked_up": {
    "sure": false,
-   "source": ""
+   "source": "",
+   "how": "web"
   },
-  "updated": "2026-11-12T03:39:00.262Z"
+  "updated": "2026-11-12T05:51:42.458197Z"
  },
  {
   "id": "2155",
@@ -1956,16 +2031,17 @@
   "id": "2157",
   "section": "OBJECT",
   "img": "images/unknown-ceremonial-axe-with-female-figure-probably-yoruba-nigeria.png",
-  "maker": "UNKNOWN",
+  "maker": "YORUBA, NIGERIA (?)",
   "name": "CEREMONIAL AXE WITH FEMALE FIGURE (PROBABLY YORUBA, NIGERIA)",
   "note": "Carved wood and forged iron blade on a stand, with a kneeling female figure holding her breasts and a scarified headdress.",
   "credit": "Imaged by Heritage Auctions, HA.com",
   "photos": "cut",
   "looked_up": {
    "sure": false,
-   "source": ""
+   "source": "",
+   "how": "web"
   },
-  "updated": "2026-11-12T03:38:15.949Z"
+  "updated": "2026-11-12T05:53:04.322048Z"
  },
  {
   "id": "2158",
@@ -1986,16 +2062,17 @@
   "id": "2159",
   "section": "OBJECT",
   "img": "images/unknown-unknown-39.png",
-  "maker": "UNKNOWN",
-  "name": "UNKNOWN",
+  "maker": "BAMANA PEOPLES, MALI (?)",
+  "name": "HORNED FACE MASK (N'TOMO OR NDOMO TYPE)",
   "note": "Carved wood face mask with a pair of horns and ridged side arches, probably West African (Mali or Burkina Faso).",
   "credit": "",
   "photos": "cut",
   "looked_up": {
    "sure": false,
-   "source": ""
+   "source": "",
+   "how": "web"
   },
-  "updated": "2026-11-12T03:37:48.402Z"
+  "updated": "2026-11-12T05:53:48.453350Z"
  },
  {
   "id": "2160",
@@ -2008,8 +2085,10 @@
   "photos": "painting",
   "looked_up": {
    "sure": false,
-   "source": ""
-  }
+   "source": "",
+   "how": "web"
+  },
+  "updated": "2026-11-12T05:54:55.389267Z"
  },
  {
   "id": "2161",
@@ -2022,9 +2101,10 @@
   "photos": "cut",
   "looked_up": {
    "sure": false,
-   "source": ""
+   "source": "",
+   "how": "web"
   },
-  "updated": "2026-11-12T03:37:32.266Z"
+  "updated": "2026-11-12T05:56:57.631766Z"
  },
  {
   "id": "2162",
@@ -2046,15 +2126,16 @@
   "section": "JEWELRY",
   "img": "images/unknown-unknown-43.png",
   "maker": "UNKNOWN",
-  "name": "UNKNOWN",
+  "name": "VICTORIAN PINK TOPAZ CROSS PENDANT",
   "note": "Cross pendant with step-cut pink stones and old-cut diamonds in closed-back settings, silver tops on gold, with a gold bale.",
-  "credit": "",
+  "credit": "A La Vieille Russie, New York",
   "photos": "cut",
   "looked_up": {
    "sure": false,
-   "source": ""
+   "source": "https://alvr.com/10171/victorian-pink-topaz-cross-pendant",
+   "how": "web"
   },
-  "updated": "2026-11-12T03:34:42.041Z"
+  "updated": "2026-11-12T05:58:11.796727Z"
  },
  {
   "id": "2164",
@@ -2232,9 +2313,10 @@
   "photos": "cut",
   "looked_up": {
    "sure": false,
-   "source": ""
+   "source": "",
+   "how": "web"
   },
-  "updated": "2026-11-12T03:30:38.394Z"
+  "updated": "2026-11-12T06:00:18.353492Z"
  },
  {
   "id": "2176",
@@ -2277,24 +2359,26 @@
   "photos": "cut",
   "looked_up": {
    "sure": false,
-   "source": ""
+   "source": "",
+   "how": "web"
   },
-  "updated": "2026-11-12T03:29:29.375Z"
+  "updated": "2026-11-12T06:02:24.689047Z"
  },
  {
   "id": "2179",
   "section": "PHOTO",
   "img": "images/unknown-unknown-51.png",
-  "maker": "UNKNOWN",
-  "name": "UNKNOWN",
+  "maker": "MICHAEL W. DAVIDSON",
+  "name": "CHICKEN EMBRYO FIBROBLAST CELLS, FLUORESCENCE MICROGRAPH",
   "note": "Fluorescence micrograph of two cultured cells with red fibrous structures, blue cell edges and green nuclei on a black background.",
-  "credit": "",
+  "credit": "Michael W. Davidson and The Florida State University, Molecular Expressions Microscopy Primer, Fluorescence Digital Image Gallery",
   "photos": "cut",
   "looked_up": {
    "sure": false,
-   "source": ""
+   "source": "https://micro.magnet.fsu.edu/primer/techniques/fluorescence/gallery/cells/cef/cefcellslarge1.html",
+   "how": "web"
   },
-  "updated": "2026-11-12T03:29:07.387Z"
+  "updated": "2026-11-12T06:03:40.590435Z"
  },
  {
   "id": "2180",
@@ -2307,8 +2391,10 @@
   "photos": "cut",
   "looked_up": {
    "sure": false,
-   "source": ""
-  }
+   "source": "",
+   "how": "web"
+  },
+  "updated": "2026-11-12T06:04:33.227683Z"
  },
  {
   "id": "2181",
@@ -2321,9 +2407,10 @@
   "photos": "cut",
   "looked_up": {
    "sure": false,
-   "source": ""
+   "source": "",
+   "how": "web"
   },
-  "updated": "2026-11-12T03:28:55.207Z"
+  "updated": "2026-11-12T06:05:27.036105Z"
  },
  {
   "id": "2182",
@@ -2352,8 +2439,10 @@
   "photos": "painting",
   "looked_up": {
    "sure": false,
-   "source": ""
-  }
+   "source": "",
+   "how": "web"
+  },
+  "updated": "2026-11-12T06:05:53.748691Z"
  },
  {
   "id": "2184",
@@ -2366,8 +2455,10 @@
   "photos": "cut",
   "looked_up": {
    "sure": false,
-   "source": ""
-  }
+   "source": "",
+   "how": "web"
+  },
+  "updated": "2026-11-12T06:06:42.988783Z"
  },
  {
   "id": "2185",
@@ -2380,22 +2471,26 @@
   "photos": "cut",
   "looked_up": {
    "sure": false,
-   "source": ""
-  }
+   "source": "",
+   "how": "web"
+  },
+  "updated": "2026-11-12T06:07:07.545270Z"
  },
  {
   "id": "2186",
   "section": "OBJECT",
   "img": "images/unknown-unknown-58.png",
   "maker": "UNKNOWN",
-  "name": "UNKNOWN",
+  "name": "CARVED STONE CARTOUCHE ROUNDEL",
   "note": "A carved pale stone cartouche with acanthus scrolls and rosettes frames a round opening with a green-painted disc and iron bars, set into a tan speckled brick facade. The building, date and maker could not be identified.",
   "credit": "",
   "photos": "cut",
   "looked_up": {
    "sure": false,
-   "source": ""
-  }
+   "source": "",
+   "how": "web"
+  },
+  "updated": "2026-11-12T06:07:42.498628Z"
  },
  {
   "id": "2187",
@@ -2408,8 +2503,10 @@
   "photos": "cut",
   "looked_up": {
    "sure": false,
-   "source": ""
-  }
+   "source": "",
+   "how": "web"
+  },
+  "updated": "2026-11-12T06:08:28.077939Z"
  },
  {
   "id": "2188",
@@ -2436,9 +2533,10 @@
   "photos": "keep",
   "looked_up": {
    "sure": false,
-   "source": ""
+   "source": "",
+   "how": "web"
   },
-  "updated": "2026-11-12T06:09:15.036Z"
+  "updated": "2026-11-12T06:08:58.080724Z"
  },
  {
   "id": "2190",
@@ -2483,8 +2581,10 @@
   "photos": "cut",
   "looked_up": {
    "sure": false,
-   "source": ""
-  }
+   "source": "",
+   "how": "web"
+  },
+  "updated": "2026-11-12T06:09:54.523402Z"
  },
  {
   "id": "2193",
@@ -2513,8 +2613,10 @@
   "photos": "painting",
   "looked_up": {
    "sure": false,
-   "source": ""
-  }
+   "source": "",
+   "how": "web"
+  },
+  "updated": "2026-11-12T06:11:11.252136Z"
  },
  {
   "id": "2195",
@@ -2541,22 +2643,26 @@
   "photos": "cut",
   "looked_up": {
    "sure": false,
-   "source": ""
-  }
+   "source": "",
+   "how": "web"
+  },
+  "updated": "2026-11-12T06:11:51.435567Z"
  },
  {
   "id": "2197",
   "section": "OBJECT",
   "img": "images/unknown-unknown-65.png",
   "maker": "UNKNOWN",
-  "name": "UNKNOWN",
+  "name": "CARVED WOOD PANEL WITH STAR-AND-POLYGON LATTICE",
   "note": "Carved wood panel with a geometric star-and-polygon lattice and floral openwork cartouches, in a style associated with Central Asian (Uzbek) Islamic woodwork. Maker, date, and origin could not be confirmed.",
   "credit": "",
   "photos": "cut",
   "looked_up": {
    "sure": false,
-   "source": ""
-  }
+   "source": "",
+   "how": "web"
+  },
+  "updated": "2026-11-12T06:12:47.601347Z"
  },
  {
   "id": "2198",
@@ -2611,7 +2717,9 @@
   "photos": "cut",
   "looked_up": {
    "sure": false,
-   "source": ""
-  }
+   "source": "",
+   "how": "web"
+  },
+  "updated": "2026-11-12T06:13:44.994757Z"
  }
 ]
