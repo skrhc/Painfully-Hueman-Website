@@ -1,11 +1,15 @@
 {
- "section": "",
- "maker": "",
- "name": "",
- "note": "",
+ "section": "PHOTO",
+ "maker": "UNKNOWN",
+ "name": "UNKNOWN",
+ "note": "Photograph of a small spotted crab on a wet, algae-covered rock surface in dim light. It shows a living animal in the wild, not a made object or artwork.",
  "credit": "",
  "keep_bg": false,
  "photo_mode": "",
  "video_url": "",
- "lookup": true
+ "lookup": true,
+ "looked_up": {
+  "sure": false,
+  "source": ""
+ }
 }
