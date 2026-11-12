@@ -364,6 +364,8 @@
       ? photos.map(function (p) { return [p]; }) : [photos.slice()];
     groups.forEach(function (group) {
       const job = { entry: Object.assign({}, entry), photos: group };
+      // the photos' original file names: a clue for the lookup (museum image numbers etc.)
+      if (job.entry.lookup) job.entry.orig_names = group.map(function (p) { return p.file.name || ''; });
       job.label = [entry.maker, entry.name].filter(Boolean).join(' — ') || entry.video_url || ('Photo ' + (group[0].file.name || ''));
       if (groups.length > 1 && job.label.indexOf('Photo ') !== 0) job.label += ' (' + group[0].file.name + ')';
       job.row = el('div', 'job');
