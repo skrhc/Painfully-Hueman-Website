@@ -1527,7 +1527,7 @@
  },
  {
   "id": "2131",
-  "section": "OBJECT",
+  "section": "ARCHITECTURE",
   "img": "images/philippe-starck-with-makato-nozawa-unhex-nani-nani-1989.png",
   "maker": "PHILIPPE STARCK WITH MAKATO NOZAWA",
   "name": "UNHEX NANI NANI, 1989",
@@ -1537,7 +1537,8 @@
   "looked_up": {
    "sure": true,
    "source": "https://architecture-tokyo.com/2017/03/15/1989-unhex-nani-nani-philippe-starck-and-makato-nozawa/"
-  }
+  },
+  "updated": "2026-11-12T03:46:07.813Z"
  },
  {
   "id": "2132",
