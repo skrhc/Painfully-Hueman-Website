@@ -1,11 +1,15 @@
 {
- "section": "",
- "maker": "",
- "name": "",
- "note": "",
- "credit": "",
+ "section": "PHOTO",
+ "maker": "Tianyao Yang",
+ "name": "ISS transit across active regions AR4498 and AR4500, 2026",
+ "note": "H-alpha photograph of the Sun's chromosphere with the International Space Station silhouetted across it, taken 1 August 2026 from Lianyungang, Jiangsu, China, with a Sky-Watcher HELIOSTAR-100Hα solar telescope. Sunspots are visible in the image. I could not view the Sky & Telescope image itself, so the match is not confirmed.",
+ "credit": "By: Tianyao Yang (Sky & Telescope byline)",
  "keep_bg": false,
  "photo_mode": "",
  "video_url": "",
- "lookup": true
+ "lookup": true,
+ "looked_up": {
+  "sure": false,
+  "source": "https://skyandtelescope.org/online-gallery/iss-transits-active-solar-chromosphere/"
+ }
 }
