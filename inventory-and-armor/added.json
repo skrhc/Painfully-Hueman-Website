@@ -2205,13 +2205,14 @@
   "img": "images/unknown-unknown-51.png",
   "maker": "UNKNOWN",
   "name": "UNKNOWN",
-  "note": "Fluorescence micrograph of two cultured cells with red fibrous structures, blue cell edges and green nuclei on a black background. The cell type and stain assignments are unconfirmed.",
+  "note": "Fluorescence micrograph of two cultured cells with red fibrous structures, blue cell edges and green nuclei on a black background.",
   "credit": "",
   "photos": "cut",
   "looked_up": {
    "sure": false,
    "source": ""
-  }
+  },
+  "updated": "2026-11-12T03:29:07.387Z"
  },
  {
   "id": "2180",
