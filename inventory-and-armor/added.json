@@ -1672,7 +1672,7 @@
   "name": "SONIC & KNUCKLES, 1994",
   "note": "Airbrush-style promotional illustration of the Sonic (blue) and Knuckles (red) faces inside a yellow-rimmed black oval, with a partial \"PRESENTS\" line at the top, apparently from a 1994 Sega ad or box art for Sonic & Knuckles. Exact medium, size and collection are unconfirmed.",
   "credit": "",
-  "photos": "cut",
+  "photos": "keep",
   "looked_up": {
    "sure": false,
    "source": ""
@@ -2323,5 +2323,285 @@
    "source": ""
   },
   "updated": "2026-11-12T03:28:55.207Z"
+ },
+ {
+  "id": "2182",
+  "section": "SCULPTURE",
+  "img": "images/unknown-unknown-54.png",
+  "maker": "UNKNOWN",
+  "name": "UNKNOWN",
+  "note": "Freestanding assemblage of purple-painted metal with scrolled wrought-iron elements, small figurines, a white angel and a crescent moon, on white-painted legs; shown in a corner of a gallery. Size, year and collection are not visible in the photo.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2183",
+  "section": "PAINTING",
+  "img": "images/unknown-unknown-55.png",
+  "maker": "UNKNOWN",
+  "name": "UNKNOWN",
+  "note": "Black-outlined grey graffiti wall piece painted on a concrete or stucco wall beside an asphalt lot, with a palm tree in the background. The lettering is not legible enough to read a word, and no signature or date is visible.",
+  "credit": "",
+  "photos": "painting",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2184",
+  "section": "OBJECT",
+  "img": "images/unknown-unknown-56.png",
+  "maker": "UNKNOWN",
+  "name": "UNKNOWN",
+  "note": "Red-lit replica cave with sculpted stalactites, stalagmites and flowstone walls, possibly a museum or exhibit set piece. Maker, date and venue could not be confirmed.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2185",
+  "section": "OBJECT",
+  "img": "images/unknown-unknown-57.png",
+  "maker": "UNKNOWN",
+  "name": "UNKNOWN",
+  "note": "A night snapshot of a silver passenger car with heavy front-end collision damage. The front bumper is torn off, the wheel and suspension are exposed, and debris is on the asphalt. It looks like a vehicle-accident photo, not an artwork, design piece or fashion item, so I couldn't tie it to a maker or catalogue entry. I didn't run a web search, because nothing in the image points to a source to confirm.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2186",
+  "section": "OBJECT",
+  "img": "images/unknown-unknown-58.png",
+  "maker": "UNKNOWN",
+  "name": "UNKNOWN",
+  "note": "A carved pale stone cartouche with acanthus scrolls and rosettes frames a round opening with a green-painted disc and iron bars, set into a tan speckled brick facade. The building, date and maker could not be identified.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2187",
+  "section": "PHOTO",
+  "img": "images/unknown-unknown-59.png",
+  "maker": "UNKNOWN",
+  "name": "UNKNOWN",
+  "note": "Black-and-white photograph of boys at a long wooden workbench in a workshop, several holding white shaped frames or mirror-frame forms, shown in a gold-painted wood frame with a tan mat.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2188",
+  "section": "OBJECT",
+  "img": "images/hector-guimard-paris-metro-entrance-railing-garde-corps-c-1900.png",
+  "maker": "HECTOR GUIMARD",
+  "name": "PARIS MÉTRO ENTRANCE RAILING (GARDE-CORPS), C. 1900",
+  "note": "Green-painted cast-iron balustrade panel in the Art Nouveau style of Guimard's Métropolitain entrances, which were cast iron set in concrete. The specific station and exact date of this panel are not confirmed.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2189",
+  "section": "HARDWARE",
+  "img": "images/unknown-unknown-60.png",
+  "maker": "UNKNOWN",
+  "name": "UNKNOWN",
+  "note": "Black-painted wrought iron post with scrolled and leaf-like arms, fixed into a concrete plinth at a wall corner. Maker, date and collection are not identifiable from the photo.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2190",
+  "section": "PERFORMANCE",
+  "img": "images/stahl-stenslie-cybersm-1993.png",
+  "maker": "STAHL STENSLIE",
+  "name": "CYBERSM, 1993",
+  "note": "Best guess from the partly cropped caption beside the image (\"St… / Cy… / 19… / Co…\"). It reads as Stahl Stenslie's CyberSM, a 1993–94 telepresence touch project made with Kirk Woolford. The image is a page from a book of two digitally rendered bronze-toned torso views, and I could not match these exact images to the work.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": "https://digitalartarchive.at/database/work/793"
+  }
+ },
+ {
+  "id": "2191",
+  "section": "PHOTO",
+  "img": "images/unknown-unknown-61.png",
+  "maker": "UNKNOWN",
+  "name": "UNKNOWN",
+  "note": "Black-and-white photograph, printed on a book page, of a performance in a domestic room: taut cords run across the space, and one shirtless man stands among them while a second man faces away from the camera. The source book's text is partly visible but I could not identify the work.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2192",
+  "section": "PHOTO",
+  "img": "images/unknown-unknown-62.png",
+  "maker": "UNKNOWN",
+  "name": "UNKNOWN",
+  "note": "Colour photograph reproduced on a printed book page, showing a figure seated in a chair wearing a red fur-trimmed jacket, red leather trousers and knee-high red platform boots, with white face makeup. Year and photographer are not established.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2193",
+  "section": "PAINTING",
+  "img": "images/marsden-hartley-cynical-blue-jovial-brown-dogtown.png",
+  "maker": "MARSDEN HARTLEY",
+  "name": "CYNICAL BLUE, JOVIAL BROWN, DOGTOWN",
+  "note": "Oil on board in a dark wood frame with a silver liner, shown in a private-sales display. The wall label is too small to read reliably, and I could not confirm a date, dimensions, or collection.",
+  "credit": "",
+  "photos": "painting",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2194",
+  "section": "PAINTING",
+  "img": "images/unknown-unknown-63.png",
+  "maker": "UNKNOWN",
+  "name": "UNKNOWN",
+  "note": "Painted interior surface with a red ground, white floral arabesques, blue and dark green medallions and raised gilded rosettes; the style suggests Ottoman palace decoration, but I could not confirm the building or date.",
+  "credit": "",
+  "photos": "painting",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2195",
+  "section": "OBJECT",
+  "img": "images/frette-sandy-weaves-bedcover.png",
+  "maker": "FRETTE",
+  "name": "SANDY WEAVES BEDCOVER",
+  "note": "Grey wave-and-trefoil jacquard on an off-white satin ground, shown close up. The listing I found describes a Pearl Grey Frette bedcover with a wave jacquard motif, but no source I found shows this particular motif.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2196",
+  "section": "OBJECT",
+  "img": "images/unknown-unknown-64.png",
+  "maker": "UNKNOWN",
+  "name": "UNKNOWN",
+  "note": "Photographed floor surface with a repeating checkerboard of brown ring-and-oval motifs on a cream ground, in an op-art style. Likely vinyl or tile, but the material, maker and date could not be confirmed.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2197",
+  "section": "OBJECT",
+  "img": "images/unknown-unknown-65.png",
+  "maker": "UNKNOWN",
+  "name": "UNKNOWN",
+  "note": "Carved wood panel with a geometric star-and-polygon lattice and floral openwork cartouches, in a style associated with Central Asian (Uzbek) Islamic woodwork. Maker, date, and origin could not be confirmed.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2198",
+  "section": "OBJECT",
+  "img": "images/justinian-i-byzantine-empire-basilica-cistern-yerebatan-sarn-c-istanbul-c-532.png",
+  "maker": "JUSTINIAN I (BYZANTINE EMPIRE)",
+  "name": "BASILICA CISTERN (YEREBATAN SARNICI), ISTANBUL, C. 532",
+  "note": "Underground Byzantine water reservoir beneath Istanbul's old city, with 336 columns in 12 rows of 28 and brick vaulting, many columns reused from older structures. Built under Justinian I, around 532, and lit in red for visitors today.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": true,
+   "source": "https://en.wikipedia.org/wiki/Basilica_Cistern"
+  }
+ },
+ {
+  "id": "2199",
+  "section": "PAINTING",
+  "img": "images/thomas-moran-the-borda-gardens-cuernavaca-mexico-1915.png",
+  "maker": "THOMAS MORAN",
+  "name": "THE BORDA GARDENS, CUERNAVACA, MEXICO, 1915",
+  "note": "Oil on canvas, approximately 28 x 20 in (66.6 x 50.8 cm), per a partly legible wall label reading \"Painted in 1915\"; the label is cropped and blurry, so the title and date are unverified.",
+  "credit": "",
+  "photos": "painting",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2200",
+  "section": "PAINTING",
+  "img": "images/agnes-pelton-the-fountains-1926.png",
+  "maker": "AGNES PELTON",
+  "name": "THE FOUNTAINS, 1926",
+  "note": "Oil on canvas, 36 1/8 × 32 in. (91.8 × 81.3 cm), 1926. A yellow celestial disk behind a central orb, with streams of water flowing around it.",
+  "credit": "Gift of Joan H. Tisch (by exchange), object number 179.2023, The Museum of Modern Art, New York",
+  "photos": "painting",
+  "looked_up": {
+   "sure": true,
+   "source": "https://www.moma.org/collection/works/447787"
+  }
+ },
+ {
+  "id": "2201",
+  "section": "LIGHTING",
+  "img": "images/unknown-unknown-66.png",
+  "maker": "UNKNOWN",
+  "name": "UNKNOWN",
+  "note": "Backlit translucent alabaster vessel in an egg form with a domed lid and a wave-carved lower band, shown on a black plinth in a dark gallery space. Maker, year and collection could not be confirmed.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
  }
 ]
