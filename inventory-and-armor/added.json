@@ -1571,15 +1571,16 @@
   "id": "2134",
   "section": "HEADWEAR",
   "img": "images/biltwell-best-guess-from-the-decal-on-the-helmet-not-confirmed-custom-painted-full-face-helmet-cream-and-black-flame-pattern-with-gold-pinstripe-model-unconfirmed-likely-gringo.png",
-  "maker": "BILTWELL (BEST GUESS, FROM THE DECAL ON THE HELMET; NOT CONFIRMED)",
+  "maker": "UNKNOWN",
   "name": "CUSTOM-PAINTED FULL-FACE HELMET, CREAM AND BLACK FLAME PATTERN WITH GOLD PINSTRIPE (MODEL UNCONFIRMED, LIKELY GRINGO)",
-  "note": "A retro full-face motorcycle helmet with a cream base, black flame-style graphics and gold pinstriping, with a DOT marking on the rear. The decal reads \"Art & Wheels\" under a script logo, but I could not confirm that name or the model.",
+  "note": "A retro full-face motorcycle helmet with a cream base, black flame-style graphics and gold pinstriping, with a DOT marking on the rear.",
   "credit": "",
   "photos": "cut",
   "looked_up": {
    "sure": false,
    "source": ""
-  }
+  },
+  "updated": "2026-11-12T03:45:29.067Z"
  },
  {
   "id": "2135",
