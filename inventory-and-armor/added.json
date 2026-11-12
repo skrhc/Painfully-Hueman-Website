@@ -2187,7 +2187,7 @@
  },
  {
   "id": "2178",
-  "section": "PAINTING",
+  "section": "PHOTO",
   "img": "images/unknown-unknown-50.png",
   "maker": "UNKNOWN",
   "name": "UNKNOWN",
@@ -2197,7 +2197,8 @@
   "looked_up": {
    "sure": false,
    "source": ""
-  }
+  },
+  "updated": "2026-11-12T03:29:22.522Z"
  },
  {
   "id": "2179",
