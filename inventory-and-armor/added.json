@@ -2145,17 +2145,18 @@
  },
  {
   "id": "2175",
-  "section": "TOP",
+  "section": "OUTERWEAR",
   "img": "images/unknown-unknown-49.png",
   "maker": "UNKNOWN",
   "name": "UNKNOWN",
-  "note": "Crinkled, crushed-metallic jacket in pink, black and bronze tones, with a stand collar, a tie front and gathered long sleeves. Maker, year and collection could not be determined.",
+  "note": "Crinkled, crushed-metallic jacket in pink, black and bronze tones, with a stand collar, a tie front and gathered long sleeves.",
   "credit": "",
   "photos": "cut",
   "looked_up": {
    "sure": false,
    "source": ""
-  }
+  },
+  "updated": "2026-11-12T03:30:38.394Z"
  },
  {
   "id": "2176",
