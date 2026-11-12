@@ -1,11 +1,15 @@
 {
- "section": "",
- "maker": "",
- "name": "",
- "note": "",
+ "section": "OBJECT",
+ "maker": "Hector Guimard",
+ "name": "Paris Métro entrance railing (garde-corps), c. 1900",
+ "note": "Green-painted cast-iron balustrade panel in the Art Nouveau style of Guimard's Métropolitain entrances, which were cast iron set in concrete. The specific station and exact date of this panel are not confirmed.",
  "credit": "",
  "keep_bg": false,
  "photo_mode": "",
  "video_url": "",
- "lookup": true
+ "lookup": true,
+ "looked_up": {
+  "sure": false,
+  "source": ""
+ }
 }
