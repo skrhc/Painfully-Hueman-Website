@@ -1184,7 +1184,7 @@
   "name": "JE VIS DESSUS LE CONTOUR VAPOREUX D'UNE FORME HUMAINE, 1896",
   "note": "Lithograph, 1896, from the series René Philipon commissioned as a supplement to his French translation of Bulwer-Lytton's The Haunted and the Haunters (La Maison hantée).",
   "credit": "Rijksmuseum, Amsterdam, RP-P-1922-110",
-  "photos": "cut",
+  "photos": "keep",
   "looked_up": {
    "sure": true,
    "source": "https://www.rijksmuseum.nl/en/collection/RP-P-1922-110"
@@ -1214,7 +1214,7 @@
   "name": "UNKNOWN",
   "note": "Photograph of a seated woman in a white dress with painted face, in a whitewashed room with brass bowls, a red cloth and other ritual objects.",
   "credit": "",
-  "photos": "cut",
+  "photos": "keep",
   "looked_up": {
    "sure": false,
    "source": ""
@@ -1274,7 +1274,7 @@
   "name": "UNKNOWN",
   "note": "Black-and-white photographic reproduction of a hand-drawn construction drawing showing a curved profile with a control-polygon style grid of guide lines, and a scale bar marked \"3 mts.\"",
   "credit": "",
-  "photos": "cut",
+  "photos": "keep",
   "looked_up": {
    "sure": false,
    "source": ""
@@ -1303,7 +1303,7 @@
   "name": "PAPER WASP STANDING ON WATER, WITH SURFACE-TENSION SHADOWS",
   "note": "Color photograph of a paper wasp (likely genus Polistes) standing on blue water. Its feet dimple the surface, which casts round shadows on the bottom.",
   "credit": "Photo: unknown",
-  "photos": "cut",
+  "photos": "keep",
   "looked_up": {
    "sure": false,
    "source": "https://neatorama.com/2013/03/04/The-Shadow-of-Surface-Tension"
@@ -1424,7 +1424,7 @@
   "name": "UNKNOWN",
   "note": "Digital collage of multicolored galaxies and nebulae linked by faint filaments on a black ground.",
   "credit": "",
-  "photos": "cut",
+  "photos": "keep",
   "looked_up": {
    "sure": false,
    "source": ""
@@ -1454,7 +1454,7 @@
   "name": "RAZORBILL (ALCA TORDA), CLOSE-UP OF HEAD AND BILL",
   "note": "Close-up of a razorbill's head and thick bill against a dark background, with a white-and-black body visible below.",
   "credit": "",
-  "photos": "cut",
+  "photos": "keep",
   "looked_up": {
    "sure": false,
    "source": ""
@@ -1558,7 +1558,7 @@
   "name": "UNHEX NANI NANI, 1989",
   "note": "A five-story copper-clad office building with street-level commercial space in Shirokanedai, Minato, Tokyo, designed for the construction company Unhex. Its verdigris-green copper skin is curved and bulbous, and the building is known as \"Nani Nani\" (\"what is it?\").",
   "credit": "",
-  "photos": "cut",
+  "photos": "keep",
   "looked_up": {
    "sure": true,
    "source": "https://architecture-tokyo.com/2017/03/15/1989-unhex-nani-nani-philippe-starck-and-makato-nozawa/"
@@ -1633,7 +1633,7 @@
   "name": "UNKNOWN",
   "note": "Colour photograph of a girl in a white headscarf and sunglasses aiming an AK-pattern rifle, with a line of similarly dressed women behind her. Photographer, date and location are unconfirmed.",
   "credit": "",
-  "photos": "cut",
+  "photos": "keep",
   "looked_up": {
    "sure": false,
    "source": ""
@@ -1648,7 +1648,7 @@
   "name": "MARILYN (SADDLE PIGEON), FROM THE NEW YORK PIGEON",
   "note": "A rescued New York street pigeon whose wings fold together into a heart shape. The bird's name and wing description are from a 2018 book of Garn's pigeon portraits, and this image is not confirmed as one of its published photos.",
   "credit": "All photos From 'The New York Pigeon' by Andrew Garn, published by powerHouse Books.",
-  "photos": "cut",
+  "photos": "keep",
   "looked_up": {
    "sure": false,
    "source": "https://mymodernmet.com/pigeon-photos-andrew-garn/"
@@ -1663,7 +1663,7 @@
   "name": "SONIC & KNUCKLES, 1994",
   "note": "Airbrush-style promotional illustration of the Sonic (blue) and Knuckles (red) faces inside a yellow-rimmed black oval, with a partial \"PRESENTS\" line at the top, apparently from a 1994 Sega ad or box art for Sonic & Knuckles. Exact medium, size and collection are unconfirmed.",
   "credit": "",
-  "photos": "painting",
+  "photos": "cut",
   "looked_up": {
    "sure": false,
    "source": ""
@@ -1797,7 +1797,7 @@
   "name": "UNKNOWN",
   "note": "Photograph of a mud-plastered interior with incised concentric geometric patterns on the floor and walls, with a man in white kneeling at the centre; the location and date are not confirmed. A small \"ATA\" logo appears in the lower-right corner.",
   "credit": "",
-  "photos": "cut",
+  "photos": "keep",
   "looked_up": {
    "sure": false,
    "source": ""
@@ -1873,7 +1873,7 @@
   "name": "UNKNOWN",
   "note": "Painted illustration of a family walking across a green, flower-filled meadow away from a burning town, with a numbered tag (\"7\") in the lower right.",
   "credit": "watchtower publishing",
-  "photos": "painting",
+  "photos": "keep",
   "looked_up": {
    "sure": false,
    "source": ""
@@ -2052,7 +2052,7 @@
   "name": "ALTAMURA MAN, SKULL ENCRUSTED IN CALCITE",
   "note": "Neanderthal skeleton discovered in 1993 by CARS speleologists. Its bones are covered in calcite formations, and it has been dated to roughly 130,000–170,000 years old. It was left in situ in the cave.",
   "credit": "",
-  "photos": "cut",
+  "photos": "keep",
   "looked_up": {
    "sure": true,
    "source": "https://www.livescience.com/50458-oldest-neanderthal-dna-found.html"
@@ -2142,7 +2142,7 @@
   "name": "CRAB",
   "note": "Photograph of a small spotted crab on a wet, algae-covered rock surface in dim light.",
   "credit": "",
-  "photos": "cut",
+  "photos": "keep",
   "looked_up": {
    "sure": false,
    "source": ""
@@ -2201,7 +2201,7 @@
   "name": "SLEEPING SWAN",
   "note": "Black-and-white photograph of a swan asleep on water with its head tucked under its wing, with a stone ledge along the bottom edge.",
   "credit": "",
-  "photos": "cut",
+  "photos": "keep",
   "looked_up": {
    "sure": false,
    "source": ""
@@ -2261,7 +2261,7 @@
   "name": "UNKNOWN",
   "note": "Digital illustration of an animal cell in a jewel-toned palette, with a nucleus, mitochondria, endoplasmic reticulum, Golgi and vesicles shown on a black ground.",
   "credit": "",
-  "photos": "painting",
+  "photos": "cut",
   "looked_up": {
    "sure": false,
    "source": ""
