@@ -1293,13 +1293,14 @@
   "img": "images/unknown-paper-wasp-standing-on-water-with-surface-tension-shadows.png",
   "maker": "UNKNOWN",
   "name": "PAPER WASP STANDING ON WATER, WITH SURFACE-TENSION SHADOWS",
-  "note": "Color photograph of a paper wasp (likely genus Polistes) standing on blue water. Its feet dimple the surface, which casts round shadows on the bottom. The photographer, date and exact species are unconfirmed.",
+  "note": "Color photograph of a paper wasp (likely genus Polistes) standing on blue water. Its feet dimple the surface, which casts round shadows on the bottom.",
   "credit": "Photo: unknown",
   "photos": "cut",
   "looked_up": {
    "sure": false,
    "source": "https://neatorama.com/2013/03/04/The-Shadow-of-Surface-Tension"
-  }
+  },
+  "updated": "2026-11-12T03:50:19.578Z"
  },
  {
   "id": "2115",
