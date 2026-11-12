@@ -1,11 +1,15 @@
 {
- "section": "",
- "maker": "",
- "name": "",
- "note": "",
+ "section": "JEWELRY",
+ "maker": "UNKNOWN",
+ "name": "UNKNOWN",
+ "note": "Silver-toned double-loop brooch or buckle with two star-shaped openwork rosettes and beaded borders, with a pin on the reverse. Maker, date and origin could not be confirmed.",
  "credit": "",
  "keep_bg": false,
  "photo_mode": "",
  "video_url": "",
- "lookup": true
+ "lookup": true,
+ "looked_up": {
+  "sure": false,
+  "source": ""
+ }
 }
