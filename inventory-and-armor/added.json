@@ -1911,13 +1911,14 @@
   "img": "images/luba-democratic-republic-of-congo-attributed-ceremonial-axe-kibiki-kasolwa-with-stacked-figures.png",
   "maker": "LUBA (DEMOCRATIC REPUBLIC OF CONGO), ATTRIBUTED",
   "name": "CEREMONIAL AXE (KIBIKI / KASOLWA) WITH STACKED FIGURES",
-  "note": "Carved wooden handle with three stacked figural heads and a crescent iron blade, leather-bound butt, mounted on a wooden stand. The type is a Luba prestige axe, but I could not match this exact piece to a published record, so the attribution is a best guess.",
+  "note": "Carved wooden handle with three stacked figural heads and a crescent iron blade, leather-bound butt, mounted on a wooden stand.",
   "credit": "",
   "photos": "cut",
   "looked_up": {
    "sure": false,
    "source": "https://ertribal.com/index.php/tribal-art/blades/ceremonial-axe-kibiki-or-kasolwa-luba-dr-congo"
-  }
+  },
+  "updated": "2026-11-12T03:37:57.840Z"
  },
  {
   "id": "2159",
