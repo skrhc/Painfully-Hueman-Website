@@ -1,11 +1,15 @@
 {
- "section": "",
- "maker": "",
- "name": "",
- "note": "",
+ "section": "JEWELRY",
+ "maker": "Cartier",
+ "name": "Devant de corsage, 1908",
+ "note": "A bow-shaped stomacher of diamonds with sapphire accents, with a central cluster and long fringed and drop pendants. The 1908 date and the attribution to Grand Duchess Maria Pavlovna the Younger come from the Instagram caption, and I could not confirm them: the search results tie Cartier's 1908 stomacher work to Maria Pavlovna the Elder (Grand Duchess Vladimir), not the Younger.",
  "credit": "",
  "keep_bg": false,
  "photo_mode": "",
  "video_url": "",
- "lookup": true
+ "lookup": true,
+ "looked_up": {
+  "sure": false,
+  "source": ""
+ }
 }
