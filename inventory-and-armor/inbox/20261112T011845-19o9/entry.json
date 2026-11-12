@@ -1,11 +1,15 @@
 {
- "section": "",
- "maker": "",
- "name": "",
- "note": "",
+ "section": "OUTERWEAR",
+ "maker": "UNKNOWN",
+ "name": "UNKNOWN",
+ "note": "A layered, cape-like garment of ribbon strips, lace, fringe and a woven headpiece, worn by a mannequin in a dark gallery display, with black printed names on the central panel. Medium, size, year and collection are not visible in the photo.",
  "credit": "",
  "keep_bg": false,
  "photo_mode": "",
  "video_url": "",
- "lookup": true
+ "lookup": true,
+ "looked_up": {
+  "sure": false,
+  "source": ""
+ }
 }
