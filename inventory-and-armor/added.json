@@ -1146,5 +1146,47 @@
    "source": ""
   },
   "updated": "2026-11-11T00:39:43.657Z"
+ },
+ {
+  "id": "2104",
+  "section": "OBJECT",
+  "img": "images/unknown-kukri-and-sheath.png",
+  "maker": "UNKNOWN",
+  "name": "KUKRI AND SHEATH",
+  "note": "A Nepalese kukri (Gurkha knife) with its scabbard, shown in a black-and-white photograph on a plain background. The sheath has studded, decorated panels and side fittings with tassels; its date, maker and origin are not established.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2105",
+  "section": "OBJECT",
+  "img": "images/unknown-unknown-16.png",
+  "maker": "UNKNOWN",
+  "name": "UNKNOWN",
+  "note": "Knife or sword sheath with a pale carved hilt, a tan leather body decorated in red with turtle and human figure motifs, and braided cord suspension ending in fringed tassels.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2106",
+  "section": "PRINT",
+  "img": "images/odilon-redon-je-vis-dessus-le-contour-vaporeux-dune-forme-humaine-1896.png",
+  "maker": "ODILON REDON",
+  "name": "JE VIS DESSUS LE CONTOUR VAPOREUX D'UNE FORME HUMAINE, 1896",
+  "note": "Lithograph, 1896, from the series René Philipon commissioned as a supplement to his French translation of Bulwer-Lytton's The Haunted and the Haunters (La Maison hantée).",
+  "credit": "Rijksmuseum, Amsterdam, RP-P-1922-110",
+  "photos": "cut",
+  "looked_up": {
+   "sure": true,
+   "source": "https://www.rijksmuseum.nl/en/collection/RP-P-1922-110"
+  }
  }
 ]
