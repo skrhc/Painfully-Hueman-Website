@@ -1,11 +1,15 @@
 {
- "section": "",
- "maker": "",
- "name": "",
- "note": "",
- "credit": "",
+ "section": "OBJECT",
+ "maker": "UNKNOWN",
+ "name": "Ceremonial axe with female figure (probably Yoruba, Nigeria)",
+ "note": "Carved wood and forged iron blade on a stand, with a kneeling female figure holding her breasts and a scarified headdress. Photographed by Heritage Auctions. I did not run a web search, so the attribution is a visual guess and I could not find the lot, date or size.",
+ "credit": "Imaged by Heritage Auctions, HA.com",
  "keep_bg": false,
  "photo_mode": "",
  "video_url": "",
- "lookup": true
+ "lookup": true,
+ "looked_up": {
+  "sure": false,
+  "source": ""
+ }
 }
