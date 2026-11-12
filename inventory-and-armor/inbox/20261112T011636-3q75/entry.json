@@ -1,11 +1,15 @@
 {
- "section": "",
- "maker": "",
- "name": "",
- "note": "",
+ "section": "OBJECT",
+ "maker": "UNKNOWN",
+ "name": "UNKNOWN",
+ "note": "A night snapshot of a silver passenger car with heavy front-end collision damage. The front bumper is torn off, the wheel and suspension are exposed, and debris is on the asphalt. It looks like a vehicle-accident photo, not an artwork, design piece or fashion item, so I couldn't tie it to a maker or catalogue entry. I didn't run a web search, because nothing in the image points to a source to confirm.",
  "credit": "",
  "keep_bg": false,
  "photo_mode": "",
  "video_url": "",
- "lookup": true
+ "lookup": true,
+ "looked_up": {
+  "sure": false,
+  "source": ""
+ }
 }
