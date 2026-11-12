@@ -1026,7 +1026,9 @@
   "looked_up": {
    "sure": true,
    "source": "https://collections.lacma.org/object/83267"
-  }
+  },
+  "deleted": true,
+  "updated": "2026-11-12T04:03:10.039Z"
  },
  {
   "id": "2096",
