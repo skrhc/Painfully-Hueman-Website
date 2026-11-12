@@ -58,7 +58,17 @@ for entry in inventory-and-armor/inbox/*/entry.json; do
   # a photo with no maker / name: look it up
   if python3 -c 'import json,sys; e=json.load(open(sys.argv[1])); sys.exit(0 if e.get("lookup") and not e.get("looked_up") else 1)' "$entry"; then
     log "looking up $sub"
-    out=$(python3 inventory-and-armor/tools/lookup-item.py "$sub" 2>"$HOME_DIR/last-error.txt")
+    if ! out=$(python3 inventory-and-armor/tools/lookup-item.py "$sub" 2>"$HOME_DIR/last-error.txt"); then
+      # the lookup itself broke: let the item through as UNKNOWN rather than retry forever
+      python3 - "$entry" "$(tail -c 300 "$HOME_DIR/last-error.txt")" <<'PY'
+import json, sys
+e = json.load(open(sys.argv[1]))
+for k in ('maker', 'name'):
+    if not (e.get(k) or '').strip(): e[k] = 'UNKNOWN'
+e['looked_up'] = {'sure': False, 'source': '', 'error': sys.argv[2]}
+json.dump(e, open(sys.argv[1], 'w'), ensure_ascii=False, indent=1)
+PY
+    fi
     log "looked up: $out $(tail -c 300 "$HOME_DIR/last-error.txt")"
     git add -A "$sub"
     git -c user.name="armory-mac" -c user.email="armory@users.noreply.github.com" commit -q -m "ARMORY: looked up $(basename "$sub")"

@@ -44,8 +44,11 @@ if photo and not re.search(r'\.(jpe?g|png|gif|webp)$', photo, re.I):   # HEIC et
 if not photo or not os.path.exists(photo):
     sys.exit('No photo to look at.')
 # work on a copy outside the repo, so nothing else in the folder is touched
-shutil.copy(photo, os.path.join(tmp, 'photo' + os.path.splitext(photo)[1].lower()))
-photo = os.path.join(tmp, 'photo' + os.path.splitext(photo)[1].lower())
+# (a converted HEIC or a video frame is already in tmp)
+if os.path.dirname(os.path.abspath(photo)) != os.path.abspath(tmp):
+    copy = os.path.join(tmp, 'photo' + os.path.splitext(photo)[1].lower())
+    shutil.copy(photo, copy)
+    photo = copy
 
 given = {k: (entry.get(k) or '').strip() for k in FIELDS}
 prompt = f"""You are cataloguing an item for ARMORY, a visual archive of clothing, art, design and objects.

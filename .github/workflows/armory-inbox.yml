@@ -38,7 +38,7 @@ jobs:
           if find inventory-and-armor/inbox -type f 2>/dev/null | grep -qiE '\.(mp4|mov|m4v|webm|mkv)$'; then
             command -v ffmpeg >/dev/null || brew install --quiet ffmpeg
           fi
-          for i in 1 2 3 4; do
+          for i in 1 2 3 4 5 6 7 8; do
             bash inventory-and-armor/tools/process-inbox.sh
             # photo colors for the spread-out shuffle on the ARMORY page
             python3 inventory-and-armor/tools/colors.py || echo "colors.json not updated"
@@ -50,6 +50,10 @@ jobs:
             git fetch -q origin main
             git reset -q --hard origin/main
             git clean -fdq inventory-and-armor
-            sleep 5
+            sleep $((5 + RANDOM % 20))
           done
-          exit 1
+          # Still racing (a bulk upload with the studio Mac pushing lookups):
+          # not an error. The newer push that beat this run starts its own run,
+          # which picks up whatever is left in the inbox.
+          echo "::warning::main kept moving; leaving the rest to the next run."
+          exit 0
