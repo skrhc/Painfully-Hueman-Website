@@ -36,11 +36,12 @@ PAGES = {
     'saint-fleur': 'work/saint-fleur/index.html',
     'music-by-lee-v1': 'work/music-by-lee-v1/index.html',
     'music-by-lee-v2': 'work/music-by-lee-v2/index.html',
+    'sotce-axel-arigato': 'work/sotce-axel-arigato/index.html',
 }
 
 PAGE_NAMES = {
     'index': 'INDEX', 'about': 'ABOUT', 'editorial': 'EDITORIAL', 'sex-change': 'SEX CHANGE',
-    'castro-nyc': 'Castro NYC', 'lee': 'LEE.', 'saint-fleur': 'Saint Fleur',
+    'castro-nyc': 'Castro NYC', 'lee': 'LEE.', 'saint-fleur': 'Saint Fleur', 'sotce-axel-arigato': 'Sotce at Axel Arigato',
     'music-by-lee-v1': 'MUSIC BY LEE. v1', 'music-by-lee-v2': 'Music by LEE. v2',
 }
 
