@@ -1,11 +1,15 @@
 {
- "section": "",
- "maker": "",
- "name": "",
- "note": "",
+ "section": "OBJECT",
+ "maker": "Altamura Man (Neanderthal, Lamalunga Cave, Altamura, Puglia, Italy)",
+ "name": "Altamura Man, skull encrusted in calcite",
+ "note": "Neanderthal skeleton discovered in 1993 by CARS speleologists. Its bones are covered in calcite formations, and it has been dated to roughly 130,000–170,000 years old. It was left in situ in the cave.",
  "credit": "",
  "keep_bg": false,
  "photo_mode": "",
  "video_url": "",
- "lookup": true
+ "lookup": true,
+ "looked_up": {
+  "sure": true,
+  "source": "https://www.livescience.com/50458-oldest-neanderthal-dna-found.html"
+ }
 }
