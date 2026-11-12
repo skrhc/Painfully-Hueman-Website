@@ -1,11 +1,15 @@
 {
- "section": "",
- "maker": "",
- "name": "",
- "note": "",
+ "section": "PHOTO",
+ "maker": "UNKNOWN",
+ "name": "UNKNOWN",
+ "note": "Photograph of a mud-plastered interior with incised concentric geometric patterns on the floor and walls, with a man in white kneeling at the centre; the location and date are not confirmed. A small \"ATA\" logo appears in the lower-right corner.",
  "credit": "",
  "keep_bg": false,
  "photo_mode": "",
  "video_url": "",
- "lookup": true
+ "lookup": true,
+ "looked_up": {
+  "sure": false,
+  "source": ""
+ }
 }
