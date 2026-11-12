@@ -1,11 +1,15 @@
 {
- "section": "",
- "maker": "",
- "name": "",
- "note": "",
+ "section": "LIGHTING",
+ "maker": "UNKNOWN",
+ "name": "UNKNOWN",
+ "note": "Backlit translucent alabaster vessel in an egg form with a domed lid and a wave-carved lower band, shown on a black plinth in a dark gallery space. Maker, year and collection could not be confirmed.",
  "credit": "",
  "keep_bg": false,
  "photo_mode": "",
  "video_url": "",
- "lookup": true
+ "lookup": true,
+ "looked_up": {
+  "sure": false,
+  "source": ""
+ }
 }
