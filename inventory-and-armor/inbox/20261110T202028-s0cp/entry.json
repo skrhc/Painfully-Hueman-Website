@@ -1,11 +1,15 @@
 {
- "section": "",
- "maker": "",
- "name": "",
- "note": "",
+ "section": "SCULPTURE",
+ "maker": "UNKNOWN",
+ "name": "UNKNOWN",
+ "note": "Freestanding assemblage of purple-painted metal with scrolled wrought-iron elements, small figurines, a white angel and a crescent moon, on white-painted legs; shown in a corner of a gallery. Size, year and collection are not visible in the photo.",
  "credit": "",
  "keep_bg": false,
  "photo_mode": "",
  "video_url": "",
- "lookup": true
+ "lookup": true,
+ "looked_up": {
+  "sure": false,
+  "source": ""
+ }
 }
