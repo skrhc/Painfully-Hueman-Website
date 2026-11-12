@@ -1,11 +1,15 @@
 {
- "section": "",
- "maker": "",
- "name": "",
- "note": "",
+ "section": "PAINTING",
+ "maker": "UNKNOWN",
+ "name": "UNKNOWN",
+ "note": "A painted relief panel showing a standing red bull with a white head, blue-rimmed eyes and black horns, on a raised plinth, set in a rectangular frame. Medium and date are not confirmed.",
  "credit": "",
  "keep_bg": false,
  "photo_mode": "",
  "video_url": "",
- "lookup": true
+ "lookup": true,
+ "looked_up": {
+  "sure": false,
+  "source": ""
+ }
 }
