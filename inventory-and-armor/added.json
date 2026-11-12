@@ -1839,15 +1839,16 @@
   "id": "2153",
   "section": "PAINTING",
   "img": "images/unknown-unknown-37.png",
-  "maker": "UNKNOWN",
+  "maker": "WATCHTOWER PUBLISHING",
   "name": "UNKNOWN",
-  "note": "Illustrated scene in an airbrushed, early-1980s religious-tract style. A smiling couple and two other groups walk over cracked paving slabs, with a lit church and a stormy orange sky behind them. I couldn't confirm the artist, publication or year, and I didn't run a web search, because a search can't match an image by its content.",
-  "credit": "",
+  "note": "Illustrated scene in an airbrushed, early-1980s religious-tract style. A smiling couple and two other groups walk over cracked paving slabs, with a lit church and a stormy orange sky behind them.",
+  "credit": "watchtower publishing",
   "photos": "painting",
   "looked_up": {
    "sure": false,
    "source": ""
-  }
+  },
+  "updated": "2026-11-12T03:39:17.685Z"
  },
  {
   "id": "2154",
