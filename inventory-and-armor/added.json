@@ -2451,7 +2451,9 @@
   "looked_up": {
    "sure": false,
    "source": "https://digitalartarchive.at/database/work/793"
-  }
+  },
+  "deleted": true,
+  "updated": "2026-11-12T04:53:47.039Z"
  },
  {
   "id": "2191",
