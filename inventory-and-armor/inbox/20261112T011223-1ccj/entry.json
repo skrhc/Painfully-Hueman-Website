@@ -1,11 +1,15 @@
 {
- "section": "",
- "maker": "",
- "name": "",
- "note": "",
+ "section": "PAINTING",
+ "maker": "Sega",
+ "name": "SONIC & KNUCKLES, 1994",
+ "note": "Airbrush-style promotional illustration of the Sonic (blue) and Knuckles (red) faces inside a yellow-rimmed black oval, with a partial \"PRESENTS\" line at the top, apparently from a 1994 Sega ad or box art for Sonic & Knuckles. Exact medium, size and collection are unconfirmed.",
  "credit": "",
  "keep_bg": false,
  "photo_mode": "",
  "video_url": "",
- "lookup": true
+ "lookup": true,
+ "looked_up": {
+  "sure": false,
+  "source": ""
+ }
 }
