@@ -2177,13 +2177,14 @@
   "img": "images/unknown-ant-pupae-macro-photograph.png",
   "maker": "UNKNOWN",
   "name": "ANT PUPAE (MACRO PHOTOGRAPH)",
-  "note": "Focus-stacked macro or photomicrograph of two ant pupae on black, one pigmented orange-tan and one pale white, with cocoon-like cases below. The species and photographer could not be identified.",
+  "note": "Focus-stacked macro or photomicrograph of two ant pupae on black, one pigmented orange-tan and one pale white, with cocoon-like cases below.",
   "credit": "",
   "photos": "cut",
   "looked_up": {
    "sure": false,
    "source": ""
-  }
+  },
+  "updated": "2026-11-12T03:29:43.012Z"
  },
  {
   "id": "2178",
