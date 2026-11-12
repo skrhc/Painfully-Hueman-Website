@@ -1,11 +1,15 @@
 {
- "section": "",
- "maker": "",
- "name": "",
- "note": "",
+ "section": "PAINTING",
+ "maker": "UNKNOWN",
+ "name": "UNKNOWN",
+ "note": "Digital or painted black silhouette of a figure in a wide-brimmed flat-crowned hat and coat, with two red eyes, against a streaked grey and white background. It resembles the 'Hat Man' shadow-figure motif from sleep-paralysis folklore. I couldn't find the artist or title, because a text search can't match an image like this.",
  "credit": "",
  "keep_bg": false,
  "photo_mode": "",
  "video_url": "",
- "lookup": true
+ "lookup": true,
+ "looked_up": {
+  "sure": false,
+  "source": ""
+ }
 }
