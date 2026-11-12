@@ -1,11 +1,15 @@
 {
- "section": "",
- "maker": "",
- "name": "",
- "note": "",
+ "section": "PHOTO",
+ "maker": "UNKNOWN",
+ "name": "UNKNOWN",
+ "note": "Colour portrait of a person with a close-cropped, flat-top haircut, dark blue-toned skin, and dark glossy lips, holding a slim white cylindrical object between the lips, wearing a dark tailored jacket against an olive-grey backdrop. No caption, credit, or date is visible in the image.",
  "credit": "",
  "keep_bg": false,
  "photo_mode": "",
  "video_url": "",
- "lookup": true
+ "lookup": true,
+ "looked_up": {
+  "sure": false,
+  "source": ""
+ }
 }
