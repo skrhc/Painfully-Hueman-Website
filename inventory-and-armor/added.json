@@ -1188,5 +1188,103 @@
    "sure": true,
    "source": "https://www.rijksmuseum.nl/en/collection/RP-P-1922-110"
   }
+ },
+ {
+  "id": "2107",
+  "section": "OBJECT",
+  "img": "images/unknown-unknown-17.png",
+  "maker": "UNKNOWN",
+  "name": "UNKNOWN",
+  "note": "A carved wooden staff or scepter with a metal-capped finial, a figurative carved top section, and a shaft wrapped in metal bands. Appears to be a central African or southern African ceremonial object, but the photo alone does not establish its origin, date or size.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2108",
+  "section": "PHOTO",
+  "img": "images/unknown-unknown-18.png",
+  "maker": "UNKNOWN",
+  "name": "UNKNOWN",
+  "note": "Photograph of a seated woman in a white dress with painted face, in a whitewashed room with brass bowls, a red cloth and other ritual objects; the setting suggests an Afro-Brazilian Candomblé context, but this is unconfirmed.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2109",
+  "section": "OBJECT",
+  "img": "images/edo-peoples-kingdom-of-benin-nigeria-hip-pendant-mask-animal-leopard-head-with-ruff-mudfish-and-bells.png",
+  "maker": "EDO PEOPLES, KINGDOM OF BENIN (NIGERIA)",
+  "name": "HIP PENDANT MASK, ANIMAL (LEOPARD) HEAD WITH RUFF, MUDFISH AND BELLS",
+  "note": "Cast copper-alloy (bronze) pendant mask of the type worn on the left hip by Benin court chiefs, probably 18th–19th century. The attribution is a best guess from the form: the animal head, mudfish ruff and hanging bells.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2110",
+  "section": "SCULPTURE",
+  "img": "images/unknown-silver-plaque-of-christ-as-the-man-of-sorrows-ecce-homo-in-a-strapwork-frame.png",
+  "maker": "UNKNOWN",
+  "name": "SILVER PLAQUE OF CHRIST AS THE MAN OF SORROWS (ECCE HOMO) IN A STRAPWORK FRAME",
+  "note": "Repoussé silver rectangular plaque showing Christ crowned with thorns, bound and holding a rod, set in a raised inner frame with scrolling strapwork. It looks Renaissance or Baroque, probably 16th–17th century and European, but I could not confirm the maker, date or collection.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2111",
+  "section": "FURNITURE",
+  "img": "images/unknown-painted-leather-trunk-with-tobias-and-the-archangel-raphael.png",
+  "maker": "UNKNOWN",
+  "name": "PAINTED LEATHER TRUNK WITH TOBIAS AND THE ARCHANGEL RAPHAEL",
+  "note": "Domed-lid wooden trunk covered in painted leather and studded with nails. It shows Tobias, the Archangel Raphael and the dog on the front, and a standing Virgin on the end panel. It looks like Spanish colonial work, probably Peruvian, from the 17th or 18th century. I couldn't find a source for this exact piece.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2112",
+  "section": "OBJECT",
+  "img": "images/unknown-unknown-19.png",
+  "maker": "UNKNOWN",
+  "name": "UNKNOWN",
+  "note": "Black-and-white photographic reproduction of a hand-drawn construction drawing showing a curved profile with a control-polygon style grid of guide lines, and a scale bar marked \"3 mts.\"",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2113",
+  "section": "PHOTO",
+  "img": "images/tianyao-yang-iss-transit-across-active-regions-ar4498-and-ar4500-2026.png",
+  "maker": "TIANYAO YANG",
+  "name": "ISS TRANSIT ACROSS ACTIVE REGIONS AR4498 AND AR4500, 2026",
+  "note": "H-alpha photograph of the Sun's chromosphere with the International Space Station silhouetted across it, taken 1 August 2026 from Lianyungang, Jiangsu, China, with a Sky-Watcher HELIOSTAR-100Hα solar telescope. Sunspots are visible in the image. I could not view the Sky & Telescope image itself, so the match is not confirmed.",
+  "credit": "By: Tianyao Yang (Sky & Telescope byline)",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": "https://skyandtelescope.org/online-gallery/iss-transits-active-solar-chromosphere/"
+  }
  }
 ]
