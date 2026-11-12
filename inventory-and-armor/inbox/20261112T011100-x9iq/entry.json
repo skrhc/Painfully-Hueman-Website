@@ -1,11 +1,15 @@
 {
- "section": "",
- "maker": "",
- "name": "",
- "note": "",
+ "section": "JEWELRY",
+ "maker": "UNKNOWN",
+ "name": "UNKNOWN",
+ "note": "Silver multi-strand woven chain necklace with a central repoussé disc medallion, a hand-shaped clasp and tassels of coiled chain at both ends. The photo looks like a museum collection image, but I couldn't confirm the maker, origin or date. I did not run a web search, and a text search can't match an image.",
  "credit": "",
  "keep_bg": false,
  "photo_mode": "",
  "video_url": "",
- "lookup": true
+ "lookup": true,
+ "looked_up": {
+  "sure": false,
+  "source": ""
+ }
 }
