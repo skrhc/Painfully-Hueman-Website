@@ -1286,5 +1286,957 @@
    "sure": false,
    "source": "https://skyandtelescope.org/online-gallery/iss-transits-active-solar-chromosphere/"
   }
+ },
+ {
+  "id": "2114",
+  "section": "PHOTO",
+  "img": "images/unknown-paper-wasp-standing-on-water-with-surface-tension-shadows.png",
+  "maker": "UNKNOWN",
+  "name": "PAPER WASP STANDING ON WATER, WITH SURFACE-TENSION SHADOWS",
+  "note": "Color photograph of a paper wasp (likely genus Polistes) standing on blue water. Its feet dimple the surface, which casts round shadows on the bottom. The photographer, date and exact species are unconfirmed.",
+  "credit": "Photo: unknown",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": "https://neatorama.com/2013/03/04/The-Shadow-of-Surface-Tension"
+  }
+ },
+ {
+  "id": "2115",
+  "section": "JEWELRY",
+  "img": "images/unknown-unknown-20.png",
+  "maker": "UNKNOWN",
+  "name": "UNKNOWN",
+  "note": "Silver-toned double-loop brooch or buckle with two star-shaped openwork rosettes and beaded borders, with a pin on the reverse. Maker, date and origin could not be confirmed.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2116",
+  "section": "SCULPTURE",
+  "img": "images/edo-artists-kingdom-of-benin-benin-plaque-with-oba-attendants-portuguese-figure-leopard-and-snake.png",
+  "maker": "EDO ARTISTS, KINGDOM OF BENIN",
+  "name": "BENIN PLAQUE WITH OBA, ATTENDANTS, PORTUGUESE FIGURE, LEOPARD AND SNAKE",
+  "note": "This is a black-and-white photograph of a rectangular relief plaque with a central Oba figure, a Portuguese figure at left, an umbrella, a leopard and a snake. It looks like a Benin cast brass plaque of the 16th–17th century, but I couldn't match it to a specific museum object, so the attribution is a best guess.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2117",
+  "section": "JEWELRY",
+  "img": "images/unknown-unknown-21.png",
+  "maker": "UNKNOWN",
+  "name": "UNKNOWN",
+  "note": "Silver multi-strand woven chain necklace with a central repoussé disc medallion, a hand-shaped clasp and tassels of coiled chain at both ends. The photo looks like a museum collection image, but I couldn't confirm the maker, origin or date. I did not run a web search, and a text search can't match an image.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2118",
+  "section": "FURNITURE",
+  "img": "images/asante-akan-artist-ghana-stool-dwa-asante-probably-19th-early-20th-century.png",
+  "maker": "ASANTE (AKAN) ARTIST, GHANA",
+  "name": "STOOL (DWA), ASANTE, PROBABLY 19TH–EARLY 20TH CENTURY",
+  "note": "Black-finished carved wooden stool with a curved seat. Two fish (probably catfish) flank a central bottle-shaped motif and two spoked discs. I could not trace this exact object, so the date and attribution are a best guess from its style.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2119",
+  "section": "FURNITURE",
+  "img": "images/asante-ashanti-peoples-ghana-carved-wood-stool-asante-ashanti-ghana.png",
+  "maker": "ASANTE (ASHANTI) PEOPLES, GHANA",
+  "name": "CARVED WOOD STOOL, ASANTE (ASHANTI), GHANA",
+  "note": "Carved wood stool with a saddle-shaped seat, an openwork back panel and an openwork base of scrolled supports, all incised with geometric patterns. Date and collection are unknown; I could not match this photo to a specific catalogued object.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2120",
+  "section": "PHOTO",
+  "img": "images/unknown-unknown-22.png",
+  "maker": "UNKNOWN",
+  "name": "UNKNOWN",
+  "note": "Black-and-white photograph of two seated figures under heavy falling water beside a rock face and bare branches, with visible film grain.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2121",
+  "section": "PAINTING",
+  "img": "images/unknown-unknown-23.png",
+  "maker": "UNKNOWN",
+  "name": "UNKNOWN",
+  "note": "Black-and-white photocopied line drawing of a round, textured bird standing inside a domed hanging cage. I couldn't identify the artist or title from the image alone, and I didn't run a web search because there is no text, signature or caption to search on.",
+  "credit": "",
+  "photos": "painting",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2122",
+  "section": "PHOTO",
+  "img": "images/unknown-unknown-24.png",
+  "maker": "UNKNOWN",
+  "name": "UNKNOWN",
+  "note": "Digital collage of multicolored galaxies and nebulae linked by faint filaments on a black ground. Medium, size and year could not be confirmed.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2123",
+  "section": "JEWELRY",
+  "img": "images/unknown-scottish-game-bird-foot-brooch-citrine-and-gold-mount.png",
+  "maker": "UNKNOWN",
+  "name": "SCOTTISH GAME-BIRD FOOT BROOCH, CITRINE AND GOLD MOUNT",
+  "note": "Probably a Victorian Scottish brooch made from a mounted bird's foot (grouse or capercaillie type). It has an engraved gold collar set with an oval citrine, and a second round citrine on the foot. I couldn't find the exact piece, so the maker, date and collection are unconfirmed.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": "https://www.victorianweb.org/art/design/jewelry/44.html"
+  }
+ },
+ {
+  "id": "2124",
+  "section": "PHOTO",
+  "img": "images/unknown-razorbill-alca-torda-close-up-of-head-and-bill.png",
+  "maker": "UNKNOWN",
+  "name": "RAZORBILL (ALCA TORDA), CLOSE-UP OF HEAD AND BILL",
+  "note": "Close-up of a razorbill's head and thick bill against a dark background, with a white-and-black body visible below. The bill's thin white line is consistent with the species, but the photo's date, camera and original photographer are unknown.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2125",
+  "section": "SCULPTURE",
+  "img": "images/unknown-maker-xochipala-culture-guerrero-mexico-standing-female-figurine-c-1500-500-bc.png",
+  "maker": "UNKNOWN MAKER (XOCHIPALA CULTURE, GUERRERO, MEXICO)",
+  "name": "STANDING FEMALE FIGURINE, C. 1500–500 BC",
+  "note": "Hand-built earthenware figurine with pigment decoration, in the Xochipala style of Guerrero, Mexico. Approximate date 1500–500 BC; size not confirmed.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2126",
+  "section": "PAINTING",
+  "img": "images/unknown-unknown-25.png",
+  "maker": "UNKNOWN",
+  "name": "UNKNOWN",
+  "note": "Digital 3D-style render of a seated figure with an iridescent surface, dispersing glittering particles against a dark background. Artist, year and source could not be identified.",
+  "credit": "",
+  "photos": "painting",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2127",
+  "section": "BOOK",
+  "img": "images/paperback-paradise-the-alien-that-sucked-me-dry.png",
+  "maker": "PAPERBACK PARADISE",
+  "name": "THE ALIEN THAT SUCKED ME DRY",
+  "note": "A mock paperback cover, not a published book: the title, byline 'Devin Herting' and back-cover copy circulate online as a joke. The painted alien face and year of the cover art are not documented.",
+  "credit": "",
+  "photos": "keep",
+  "looked_up": {
+   "sure": true,
+   "source": "https://ifunny.co/picture/government-doesn-t-wantvouto-knowabout-i-hie-alien-that-sucked-vf4pBx07C"
+  }
+ },
+ {
+  "id": "2128",
+  "section": "BOTTOMS",
+  "img": "images/unknown-unknown-26.png",
+  "maker": "UNKNOWN",
+  "name": "UNKNOWN",
+  "note": "Wide-leg trousers in grey melange wool-blend fabric, with a raw-edge waistband, front pleats and a waist tab. Maker and season not identified.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2129",
+  "section": "BOTTOMS",
+  "img": "images/unknown-unknown-27.png",
+  "maker": "UNKNOWN",
+  "name": "UNKNOWN",
+  "note": "Navy and black marled rib-knit shorts with a wide, relaxed leg, a pleated front, and a frayed check-organza layer showing at the hem; worn with white socks and white-and-blue chunky sneakers. I could not match the maker, season or model.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2130",
+  "section": "BOTTOMS",
+  "img": "images/unknown-unknown-28.png",
+  "maker": "UNKNOWN",
+  "name": "UNKNOWN",
+  "note": "Wide, knee-length shorts in an olive-green marled rib knit with a black sheer pleated layer showing at the hem. Photographed as a studio look with black socks and black leather loafers.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2131",
+  "section": "OBJECT",
+  "img": "images/philippe-starck-with-makato-nozawa-unhex-nani-nani-1989.png",
+  "maker": "PHILIPPE STARCK WITH MAKATO NOZAWA",
+  "name": "UNHEX NANI NANI, 1989",
+  "note": "A five-story copper-clad office building with street-level commercial space in Shirokanedai, Minato, Tokyo, designed for the construction company Unhex. Its verdigris-green copper skin is curved and bulbous, and the building is known as \"Nani Nani\" (\"what is it?\").",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": true,
+   "source": "https://architecture-tokyo.com/2017/03/15/1989-unhex-nani-nani-philippe-starck-and-makato-nozawa/"
+  }
+ },
+ {
+  "id": "2132",
+  "section": "OBJECT",
+  "img": "images/figoni-et-falaschi-delahaye-1936-delahaye-135m-competition-coupe.png",
+  "maker": "FIGONI ET FALASCHI (DELAHAYE)",
+  "name": "1936 DELAHAYE 135M COMPETITION COUPE",
+  "note": "Aerodynamic teardrop coupe with a hand-formed aluminum body on a short Delahaye 135M chassis, powered by a 4-litre six. This is my best match for the car in the photo. The Frist page doesn't give the colour, and I couldn't check the image against the car's page.",
+  "credit": "Collection of Jim Patterson / The Patterson Collection, Louisville, KY. Photo: Peter Harholdt, © 2013",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": "https://fristartmuseum.org/1936-delahaye-135m-figoni-falaschi-competition-coupe/"
+  }
+ },
+ {
+  "id": "2133",
+  "section": "SCULPTURE",
+  "img": "images/unknown-standing-female-figure-andean-ceramic-probably-peruvian-central-south-coast.png",
+  "maker": "UNKNOWN",
+  "name": "STANDING FEMALE FIGURE, ANDEAN CERAMIC (PROBABLY PERUVIAN CENTRAL/SOUTH COAST)",
+  "note": "Painted ceramic standing female figure with hands on hips, a red slip body, and cream and black stepped-fret face paint, zigzag chest bands and banded thighs, shown on a metal stand. The style resembles Chancay-type figures, but the attribution, date and collection are unconfirmed.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2134",
+  "section": "HEADWEAR",
+  "img": "images/biltwell-best-guess-from-the-decal-on-the-helmet-not-confirmed-custom-painted-full-face-helmet-cream-and-black-flame-pattern-with-gold-pinstripe-model-unconfirmed-likely-gringo.png",
+  "maker": "BILTWELL (BEST GUESS, FROM THE DECAL ON THE HELMET; NOT CONFIRMED)",
+  "name": "CUSTOM-PAINTED FULL-FACE HELMET, CREAM AND BLACK FLAME PATTERN WITH GOLD PINSTRIPE (MODEL UNCONFIRMED, LIKELY GRINGO)",
+  "note": "A retro full-face motorcycle helmet with a cream base, black flame-style graphics and gold pinstriping, with a DOT marking on the rear. The decal reads \"Art & Wheels\" under a script logo, but I could not confirm that name or the model.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2135",
+  "section": "OUTERWEAR",
+  "img": "images/thierry-mugler-la-chimere-gown-haute-couture-autumn-winter-1997-98.png",
+  "maker": "THIERRY MUGLER",
+  "name": "LA CHIMÈRE GOWN, HAUTE COUTURE AUTUMN/WINTER 1997-98",
+  "note": "Couture gown with a gold articulated armoured corset, iridescent hand-painted scales set with crystals, feathers and horsehair, and a feathered headpiece. Made with corsetier Mr. Pearl and artist Jean-Jacques Urcun for the 'Les Chimères' collection. The photo is a runway image. The match comes from visual similarity to published descriptions, so the identification is likely but not confirmed.",
+  "credit": "Thierry Mugler",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": "https://worleygig.com/2022/12/14/eye-on-design-thierry-mugler-la-chimere-gown"
+  }
+ },
+ {
+  "id": "2136",
+  "section": "PHOTO",
+  "img": "images/unknown-unknown-29.png",
+  "maker": "UNKNOWN",
+  "name": "UNKNOWN",
+  "note": "Colour photograph of a girl in a white headscarf and sunglasses aiming an AK-pattern rifle, with a line of similarly dressed women behind her. Photographer, date and location are unconfirmed.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2137",
+  "section": "PHOTO",
+  "img": "images/andrew-garn-marilyn-saddle-pigeon-from-the-new-york-pigeon.png",
+  "maker": "ANDREW GARN",
+  "name": "MARILYN (SADDLE PIGEON), FROM THE NEW YORK PIGEON",
+  "note": "A rescued New York street pigeon whose wings fold together into a heart shape. The bird's name and wing description are from a 2018 book of Garn's pigeon portraits, and this image is not confirmed as one of its published photos.",
+  "credit": "All photos From 'The New York Pigeon' by Andrew Garn, published by powerHouse Books.",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": "https://mymodernmet.com/pigeon-photos-andrew-garn/"
+  }
+ },
+ {
+  "id": "2138",
+  "section": "PAINTING",
+  "img": "images/sega-sonic-knuckles-1994.png",
+  "maker": "SEGA",
+  "name": "SONIC & KNUCKLES, 1994",
+  "note": "Airbrush-style promotional illustration of the Sonic (blue) and Knuckles (red) faces inside a yellow-rimmed black oval, with a partial \"PRESENTS\" line at the top, apparently from a 1994 Sega ad or box art for Sonic & Knuckles. Exact medium, size and collection are unconfirmed.",
+  "credit": "",
+  "photos": "painting",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2139",
+  "section": "PAINTING",
+  "img": "images/unknown-unknown-30.png",
+  "maker": "UNKNOWN",
+  "name": "UNKNOWN",
+  "note": "Digital or painted black silhouette of a figure in a wide-brimmed flat-crowned hat and coat, with two red eyes, against a streaked grey and white background. It resembles the 'Hat Man' shadow-figure motif from sleep-paralysis folklore. I couldn't find the artist or title, because a text search can't match an image like this.",
+  "credit": "",
+  "photos": "painting",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2140",
+  "section": "OBJECT",
+  "img": "images/unknown-eight-pointed-star-mesopotamian-star-of-ishtar-inanna-motif.png",
+  "maker": "UNKNOWN",
+  "name": "EIGHT-POINTED STAR, MESOPOTAMIAN (STAR OF ISHTAR / INANNA) MOTIF",
+  "note": "High-contrast ink-style reproduction of an eight-pointed star with a raised central disc and spiral, in the style of the Ishtar/Inanna star symbol of ancient Mesopotamia. I could not trace this image to a specific artefact, museum object or publication, so the identification is a best guess based on iconography.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2141",
+  "section": "JEWELRY",
+  "img": "images/unknown-blue-and-white-necklace.png",
+  "maker": "UNKNOWN",
+  "name": "BLUE AND WHITE NECKLACE",
+  "note": "Three solid pieces of loom-woven glass bead work (size 10 beads) joined by bead strings, in dark blue, white, green and light blue, with a dark blue bead fringe. The image is a photograph on page 32 of an unidentified bead-weaving book, which gives materials and a counted design for working it.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2142",
+  "section": "SCULPTURE",
+  "img": "images/dogon-carver-unidentified-kanaga-mask.png",
+  "maker": "DOGON CARVER (UNIDENTIFIED)",
+  "name": "KANAGA MASK",
+  "note": "Carved wood face mask with a double-cross superstructure, white and dark pigment, and iron or leather fittings on the arms. The form is a Dogon kanaga, worn mainly at the dama funerary rite; date and dimensions are unknown.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2143",
+  "section": "HEADWEAR",
+  "img": "images/unknown-unknown-31.png",
+  "maker": "UNKNOWN",
+  "name": "UNKNOWN",
+  "note": "Runway-style look: a translucent, frosted skull-shaped head mask with cut-out eyes and fanged teeth, worn with a multi-strand white pearl collar, pearl drop earrings, and white sculpted shoulder pieces over a black garment. Maker, season and year could not be confirmed.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2144",
+  "section": "PHOTO",
+  "img": "images/unknown-tanker-truck-rear-graphic-c22-cum-truck-back-off-we-aint-haulin-milk.png",
+  "maker": "UNKNOWN",
+  "name": "TANKER TRUCK REAR GRAPHIC, \"C22 CUM TRUCK – BACK OFF! WE AINT HAULIN MILK!\"",
+  "note": "Snapshot of the rear of a fuel tanker (placard 1203, gasoline) with a custom decal. The decal shows a Yosemite Sam-style cartoon character in a feathered headdress holding two hatchets. The photographer and date are unknown, and the image circulates online as a meme. I did not run a web search, so no source confirms the photo's origin.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2145",
+  "section": "FOOTWEAR",
+  "img": "images/rombaut-typhoon-silver-boots.png",
+  "maker": "ROMBAUT",
+  "name": "TYPHOON SILVER BOOTS",
+  "note": "Knee-high boot with a non-removable ruched metallic overlayer and a lug sole. Rombaut's site lists the upper as 63% PU and 37% PL and the sole as 100% TPU, though some retailers give different materials.",
+  "credit": "Rombaut",
+  "photos": "cut",
+  "looked_up": {
+   "sure": true,
+   "source": "https://rombaut.com/products/typhoon-silver"
+  }
+ },
+ {
+  "id": "2146",
+  "section": "OBJECT",
+  "img": "images/unknown-unknown-32.png",
+  "maker": "UNKNOWN",
+  "name": "UNKNOWN",
+  "note": "A dried gourd (hyōtan-type double gourd) with a glossy red-brown lacquered or varnished surface, bound with tan braided cord and a red silk tassel, shown on a flat metal base.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2147",
+  "section": "PHOTO",
+  "img": "images/unknown-unknown-33.png",
+  "maker": "UNKNOWN",
+  "name": "UNKNOWN",
+  "note": "Photograph of a mud-plastered interior with incised concentric geometric patterns on the floor and walls, with a man in white kneeling at the centre; the location and date are not confirmed. A small \"ATA\" logo appears in the lower-right corner.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2148",
+  "section": "OBJECT",
+  "img": "images/unknown-unknown-34.png",
+  "maker": "UNKNOWN",
+  "name": "UNKNOWN",
+  "note": "Carved wooden panel, a long plank with symmetrical shallow-relief figures and incised geometric borders (diamond and zigzag patterns). The form resembles Oceanic or Southeast Asian architectural or ceremonial carving, but I could not match it to a specific source.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2149",
+  "section": "SCULPTURE",
+  "img": "images/unknown-unknown-35.png",
+  "maker": "UNKNOWN",
+  "name": "UNKNOWN",
+  "note": "Painted terracotta head of a bearded man with curly hair, shown in a museum case beside a pale blue glass jug. The wall label appears to read as Roman-period Egypt, but it is too blurred in the photo to confirm the title, date or collection.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2150",
+  "section": "PAINTING",
+  "img": "images/unknown-nebuchadnezzars-dream-of-the-statue-and-the-stone-cut-out-of-the-mountain-daniel-2.png",
+  "maker": "UNKNOWN",
+  "name": "NEBUCHADNEZZAR'S DREAM OF THE STATUE AND THE STONE CUT OUT OF THE MOUNTAIN (DANIEL 2)",
+  "note": "Illustration of the golden-headed statue from Daniel 2, with a stone rolling down from a glowing mountain. It looks like a scan from a printed publication, possibly a Watchtower Society book. I couldn't confirm the artist, year or publication.",
+  "credit": "",
+  "photos": "painting",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2151",
+  "section": "BOOK",
+  "img": "images/watch-tower-bible-and-tract-society-of-pennsylvania-it-has-come-to-pass-illustration-revelation-16-17.png",
+  "maker": "WATCH TOWER BIBLE AND TRACT SOCIETY OF PENNSYLVANIA",
+  "name": "IT HAS COME TO PASS! (ILLUSTRATION, REVELATION 16:17)",
+  "note": "Full-page painted illustration on page 233 of the book Revelation—Its Grand Climax At Hand!, showing the seventh bowl of wrath (Revelation 16:17) poured from the sky onto a collapsing city. The publisher's caption reads \"Those motivated by Satan's polluted 'air' must suffer the execution of Jehovah's righteous judgments.\" Artist and exact year are not stated on the source page.",
+  "credit": "Watch Tower Bible and Tract Society of Pennsylvania (publisher); artist not credited in the source",
+  "photos": "keep",
+  "looked_up": {
+   "sure": true,
+   "source": "https://wol.jw.org/en/wol/d/r1/lp-e/1101988032"
+  }
+ },
+ {
+  "id": "2152",
+  "section": "PAINTING",
+  "img": "images/unknown-unknown-36.png",
+  "maker": "UNKNOWN",
+  "name": "UNKNOWN",
+  "note": "Painted illustration of a family walking across a green, flower-filled meadow away from a burning town, with a numbered tag (\"7\") in the lower right.",
+  "credit": "",
+  "photos": "painting",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2153",
+  "section": "PAINTING",
+  "img": "images/unknown-unknown-37.png",
+  "maker": "UNKNOWN",
+  "name": "UNKNOWN",
+  "note": "Illustrated scene in an airbrushed, early-1980s religious-tract style. A smiling couple and two other groups walk over cracked paving slabs, with a lit church and a stormy orange sky behind them. I couldn't confirm the artist, publication or year, and I didn't run a web search, because a search can't match an image by its content.",
+  "credit": "",
+  "photos": "painting",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2154",
+  "section": "TOP",
+  "img": "images/unknown-unknown-38.png",
+  "maker": "UNKNOWN",
+  "name": "UNKNOWN",
+  "note": "Pink cotton check shirt with a collarless neckline, front button placket and a draped fabric panel across one shoulder, worn with black wide-leg trousers and black flat shoes.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2155",
+  "section": "TOP",
+  "img": "images/alexander-wang-unknown.png",
+  "maker": "ALEXANDER WANG",
+  "name": "UNKNOWN",
+  "note": "Black oversized zip-trimmed hooded sweatshirt with ruched sleeves, shown in a full look with an asymmetric black skirt, a black cap with ear flaps, a small round bag and black lace-up flats. The small chest logo resembles Alexander Wang's, but I couldn't confirm the brand, season or product name.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2156",
+  "section": "BOTTOMS",
+  "img": "images/ader-error-unconfirmed-grey-sweat-skirt-asymmetric-handkerchief-hem.png",
+  "maker": "ADER ERROR (UNCONFIRMED)",
+  "name": "GREY SWEAT SKIRT, ASYMMETRIC HANDKERCHIEF HEM",
+  "note": "Grey marl cotton-jersey midi skirt with an elasticated drawstring waist, distressed hem and a pointed handkerchief hem that shows the cream reverse side. It is styled with cream ribbed socks and white and taupe sneakers with a blue logo. The maker is a best guess from the hem label and the sneakers. I could not find the exact product, so the season is unknown.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2157",
+  "section": "OBJECT",
+  "img": "images/unknown-ceremonial-axe-with-female-figure-probably-yoruba-nigeria.png",
+  "maker": "UNKNOWN",
+  "name": "CEREMONIAL AXE WITH FEMALE FIGURE (PROBABLY YORUBA, NIGERIA)",
+  "note": "Carved wood and forged iron blade on a stand, with a kneeling female figure holding her breasts and a scarified headdress. Photographed by Heritage Auctions. I did not run a web search, so the attribution is a visual guess and I could not find the lot, date or size.",
+  "credit": "Imaged by Heritage Auctions, HA.com",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2158",
+  "section": "SCULPTURE",
+  "img": "images/luba-democratic-republic-of-congo-attributed-ceremonial-axe-kibiki-kasolwa-with-stacked-figures.png",
+  "maker": "LUBA (DEMOCRATIC REPUBLIC OF CONGO), ATTRIBUTED",
+  "name": "CEREMONIAL AXE (KIBIKI / KASOLWA) WITH STACKED FIGURES",
+  "note": "Carved wooden handle with three stacked figural heads and a crescent iron blade, leather-bound butt, mounted on a wooden stand. The type is a Luba prestige axe, but I could not match this exact piece to a published record, so the attribution is a best guess.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": "https://ertribal.com/index.php/tribal-art/blades/ceremonial-axe-kibiki-or-kasolwa-luba-dr-congo"
+  }
+ },
+ {
+  "id": "2159",
+  "section": "OBJECT",
+  "img": "images/unknown-unknown-39.png",
+  "maker": "UNKNOWN",
+  "name": "UNKNOWN",
+  "note": "Carved wood face mask with a pair of horns and ridged side arches, probably West African (Mali or Burkina Faso). Tribe, date and provenance are not confirmed.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2160",
+  "section": "PAINTING",
+  "img": "images/unknown-unknown-40.png",
+  "maker": "UNKNOWN",
+  "name": "UNKNOWN",
+  "note": "A painted relief panel showing a standing red bull with a white head, blue-rimmed eyes and black horns, on a raised plinth, set in a rectangular frame. Medium and date are not confirmed.",
+  "credit": "",
+  "photos": "painting",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2161",
+  "section": "OUTERWEAR",
+  "img": "images/unknown-unknown-41.png",
+  "maker": "UNKNOWN",
+  "name": "UNKNOWN",
+  "note": "A layered, cape-like garment of ribbon strips, lace, fringe and a woven headpiece, worn by a mannequin in a dark gallery display, with black printed names on the central panel. Medium, size, year and collection are not visible in the photo.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2162",
+  "section": "PHOTO",
+  "img": "images/unknown-unknown-42.png",
+  "maker": "UNKNOWN",
+  "name": "UNKNOWN",
+  "note": "Colour portrait of a person with a close-cropped, flat-top haircut, dark blue-toned skin, and dark glossy lips, holding a slim white cylindrical object between the lips, wearing a dark tailored jacket against an olive-grey backdrop. No caption, credit, or date is visible in the image.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2163",
+  "section": "JEWELRY",
+  "img": "images/unknown-unknown-43.png",
+  "maker": "UNKNOWN",
+  "name": "UNKNOWN",
+  "note": "Cross pendant with step-cut pink stones and old-cut diamonds in closed-back settings, silver tops on gold, with a gold bale; the style suggests Georgian or Victorian work, but the photo shows no marks or date. The pink stones are unverified (pink topaz is likely).",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2164",
+  "section": "OBJECT",
+  "img": "images/altamura-man-neanderthal-lamalunga-cave-altamura-puglia-italy-altamura-man-skull-encrusted-in-calcite.png",
+  "maker": "ALTAMURA MAN (NEANDERTHAL, LAMALUNGA CAVE, ALTAMURA, PUGLIA, ITALY)",
+  "name": "ALTAMURA MAN, SKULL ENCRUSTED IN CALCITE",
+  "note": "Neanderthal skeleton discovered in 1993 by CARS speleologists. Its bones are covered in calcite formations, and it has been dated to roughly 130,000–170,000 years old. It was left in situ in the cave.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": true,
+   "source": "https://www.livescience.com/50458-oldest-neanderthal-dna-found.html"
+  }
+ },
+ {
+  "id": "2165",
+  "section": "JEWELRY",
+  "img": "images/unknown-unknown-44.png",
+  "maker": "UNKNOWN",
+  "name": "UNKNOWN",
+  "note": "Silver link bracelet with nine bean- or pod-shaped links. Each link has a central oval opening and small knobs on the ends. The links are joined by small ring connectors, and the clasp is open in the photo. I couldn't identify the maker or model from the image alone, and there's no marking or text to search on.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2166",
+  "section": "JEWELRY",
+  "img": "images/cartier-devant-de-corsage-1908.png",
+  "maker": "CARTIER",
+  "name": "DEVANT DE CORSAGE, 1908",
+  "note": "A bow-shaped stomacher of diamonds with sapphire accents, with a central cluster and long fringed and drop pendants. The 1908 date and the attribution to Grand Duchess Maria Pavlovna the Younger come from the Instagram caption, and I could not confirm them: the search results tie Cartier's 1908 stomacher work to Maria Pavlovna the Elder (Grand Duchess Vladimir), not the Younger.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2167",
+  "section": "PHOTO",
+  "img": "images/unknown-unknown-45.png",
+  "maker": "UNKNOWN",
+  "name": "UNKNOWN",
+  "note": "Snapshot taken from inside a coastal sea cave, looking out through a rock opening to the ocean, with a tidal pool reflecting the sky. It may be Animal Flower Cave in Barbados, but that is unconfirmed. I found no photographer or published source for this image.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2168",
+  "section": "OBJECT",
+  "img": "images/unknown-unknown-46.png",
+  "maker": "UNKNOWN",
+  "name": "UNKNOWN",
+  "note": "Photograph of a natural limestone cave interior, with a rough, weathered ceiling and a floor of wet rock and pebbles. It shows no artwork, garment or manufactured object, and no identifiable site.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2169",
+  "section": "FOOTWEAR",
+  "img": "images/mia-unknown.png",
+  "maker": "MIA",
+  "name": "UNKNOWN",
+  "note": "White EVA two-strap buckle slide sandal with a molded footbed, photographed on a beach at sunset. The \"MIA\" mark is printed on the footbed.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2170",
+  "section": "PHOTO",
+  "img": "images/unknown-unknown-47.png",
+  "maker": "UNKNOWN",
+  "name": "UNKNOWN",
+  "note": "Photograph of a small spotted crab on a wet, algae-covered rock surface in dim light. It shows a living animal in the wild, not a made object or artwork.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2171",
+  "section": "OBJECT",
+  "img": "images/unknown-cut-glass-perfume-bottle-with-disc-stopper.png",
+  "maker": "UNKNOWN",
+  "name": "CUT GLASS PERFUME BOTTLE WITH DISC STOPPER",
+  "note": "Smoke-gray cut-glass perfume bottle with a large round fan-cut stopper and a star-cut center. It looks like an Art Deco piece from the 1920s–40s, possibly Czech. This is a visual identification only, and I couldn't confirm the maker or date.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2172",
+  "section": "SCULPTURE",
+  "img": "images/edo-artists-kingdom-of-benin-igun-eronmwon-brass-casting-guild-plaque-with-warrior-chief-16th-17th-century.png",
+  "maker": "EDO ARTISTS, KINGDOM OF BENIN (IGUN ERONMWON BRASS-CASTING GUILD)",
+  "name": "PLAQUE WITH WARRIOR CHIEF, 16TH–17TH CENTURY",
+  "note": "Cast brass (lost-wax) relief plaque from the Oba's palace at Benin City, Nigeria. It shows a chief with a coral-beaded helmet and collar, a leopard-tooth necklace and a ceremonial eben sword, with a crescent and rosettes on the ground. The plaque is broken at the edges. I could not match it to one specific museum record, so the exact collection and accession number are unconfirmed.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2173",
+  "section": "PHOTO",
+  "img": "images/nick-veasey-bat-2006.png",
+  "maker": "NICK VEASEY",
+  "name": "BAT, 2006",
+  "note": "X-ray photograph of a fruit bat with wings spread, made by Veasey from a bat bought online; listed as a C-type print, 1189 x 1189mm, edition of 5, from 2006.",
+  "credit": "Nick Veasey",
+  "photos": "cut",
+  "looked_up": {
+   "sure": true,
+   "source": "https://www.designboom.com/art/nick-veasey-x-ray-photography/"
+  }
+ },
+ {
+  "id": "2174",
+  "section": "PHOTO",
+  "img": "images/unknown-unknown-48.png",
+  "maker": "UNKNOWN",
+  "name": "UNKNOWN",
+  "note": "Black-and-white photograph of a swan asleep on water with its head tucked under its wing, with a stone ledge along the bottom edge. Year and collection unknown.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2175",
+  "section": "TOP",
+  "img": "images/unknown-unknown-49.png",
+  "maker": "UNKNOWN",
+  "name": "UNKNOWN",
+  "note": "Crinkled, crushed-metallic jacket in pink, black and bronze tones, with a stand collar, a tie front and gathered long sleeves. Maker, year and collection could not be determined.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2176",
+  "section": "PHOTO",
+  "img": "images/unknown-triangular-diatom-triceratium-sp-darkfield-or-polarized-light-micrograph.png",
+  "maker": "UNKNOWN",
+  "name": "TRIANGULAR DIATOM (TRICERATIUM SP.), DARKFIELD OR POLARIZED LIGHT MICROGRAPH",
+  "note": "Microscope image of a triangular diatom frustule with a patterned silica lattice, in false or interference colour on black. I couldn't trace the photographer, date or collection, so the genus is a best guess from the shape.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2177",
+  "section": "PHOTO",
+  "img": "images/unknown-ant-pupae-macro-photograph.png",
+  "maker": "UNKNOWN",
+  "name": "ANT PUPAE (MACRO PHOTOGRAPH)",
+  "note": "Focus-stacked macro or photomicrograph of two ant pupae on black, one pigmented orange-tan and one pale white, with cocoon-like cases below. The species and photographer could not be identified.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2178",
+  "section": "PAINTING",
+  "img": "images/unknown-unknown-50.png",
+  "maker": "UNKNOWN",
+  "name": "UNKNOWN",
+  "note": "Digital illustration of an animal cell in a jewel-toned palette, with a nucleus, mitochondria, endoplasmic reticulum, Golgi and vesicles shown on a black ground. Medium, size and year are not visible in the image.",
+  "credit": "",
+  "photos": "painting",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2179",
+  "section": "PHOTO",
+  "img": "images/unknown-unknown-51.png",
+  "maker": "UNKNOWN",
+  "name": "UNKNOWN",
+  "note": "Fluorescence micrograph of two cultured cells with red fibrous structures, blue cell edges and green nuclei on a black background. The cell type and stain assignments are unconfirmed.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2180",
+  "section": "PHOTO",
+  "img": "images/unknown-unknown-52.png",
+  "maker": "UNKNOWN",
+  "name": "UNKNOWN",
+  "note": "False-colour 3D rendering of a spiked, roughly symmetrical virus-like particle, coloured from red at the centre through yellow and green to blue at the spike tips, on a black background.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
+ },
+ {
+  "id": "2181",
+  "section": "OBJECT",
+  "img": "images/unknown-unknown-53.png",
+  "maker": "UNKNOWN",
+  "name": "UNKNOWN",
+  "note": "Digital 3D render of a virus-like particle with green protein-ribbon spikes and a blue inner core on a black background. Source and year not confirmed.",
+  "credit": "",
+  "photos": "cut",
+  "looked_up": {
+   "sure": false,
+   "source": ""
+  }
  }
 ]
