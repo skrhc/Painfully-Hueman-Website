@@ -1825,15 +1825,16 @@
   "id": "2152",
   "section": "PAINTING",
   "img": "images/unknown-unknown-36.png",
-  "maker": "UNKNOWN",
+  "maker": "WATCHTOWER PUBLISHING",
   "name": "UNKNOWN",
   "note": "Painted illustration of a family walking across a green, flower-filled meadow away from a burning town, with a numbered tag (\"7\") in the lower right.",
-  "credit": "",
+  "credit": "watchtower publishing",
   "photos": "painting",
   "looked_up": {
    "sure": false,
    "source": ""
-  }
+  },
+  "updated": "2026-11-12T03:39:29.569Z"
  },
  {
   "id": "2153",
