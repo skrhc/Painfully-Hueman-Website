@@ -1,11 +1,15 @@
 {
- "section": "",
- "maker": "",
- "name": "",
- "note": "",
+ "section": "TOP",
+ "maker": "Alexander Wang",
+ "name": "UNKNOWN",
+ "note": "Black oversized zip-trimmed hooded sweatshirt with ruched sleeves, shown in a full look with an asymmetric black skirt, a black cap with ear flaps, a small round bag and black lace-up flats. The small chest logo resembles Alexander Wang's, but I couldn't confirm the brand, season or product name.",
  "credit": "",
  "keep_bg": false,
  "photo_mode": "",
  "video_url": "",
- "lookup": true
+ "lookup": true,
+ "looked_up": {
+  "sure": false,
+  "source": ""
+ }
 }
