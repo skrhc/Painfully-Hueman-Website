@@ -1,11 +1,15 @@
 {
- "section": "",
- "maker": "",
- "name": "",
- "note": "",
- "credit": "",
+ "section": "OBJECT",
+ "maker": "Figoni et Falaschi (Delahaye)",
+ "name": "1936 Delahaye 135M Competition Coupe",
+ "note": "Aerodynamic teardrop coupe with a hand-formed aluminum body on a short Delahaye 135M chassis, powered by a 4-litre six. This is my best match for the car in the photo. The Frist page doesn't give the colour, and I couldn't check the image against the car's page.",
+ "credit": "Collection of Jim Patterson / The Patterson Collection, Louisville, KY. Photo: Peter Harholdt, © 2013",
  "keep_bg": false,
  "photo_mode": "",
  "video_url": "",
- "lookup": true
+ "lookup": true,
+ "looked_up": {
+  "sure": false,
+  "source": "https://fristartmuseum.org/1936-delahaye-135m-figoni-falaschi-competition-coupe/"
+ }
 }
