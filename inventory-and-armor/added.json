@@ -1865,17 +1865,18 @@
  },
  {
   "id": "2155",
-  "section": "TOP",
+  "section": "UNIFORM",
   "img": "images/alexander-wang-unknown.png",
-  "maker": "ALEXANDER WANG",
+  "maker": "ADER ERROR",
   "name": "UNKNOWN",
-  "note": "Black oversized zip-trimmed hooded sweatshirt with ruched sleeves, shown in a full look with an asymmetric black skirt, a black cap with ear flaps, a small round bag and black lace-up flats. The small chest logo resembles Alexander Wang's, but I couldn't confirm the brand, season or product name.",
+  "note": "Black oversized zip-trimmed hooded sweatshirt with ruched sleeves, shown in a full look with an asymmetric black skirt, a black cap with ear flaps, a small round bag and black lace-up flats.",
   "credit": "",
   "photos": "cut",
   "looked_up": {
    "sure": false,
    "source": ""
-  }
+  },
+  "updated": "2026-11-12T03:38:49.926Z"
  },
  {
   "id": "2156",
