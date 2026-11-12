@@ -1797,15 +1797,16 @@
   "id": "2150",
   "section": "PAINTING",
   "img": "images/unknown-nebuchadnezzars-dream-of-the-statue-and-the-stone-cut-out-of-the-mountain-daniel-2.png",
-  "maker": "UNKNOWN",
+  "maker": "WATCHTOWER PUBLISHING",
   "name": "NEBUCHADNEZZAR'S DREAM OF THE STATUE AND THE STONE CUT OUT OF THE MOUNTAIN (DANIEL 2)",
-  "note": "Illustration of the golden-headed statue from Daniel 2, with a stone rolling down from a glowing mountain. It looks like a scan from a printed publication, possibly a Watchtower Society book. I couldn't confirm the artist, year or publication.",
-  "credit": "",
+  "note": "Illustration of the golden-headed statue from Daniel 2, with a stone rolling down from a glowing mountain.",
+  "credit": "watchtower publishing",
   "photos": "painting",
   "looked_up": {
    "sure": false,
    "source": ""
-  }
+  },
+  "updated": "2026-11-12T03:40:10.881Z"
  },
  {
   "id": "2151",
