@@ -1,11 +1,15 @@
 {
- "section": "",
- "maker": "",
- "name": "",
- "note": "",
+ "section": "SCULPTURE",
+ "maker": "Dogon carver (unidentified)",
+ "name": "Kanaga mask",
+ "note": "Carved wood face mask with a double-cross superstructure, white and dark pigment, and iron or leather fittings on the arms. The form is a Dogon kanaga, worn mainly at the dama funerary rite; date and dimensions are unknown.",
  "credit": "",
  "keep_bg": false,
  "photo_mode": "",
  "video_url": "",
- "lookup": true
+ "lookup": true,
+ "looked_up": {
+  "sure": false,
+  "source": ""
+ }
 }
