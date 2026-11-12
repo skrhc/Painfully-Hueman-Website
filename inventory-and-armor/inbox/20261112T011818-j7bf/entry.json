@@ -1,11 +1,15 @@
 {
- "section": "",
- "maker": "",
- "name": "",
- "note": "",
+ "section": "TOP",
+ "maker": "UNKNOWN",
+ "name": "UNKNOWN",
+ "note": "Pink cotton check shirt with a collarless neckline, front button placket and a draped fabric panel across one shoulder, worn with black wide-leg trousers and black flat shoes.",
  "credit": "",
  "keep_bg": false,
  "photo_mode": "",
  "video_url": "",
- "lookup": true
+ "lookup": true,
+ "looked_up": {
+  "sure": false,
+  "source": ""
+ }
 }
