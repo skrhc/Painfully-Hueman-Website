@@ -2162,14 +2162,15 @@
   "section": "PHOTO",
   "img": "images/unknown-triangular-diatom-triceratium-sp-darkfield-or-polarized-light-micrograph.png",
   "maker": "UNKNOWN",
-  "name": "TRIANGULAR DIATOM (TRICERATIUM SP.), DARKFIELD OR POLARIZED LIGHT MICROGRAPH",
-  "note": "Microscope image of a triangular diatom frustule with a patterned silica lattice, in false or interference colour on black. I couldn't trace the photographer, date or collection, so the genus is a best guess from the shape.",
+  "name": "TRIANGULAR DIATOM",
+  "note": "Microscope image of a triangular diatom frustule with a patterned silica lattice, in false or interference colour on black.",
   "credit": "",
   "photos": "cut",
   "looked_up": {
    "sure": false,
    "source": ""
-  }
+  },
+  "updated": "2026-11-12T03:30:02.093Z"
  },
  {
   "id": "2177",
