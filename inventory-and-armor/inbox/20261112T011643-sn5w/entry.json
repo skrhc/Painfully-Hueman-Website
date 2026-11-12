@@ -1,11 +1,15 @@
 {
- "section": "",
- "maker": "",
- "name": "",
- "note": "",
+ "section": "OBJECT",
+ "maker": "UNKNOWN",
+ "name": "UNKNOWN",
+ "note": "A dried gourd (hyōtan-type double gourd) with a glossy red-brown lacquered or varnished surface, bound with tan braided cord and a red silk tassel, shown on a flat metal base.",
  "credit": "",
  "keep_bg": false,
  "photo_mode": "",
  "video_url": "",
- "lookup": true
+ "lookup": true,
+ "looked_up": {
+  "sure": false,
+  "source": ""
+ }
 }
