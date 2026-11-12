@@ -1,11 +1,15 @@
 {
- "section": "",
- "maker": "",
- "name": "",
- "note": "",
+ "section": "SCULPTURE",
+ "maker": "Unknown maker (Xochipala culture, Guerrero, Mexico)",
+ "name": "Standing female figurine, c. 1500–500 BC",
+ "note": "Hand-built earthenware figurine with pigment decoration, in the Xochipala style of Guerrero, Mexico. Approximate date 1500–500 BC; size not confirmed.",
  "credit": "",
  "keep_bg": false,
  "photo_mode": "",
  "video_url": "",
- "lookup": true
+ "lookup": true,
+ "looked_up": {
+  "sure": false,
+  "source": ""
+ }
 }
