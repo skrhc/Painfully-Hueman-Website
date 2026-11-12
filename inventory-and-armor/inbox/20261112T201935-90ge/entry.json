@@ -1,14 +1,19 @@
 {
- "section": "",
- "maker": "",
- "name": "",
- "note": "",
- "credit": "",
+ "section": "PHOTO",
+ "maker": "Paolo Roversi (photographer); Comme des Garçons (designer)",
+ "name": "New Idols, DAZED Autumn 2026 (Vol. VI) cover, Comme des Garçons A/W26",
+ "note": "Magazine cover of DAZED Autumn 2026 (Vol. VI), UK £7.99, showing Alaina Rae in a pink Comme des Garçons A/W26 draped jacket and dress with Comme des Garçons × John Fluevog leather boots.",
+ "credit": "Photography Paolo Roversi, Styling Imruh Asha; DAZED",
  "keep_bg": false,
  "photo_mode": "",
  "video_url": "",
  "lookup": true,
  "orig_names": [
   "IMG_0488.HEIC"
- ]
+ ],
+ "looked_up": {
+  "sure": true,
+  "source": "https://www.dazeddigital.com/fashion/gallery/37327/1/comme-des-garcons-the-autumn-2026-issue",
+  "how": "web"
+ }
 }
