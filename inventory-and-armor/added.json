@@ -1153,13 +1153,14 @@
   "img": "images/unknown-kukri-and-sheath.png",
   "maker": "UNKNOWN",
   "name": "KUKRI AND SHEATH",
-  "note": "A Nepalese kukri (Gurkha knife) with its scabbard, shown in a black-and-white photograph on a plain background. The sheath has studded, decorated panels and side fittings with tassels; its date, maker and origin are not established.",
+  "note": "A Nepalese kukri (Gurkha knife) with its scabbard, shown in a black-and-white photograph on a plain background. The sheath has studded, decorated panels and side fittings with tassels.",
   "credit": "",
   "photos": "cut",
   "looked_up": {
    "sure": false,
    "source": ""
-  }
+  },
+  "updated": "2026-11-12T03:51:47.823Z"
  },
  {
   "id": "2105",
