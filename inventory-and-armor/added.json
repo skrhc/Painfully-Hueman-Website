@@ -297,13 +297,14 @@
  },
  {
   "id": "2045",
-  "section": "",
+  "section": "FILM",
   "img": "images/maya-deren-meshes-of-the-afternoon-1943.png, videos/maya-deren-meshes-of-the-afternoon-1943.mp4",
   "maker": "MAYA DEREN",
   "name": "MESHES OF THE AFTERNOON (1943)",
   "note": "Meshes of the Afternoon is a 1943 American silent experimental thriller short film directed by and starring married couple Maya Deren and Alexandr Hackenschmied. Deren also wrote, produced, and edited it, whilst Hackenschmied served as director of photography.",
   "credit": "public domain",
-  "photos": "cut"
+  "photos": "cut",
+  "updated": "2026-11-12T04:11:53.196Z"
  },
  {
   "id": "2046",
