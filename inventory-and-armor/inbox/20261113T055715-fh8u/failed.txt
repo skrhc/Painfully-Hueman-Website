@@ -1,3 +1,0 @@
-The Mac helper couldn't fetch https://www.youtube.com/watch?v=TwzrydxHQQA&list=LL&index=329:
-=stdout, stderr=stderr)
-subprocess.CalledProcessError: Command ['yt-dlp', '--no-playlist', '--quiet', '--no-warnings', '-f', 'bv*[height<=720]/b[height<=720]/bv*/b', '--download-sections', '*564.06-573.06', '--force-keyframes-at-cuts', '-o', 'inventory-and-armor/inbox/20261113T055715-fh8u/0.%(ext)s', 'https://www.youtube.com/watch?v=TwzrydxHQQA&list=LL&index=329'] returned non-zero exit status 1.
