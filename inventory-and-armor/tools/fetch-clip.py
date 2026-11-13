@@ -60,6 +60,10 @@ if os.path.exists(entry):
     e = json.load(open(entry))
     if not (e.get('maker') or '').strip(): e['maker'] = info.get('uploader') or ''
     if not (e.get('name') or '').strip(): e['name'] = info.get('title') or ''
+    if not (e.get('section') or '').strip():   # from YouTube's own category
+        cats = ' '.join(info.get('categories') or []).lower()
+        e['section'] = ('music video' if 'music' in cats else 'film' if 'film' in cats else
+                        'video game' if 'gaming' in cats else 'education' if 'education' in cats else 'video')
     json.dump(e, open(entry, 'w'), ensure_ascii=False)
 
 print(json.dumps({'title': info.get('title'), 'uploader': info.get('uploader'), 'start': start, 'how': how}))

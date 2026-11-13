@@ -377,6 +377,8 @@
 
     // clear the form for the next item (the photos' previews stay alive until sent)
     photos = []; drawThumbs();
+    // a video link's section is set from the video itself, so don't carry it to the next item
+    if (entry.video_url) $('section').value = '';
     ['maker', 'name', 'note', 'credit', 'videourl'].forEach(function (id) { $(id).value = ''; });
     $('photomode').value = '';
   });
