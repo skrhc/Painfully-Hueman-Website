@@ -2868,7 +2868,7 @@
   "section": "BOOK",
   "img": "images/carl-jung-unknown.png",
   "maker": "CARL JUNG",
-  "name": "UNKNOWN",
+  "name": "PSYCHOLOGY AND ALCHEMY",
   "note": "",
   "credit": "",
   "photos": "keep",
@@ -2877,7 +2877,8 @@
    "source": "",
    "how": "",
    "error": "You've hit your 5-hour limit · resets 2am (America/New_York)"
-  }
+  },
+  "updated": "2026-11-13T06:12:15.153Z"
  },
  {
   "id": "2215",
