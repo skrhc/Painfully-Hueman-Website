@@ -2726,7 +2726,7 @@
  },
  {
   "id": "2202",
-  "section": "PHOTO",
+  "section": "BOOK",
   "img": "images/paolo-roversi-photographer-comme-des-garcons-designer-new-idols-dazed-autumn-2026-vol-vi-cover-comme-des-garcons-a-w26.png",
   "maker": "PAOLO ROVERSI (PHOTOGRAPHER); COMME DES GARÇONS (DESIGNER)",
   "name": "NEW IDOLS, DAZED AUTUMN 2026 (VOL. VI) COVER, COMME DES GARÇONS A/W26",
@@ -2737,6 +2737,7 @@
    "sure": true,
    "source": "https://www.dazeddigital.com/fashion/gallery/37327/1/comme-des-garcons-the-autumn-2026-issue",
    "how": "web"
-  }
+  },
+  "updated": "2026-11-13T05:43:43.821Z"
  }
 ]
