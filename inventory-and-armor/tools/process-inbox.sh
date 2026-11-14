@@ -67,10 +67,11 @@ is_video() { case "$(printf '%s' "${1##*.}" | tr '[:upper:]' '[:lower:]')" in mp
 
 # make_video SRC STEM  -> images/STEM.png (still) + videos/STEM.mp4 (silent loop)
 # The 8 seconds: SRC's .start file if there is one (a YouTube clip, already
-# trimmed to its best part), otherwise the liveliest stretch (tools/best-clip.py).
+# trimmed to its best part), otherwise the best-composed stretch (tools/best-clip.py).
+# A video on its side is turned upright.
 # Black bars around the picture are cropped off.
 make_video() {
-  local src="$1" stem="$2" start still crop
+  local src="$1" stem="$2" start still crop turn
   command -v ffmpeg >/dev/null || { echo "ffmpeg is missing; can't process $src"; return 1; }
   mkdir -p videos
   if [ -f "${src%.*}.start" ]; then start=$(cat "${src%.*}.start")
@@ -78,6 +79,9 @@ make_video() {
   crop=$(ffmpeg -v info -ss "$start" -t 8 -i "$src" -an -vf "fps=2,cropdetect=limit=24:round=2:reset=0" -f null - 2>&1 \
     | grep -o 'crop=[0-9:]*' | tail -1)
   [ -n "$crop" ] && crop="$crop," || crop=""
+  # filmed or posted on its side: turn it upright (tools/orientation.swift)
+  turn=$(python3 tools/best-clip.py --turn "$src" "$start" 2>/dev/null || true)
+  [ -n "$turn" ] && { crop="$crop$turn,"; echo "turning $src upright ($turn)"; }
   still="$TOOLS/still.png"; rm -f "$still"
   ffmpeg -v error -y -ss "$(python3 -c "print($start + 2)")" -i "$src" -vf "${crop%,}" -frames:v 1 "$still" 2>/dev/null ||
     ffmpeg -v error -y -i "$src" -frames:v 1 "$still"

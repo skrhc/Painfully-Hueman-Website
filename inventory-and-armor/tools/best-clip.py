@@ -6,8 +6,9 @@
 composed() (the default): splits the video into shots, lines up to 12
 candidate loops (one per shot), and makes a contact sheet with a row per loop
 (its beginning, middle and end). Claude (small model) picks the row with the
-best composition throughout: clear subject, strong framing, good light, no
-titles, subtitles or logos. Without Claude (e.g. on GitHub) it
+best composition throughout: clear subject, strong framing, good light.
+Before that, loops with a title card, credits, subtitles or big captions in any
+of their frames are dropped (text read on the Mac by text-in-image.swift). Without Claude (e.g. on GitHub) it
 takes the longest steady, well-lit, colourful shot.
 
 liveliest() (the old way, kept below):
@@ -117,7 +118,8 @@ performance, shown as a small tile in a grid.
 Pick the row whose clip has the strongest composition all the way through: a clear subject, deliberate framing
 (symmetry, thirds, strong lines or shapes), good light and colour, in focus, reads well small. Reject any row
 with a title card, credits, subtitles, captions, a logo or watermark, a game menu or HUD, black or blurry frames,
-a talking-head interview or an unfocused crowd in any of its three frames.
+a talking-head interview or an unfocused crowd in any of its three frames. If every row has text, pick the
+one where it is smallest and least prominent.
 Reply with ONLY JSON: {{"row": n, "why": "a few words"}}"""
     try:
         r = subprocess.run([claude, '-p', prompt, '--output-format', 'json', '--model', 'haiku',
@@ -162,37 +164,131 @@ def composed(path, win=8.0, verbose=False):
                    - (0.5 if s[2] < 45 or s[2] > 220 else 0))
         return start_in(best)
 
-    # each candidate loop is one row of the contact sheet: its beginning, middle and end
-    if len(long_) > 12:
-        step = len(long_) / 12
-        long_ = [long_[int(i * step)] for i in range(12)]
-    starts = [min(start_in(s), max(0.0, dur - win)) for s in long_]
+    # up to 20 candidate loops, each looked at at its beginning, middle and end
+    if len(long_) > 20:
+        step = len(long_) / 20
+        long_ = [long_[int(i * step)] for i in range(20)]
     tmp = tempfile.mkdtemp()
     try:
-        n = 0
-        for st in starts:
-            for off in (0.6, win / 2, win - 0.6):
-                subprocess.run(['ffmpeg', '-v', 'error', '-ss', f'{st + off:.2f}', '-i', path, '-frames:v', '1',
-                                '-vf', 'scale=256:144:force_original_aspect_ratio=decrease,pad=256:144:-1:-1:color=white',
-                                '-y', os.path.join(tmp, f'f{n:03d}.jpg')], capture_output=True)
-                n += 1
-        got = sorted(glob.glob(os.path.join(tmp, 'f*.jpg')))
-        if len(got) != n:
+        def make(starts_shots, tag):
+            out = []   # [start, shot, [3 sheet frames], text score, [5 frames read for text]]
+            for k, (st, s) in enumerate(starts_shots):
+                files = []
+                for j, off in enumerate((0.6, win * 0.3, win / 2, win * 0.7, win - 0.6)):
+                    f = os.path.join(tmp, f'{tag}{k:02d}_{j}.jpg')
+                    subprocess.run(['ffmpeg', '-v', 'error', '-ss', f'{st + off:.2f}', '-i', path, '-frames:v', '1',
+                                    '-vf', "scale='min(640,iw)':-2", '-y', f], capture_output=True)
+                    if os.path.exists(f): files.append(f)
+                if len(files) == 5:
+                    out.append([st, s, [files[0], files[2], files[4]], 0.0, files])
+            texts = read_text([f for c in out for f in c[4]])
+            for c in out:
+                c[3] = max(texts.get(f, (0, 0))[0] * 100 + texts.get(f, (0, 0))[1] * 20 for f in c[4])
+                c.append(any(big_text(*texts.get(f, (0, 0))) for f in c[4]))
+            return out
+
+        # title cards, credits, subtitles, big captions: read the frames, drop loops with big text
+        cands = make([(min(start_in(s), max(0.0, dur - win)), s) for s in long_], 'c')
+        if not cands:
             return fallback()
-        sheet = os.path.join(tmp, 'sheet.jpg')
-        subprocess.run(['ffmpeg', '-v', 'error', '-framerate', '1', '-i', os.path.join(tmp, 'f%03d.jpg'),
-                        '-vf', f'tile=3x{len(starts)}:padding=6:margin=12:color=white', '-frames:v', '1', '-y', sheet],
-                       capture_output=True)
-        pick = ask_claude(sheet, len(starts)) if os.path.exists(sheet) else None
+        clean = [c for c in cands if not c[5]]
+        if len(clean) < 4:   # text over most shots (trailers): look for any text-free stretch
+            have = {round(c[0]) for c in cands}
+            step = max(win / 2, (hi - lo) / 40)
+            grid, t = [], lo
+            while t + win <= hi:
+                if round(t) not in have:
+                    grid.append((round(t, 2), (t, t + win, 128, 0, 0)))
+                t += step
+            more = make(grid, 'g')
+            cands += more
+            clean += [c for c in more if not c[5]]
         if verbose:
+            sys.stderr.write(f'{len(cands)} candidates, {len(cands) - len(clean)} with big text\n')
+        if len(clean) < 4:   # text nearly everywhere: add the loops with the least, and let Claude judge
+            clean += [c for c in sorted(cands, key=lambda c: c[3]) if c not in clean][:4 - len(clean)]
+            clean.sort(key=lambda c: c[0])
+        long_ = [c[1] for c in clean]
+        if len(clean) > 12:
+            step = len(clean) / 12
+            clean = [clean[int(i * step)] for i in range(12)]
+        # contact sheet: one row per loop
+        for n, f in enumerate(f for c in clean for f in c[2]):
+            shutil.copy(f, os.path.join(tmp, f's{n:03d}.jpg'))
+        sheet = os.path.join(tmp, 'sheet.jpg')
+        subprocess.run(['ffmpeg', '-v', 'error', '-framerate', '1', '-i', os.path.join(tmp, 's%03d.jpg'),
+                        '-vf', 'scale=256:144:force_original_aspect_ratio=decrease,pad=256:144:-1:-1:color=white,'
+                               f'tile=3x{len(clean)}:padding=6:margin=12:color=white', '-frames:v', '1', '-y', sheet],
+                       capture_output=True)
+        pick = ask_claude(sheet, len(clean)) if os.path.exists(sheet) else None
+        if verbose and os.path.exists(sheet):
             shutil.copy(sheet, os.path.splitext(path)[0] + '-sheet.jpg')
-            sys.stderr.write(f'{len(starts)} candidates; claude: {pick}\n')
-        if not pick or not 0 <= pick[0] < len(starts):
+            sys.stderr.write(f'{len(clean)} on the sheet; claude: {pick}\n')
+        if not pick or not 0 <= pick[0] < len(clean):
             return fallback()
-        return starts[pick[0]]
+        return clean[pick[0]][0]
     finally:
         shutil.rmtree(tmp, ignore_errors=True)
 
 
+def read_text(files):
+    """{file: (share of the picture covered by text, tallest line's height)}, read on the Mac
+    (tools/text-in-image.swift, Apple Vision). Empty if it can't run."""
+    swift = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'text-in-image.swift')
+    if not files or not shutil.which('swift') or not os.path.exists(swift):
+        return {}
+    try:
+        out = subprocess.run(['swift', swift] + files, capture_output=True, text=True, timeout=600).stdout
+    except Exception:
+        return {}
+    res = {}
+    for f, line in zip(files, out.splitlines()):
+        p = line.split(' ', 2)
+        try: res[f] = (float(p[0]), float(p[1]))
+        except (ValueError, IndexError): pass
+    return res
+
+
+def big_text(area, tallest):
+    """A title card, credits, subtitles or a big caption; a small corner logo is fine."""
+    return area >= 0.008 or tallest >= 0.045
+
+def turn_filter(path, start=0.0, win=8.0):
+    """'' if the video is upright, else the ffmpeg filter that turns it upright
+    ('transpose=1' a quarter turn clockwise, 'transpose=2' counter-clockwise,
+    'hflip,vflip' upside down). Turns only when 3 of 5 frames clearly agree that
+    people stand upright that way and not as stored (someone lying down isn't enough).
+    Uses tools/orientation.swift (Apple Vision); '' when it can't run."""
+    swift = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'orientation.swift')
+    if not shutil.which('swift') or not os.path.exists(swift):
+        return ''
+    tmp = tempfile.mkdtemp()
+    try:
+        files = []
+        for j, off in enumerate((0.5, win * 0.3, win / 2, win * 0.7, win - 0.5)):
+            f = os.path.join(tmp, f'o{j}.jpg')
+            subprocess.run(['ffmpeg', '-v', 'error', '-ss', f'{start + off:.2f}', '-i', path, '-frames:v', '1',
+                            '-vf', "scale='min(720,iw)':-2", '-y', f], capture_output=True)
+            if os.path.exists(f): files.append(f)
+        if not files:
+            return ''
+        out = subprocess.run(['swift', swift] + files, capture_output=True, text=True, timeout=300).stdout
+        votes = [0, 0, 0, 0]
+        for line in out.splitlines():
+            try: sc = [float(x) for x in line.split()[:4]]
+            except ValueError: continue
+            if len(sc) < 4: continue
+            b = max(range(4), key=lambda j: sc[j])
+            if b and sc[b] >= 0.6 and sc[0] < 0.2:
+                votes[b] += 1
+        b = max(range(4), key=lambda j: votes[j])
+        return ['', 'transpose=1', 'hflip,vflip', 'transpose=2'][b] if votes[b] >= 3 else ''
+    except Exception:
+        return ''
+    finally:
+        shutil.rmtree(tmp, ignore_errors=True)
+
 if __name__ == '__main__':
+    if sys.argv[1] == '--turn':   # best-clip.py --turn VIDEO START
+        print(turn_filter(sys.argv[2], float(sys.argv[3]) if len(sys.argv) > 3 else 0.0)); sys.exit()
     print(composed(sys.argv[1], float(sys.argv[2]) if len(sys.argv) > 2 else 8.0, '-v' in sys.argv))
