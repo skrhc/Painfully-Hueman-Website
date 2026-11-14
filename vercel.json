@@ -1,0 +1,10 @@
+{
+  "redirects": [
+    {
+      "source": "/",
+      "missing": [{ "type": "header", "key": "referer", "value": ".*painfullyhueman\\.com.*" }],
+      "destination": "/vol-1/",
+      "permanent": false
+    }
+  ]
+}
