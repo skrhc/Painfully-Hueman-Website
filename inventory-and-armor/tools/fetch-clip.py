@@ -5,10 +5,8 @@
                                             OUT_DIR/0.start (0: already trimmed)
                                             prints a JSON line: {title, uploader, start, how}
 
-Where the 8 seconds come from:
-  1. YouTube's "most replayed" graph, when the video has one (busier videos);
-  2. otherwise the liveliest stretch (most movement), found by scanning a
-     tiny low-quality copy with best-clip.py.
+Where the 8 seconds come from: the best-composed shot (best-clip.py looks at
+one still per shot of a small low-quality copy and picks the best-framed one).
 Only that stretch is downloaded at full size (720p at most, no sound).
 Needs yt-dlp and ffmpeg.
 """
@@ -31,22 +29,12 @@ if r.returncode:
 info = json.loads(r.stdout)
 dur = float(info.get('duration') or 0)
 
-heat = info.get('heatmap') or []
-if heat and dur > WIN + 1:
-    # each heatmap point covers a stretch of the video; weight by overlap
-    pts = []
-    for h in heat:
-        t, e = float(h['start_time']), float(h['end_time'])
-        while t < e:
-            pts.append((t, float(h['value'])))
-            t += 0.5
-    start, how = best.best_window(pts, dur, WIN), 'most replayed'
-else:
-    with tempfile.TemporaryDirectory() as tmp:
-        subprocess.run(YT + ['-f', 'wv*[height>=144]/wv*/w', '-o', os.path.join(tmp, 'scan.%(ext)s'), url],
-                       check=True)
-        scan = glob.glob(os.path.join(tmp, 'scan.*'))[0]
-        start, how = best.liveliest(scan, WIN), 'most movement'
+# the best-composed shot, judged from a small low-quality copy (best-clip.py)
+with tempfile.TemporaryDirectory() as tmp:
+    subprocess.run(YT + ['-f', 'wv*[height>=240][height<=360]/wv*[height>=144]/wv*/w',
+                         '-o', os.path.join(tmp, 'scan.%(ext)s'), url], check=True)
+    scan = glob.glob(os.path.join(tmp, 'scan.*'))[0]
+    start, how = best.composed(scan, WIN), 'composition'
 
 end = min(start + WIN + 1, dur) if dur else start + WIN + 1
 subprocess.run(YT + ['-f', 'bv*[height<=720]/b[height<=720]/bv*/b',
